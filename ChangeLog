@@ -1,8 +1,10 @@
 2002-06-26  Steve Youngs  <youngs@xemacs.org>
 
-	* Packages released:  xslt-process xemacs-devel xemacs-base w3  tm
-	text-modes prog-modes  net-utils mule-base lookup liece ilisp gnus
-	gnats edit-utils clearcase bbdb auctex.
+	*  Packages  released:  lookup liece  ilisp gnus  gnats edit-utils
+	clearcase bbdb auctex.
+
+	* Packages released: xemacs-devel xemacs-base w3 tm text-modes
+	prog-modes net-utils mule-base.
 
 2002-06-09  Adrian Aichner  <adrian@xemacs.org>
 

@@ -1,3 +1,7 @@
+2003-09-10  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: edebug.
+
 2003-08-31  Mats Lidell <matsl@xemacs.org>
 
 	* mule-packages/Makefile (compile): New.

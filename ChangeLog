@@ -1,3 +1,8 @@
+2003-07-02  Norbert Koch  <viteno@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES): Hook up hyperbole package
+	to the build.
+
 2003-06-29  Norbert Koch  <viteno@xemacs.org>
 
 	* Sumo packages released.

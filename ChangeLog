@@ -1,3 +1,8 @@
+1998-12-08  SL Baur  <steve@altair.xemacs.org>
+
+	* libs/Makefile (autoloads): Fix typo.
+	(bytecompile): Ditto.
+
 1998-12-06  SL Baur  <steve@altair.xemacs.org>
 
 	* XEmacs.rules (bytecompile): Add bytecompile target.  Eliminate

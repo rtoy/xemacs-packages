@@ -71,7 +71,7 @@ $(ALL_TARGETS) : %.target:
 
 # Main driver rules
 
-bytecompile: $(BYTECOMPILE_TARGETS)
+bytecompile:: $(BYTECOMPILE_TARGETS)
 
 autoloads: $(AUTOLOADS_TARGETS)
 

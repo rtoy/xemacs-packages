@@ -1,3 +1,9 @@
+2003-08-29  Steve Youngs  <youngs@xemacs.org>
+
+	* xemacs-packages/Makefile: Fix syntax of ifeg.
+
+	* iterate.rules (bytecompile): Use double colon.
+
 2003-08-28  Steve Youngs  <youngs@xemacs.org>
 
 	* xemacs-packages/Makefile: include ../Local.rules.inc so we can get

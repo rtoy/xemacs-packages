@@ -27,7 +27,7 @@
 # So we can get at $NONMULE_PACKAGES
 include ../Local.rules.inc
 
-ifeq $($(NONMULE_PACKAGES),xemacs-packages)
+ifeq ('$(NONMULE_PACKAGES)','xemacs-packages')
 PACKAGES := xemacs-base fsf-compat mail-lib dired efs apel \
 	Sun edebug elib tooltalk xemacs-devel sounds-au sounds-wav \
 	eieio build auctex crisp edt reftex texinfo textools tpu viper \

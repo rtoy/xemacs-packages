@@ -54,6 +54,7 @@
     ;; libs/*
     ("Sun" . "libs")
     ("apel" . "libs")
+    ("dired" . "libs")
     ("edebug" . "libs")
     ("efs" . "libs")
     ("mail-lib" . "libs")

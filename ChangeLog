@@ -1,5 +1,8 @@
 1998-10-12  SL Baur  <steve@altair.xemacs.org>
 
+	* XEmacs.rules: Fix all references to _pkg.el to refer to it via
+	$(AUTOLOAD_PATH).
+
 	* hack-package-index.el: New file.  Dynamically update
 	package-get-base.el as tarballs are created.
 

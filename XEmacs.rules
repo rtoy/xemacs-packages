@@ -65,7 +65,7 @@ GENERATED = $(AUTOLOAD_PATH)/auto-autoloads.elc
 # SOURCE_FILES_TO_COPY = *.el*
 SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) \
 	$(MULE_ELCS) $(MULE_ELCS:.elc=.el) \
-	$(GENERATED) $(GENERATED:.elc=.el) _pkg.el
+	$(GENERATED) $(GENERATED:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
 
 # Non configurable portion follows
 
@@ -80,7 +80,7 @@ MANIFEST = pkginfo/MANIFEST.$(PACKAGE)
 %.elc: %.el
 	$(XEMACS) -no-autoloads -batch $(PRELOADS) -l ../../package-compile.el -- $(REQUIRES) -- $<
 
-all:: _pkg.el
+all:: $(AUTOLOAD_PATH)/_pkg.el
 
 dist:: srckit binkit package-info
 
@@ -94,7 +94,8 @@ extraclean: clean
 
 distclean: extraclean
 	rm -f core *~ $(AUTOLOAD_PATH)/auto-autoloads.el \
-		$(AUTOLOAD_PATH)/custom-load.el package-info _pkg.el
+		$(AUTOLOAD_PATH)/custom-load.el package-info \
+		$(AUTOLOAD_PATH)/_pkg.el
 
 $(AUTOLOAD_PATH)/auto-autoloads.el : $(ELCS:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
 	$(XEMACS) $(VANILLA) -batch \
@@ -106,7 +107,8 @@ $(AUTOLOAD_PATH)/custom-load.el : $(ELCS:.elc=.el)
 	$(XEMACS) $(VANILLA) -batch -l cus-dep \
 		-f Custom-make-dependencies $(AUTOLOAD_PATH)
 
-package-info : package-info.in Makefile _pkg.el $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz
+package-info : package-info.in Makefile $(AUTOLOAD_PATH)/_pkg.el \
+			$(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz
 	$(XEMACS) $(VANILLA) -batch \
 		-l package-info.el -f batch-update-package-info \
 		'$(VERSION)' $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz \
@@ -124,16 +126,16 @@ $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz: $(STAGING)/$(MANIFEST)
 		`cat $(MANIFEST)`; \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
 
-_pkg.el: Makefile
-	@echo Creating _pkg.el
-	@echo ";;;###autoload" > _pkg.el
-	@echo "(package-provide '$(PACKAGE)" >> _pkg.el
-	@echo "		 :version $(VERSION)" >> _pkg.el
-	@echo "		 :type '$(PKG_TYPE))" >> _pkg.el
+$(AUTOLOAD_PATH)/_pkg.el: Makefile
+	@echo Creating $(AUTOLOAD_PATH)/_pkg.el
+	@echo ";;;###autoload" > $(AUTOLOAD_PATH)/_pkg.el
+	@echo "(package-provide '$(PACKAGE)" >> $(AUTOLOAD_PATH)/_pkg.el
+	@echo "		 :version $(VERSION)" >> $(AUTOLOAD_PATH)/_pkg.el
+	@echo "		 :type '$(PKG_TYPE))" >> $(AUTOLOAD_PATH)/_pkg.el
 
 .PHONY: srckit-std
 .PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo
-.PHONY: bindist install
+.PHONY: bindist install autoloads
 
 bindist: binkit package-info
 

@@ -217,11 +217,12 @@
 
 (defun package-name-to-directory (package)
   "Map `package' to a source directory."
-  (let ((dir (expand-file-name
-	      package
-	      (expand-file-name (cdr (assoc package
-					    package-directory-map))
-				package-source-root))))
+  (let* ((area (or (cdr (assoc package package-directory-map))
+		   (error (concat "%s is not in `package-directory-map'.  "
+				  "See: package-compile.el")
+			  package)))
+	 (dir (expand-file-name
+	      package (expand-file-name area package-source-root))))
     (cond ((or (equal package "bbdb") 
 	       (equal package "ess")
 	       (equal package "gnus")

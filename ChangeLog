@@ -1,3 +1,8 @@
+2003-09-23  Steve Youngs  <youngs@xemacs.org>
+
+	* XEmacs.rules (TEXI_FILES): Make sure it gets set to the correct
+	value. 
+
 2003-09-21  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: prog-modes.

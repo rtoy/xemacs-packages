@@ -212,7 +212,17 @@ else
 EXPLICIT_DOCS_AS_TEXI=$(EXPLICIT_DOCS)
 endif
 endif
-TEXI_FILES = $(EXPLICIT_DOCS) $(EXTRA_TEXI_FILES)
+
+# Ensure the correct setting of $TEXI_FILES. --SY.
+TEXI_FILES = $(EXPLICIT_DOCS)
+ifeq ($(DOCS_TEXINFO_EXTENSION),t)
+  TEXI_FILES = $(EXPLICIT_DOCS_AS_TEXI:%.texi=%.texinfo)
+endif
+ifeq ($(DOCS_TXI_EXTIONSION),t)
+  TEXI_FILES = $(EXPLICIT_DOCS_AS_TEXI:%.texi=%.txi)
+endif
+
+TEXI_FILES += $(EXTRA_TEXI_FILES)
 INFO_FILES = $(EXPLICIT_DOCS_AS_TEXI:%.texi=%.info*)
 INFO_DEP = $(EXPLICIT_DOCS_AS_TEXI:%.texi=%.info)
 

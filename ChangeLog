@@ -1,3 +1,9 @@
+2000-10-20  Adrian Aichner  <adrian@xemacs.org>
+
+	* Local.rules.template (XEMACS_NATIVE_NT): Configuration variable
+	moved here from XEmacs.rules.
+	* XEmacs.rules: Don't run XEmacs to determine system-type.
+
 2000-08-22  Steve Youngs  <youngs@xemacs.org>
 
 	* XEmacs.rules (clean): Use $INFO_FILES instead of $PACKAGE.info*, use

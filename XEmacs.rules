@@ -34,12 +34,6 @@ include ${XEMACS_PACKAGES_BASE}/Local.rules.mk
 # Ensure vanilla locale when building
 override LANG := C
 
-# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
-# need to temporarily work around.
-XEMACS_NATIVE_NT = \
-$(shell $(XEMACS) $(VANILLA) -batch \
--eval "(princ (eq system-type 'windows-nt))")
-
 # Only in rare cases will you need to override this
 ifeq ($(AUTOLOAD_PATH),)
 AUTOLOAD_PATH = .
@@ -125,10 +119,10 @@ ifeq ($(XEMACS_NATIVE_NT),t)
 # APA: Convert UNIX-path (containing output of `pwd') to windows-path,
 # so that XEmacs native NT can handle it.
 PKG_TAR_GZ = "$(shell cygpath --windows $(pkg_tar)).gz"
-PACKAGE_INFO = "$(shell cygpath --windows $(STAGING)/package-index)"
+PACKAGE_INFO = "$(shell cygpath --windows $(STAGING)/$(PACKAGE_INDEX))"
 else
 PKG_TAR_GZ = $(pkg_tar).gz
-PACKAGE_INFO = $(STAGING)/package-index
+PACKAGE_INFO = $(STAGING)/$(PACKAGE_INDEX)
 endif
 
 # Make the $(pkg_tar).gz first, then the $(pkg_tar).bz2

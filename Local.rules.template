@@ -20,7 +20,10 @@ XEMACS_PACKAGES =
 # Where to stage or install the packages, or where the symlink tree will go.
 #
 XEMACS_STAGING = ${XEMACS_PACKAGES_BASE}/../Packages
-
+#
+# APA: Name of package index file
+#
+PACKAGE_INDEX = package-index
 # Should we build the mule package?
 #
 BUILD_WITHOUT_MULE =
@@ -35,7 +38,27 @@ MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../Mule-Packages
 
 # Path to XEmacs to use for byte compilation.
 #
+# APA: Double-quote path to protect possibly embedded SPACEs on WindowsNT.
 XEMACS = xemacs
+
+# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
+# need to temporarily work around.
+# Following test, which would be performed by every makefile
+# including XEmacs.rules, slows down the make process terribly
+# according to
+#
+# From: Gunnar Evermann <ge204@eng.cam.ac.uk>
+# Subject: building xemacs-pacakges on unix
+# To: XEmacs Developers <xemacs-beta@xemacs.org>
+# Date: 14 Oct 2000 12:28:44 +0100
+#
+# XEMACS_NATIVE_NT = \
+# $(shell $(XEMACS) $(VANILLA) -batch \
+# -eval "(princ (eq system-type 'windows-nt))")
+#
+# Therefore this has become a make variable instead:
+#
+XEMACS_NATIVE_NT =
 
 # See: Makefile and XEmacs.rules to see how $(XEMACS_STAGING),
 # $(MULE_STAGING), and $(STAGING) are used.

@@ -61,6 +61,7 @@ mine                  XEmacs Development Team <xemacs-beta@xemacs.org>
 misc-games            XEmacs Development Team <xemacs-beta@xemacs.org>
 mmm-mode              XEmacs Development Team <xemacs-beta@xemacs.org>
 net-utils             XEmacs Development Team <xemacs-beta@xemacs.org>
+- dns.el              Steve Youngs <sryoungs@bigpond.net.au>
 ocaml                 XEmacs Development Team <xemacs-beta@xemacs.org>
 oo-browser            Jake Colman <jake.colman@xemacs.org>
 os-utils              XEmacs Development Team <xemacs-beta@xemacs.org>

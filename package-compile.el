@@ -116,7 +116,7 @@
     ("pcl-cvs" . "xemacs-packages")
     ("pcomplete" . "xemacs-packages")
     ("prog-modes" . "xemacs-packages")
-    ("ps-print-nomule" . "xemacs-packages")
+    ("ps-print" . "xemacs-packages")
     ("psgml" . "xemacs-packages")
     ("reftex" . "xemacs-packages")
     ("rmail" . "xemacs-packages")

@@ -1,3 +1,10 @@
+2002-01-09  Steve Youngs  <youngs@xemacs.org>
+
+	* package-compile.el (package-directory-map): Change
+	'ps-print-nomule' to 'ps-print'.
+
+	* xemacs-packages/Makefile (PACKAGES): Ditto.
+
 2001-12-22  Steve Youngs  <youngs@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add dictionary.

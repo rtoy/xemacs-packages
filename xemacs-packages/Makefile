@@ -27,7 +27,7 @@ PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	rmail gnus tm mew zenirc bbdb eicq cookie games mine \
 	misc-games semantic cc-mode pcl-cvs ada c-support debug ediff \
 	emerge idlwave jde prog-modes scheme sh-script vc-cc vc vhdl \
-	xslt-process eterm igrep ilisp os-utils ps-print-nomule view-process \
+	xslt-process eterm igrep ilisp os-utils ps-print view-process \
 	eshell pcomplete edit-utils speedbar calc calendar forms frame-icon \
 	hm--html-menus ispell pc psgml sgml slider text-modes time \
 	strokes tramp clearcase dictionary

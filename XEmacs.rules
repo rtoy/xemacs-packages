@@ -339,6 +339,33 @@ endif
 ifneq ($(DATA_26_FILES),)
 	@-mkdir -p $(STAGING)/etc/$(DATA_26_DEST)
 endif
+ifneq ($(DATA_27_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_27_DEST)
+endif
+ifneq ($(DATA_28_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_28_DEST)
+endif
+ifneq ($(DATA_29_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_29_DEST)
+endif
+ifneq ($(DATA_30_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_30_DEST)
+endif
+ifneq ($(DATA_31_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_31_DEST)
+endif
+ifneq ($(DATA_32_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_32_DEST)
+endif
+ifneq ($(DATA_33_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_33_DEST)
+endif
+ifneq ($(DATA_34_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_34_DEST)
+endif
+ifneq ($(DATA_35_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_35_DEST)
+endif
 ifneq ($(LIBSRC_FILES),)
 	@-mkdir -p $(STAGING)/lib-src
 endif
@@ -434,6 +461,33 @@ ifneq ($(DATA_25_FILES),)
 endif
 ifneq ($(DATA_26_FILES),)
 	$(RCOPY) $(addprefix $(PWD)/, $(DATA_26_FILES)) $(STAGING)/etc/$(DATA_26_DEST)
+endif
+ifneq ($(DATA_27_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_27_FILES)) $(STAGING)/etc/$(DATA_27_DEST)
+endif
+ifneq ($(DATA_28_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_28_FILES)) $(STAGING)/etc/$(DATA_28_DEST)
+endif
+ifneq ($(DATA_29_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_29_FILES)) $(STAGING)/etc/$(DATA_29_DEST)
+endif
+ifneq ($(DATA_30_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_30_FILES)) $(STAGING)/etc/$(DATA_30_DEST)
+endif
+ifneq ($(DATA_31_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_31_FILES)) $(STAGING)/etc/$(DATA_31_DEST)
+endif
+ifneq ($(DATA_32_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_32_FILES)) $(STAGING)/etc/$(DATA_32_DEST)
+endif
+ifneq ($(DATA_33_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_33_FILES)) $(STAGING)/etc/$(DATA_33_DEST)
+endif
+ifneq ($(DATA_34_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_34_FILES)) $(STAGING)/etc/$(DATA_34_DEST)
+endif
+ifneq ($(DATA_35_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_35_FILES)) $(STAGING)/etc/$(DATA_35_DEST)
 endif
 ifneq ($(LIBSRC_FILES),)
 	$(RCOPY) $(addprefix $(PWD)/, $(LIBSRC_FILES)) $(STAGING)/lib-src
@@ -592,7 +646,51 @@ ifneq ($(DATA_26_FILES),)
 	ls -1 $(patsubst %, etc/$(DATA_26_DEST)/%, $(notdir $(DATA_26_FILES))) \
 		>> $(MANIFEST))
 endif
-
+ifneq ($(DATA_27_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_27_DEST)/%, $(notdir $(DATA_27_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_28_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_28_DEST)/%, $(notdir $(DATA_28_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_29_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_29_DEST)/%, $(notdir $(DATA_29_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_30_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_30_DEST)/%, $(notdir $(DATA_30_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_31_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_31_DEST)/%, $(notdir $(DATA_31_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_32_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_32_DEST)/%, $(notdir $(DATA_32_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_33_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_33_DEST)/%, $(notdir $(DATA_33_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_34_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_34_DEST)/%, $(notdir $(DATA_34_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_35_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_35_DEST)/%, $(notdir $(DATA_35_FILES))) \
+		>> $(MANIFEST))
+endif
 ifneq ($(LIBSRC_FILES),)
 	@(cd $(STAGING); \
 	ls -1 $(patsubst %,lib-src/%, $(notdir $(LIBSRC_FILES))) >> $(MANIFEST))

@@ -1,3 +1,7 @@
+2001-07-30  Edward M. Lee  <tailbert@yahoo.com>
+
+	* XEmacs.rules: Define DATA_{27-35}_FILES for jde Makefile.
+
 2001-06-18  Ben Wing  <ben@xemacs.org>
 
 	* Local.rules.template (XEMACS_PACKAGES):

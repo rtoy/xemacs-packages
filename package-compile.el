@@ -149,6 +149,7 @@
     ("w3" . "xemacs-packages")
     ("xemacs-base" . "xemacs-packages")
     ("xemacs-devel" . "xemacs-packages")
+    ("xslide" . "xemacs-packages")
     ("xslt-process" . "xemacs-packages")
     ("zenirc" . "xemacs-packages")
     ;; mule/*

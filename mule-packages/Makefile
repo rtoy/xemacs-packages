@@ -18,34 +18,4 @@
 PACKAGES= mule-base \
 	locale leim lookup edict egg-its skk
 
-all:
-	for dir in $(PACKAGES); do \
-		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} all; \
-	done
-
-.PHONY: all autoloads bytecompile bindist clean distclean
-
-autoloads:
-	for dir in $(PACKAGES); do \
-		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} autoloads; \
-	done
-
-bytecompile:
-	for dir in $(PACKAGES); do \
-		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} bytecompile; \
-	done
-
-bindist:
-	for dir in $(PACKAGES); do \
-		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} bindist; \
-	done
-
-clean:
-	for dir in $(PACKAGES); do \
-		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} clean; \
-	done
-
-distclean:
-	for dir in $(PACKAGES); do \
-		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} distclean; \
-	done
+include ../iterate.rules

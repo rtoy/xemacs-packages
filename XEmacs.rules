@@ -257,6 +257,60 @@ endif
 ifneq ($(DATA_8_FILES),)
 	@-mkdir -p $(STAGING)/etc/$(DATA_8_DEST)
 endif
+ifneq ($(DATA_9_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_9_DEST)
+endif
+ifneq ($(DATA_10_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_10_DEST)
+endif
+ifneq ($(DATA_11_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_11_DEST)
+endif
+ifneq ($(DATA_12_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_12_DEST)
+endif
+ifneq ($(DATA_13_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_13_DEST)
+endif
+ifneq ($(DATA_14_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_14_DEST)
+endif
+ifneq ($(DATA_15_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_15_DEST)
+endif
+ifneq ($(DATA_16_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_16_DEST)
+endif
+ifneq ($(DATA_17_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_17_DEST)
+endif
+ifneq ($(DATA_18_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_18_DEST)
+endif
+ifneq ($(DATA_19_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_19_DEST)
+endif
+ifneq ($(DATA_20_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_20_DEST)
+endif
+ifneq ($(DATA_21_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_21_DEST)
+endif
+ifneq ($(DATA_22_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_22_DEST)
+endif
+ifneq ($(DATA_23_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_23_DEST)
+endif
+ifneq ($(DATA_24_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_24_DEST)
+endif
+ifneq ($(DATA_25_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_25_DEST)
+endif
+ifneq ($(DATA_26_FILES),)
+	@-mkdir -p $(STAGING)/etc/$(DATA_26_DEST)
+endif
 ifneq ($(LIBSRC_FILES),)
 	@-mkdir -p $(STAGING)/lib-src
 endif
@@ -298,6 +352,60 @@ ifneq ($(DATA_7_FILES),)
 endif
 ifneq ($(DATA_8_FILES),)
 	$(RCOPY) $(addprefix $(PWD)/, $(DATA_8_FILES)) $(STAGING)/etc/$(DATA_8_DEST)
+endif
+ifneq ($(DATA_9_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_9_FILES)) $(STAGING)/etc/$(DATA_9_DEST)
+endif
+ifneq ($(DATA_10_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_10_FILES)) $(STAGING)/etc/$(DATA_10_DEST)
+endif
+ifneq ($(DATA_11_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_11_FILES)) $(STAGING)/etc/$(DATA_11_DEST)
+endif
+ifneq ($(DATA_12_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_12_FILES)) $(STAGING)/etc/$(DATA_12_DEST)
+endif
+ifneq ($(DATA_13_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_13_FILES)) $(STAGING)/etc/$(DATA_13_DEST)
+endif
+ifneq ($(DATA_14_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_14_FILES)) $(STAGING)/etc/$(DATA_14_DEST)
+endif
+ifneq ($(DATA_15_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_15_FILES)) $(STAGING)/etc/$(DATA_15_DEST)
+endif
+ifneq ($(DATA_16_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_16_FILES)) $(STAGING)/etc/$(DATA_16_DEST)
+endif
+ifneq ($(DATA_17_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_17_FILES)) $(STAGING)/etc/$(DATA_17_DEST)
+endif
+ifneq ($(DATA_18_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_18_FILES)) $(STAGING)/etc/$(DATA_18_DEST)
+endif
+ifneq ($(DATA_19_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_19_FILES)) $(STAGING)/etc/$(DATA_19_DEST)
+endif
+ifneq ($(DATA_20_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_20_FILES)) $(STAGING)/etc/$(DATA_20_DEST)
+endif
+ifneq ($(DATA_21_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_21_FILES)) $(STAGING)/etc/$(DATA_21_DEST)
+endif
+ifneq ($(DATA_22_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_22_FILES)) $(STAGING)/etc/$(DATA_22_DEST)
+endif
+ifneq ($(DATA_23_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_23_FILES)) $(STAGING)/etc/$(DATA_23_DEST)
+endif
+ifneq ($(DATA_24_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_24_FILES)) $(STAGING)/etc/$(DATA_24_DEST)
+endif
+ifneq ($(DATA_25_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_25_FILES)) $(STAGING)/etc/$(DATA_25_DEST)
+endif
+ifneq ($(DATA_26_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(DATA_26_FILES)) $(STAGING)/etc/$(DATA_26_DEST)
 endif
 ifneq ($(LIBSRC_FILES),)
 	$(RCOPY) $(addprefix $(PWD)/, $(LIBSRC_FILES)) $(STAGING)/lib-src
@@ -364,6 +472,96 @@ endif
 ifneq ($(DATA_8_FILES),)
 	@(cd $(STAGING); \
 	ls -1 $(patsubst %, etc/$(DATA_8_DEST)/%, $(notdir $(DATA_8_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_9_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_9_DEST)/%, $(notdir $(DATA_9_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_10_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_10_DEST)/%, $(notdir $(DATA_10_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_11_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_11_DEST)/%, $(notdir $(DATA_11_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_12_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_12_DEST)/%, $(notdir $(DATA_12_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_13_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_13_DEST)/%, $(notdir $(DATA_13_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_14_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_14_DEST)/%, $(notdir $(DATA_14_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_15_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_15_DEST)/%, $(notdir $(DATA_15_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_16_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_16_DEST)/%, $(notdir $(DATA_16_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_17_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_17_DEST)/%, $(notdir $(DATA_17_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_18_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_18_DEST)/%, $(notdir $(DATA_18_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_19_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_19_DEST)/%, $(notdir $(DATA_19_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_20_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_20_DEST)/%, $(notdir $(DATA_20_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_21_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_21_DEST)/%, $(notdir $(DATA_21_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_22_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_22_DEST)/%, $(notdir $(DATA_22_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_23_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_23_DEST)/%, $(notdir $(DATA_23_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_24_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_24_DEST)/%, $(notdir $(DATA_24_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_25_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_25_DEST)/%, $(notdir $(DATA_25_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq ($(DATA_26_FILES),)
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_26_DEST)/%, $(notdir $(DATA_26_FILES))) \
 		>> $(MANIFEST))
 endif
 

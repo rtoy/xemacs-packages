@@ -1,5 +1,11 @@
 2003-11-26  Norbert Koch  <viteno@xemacs.org>
 
+	* xemacs-packages/Makefile (PACKAGES):
+	* package-compile.el (package-directory-map): Make the new
+	standard package erc known.
+
+2003-11-26  Norbert Koch  <viteno@xemacs.org>
+
 	* Packages released: erc.
 
 2003-11-18  Norbert Koch  <viteno@xemacs.org>

@@ -116,6 +116,7 @@
     ("eieio" . "xemacs-packages")
     ("elib" . "xemacs-packages")
     ("emerge" . "xemacs-packages")
+    ("erc" . "xemacs-packages")
     ("eshell" . "xemacs-packages")
     ("ess" . "xemacs-packages")
     ("eterm" . "xemacs-packages")

@@ -1,3 +1,14 @@
+2000-05-23  Karl M. Hegbloom  <karlheg@debian.org>
+
+	* Local.rules: Remove from CVS.
+
+	* Local.rules.template, Local.rules.mk: New files.
+
+	* Makefile, XEmacs.rules: Include Local.rules.mk, define
+	XEMACS_PACKAGES_BASE, make sure all RCOPY commands are run with
+	absolute / rooted paths so that --recursive --symlink works.  Make
+	tar building optional. Did away with BUILD_MULE.
+
 2000-01-12  Andreas Jaeger  <aj@suse.de>
 
 	* package-compile.el (package-directory-map): Added idlwave.

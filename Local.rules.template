@@ -1,0 +1,101 @@
+# Local.rules - Site-Local definitions.
+
+# ${XEMACS_PACKAGES_BASE} is defined in XEmacs.rules, and is always
+# the full / rooted path to the directory where this "Local.rules"
+# makefile is supposed to be.  Don't override it here.
+
+# `t' or `nil' - When `t', a symlink tree will be built for running a
+# live CVS checkout.  Requires GNU `cp', and that you configure your
+# XEmacs to use ${STAGING} in the package-path.  Create the tree with
+# `make bindist'.
+#
+symlink = 
+
+# Stuff to install.
+
+# XEmacs packages to install.
+#
+XEMACS_PACKAGES =
+#
+# Where to stage or install the packages, or where the symlink tree will go.
+#
+XEMACS_STAGING = ${XEMACS_PACKAGES_BASE}/../Packages
+
+# Should we build the mule package?
+#
+BUILD_WITHOUT_MULE =
+
+# Mule packages to install
+#
+MULE_PACKAGES =
+#
+# Where to install them
+#
+MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../Mule-Packages
+
+# Path to XEmacs to use for byte compilation.
+#
+XEMACS = ${XEMACS_PACKAGES_BASE}/../xemacs/src/xemacs
+
+# See: Makefile and XEmacs.rules to see how $(XEMACS_STAGING),
+# $(MULE_STAGING), and $(STAGING) are used.
+#
+ifneq ('$(MAKECMDGOALS)','install')
+STAGING := $(XEMACS_STAGING)
+endif
+
+# Path to BSD install.
+# INSTALL = ginstall -c
+#
+INSTALL = install -c
+
+# Define to build tarfiles for installation/distribution
+#
+ifneq ('$(symlink)','t')
+BUILD_TARS = t
+else
+BUILD_TARS = nil
+endif
+
+# Path to GNU tar.
+#
+TAR = tar
+
+# Path to bzip2
+# If this is set, then tar.bz2 packages will be created.
+# BZIP2 = bzip2
+#
+BZIP2 =
+
+# Stuff tar should never archive
+#
+EXCLUDES =					\
+	--exclude 'CVS'				\
+	--exclude 'RCS'				\
+	--exclude 'SCCS'			\
+	--exclude '*~'				\
+	--exclude '*.orig'			\
+	--exclude '*.rej'			\
+	--exclude '.\#*'
+
+VANILLA = -vanilla
+
+# path to makeinfo
+#
+MAKEINFO = makeinfo
+
+ifneq ('$(symlink)','t')
+ # path to GNU cp, use the latter if no GNU cp is available.
+ #
+ RCOPY = cp -a
+ # RCOPY = cp -pR
+else
+ # This next one is for running in-place from a CVS checkout.
+ #
+ RCOPY = cp --recursive --symbolic-link
+endif
+#
+# Local Variables:
+# mode: makefile
+# End:
+#

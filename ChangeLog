@@ -1,3 +1,7 @@
+2000-01-12  Andreas Jaeger  <aj@suse.de>
+
+	* package-compile.el (package-directory-map): Added idlwave.
+
 1999-12-14  Andreas Jaeger  <aj@suse.de>
 
 	* Makefile (SUBDIRS): Build for mule unless BUILD_WITHOUT_MULE is

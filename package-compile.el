@@ -84,6 +84,7 @@
     ("debug" . "prog")
     ("ediff" . "prog")
     ("emerge" . "prog")
+    ("idlwave" . "prog")
     ("jde" . "prog")
     ("pcl-cvs" . "prog")
     ("prog-modes" . "prog")

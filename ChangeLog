@@ -1,3 +1,7 @@
+2002-05-10  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released: os-utils pc text-modes gnus.
+
 2002-05-09  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages released: xslide jde haskell-mode xslt-process w3 vm

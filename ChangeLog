@@ -1,3 +1,7 @@
+2005-04-04  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: vm xetla.
+
 2005-04-04  Steve Youngs  <steve@sxemacs.org>
 
 	* package-compile.el (package-directory-map): Add xetla.

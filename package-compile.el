@@ -101,7 +101,7 @@
     ("mew" . "comm")
     ("mh-e" . "comm")
     ("net-utils" . "comm")
-    ;; ("pgnus" . "comm")
+    ("pgnus" . "comm")
     ("rmail" . "comm")
     ("supercite" . "comm")
     ("tm" . "comm")

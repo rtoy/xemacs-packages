@@ -80,6 +80,7 @@
     ("docbookide" . "xemacs-packages")
     ("dictionary" . "xemacs-packages")
     ("dired" . "xemacs-packages")
+    ("ecb" . "xemacs-packages")
     ("ecrypto" . "xemacs-packages")
     ("edebug" . "xemacs-packages")
     ("ediff" . "xemacs-packages")

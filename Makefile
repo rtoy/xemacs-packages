@@ -21,11 +21,7 @@
 #	comm/net-utils oa/edit-utils oa/speedbar
 
 # The rest require no further special treatment
-SUBDIRS = libs comm games prog wp os oa
-
-ifeq '$(BUILD_MULE)' 't'
-SUBDIRS += mule
-endif
+SUBDIRS = libs comm games prog wp os oa mule
 
 all:
 	for dir in $(SUBDIRS); do \

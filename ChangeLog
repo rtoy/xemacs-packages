@@ -1,3 +1,7 @@
+1999-07-16  SL Baur  <steve@xemacs.org>
+
+	* Makefile: revert mule subdirectory change
+
 1999-07-13  SL Baur  <steve@xemacs.org>
 
 	* mule/Makefile: add lookup.

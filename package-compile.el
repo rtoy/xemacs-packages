@@ -90,6 +90,7 @@
     ("footnote" . "comm")
     ("gnats" . "comm")
     ("gnus" . "comm")
+    ("irchat" . "comm")
     ("mailcrypt" . "comm")
     ("mew" . "comm")
     ("mh-e" . "comm")

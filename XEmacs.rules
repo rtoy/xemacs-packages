@@ -52,6 +52,9 @@ STAGING = /tmp/staging
 RCOPY = cp -a
 # RCOPY = cp -pR
 
+SOURCE_FILES_TO_COPY = *.el*
+# SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) $(MULE_ELCS) $(MULE_ELCS:.elc=.el)
+
 # Non configurable portion follows
 
 .SUFFIXES:
@@ -117,7 +120,7 @@ srckit-std: distclean
 binkit-sourceonly: all
 	-rm -rf $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
 	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE); \
@@ -128,7 +131,7 @@ binkit-sourceinfo: all
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/info
 	(cd $(STAGING)/info; rm -rf $(INFO_FILES))
-	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	$(RCOPY) $(INFO_FILES) $(STAGING)/info
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
@@ -141,7 +144,7 @@ binkit-sourcedata: all
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
 	-rm -rf $(STAGING)/etc/$(PACKAGE)
 	-mkdir -p $(STAGING)/etc/$(PACKAGE)
-	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	$(RCOPY) etc/* $(STAGING)/etc/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
@@ -156,7 +159,7 @@ binkit-sourcedatainfo: all
 	-(cd $(STAGING)/info; rm -rf $(INFO_FILES))
 	-rm -rf $(STAGING)/etc/$(PACKAGE)
 	-mkdir -p $(STAGING)/etc/$(PACKAGE)
-	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	$(RCOPY) $(INFO_FILES) $(STAGING)/info
 	$(RCOPY) etc/* $(STAGING)/etc/$(PACKAGE)
 	(cd $(STAGING); \

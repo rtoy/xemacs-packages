@@ -1,3 +1,7 @@
+1998-09-07  SL Baur  <steve@altair.xemacs.org>
+
+	* package-compile.el: Add irchat package.
+
 1998-08-31  SL Baur  <steve@altair.xemacs.org>
 
 	* package-compile.el: Add support for unsupported Pterodactyl Gnus.

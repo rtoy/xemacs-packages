@@ -98,6 +98,13 @@ STAGING := $(XEMACS_STAGING)
 endif
 endif
 
+# 'make bindist' needs STAGING to be set to XEMACS_STAGING regardless of
+# whether a Mule package or not so we don't end up with 2 package-index 
+# files.
+ifeq ('$(MAKECMDGOALS)','bindist')
+STAGING := $(XEMACS_STAGING)
+endif
+
 # Path to BSD install.
 # INSTALL = ginstall -c
 #

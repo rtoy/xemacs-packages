@@ -1,3 +1,9 @@
+2002-06-26  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released:  xslt-process xemacs-devel xemacs-base w3  tm
+	text-modes prog-modes  net-utils mule-base lookup liece ilisp gnus
+	gnats edit-utils clearcase bbdb auctex.
+
 2002-06-09  Adrian Aichner  <adrian@xemacs.org>
 
 	* XEmacs.rules (distclean): Convert to double-colon, allowing

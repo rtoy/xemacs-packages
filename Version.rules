@@ -28,10 +28,10 @@
 
 # To get this to work, in the package's Makefile:
 #
-#  # This takes the same arguments as `emacs-version>='
-#  REQ_MIN_VERSION = x x x
 #  include ../../Local.rules
-#  CHECK_VERSION = $(XEMACS) -batch -eval '(princ (emacs-version>= $(value REQ_MIN_VERSION)))'
+#  CHECK_VERSION = $(XEMACS) -batch -no-autoloads -eval '(princ (emacs-version>= x y z))'
+#  # 'x y z' represents the minimum XEmacs major and optional minor and patch versions
+#  # this package runs on.
 #  ifeq ($(shell $(CHECK_VERSION)),t)
 #   [rest of normal package Makefile]
 #  else

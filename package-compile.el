@@ -76,6 +76,7 @@
     ("lookup" . "mule")
     ("mule-base" . "mule")
     ("skk" . "mule")
+    ("ucs-conv" . "mule")
     ;; prog/*
     ("ada" . "prog")
     ("c-support" . "prog")

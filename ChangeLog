@@ -1,6 +1,7 @@
 2000-08-16  Andreas Jaeger  <aj@suse.de>
 
 	* package-compile.el (package-directory-map): Add semantic.
+	(package-name-to-directory): Handle jde special.
 
 2000-08-16  Steve Youngs  <youngs_s@ozlinx.com.au>
 

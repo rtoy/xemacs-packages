@@ -162,7 +162,7 @@
 	   (expand-file-name "gnus/lisp" (file-name-as-directory dir)))
 	  ((equal package "pgnus")
 	   (expand-file-name "gnus/lisp" (file-name-as-directory dir)))
-	  ((or (equal package "w3") (equal package "bbdb"))
+	  ((or (equal package "w3") (equal package "bbdb") (equal package "jde"))
 	   (expand-file-name "lisp" (file-name-as-directory dir)))
 	  ((equal package "mew")
 	   (expand-file-name "mew" (file-name-as-directory dir)))

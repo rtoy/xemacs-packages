@@ -1,3 +1,7 @@
+2003-12-01  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: auctex fsf-compat riece.
+
 2003-11-26  Norbert Koch  <viteno@xemacs.org>
 
 	* MAINTAINERS: Add entry for erc package.

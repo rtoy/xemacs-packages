@@ -124,6 +124,7 @@
     ("pc" . "xemacs-packages")
     ("pcl-cvs" . "xemacs-packages")
     ("pcomplete" . "xemacs-packages")
+    ("perl-modes" . "xemacs-packages")
     ("prog-modes" . "xemacs-packages")
     ("ps-print" . "xemacs-packages")
     ("psgml" . "xemacs-packages")

@@ -1,3 +1,8 @@
+2004-05-19  Norbert Koch  <viteno@xemacs.org>
+
+	* MAINTAINERS: We now have two ESS maintainers, add Rodney
+	Sparapani.
+
 2004-05-17  Norbert Koch  <viteno@xemacs.org>
 
 	* Sumo packages released.

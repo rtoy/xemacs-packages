@@ -1,3 +1,18 @@
+1998-09-19  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules (EXCLUDES): Add *.orig and *.rej.
+	(binkit-sourceinfo): Add texinfo sources.
+	(binkit-sourcedatainfo): Ditto.
+	When installing add a MANIFEST file.
+
+1998-09-18  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules (PKGDIR): Change to `xemacs-packages' instead of
+	`packages'.
+
+	* libs/Makefile: Add sounds-au and sounds-wav to the list of
+	packages to build.
+
 1998-09-07  SL Baur  <steve@altair.xemacs.org>
 
 	* package-compile.el: Add irchat package.

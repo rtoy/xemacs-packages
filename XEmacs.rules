@@ -18,11 +18,11 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-# Requires XEmacs 20.5-beta19 or greater
+# Requires XEmacs 21.0-beta19 or greater
 
 # Developer configurable portion
 
-# path to XEmacs-20.5
+# path to XEmacs-21.0
 XEMACS = /home/xemacs/xemacs-20.0/src/xemacs
 
 # Build Mule?  Comment for no Mule
@@ -35,7 +35,7 @@ INSTALL = ginstall -c
 TAR = /usr/bin/tar
 
 # Stuff tar should never archive
-EXCLUDES = --exclude 'CVS' --exclude '*~'
+EXCLUDES = --exclude 'CVS' --exclude '*~' --exclude '*.orig' --exclude '*.rej'
 
 VANILLA = -vanilla
 
@@ -43,7 +43,7 @@ VANILLA = -vanilla
 MAKEINFO = makeinfo
 
 # path to directory to install packages in
-PKGDIR = /usr/local/lib/xemacs/packages
+PKGDIR = /usr/local/lib/xemacs/xemacs-packages
 
 # path to directory for builing kits for distribution
 STAGING = /tmp/staging
@@ -52,10 +52,15 @@ STAGING = /tmp/staging
 RCOPY = cp -a
 # RCOPY = cp -pR
 
-SOURCE_FILES_TO_COPY = *.el*
-# SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) $(MULE_ELCS) $(MULE_ELCS:.elc=.el)
+# Override or add to this in the package Makefile if necessary
+GENERATED = auto-autoloads.elc
+
+# SOURCE_FILES_TO_COPY = *.el*
+SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) $(MULE_ELCS) $(MULE_ELCS:.elc=.el) $(GENERATED) $(GENERATED:.elc=.el)
 
 # Non configurable portion follows
+
+MANIFEST = pkginfo/MANIFEST.$(PACKAGE)
 
 .SUFFIXES:
 .SUFFIXES: .info .texi .dvi .elc .el
@@ -120,50 +125,84 @@ srckit-std: distclean
 binkit-sourceonly: all
 	-rm -rf $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+	-rm -f $(STAGING)/$(MANIFEST)
+	-mkdir -p $(STAGING)/pkginfo
+	-touch $(STAGING)/$(MANIFEST)
 	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE); \
+	ls -1 $(MANIFEST) lisp/$(PACKAGE)/* > $(MANIFEST); \
+	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar \
+		$(MANIFEST) lisp/$(PACKAGE); \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
 
 binkit-sourceinfo: all
 	-rm -rf $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/info
-	(cd $(STAGING)/info; rm -rf $(INFO_FILES))
+	-(cd $(STAGING)/info; rm -rf $(notdir $(INFO_FILES)))
+	-(cd $(STAGING)/man; rm -rf $(PACKAGE))
+	-mkdir -p $(STAGING)/man/$(PACKAGE)
+	-rm -f $(STAGING)/$(MANIFEST)
+	-mkdir -p $(STAGING)/pkginfo
+	-touch $(STAGING)/$(MANIFEST)
 	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	$(RCOPY) $(INFO_FILES) $(STAGING)/info
+	$(RCOPY) $(TEXI_FILES) $(STAGING)/man/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+	ls -1 $(MANIFEST) lisp/$(PACKAGE)/* man/$(PACKAGE)/* \
+		$(patsubst %,info/%, $(notdir $(INFO_FILES))) > $(MANIFEST); \
 	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
-		$(INFO_FILES:%=info/%); \
+		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
+		man/$(PACKAGE) $(MANIFEST); \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
 
 binkit-sourcedata: all
 	-rm -rf $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-	-rm -rf $(STAGING)/etc/$(PACKAGE)
-	-mkdir -p $(STAGING)/etc/$(PACKAGE)
+	-rm -rf $(patsubst %, $(STAGING)/etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES)))
+	-mkdir -p $(STAGING)/etc/$(DATA_DEST)
+	-rm -f $(STAGING)/$(MANIFEST)
+	-mkdir -p $(STAGING)/pkginfo
+	-touch $(STAGING)/$(MANIFEST)
 	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
-	$(RCOPY) etc/* $(STAGING)/etc/$(PACKAGE)
+	$(RCOPY) $(DATA_FILES) $(STAGING)/etc/$(DATA_DEST)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+	ls -1 lisp/$(PACKAGE)/* \
+		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+		$(MANIFEST) > $(MANIFEST); \
 	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
-		etc/$(PACKAGE); \
+		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+		$(MANIFEST); \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
 
 binkit-sourcedatainfo: all
 	-rm -rf $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/info
-	-(cd $(STAGING)/info; rm -rf $(INFO_FILES))
-	-rm -rf $(STAGING)/etc/$(PACKAGE)
-	-mkdir -p $(STAGING)/etc/$(PACKAGE)
+	-(cd $(STAGING)/info; rm -rf $(notdir $(INFO_FILES)))
+	-(cd $(STAGING)/man; rm -rf $(PACKAGE))
+	-mkdir -p $(STAGING)/man/$(PACKAGE)
+	-rm -rf $(patsubst %, $(STAGING)/etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES)))
+	-mkdir -p $(STAGING)/etc/$(DATA_DEST)
+	-rm -f $(STAGING)/$(MANIFEST)
+	-mkdir -p $(STAGING)/pkginfo
+	-touch $(STAGING)/$(MANIFEST)
 	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	$(RCOPY) $(INFO_FILES) $(STAGING)/info
-	$(RCOPY) etc/* $(STAGING)/etc/$(PACKAGE)
+	$(RCOPY) $(TEXI_FILES) $(STAGING)/man/$(PACKAGE)
+	$(RCOPY) $(DATA_FILES) $(STAGING)/etc/$(DATA_DEST)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+	ls -1 lisp/$(PACKAGE)/* man/$(PACKAGE)/* \
+		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
+		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+		$(MANIFEST) > $(MANIFEST); \
 	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
-		$(INFO_FILES:%=info/%) etc/$(PACKAGE); \
+		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
+		man/$(PACKAGE) \
+		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+		$(MANIFEST); \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)

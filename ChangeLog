@@ -1,5 +1,10 @@
 2002-09-18  Ville Skyttä  <ville.skytta@xemacs.org>
 
+	* xemacs-packages/Makefile (PACKAGES): Add ruby-modes.
+	* package-compile.el (package-directory-map): Ditto.
+
+2002-09-18  Ville Skyttä  <ville.skytta@xemacs.org>
+
 	* xemacs-packages/Makefile (PACKAGES): Add fortran-modes.
 	* package-compile.el (package-directory-map): Ditto.
 

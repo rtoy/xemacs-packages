@@ -131,6 +131,7 @@
     ("python-modes" . "xemacs-packages")
     ("reftex" . "xemacs-packages")
     ("rmail" . "xemacs-packages")
+    ("ruby-modes" . "xemacs-packages")
     ("sasl" . "xemacs-packages")
     ("scheme" . "xemacs-packages")
     ("semantic" . "xemacs-packages")

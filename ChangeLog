@@ -1,3 +1,10 @@
+2002-05-25  Steve Youngs  <youngs@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES): Add ess.
+
+	* package-compile.el (package-directory-map): Add ess.
+	(package-name-to-directory): Ditto.
+
 2002-05-22  Steve Youngs  <youngs@xemacs.org>
 
 	* Sumo packages released.

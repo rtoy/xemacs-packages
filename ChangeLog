@@ -1,5 +1,8 @@
 1998-12-08  SL Baur  <steve@altair.xemacs.org>
 
+	* package-compile.el (package-directory-map): Update to match
+	current set of packages.
+
 	* libs/Makefile (autoloads): Fix typo.
 	(bytecompile): Ditto.
 

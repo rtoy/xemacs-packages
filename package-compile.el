@@ -110,6 +110,7 @@
     ("mh-e" . "xemacs-packages")
     ("mine" . "xemacs-packages")
     ("misc-games" . "xemacs-packages")
+    ("mmm-mode" . "xemacs-packages")
     ("net-utils" . "xemacs-packages")
     ("os-utils" . "xemacs-packages")
     ("pc" . "xemacs-packages")

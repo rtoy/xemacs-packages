@@ -30,6 +30,6 @@ PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	xslt-process eterm igrep ilisp os-utils ps-print view-process \
 	eshell pcomplete edit-utils speedbar calc calendar forms frame-icon \
 	hm--html-menus ispell pc psgml sgml slider text-modes time \
-	strokes tramp clearcase dictionary sieve ibuffer
+	strokes tramp clearcase dictionary sieve ibuffer mmm-mode
 
 include ../iterate.rules

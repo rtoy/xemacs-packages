@@ -1,3 +1,11 @@
+2003-01-13  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+
+	*  Packages released:  build  xslide xemacs-base  textools texinfo
+	sml-mode  sieve  scheme  python-modes psgml  prog-modes perl-modes
+	os-utils ocaml idlwave fortran-modes docbookide cc-mode ada jde w3
+	ruby-modes haskell-mode   fsf-compat edit-utils semantic  mail-lib
+	sh-script text-modes mh-e.
+
 2003-01-03  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	*  Packages released:  xemacs-base dired apel  edebug xemacs-devel

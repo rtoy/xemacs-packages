@@ -1,5 +1,7 @@
 2004-03-15  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: xwem escreen.
+
 	* MAINTAINERS: 
 	* package-compile.el (package-directory-map): 
 	* xemacs-packages/Makefile (PACKAGES): 

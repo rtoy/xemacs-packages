@@ -162,6 +162,7 @@
     ("psgml" . "xemacs-packages")
     ("psgml-dtds" . "xemacs-packages")
     ("python-modes" . "xemacs-packages")
+    ("re-builder" . "xemacs-packages")
     ("reftex" . "xemacs-packages")
     ("riece" . "xemacs-packages")
     ("rmail" . "xemacs-packages")

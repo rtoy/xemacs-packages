@@ -50,9 +50,9 @@ PACKAGES := xemacs-base fsf-compat mail-lib \
 	hm--html-menus hyperbole ibuffer idlwave igrep ilisp \
 	jde liece mailcrypt mew mh-e mine misc-games mmm-mode \
 	ocaml oo-browser pc pcl-cvs pcomplete perl-modes pgg \
-	prog-modes ps-print psgml psgml-dtds python-modes reftex \
-	riece rmail ruby-modes sasl scheme semantic sgml sieve \
-	slider sml-mode sounds-au sounds-wav speedbar strokes \
+	prog-modes ps-print psgml psgml-dtds python-modes re-builder \
+	reftex riece rmail ruby-modes sasl scheme semantic sgml \
+	sieve slider sml-mode sounds-au sounds-wav speedbar strokes \
 	supercite textools time tm tooltalk tpu tramp \
 	vc vc-cc vhdl view-process viper vm w3 x-symbol \
 	xslide xslt-process xwem zenirc

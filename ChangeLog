@@ -1,3 +1,21 @@
+2003-08-28  Steve Youngs  <youngs@xemacs.org>
+
+	* xemacs-packages/Makefile: include ../Local.rules.inc so we can get
+	at $NONMULE_PACKAGES.
+	(PACKAGES): Base it on the value of $NONMULE_PACKAGES.
+
+	* mule-packages/Makefile: include ../Local.rules.inc so we can get at
+	$MULE_PACKAGES.
+	(PACKAGES): Base it on the value of $MULE_PACKAGES.
+
+	* Local.rules.template: Update the comments about NONMULE_PACKAGES
+	and MULE_PACKAGES.
+
+	This change makes it possible to build a subset of packages from
+	the toplevel by setting (NON)MULE_PACKAGES in Local.rules.  The
+	format for both vars is a whitespace separated list of package
+	directory names with *NO* '(xemacs|mule)-packages/' prefix.
+
 2003-08-26  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: text-modes.

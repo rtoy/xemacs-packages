@@ -23,7 +23,12 @@
 #
 # This is no longer true.  We build all autoloads first, before any
 # compilation, so they're available to all packages. --ben
-PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
+
+# So we can get at $NONMULE_PACKAGES
+include ../Local.rules.inc
+
+ifeq $($(NONMULE_PACKAGES),xemacs-packages)
+PACKAGES := xemacs-base fsf-compat mail-lib dired efs apel \
 	Sun edebug elib tooltalk xemacs-devel sounds-au sounds-wav \
 	eieio build auctex crisp edt reftex texinfo textools tpu viper \
 	vm w3 net-utils eudc footnote gnats mh-e supercite mailcrypt \
@@ -37,5 +42,8 @@ PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	liece haskell-mode ess docbookide ecrypto ocaml sasl sml-mode \
 	python-modes fortran-modes ruby-modes perl-modes pgg ecb x-symbol \
 	hyperbole oo-browser
+else
+PACKAGES := $(NONMULE_PACKAGES)
+endif
 
 include ../iterate.rules

@@ -98,8 +98,11 @@ MULE_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/mule-packages
 # doesn't look at this, it's used by 'make install'.  You probably don't
 # want to change this.
 #
-# The format for this is: xemacs-packages/pkg1 xemacs-packages/pkg2...
-# e.g. xemacs-packages/xemacs-base xemacs-packages/bbdb
+# The format for this is: pkg1 pkg2...
+# e.g. xemacs-base bbdb
+#
+# Or you can use the symbol 'xemacs-packages' which means to build ALL
+# the non-Mule packages.
 NONMULE_PACKAGES = xemacs-packages
 
 # Mule packages or groups of packages to build/install.  'make bindist'
@@ -107,8 +110,8 @@ NONMULE_PACKAGES = xemacs-packages
 # want to change this.  If you don't want any Mule packages, don't change
 # this, instead set BUILD_WITHOUT_MULE above.
 #
-# The format for this is: mule-packages/pkg1 mule-packages/pkg2...
-# e.g. mule-packages/mule-base mule-packages/skk
+# The format for this is the same as for 'NONMULE_PACKAGES' except you
+# can use the symbol 'mule-packages' to mean ALL Mule packages.
 MULE_PACKAGES = mule-packages
 
 PACKAGE_INDEX = package-index

@@ -15,8 +15,15 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-PACKAGES= mule-base \
-	locale leim lookup edict egg-its skk mule-ucs latin-unity
+# So we can get at $MULE_PACKAGES
+include ../Local.rules.inc
+
+ifeq ('$(MULE_PACKAGES)','mule-packages')
+PACKAGES := mule-base locale leim lookup edict egg-its skk \
+	mule-ucs latin-unity
+else
+PACKAGES := $(MULE_PACKAGES)
+endif
 
 ASSUMED_PRESENT = xemacs-base fsf-compat viper apel cookie elib dired
 

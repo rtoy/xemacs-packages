@@ -1,3 +1,7 @@
+2003-06-20  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: prog-modes tramp edit-utils.
+
 2003-06-18  Norbert Koch  <viteno@xemacs.org>
 
 	* MAINTAINERS: Update tramp-maintainer's e-mail address

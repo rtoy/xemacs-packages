@@ -1,5 +1,8 @@
 2002-10-07  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
+	*   Packages  released: python-modes  psgml prog-modes  perl-modes
+	os-utils.
+
 	* Packages released: mh-e idlwave fortran-modes cc-mode ada.
 
 2002-10-05  Ville Skyttä  <ville.skytta@xemacs.org>

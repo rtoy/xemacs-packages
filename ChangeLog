@@ -1,5 +1,7 @@
 2004-05-19  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: xwem net-utils text-modes.
+
 	* MAINTAINERS: We now have two ESS maintainers, add Rodney
 	Sparapani.
 

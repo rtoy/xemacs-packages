@@ -1,3 +1,9 @@
+2001-04-20  Ben Wing  <ben@xemacs.org>
+
+	* Local.rules.template (PACKAGE_INDEX): Make sure STAGING is
+	always set (but doesn't override command line), so that `make
+	install' from a subdir works.
+
 2001-04-19  Andy Piper  <andy@xemacs.org>
 
 	* package-net-packages.el: New.

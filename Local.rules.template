@@ -83,8 +83,19 @@ PACKAGE_INDEX = package-index
 # See: Makefile and XEmacs.rules to see how $(XEMACS_STAGING),
 # $(MULE_STAGING), and $(STAGING) are used.
 #
-ifneq ('$(MAKECMDGOALS)','install')
+
+# We need to set STAGING so that `make' run from a lower-level directory
+# works right.
+
+# the first endif is really not necessary, because STAGING is set from
+# the command line, and variable settings should not override command-line
+# ones.
+ifeq ('$(STAGING)','')
+ifeq ('$(CATEGORY)','mule')
+STAGING := $(MULE_STAGING)
+else
 STAGING := $(XEMACS_STAGING)
+endif
 endif
 
 # Path to BSD install.

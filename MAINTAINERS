@@ -41,7 +41,7 @@ fsf-compat            XEmacs Development Team <xemacs-beta@xemacs.org>
 games                 Glynn Clements <glynn.clements@virgin.net>
 general-docs          XEmacs Development Team <xemacs-beta@xemacs.org>
 gnats                 XEmacs Development Team <xemacs-beta@xemacs.org>
-gnus                  XEmacs Development Team <xemacs-beta@xemacs.org>
+gnus                  Steve Youngs <sryoungs@bigpond.net.au>
 haskell-mode          XEmacs Development Team <xemacs-beta@xemacs.org>
 hm--html-menus        XEmacs Development Team <xemacs-beta@xemacs.org>
 hyperbole             Mats Lidell <matsl@xemacs.org>
@@ -111,7 +111,7 @@ view-process          XEmacs Development Team <xemacs-beta@xemacs.org>
 viper                 Michael Kifer <kifer@cs.sunysb.edu>
 vm                    Kyle Jones <kyle_jones@wonderworks.com>
 w3                    XEmacs Development Team <xemacs-beta@xemacs.org>
-x-symbol	      Steve Youngs <youngs@xemacs.org>
+x-symbol              Steve Youngs <sryoungs@bigpond.net.au>
 xemacs-base           XEmacs Development Team <xemacs-beta@xemacs.org>
 xemacs-devel          XEmacs Development Team <xemacs-beta@xemacs.org>
 xslide                XEmacs Development Team <xemacs-beta@xemacs.org>

@@ -66,20 +66,15 @@ PWD      := $(shell pwd)
 
 # 'make bindist' needs STAGING to be set to NONMULE_INSTALLED_PACKAGES_ROOT
 # if we are building a Mule package so we don't end up with 2 package-index
-# files. (Unsupported packages have a separate package-index-unsupported,
-# so this doesn't apply to them.)
+# files. 
 
-ifeq ('$(CATEGORY)','unsupported')
-STAGING:= $(UNSUPPORTED_INSTALLED_PACKAGES_ROOT)
+ifeq ('$(MAKECMDGOALS)','bindist')
+STAGING:= $(NONMULE_INSTALLED_PACKAGES_ROOT)
 else
- ifeq ('$(MAKECMDGOALS)','bindist')
-STAGING:= $(NONMULE_INSTALLED_PACKAGES_ROOT)
- else
-  ifeq ('$(CATEGORY)','mule')
+ ifeq ('$(CATEGORY)','mule')
 STAGING:= $(MULE_INSTALLED_PACKAGES_ROOT)
-  else
+ else
 STAGING:= $(NONMULE_INSTALLED_PACKAGES_ROOT)
-  endif
  endif
 endif
 

@@ -32,11 +32,15 @@ Notes for FreeBSD users:
 	(3) Run either 'make install' or 'make bindist' (not both).
 
 	    'make install' builds the packages and installs them into
-	    the $STAGING directory (see Local.rules format below).  It
-	    doesn't create package binary tarballs.
+	    the $NONMULE_INSTALLED_PACKAGES_ROOT directory
+	    ($MULE_INSTALLED_PACKAGES_ROOT for mule-packages),
+	    see Local.rules format below.  It doesn't create package
+	    binary tarballs.
 
 	    'make bindist' builds the packages and creates package
-	    binary tarballs and a 'package-index' file in $STAGING.
+	    binary tarballs and a 'package-index' file in
+	    $NONMULE_INSTALLED_PACKAGES_ROOT
+	    (both for mule and non-mule packages).
 
 ** Building a Single Package:
 

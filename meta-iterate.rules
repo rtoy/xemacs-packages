@@ -46,9 +46,6 @@ JUST_INSTALL_TARGETS = $(NONMULE_PACKAGES:=/NONMULE.install)
 ifeq ($(BUILD_WITHOUT_MULE),)
 JUST_INSTALL_TARGETS += $(MULE_PACKAGES:=/MULE.install)
 endif
-ifeq ($(BUILD_UNSUPPORTED),t)
-JUST_INSTALL_TARGETS += $(UNSUPPORTED_PACKAGES:=/UNSUPPORTED.install)
-endif
 
 # At some point we might have dependencies here...
 

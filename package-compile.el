@@ -64,17 +64,14 @@
 
 ;;; Step 1, set the load-path and load the core autoloads.
 
-(let* ((roots (paths-find-emacs-roots invocation-directory
-				      invocation-name))
-       (lisp-directory (paths-find-lisp-directory roots))
-       (depth (cond
-	       ;; #### All hail Mr. Preprocessor!
-	       ;; OK, OK, his code is under development; FIXME when it's done.
-	       ((boundp 'paths-load-path-depth) ; XEmacs 21.1
-		paths-load-path-depth)
-	       ((boundp 'paths-core-load-path-depth) ; XEmacs > 21.2.41
-		paths-core-load-path-depth)
-	       (t (error "Somebody has been messing with paths-find-*!")))))
+(let ((depth (cond
+	      ;; #### All hail Mr. Preprocessor!
+	      ;; OK, OK, his code is under development; FIXME when it's done.
+	      ((boundp 'paths-load-path-depth) ; XEmacs 21.1
+	       paths-load-path-depth)
+	      ((boundp 'paths-core-load-path-depth) ; XEmacs > 21.2.41
+	       paths-core-load-path-depth)
+	      (t (error "Somebody has been messing with paths-find-*!")))))
   (setq load-path (paths-find-recursive-load-path (list lisp-directory)
 						  depth)))
 
@@ -192,6 +189,7 @@
     ("viper" . "xemacs-packages")
     ("vm" . "xemacs-packages")
     ("w3" . "xemacs-packages")
+    ("x-symbol" . "xemacs-packages")
     ("xemacs-base" . "xemacs-packages")
     ("xemacs-devel" . "xemacs-packages")
     ("xslide" . "xemacs-packages")
@@ -207,14 +205,6 @@
     ("mule-base" . "mule-packages")
     ("mule-ucs" . "mule-packages")
     ("skk" . "mule-packages")
-    ;; unsupported
-    ("antlr-mode" . "scop")
-    ("asn1" . "simon")
-    ("cogre" . "scop")
-    ("ecb" . "scop")
-    ("ede" . "scop")
-    ("epop3" . "simon")
-    ("flim" . "simon")
     ))
 
 (defvar package-source-root nil)
@@ -238,7 +228,8 @@
 	       (equal package "tramp")
 	       (equal package "lookup")
 	       (equal package "mule-ucs")
-	       (equal package "ess"))
+	       (equal package "ess")
+	       (equal package "x-symbol"))
 	   (expand-file-name "lisp" (file-name-as-directory dir)))
 	  ((equal package "mew")
 	   (expand-file-name "mew" (file-name-as-directory dir)))

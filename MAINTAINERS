@@ -3,7 +3,7 @@ xemacs-packages       Maintainer
 ------------------------------------------------------------------------
 ada                   XEmacs Development Team <xemacs-beta@xemacs.org>
 apel                  XEmacs Development Team <xemacs-beta@xemacs.org>
-auctex                XEmacs Development Team <xemacs-beta@xemacs.org>
+auctex                Uwe Brauer <oub@xemacs.org>
 bbdb                  Ronan Waide <waider@waider.ie>
 build                 Adrian Aichner <adrian@xemacs.org>
 calc                  XEmacs Development Team <xemacs-beta@xemacs.org>
@@ -107,6 +107,7 @@ view-process          XEmacs Development Team <xemacs-beta@xemacs.org>
 viper                 Michael Kifer <kifer@cs.sunysb.edu>
 vm                    Kyle Jones <kyle_jones@wonderworks.com>
 w3                    XEmacs Development Team <xemacs-beta@xemacs.org>
+x-symbol	      Steve Youngs <youngs@xemacs.org>
 xemacs-base           XEmacs Development Team <xemacs-beta@xemacs.org>
 xemacs-devel          XEmacs Development Team <xemacs-beta@xemacs.org>
 xslide                XEmacs Development Team <xemacs-beta@xemacs.org>

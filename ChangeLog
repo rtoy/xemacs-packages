@@ -1,3 +1,9 @@
+2003-02-07  Ben Wing  <ben@xemacs.org>
+
+	* package-compile.el:
+	Just use the existing global `lisp-directory' instead of
+	recomputing (and hit problems with paths-find-emacs-roots).
+
 2003-02-06  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Sumo packages released

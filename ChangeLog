@@ -1,5 +1,7 @@
 2001-05-15  Steve Youngs  <youngs@xemacs.org>
 
+	* INSTALL: Update to reflect the 'flat' package tree.
+
 	* Local.rules.template: The shell doesn't know that 'nil' means ''.
 
 2001-05-11  Steve Youngs  <youngs@xemacs.org>

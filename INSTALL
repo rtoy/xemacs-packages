@@ -35,12 +35,12 @@ IMPORTANT:
 	All you need to do is run the make from the package's
 	directory.  Say, for example, you want to build the bbdb
 	package:
-	  	- cd ./comm/bbdb
+	  	- cd ./xemacs-packages/bbdb
 		- make install or bindist
 
 	You can build a category of packages just as easily.  For
 	example, if you want to build all the packages in ./libs:
-		- cd ./libs
+		- cd ./xemacs-packages
 		- make install or bindist
 
 ** Building Sumo Packages:
@@ -107,7 +107,7 @@ address.
 	XEMACS_PACKAGES =
 		This is where you list the the normal (i.e. non-mule)
 		packages that you want to install. eg:
-			XEMACS_PACKAGES = libs/xemacs-base comm/bbdb
+		   XEMACS_PACKAGES = xemacs-packages/xemacs-base xemacs-packages/bbdb
 
 	XEMACS_STAGING = ${XEMACS_PACKAGES_BASE}/../Packages
 		Set this to where you want normal packages to be
@@ -124,7 +124,7 @@ address.
 	MULE_PACKAGES =
 		Same as for 'XEMACS_PACKAGES' except you list the Mule
 		packages you want to install here. eg:
-			MULE_PACKAGES = mule/mule-base mule/skk
+		   MULE_PACKAGES = mule-packages/mule-base mule-packages/skk
 
 	MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../Mule-Packages
 		Set this to where you want Mule packages installed

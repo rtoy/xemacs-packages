@@ -1,7 +1,7 @@
 2003-01-03  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	*  Packages released:  xemacs-base dired apel  edebug xemacs-devel
-	build  auctex  net-utils  eudc mh-e   gnus tm  semantic  ada   jde
+	build  auctex  net-utils  eudc  gnus tm  semantic  ada   jde
 	prog-modes vc vhdl ilisp edit-utils speedbar psgml tramp ess leim.
 
 2002-12-31  Steve Youngs  <youngs@xemacs.org>

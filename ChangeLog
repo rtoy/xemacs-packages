@@ -1,3 +1,8 @@
+2003-10-11  Steve Youngs  <sryoungs@bigpond.net.au>
+
+	* XEmacs.rules ($(AUTOLOAD_PATH)/_pkg.el): Store $AUTHOR_VERSION
+	as well.
+
 2003-10-10  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: gnus x-symbol.

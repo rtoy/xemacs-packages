@@ -531,6 +531,7 @@ $(AUTOLOAD_PATH)/_pkg.el: Makefile
 	@echo ";;;###autoload" > $(AUTOLOAD_PATH)/_pkg.el
 	@echo "(package-provide '$(PACKAGE)" >> $(AUTOLOAD_PATH)/_pkg.el
 	@echo "		 :version $(VERSION)" >> $(AUTOLOAD_PATH)/_pkg.el
+	@echo "          :author-version \"$(AUTHOR_VERSION)\"" >> $(AUTOLOAD_PATH)/_pkg.el
 	@echo "		 :type '$(PKG_TYPE))" >> $(AUTOLOAD_PATH)/_pkg.el
 ifneq ($(PACKAGE_SUPPRESS),)
 	@echo "" >> $(AUTOLOAD_PATH)/_pkg.el

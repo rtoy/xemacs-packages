@@ -1,3 +1,7 @@
+2005-02-10  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: auctex edit-utils perl-modes text-modes.
+
 2005-02-03  Norbert Koch  <viteno@xemacs.org>
 
 	* XEmacs.rules (package-info): Fix build, move comment out of the

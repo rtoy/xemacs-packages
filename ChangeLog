@@ -1,3 +1,13 @@
+2000-06-04  Andreas Jaeger  <aj@suse.de>
+
+	* Makefile: Move includes to the front and add new target all as
+	first target.
+
+	* Local.rules.template (XEMACS): Use xemacs instead of a system
+	specific path.
+
+	* Local.rules.mk (___): Really create Local.rules if it doesn't exist.
+
 2000-05-23  Karl M. Hegbloom  <karlheg@debian.org>
 
 	* Local.rules.template, Local.rules.mk: New files.
@@ -87,7 +97,7 @@
 
 1998-10-15  Greg Klanderman  <greg@alphatech.com>
 
-	* hack-package-index.el (batch-hack-package-index): update for new 
+	* hack-package-index.el (batch-hack-package-index): update for new
 	package index file format.
 
 1998-10-13  SL Baur  <steve@altair.xemacs.org>
@@ -115,7 +125,7 @@
 	* XEmacs.rules (binkit-common): New rule.  Obsoletes the
 	individual binkit-* rules.
 	- Add support for installing files in lib-src.
-	
+
 1998-10-01  SL Baur  <steve@altair.xemacs.org>
 
 	* XEmacs.rules (SOURCE_FILES_TO_COPY): Add _pkg.el.
@@ -193,7 +203,7 @@
 	* os/Makefile: Ditto.
 	* oa/Makefile: Ditto.
 	* mule/Makefile: Ditto.
-	
+
 	* XEmacs.rules (RCOPY): Parameterize recursive copy command.
 	(package-info): Update to package standard 1.0.
 
@@ -209,11 +219,10 @@
 
 1998-01-11  SL Baur  <steve@altair.xemacs.org>
 
-	* XEmacs.rules: Explicitly load autoloads from dependent 
+	* XEmacs.rules: Explicitly load autoloads from dependent
 	packages.
 	Move srckit/binkit dependencies here.
 	Add REQUIRES variable.
 	Move the *clean: dependencies here.
 
 	* package-compile.el: New file.
-

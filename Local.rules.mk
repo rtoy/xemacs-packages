@@ -11,9 +11,8 @@ Local.rules : ${XEMACS_PACKAGES_BASE}/Local.rules
 
 ${XEMACS_PACKAGES_BASE}/Local.rules : ${XEMACS_PACKAGES_BASE}/Local.rules.template
 ifneq (${___},exists)
-	cp -p $< $@
+	command := $(shell cp -p $< $@)
 	$(error You must edit "$(notdir $@)" and customize it for this build host.)
 else
-	diff -u $@ $<
 	$(error "$(notdir $<)" has been updated or is newer than "$(notdir $@)".  Merge the changes into your "$(notdir $@)".)
 endif

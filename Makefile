@@ -20,11 +20,17 @@ SUBDIRS = libs comm games prog wp os oa
 # Use a Local.rules file to specify what you wish to have installed
 XEMACS_PACKAGES_BASE := $(shell pwd)
 
+
+all:: all-bytecompile
+
+include Local.rules.mk
+-include Local.rules
+
 ifeq ($(BUILD_WITHOUT_MULE),)
 SUBDIRS += mule
 endif
 
-all:
+all-bytecompile:
 	for dir in $(SUBDIRS); do \
 		$(MAKE) $(MFLAGS) -C $${dir} autoloads; \
 	done
@@ -32,10 +38,8 @@ all:
 		$(MAKE) $(MFLAGS) -C $${dir} bytecompile; \
 	done
 
-include Local.rules.mk
--include Local.rules
 
-.PHONY: all bindist clean distclean install autoloads
+.PHONY: all all-bytecompile bindist clean distclean install autoloads
 
 autoloads:
 	for dir in $(SUBDIRS); do \

@@ -35,7 +35,7 @@ MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../Mule-Packages
 
 # Path to XEmacs to use for byte compilation.
 #
-XEMACS = ${XEMACS_PACKAGES_BASE}/../xemacs/src/xemacs
+XEMACS = xemacs
 
 # See: Makefile and XEmacs.rules to see how $(XEMACS_STAGING),
 # $(MULE_STAGING), and $(STAGING) are used.

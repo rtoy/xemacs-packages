@@ -1,3 +1,8 @@
+2002-05-07  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released: ibuffer os-utils pcl-cvs xemacs-base
+	prog-modes latin-unity haskell-mode mule-base. 
+
 2002-05-04  Stephen J. Turnbull  <stephen@xemacs.org>
 
 	* XEmacs.rules (BOOT_XEMACS): Do PRELOADS in correct order.

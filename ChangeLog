@@ -1,3 +1,7 @@
+2002-05-14  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released: prog-modes liece ilisp edit-utils.
+
 2002-05-10  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages released: os-utils pc text-modes gnus apel.

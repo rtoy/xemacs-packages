@@ -1,4 +1,4 @@
-# Configuration constants for building XEmacs packages
+# Common Makefile material for package Makefiles
 # Copyright (C) 1997 Free Software Foundation Inc.
 
 # This file is part of XEmacs.
@@ -60,15 +60,16 @@ PWD      := $(shell pwd)
 %.info: %.texi
 	$(MAKEINFO) $(MAKEINFO_FLAGS) -o $@ $<
 
-# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
-# need to temporarily work around.
 ifeq ($(XEMACS_NATIVE_NT),t)
-# APA: Convert UNIX-path (containing output of `pwd') to windows-path,
-# so that XEmacs native NT can handle it.
+# Convert UNIX-path (containing output of `pwd') to windows-path, so
+# that XEmacs native NT can handle it.
 PACKAGE_COMPILE = \
 "$(shell cygpath --windows $(XEMACS_PACKAGES_BASE)/package-compile.el)"
+PACKAGE_CLEAN = \
+"$(shell cygpath --windows $(XEMACS_PACKAGES_BASE)/package-clean.el)"
 else
 PACKAGE_COMPILE = $(XEMACS_PACKAGES_BASE)/package-compile.el
+PACKAGE_CLEAN = $(XEMACS_PACKAGES_BASE)/package-clean.el
 endif
 
 %.elc: %.el
@@ -91,11 +92,14 @@ distclean: extraclean
 		$(AUTOLOAD_PATH)/custom-load.el package-info \
 		$(AUTOLOAD_PATH)/_pkg.el
 
-# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
-# need to temporarily work around.
-ifeq ($(XEMACS_NATIVE_NT),t)
-# APA: XEmacs native NT currently needs this quoting of
-# command-line-rguments.
+elcclean:
+	$(XEMACS) $(VANILLA) -batch -l $(PACKAGE_CLEAN)
+
+# XEmacs native MS Windows needs this quoting of command-line
+# arguments due to basic differences in the handling of command-line
+# arguments in Unix and MS Windows.
+#### not any more, as of Cygwin 1.1.8-2 (Feb 2001) -- ben
+ifeq ($(XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING),t)
 AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \\\"$(PACKAGE)\\\")
 else
 AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \"$(PACKAGE)\")
@@ -113,10 +117,8 @@ $(AUTOLOAD_PATH)/custom-load.el : $(ELCS:.elc=.el)
 
 pkg_tar = $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar
 
-# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
-# need to temporarily work around.
 ifeq ($(XEMACS_NATIVE_NT),t)
-# APA: Convert UNIX-path (containing output of `pwd') to windows-path,
+# Convert UNIX-path (containing output of `pwd') to windows-path,
 # so that XEmacs native NT can handle it.
 PKG_TAR_GZ = "$(shell cygpath --windows $(pkg_tar)).gz"
 PACKAGE_INFO = "$(shell cygpath --windows $(STAGING)/$(PACKAGE_INDEX))"

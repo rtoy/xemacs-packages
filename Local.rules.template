@@ -4,6 +4,8 @@
 # the full / rooted path to the directory where this "Local.rules"
 # makefile is supposed to be.  Don't override it here.
 
+###################### Begin settings that commonly need to be changed
+
 # `t' or `nil' - When `t', a symlink tree will be built for running a
 # live CVS checkout.  Requires GNU `cp', and that you configure your
 # XEmacs to use ${STAGING} in the package-path.  Create the tree with
@@ -11,44 +13,15 @@
 #
 symlink = 
 
-# Stuff to install.
+# Path to XEmacs to use for byte compilation.
+#
+# (Double-quote path under native MS Windows if there are embedded spaces.)
+XEMACS = xemacs
 
-# XEmacs packages to install. 'make bindist' doesn't look at this, it's
-# used by 'make install'.
-#
-# The format for this is: dir/pkg1 dir/pkg2...
-# e.g. libs/xemacs-base comm/bbdb
-XEMACS_PACKAGES =
-#
-# Where to stage or install the packages, or where the symlink tree will go.
-#
-XEMACS_STAGING = ${XEMACS_PACKAGES_BASE}/../Packages
-#
-# APA: Name of package index file
-#
-PACKAGE_INDEX = package-index
 # Should we build the mule package?  Set to 't' if you do not have/want Mule.
 #
 BUILD_WITHOUT_MULE =
 
-# Mule packages to install.  'make bindist' doesn't look at this, it's
-# used by 'make install'.
-#
-# The format for this is: dir/pkg1 dir/pkg2...
-# e.g. mule/mule-base mule/skk
-MULE_PACKAGES =
-#
-# Where to install them
-#
-MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../Mule-Packages
-
-# Path to XEmacs to use for byte compilation.
-#
-# APA: Double-quote path to protect possibly embedded SPACEs on WindowsNT.
-XEMACS = xemacs
-
-# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
-# need to temporarily work around.
 # Following test, which would be performed by every makefile
 # including XEmacs.rules, slows down the make process terribly
 # according to
@@ -64,8 +37,48 @@ XEMACS = xemacs
 #
 # Therefore this has become a make variable instead:
 #
-# Set XEMACS_NATIVE_NT to 't' if you are building on Microsoft Windows.
+# Set XEMACS_NATIVE_NT to 't' if you are building using a native
+# Microsoft Windows version of XEmacs (not a Cygwin-built version).
+# NOTE: You still need the Cygwin environment to build the packages!
+# This only concerns how XEmacs itself was built.
 XEMACS_NATIVE_NT =
+
+# XEmacs native MS Windows needs this quoting of command-line
+# arguments due to basic differences in the handling of command-line
+# arguments in Unix and MS Windows.
+#### not any more, as of Cygwin 1.1.8-2 (Feb 2001) -- ben
+# set this to 't' if you get errors under MS Windows without it.
+XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING =
+
+#
+# Where to stage or install the non-Mule packages, or where the
+# symlink tree will go.
+#
+XEMACS_STAGING = ${XEMACS_PACKAGES_BASE}/../xemacs-packages
+
+#
+# Where to stage or install the Mule packages, or where the
+# symlink tree will go.
+#
+MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../mule-packages
+
+# XEmacs packages or groups of packages to install. 'make bindist'
+# doesn't look at this, it's used by 'make install'.
+#
+# The format for this is: dir/pkg1 dir/pkg2...
+# e.g. libs/xemacs-base comm/bbdb
+XEMACS_PACKAGES = comm games libs oa os prog wp
+
+# Mule packages or groups of packages to install.  'make bindist'
+# doesn't look at this, it's used by 'make install'.
+#
+# The format for this is: dir/pkg1 dir/pkg2...
+# e.g. mule/mule-base mule/skk
+MULE_PACKAGES = mule
+
+###################### End settings that commonly need to be changed
+
+PACKAGE_INDEX = package-index
 
 # See: Makefile and XEmacs.rules to see how $(XEMACS_STAGING),
 # $(MULE_STAGING), and $(STAGING) are used.

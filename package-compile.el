@@ -34,7 +34,7 @@
 
 ;;; Code:
 
-;; (setq stack-trace-on-error t)
+(setq stack-trace-on-error t)
 
 (when (interactive-p)
   (error "package-compile may only be used with -batch"))

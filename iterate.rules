@@ -25,8 +25,10 @@ BYTECOMPILE_TARGETS= $(PACKAGES:=/bytecompile.target)
 BINDIST_TARGETS= $(PACKAGES:=/bindist.target)
 CLEAN_TARGETS= $(PACKAGES:=/clean.target)
 DISTCLEAN_TARGETS= $(PACKAGES:=/distclean.target)
+ELCCLEAN_TARGETS= $(PACKAGES:=/elcclean.target)
+INSTALL_TARGETS= $(PACKAGES:=/install.target)
 
-.PHONY: all autoloads bytecompile bindist clean distclean
+.PHONY: all autoloads bytecompile bindist clean distclean elcclean install
 
 # At some point we might have dependencies here..
 
@@ -44,6 +46,10 @@ bindist: $(BINDIST_TARGETS)
 clean: $(CLEAN_TARGETS)
 
 distclean: $(DISTCLEAN_TARGETS)
+
+elcclean: $(ELCCLEAN_TARGETS)
+
+install: $(INSTALL_TARGETS)
 
 # Local Variables:
 # mode: Makefile

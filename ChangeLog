@@ -1,3 +1,57 @@
+2001-02-24  Ben Wing  <ben@xemacs.org>
+
+	* package-clean.el:
+	New file, based on update-elc-2.el.
+	
+	* Local.rules.template:
+	* Local.rules.template (symlink):
+	* Local.rules.template (XEMACS):
+	* Local.rules.template (BUILD_WITHOUT_MULE):
+	* Local.rules.template (XEMACS_NATIVE_NT):
+	* Local.rules.template (XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING):
+	* Local.rules.template (XEMACS_STAGING):
+	* Local.rules.template (MULE_STAGING):
+	* Local.rules.template (XEMACS_PACKAGES):
+	* Local.rules.template (MULE_PACKAGES):
+	Rearrange so that most-commonly-needed-to-change options are first
+	and add appropriate comments.  Change defaults for XEMACS_STAGING
+	and MULE_STAGING to conform to what XEmacs expects for a package
+	tree.  Change defaults for XEMACS_PACKAGES and MULE_PACKAGES so
+	that everything will by default be installed.  Add
+	XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING to conditionalize out no
+	longer needed MS Windows quoting changes.
+	
+	* Makefile (all):
+	* Makefile (all-bytecompile):
+	* Makefile (elcclean):
+	* Makefile (World):
+	* Makefile (install):
+	* Makefile (just-install):
+	Complete the list of phony targets.  Add target just-install to
+	just install, not byte-compile.  Add target elcclean to
+	remove out-of-date and orphaned .elc files to avoid
+	compile errors when upgrading, and use it in all:.  Rename
+	INSTALL_TARGETS to JUST_INSTALL_TARGETS and conditionalize
+	appropriately on BUILD_WITHOUT_MULE.
+	
+	* XEmacs.rules:
+	* XEmacs.rules (PWD):
+	* XEmacs.rules (elcclean):
+	* XEmacs.rules (pkg_tar):
+	Add elcclean target (not currently used by default).  Clean up MS
+	Windows comments.  Conditionalize extra MS Windows quoting on
+	XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING, since it breaks things under
+	newer Cygwins.
+	
+	* iterate.rules (ELCCLEAN_TARGETS):
+	* iterate.rules (INSTALL_TARGETS):
+	* iterate.rules (distclean):
+	* iterate.rules (elcclean):
+	Add targets for elcclean and install to work recursively.
+	
+	* package-compile.el (stack-trace-on-error):
+	Turn on by default for better error tracking.
+
 2001-02-20  Martin Buchholz  <martin@xemacs.org>
 
 	* INSTALL: cvs update -Pd and other INSTALL corrections.

@@ -30,18 +30,22 @@ ifeq ($(BUILD_WITHOUT_MULE),)
 SUBDIRS += mule
 endif
 
-.PHONY: all all-bytecompile bindist clean distclean install autoloads
+.PHONY: all all-bytecompile autoloads bytecompile bindist-real bindist clean distclean elcclean World install just-install
 
 # The toplevel has slightly different rules so we do not use iterate.rules
 # directly
- 
+
 ALL_TARGETS= $(SUBDIRS:=/all.target)
 AUTOLOADS_TARGETS= $(SUBDIRS:=/autoloads.target)
 BYTECOMPILE_TARGETS= $(SUBDIRS:=/bytecompile.target)
 BINDIST_TARGETS= $(SUBDIRS:=/bindist.target)
 CLEAN_TARGETS= $(SUBDIRS:=/clean.target)
 DISTCLEAN_TARGETS= $(SUBDIRS:=/distclean.target)
-INSTALL_TARGETS = $(XEMACS_PACKAGES:=/XEMACS.install) $(MULE_PACKAGES:=/MULE.install) 
+ELCCLEAN_TARGETS= $(SUBDIRS:=/elcclean.target)
+JUST_INSTALL_TARGETS = $(XEMACS_PACKAGES:=/XEMACS.install)
+ifeq ($(BUILD_WITHOUT_MULE),)
+JUST_INSTALL_TARGETS += $(MULE_PACKAGES:=/MULE.install)
+endif
 
 # At some point we might have dependencies here...
 
@@ -51,7 +55,7 @@ INSTALL_TARGETS = $(XEMACS_PACKAGES:=/XEMACS.install) $(MULE_PACKAGES:=/MULE.ins
 %.install:
 	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) STAGING=$($(*F:=_STAGING)) install
 
-all-bytecompile: autoloads bytecompile
+all-bytecompile: elcclean autoloads bytecompile
 
 autoloads: $(AUTOLOADS_TARGETS)
 
@@ -65,7 +69,13 @@ clean: $(CLEAN_TARGETS)
 
 distclean: $(DISTCLEAN_TARGETS)
 
+elcclean:
+	$(XEMACS) $(VANILLA) -batch -l package-clean.el
+
 World: distclean install
 
-install: all $(INSTALL_TARGETS)
+install: all just-install
+
+just-install: $(JUST_INSTALL_TARGETS)
+
 

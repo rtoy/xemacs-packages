@@ -35,6 +35,7 @@ PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	hm--html-menus ispell pc psgml psgml-dtds sgml slider text-modes time \
 	strokes tramp clearcase dictionary sieve ibuffer mmm-mode xslide \
 	liece haskell-mode ess docbookide ecrypto ocaml sasl sml-mode \
-	python-modes fortran-modes ruby-modes perl-modes pgg ecb x-symbol
+	python-modes fortran-modes ruby-modes perl-modes pgg ecb x-symbol \
+	hyperbole
 
 include ../iterate.rules

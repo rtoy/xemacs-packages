@@ -1,3 +1,11 @@
+2000-08-16  Steve Youngs  <youngs_s@ozlinx.com.au>
+
+	* CVSROOT/modules: added module for eicq
+
+	* comm/Makefile (PACKAGES): added eicq
+
+	* package-compile.el (package-directory-map): added eicq
+
 2000-06-23  Adrian Aichner  <aichner@ecf.teradyne.com>
 
 	* XEmacs.rules: Temporarily work around shortcomings of XEmacs

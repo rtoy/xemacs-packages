@@ -95,6 +95,7 @@
     ("vhdl" . "prog")
     ;; comm/*
     ("bbdb" . "comm")
+    ("eicq" . "comm")
     ("eudc" . "comm")
     ("footnote" . "comm")
     ("gnats" . "comm")

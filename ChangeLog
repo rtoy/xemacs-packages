@@ -1,3 +1,179 @@
+2003-03-09  Ben Wing  <ben@xemacs.org>
+
+	* Local.rules.inc: New file.  Used when it's necessary to get at
+	some settings (in particular, usually BUILD_WITHOUT_MULE) before
+	including XEmacs.rules.
+	
+	* Local.rules.template (XEMACS):
+	* Local.rules.template (XEMACS_21_5): New.
+	* Local.rules.template (BATCH):
+	* Local.rules.template (MAKEINFO):
+	* Local.rules.template (INSTALL_HTML): New.
+	Add new XEMACS_21_5; if t, build custom-defines.el files and use
+	the new interface for building auto-autoloads.el files.
+
+	Add new INSTALL_HTML, for building the packages with HTML (not working
+	yet).
+
+	Add load-always-display-messages=t to $(BATCH) flags.
+	
+	* XEmacs.rules:
+	* XEmacs.rules (XEMACS_PACKAGES_BASE):
+	* XEmacs.rules (DEPENDS_FILE_NAME): Removed.
+	* XEmacs.rules (all): Removed.
+	* XEmacs.rules (bytecompile): Removed.
+	* XEmacs.rules (AUTOLOAD_PATH):
+	* XEmacs.rules (GENERATED): Removed.
+	* XEmacs.rules (EARLY_GENERATED_ELCS): New.
+	* XEmacs.rules (GENERATED_ELCS): New.
+	* XEmacs.rules (SOURCE_FILES_TO_COPY):
+	* XEmacs.rules (.SUFFIXES):
+	* XEmacs.rules (STAGING):
+	* XEmacs.rules (FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS): Removed.
+	* XEmacs.rules (check-mule): New.
+	* XEmacs.rules (EXPLICIT_DOCS): New.
+	* XEmacs.rules (EXPLICIT_DOCS_AS_TEXI): New.
+	* XEmacs.rules (TEXI_FILES): New.
+	* XEmacs.rules (INFO_FILES): New.
+	* XEmacs.rules (INFO_DEP): New.
+	* XEmacs.rules (mostlyclean): New.
+	* XEmacs.rules (clean): New.
+	* XEmacs.rules (HTML_FILES): New.
+	* XEmacs.rules (HTML_DEP): New.
+	* XEmacs.rules (html):
+	* XEmacs.rules (FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS):
+	* XEmacs.rules (FORMAT_INFO_USING_XEMACS_ARGS):
+	* XEmacs.rules (FORMAT_INFO_USING_XEMACS): New.
+	* XEmacs.rules (FORMAT_MULE_INFO_USING_XEMACS): New.
+	* XEmacs.rules (FORMAT_INFO): New.
+	* XEmacs.rules (RUN_TEXI2HTML): New.
+	* XEmacs.rules (RUN_TEXI2DVI): New.
+	* XEmacs.rules (RUN_TEXI2PDF): New.
+	* XEmacs.rules (RUN_DVIPS): New.
+	* XEmacs.rules (PACKAGE_STAGING):
+	* XEmacs.rules (BOOT_XEMACS):
+	* XEmacs.rules (compile): New.
+	* XEmacs.rules (distclean):
+	* XEmacs.rules (extraclean):
+	* XEmacs.rules (AUTOLOAD_PACKAGE_NAME): Removed.
+	* XEmacs.rules (AUTOLOAD_FILE): Removed.
+	* XEmacs.rules (GENERATED_ELC_DEPENDENCIES): New.
+	* XEmacs.rules (.PHONY): Removed.
+	* XEmacs.rules (bindist):
+	* XEmacs.rules (setup-info):
+	* XEmacs.rules (install):
+	* XEmacs.rules (just-install): Removed.
+	* XEmacs.rules (binkit-common): Removed.
+	* XEmacs.rules (binkit-1): New.
+	* XEmacs.rules (binkit-sourceonly): Removed.
+	* XEmacs.rules (binkit-sourceinfo): Removed.
+	* XEmacs.rules (binkit-sourcedata): Removed.
+	* XEmacs.rules (binkit-sourcedatainfo): Removed.
+	* XEmacs.rules (install-html): New.
+	* XEmacs.rules (binkit): New.
+
+	This overhaul of package Makefiles was inspired originally by the
+	need to add the building of custom-defines.el files into the
+	process.  Previously to this change, packages themselves listed
+	auto-autoloads.el (and optionally custom-loads.el) as targets in
+	the Makefile.  Modifying 100 Makefiles to add custom-defines.el to
+	each one seemed wrong, and so instead I chose to add a layer of
+	abstraction (or more correctly, clean up the existing
+	inconsistently-implemented layer) so that the Makefiles no longer
+	*do* anything themselves, instead just using directives to enable
+	actions.  This way, XEmacs.rules can change the implementation
+	(e.g. add another generated file) without impacting the package
+	Makefiles.
+	
+	(1) XEmacs.rules now takes care of ELCS dependencies and
+	auto-autoloads/custom-load/etc.  Additional generated .el files
+	should be added to GENERATED_LISP or EARLY_GENERATED_LISP
+	(`GENERATED' is gone).  THERE ARE NO MORE PACKAGES that
+	compile their own ELC's.  Hallelujah, praise the lord.  I
+	eliminated the custom compilation from the last two packages that
+	did it (mule-ucs and liece), and ilisp had the same elimination
+	done the last time i did an overhaul of the packages.  If any
+	package comes along with its own compilation script, GET RID OF
+	IT! The only thing needed to get mule-ucs and liece to compile was
+	a PRELOADS line.
+
+	(2) Various mechanisms have been created to allow XEmacs.rules to
+	handle almost all of the different layouts of .texi files -- these
+	include STANDARD_DOCS and EXPLICIT_DOCS, and additional variables
+	such as EXTRA_TEXI_FILES, EXTRA_HTML_FILES, EXTRA_DOC_FILES,
+	DOCS_TEXINFO_EXTENSION, DOCS_TXI_EXTENSION, and
+	COMPILE_INFO_AS_MULE.  [The old `specify all targets by hand' way
+	still works but should basically never be used.] Also, the
+	existing support in XEmacs.rules for doc building has been ripped
+	out and almost completely replaced.  This is documented more in
+	XEmacs.rules.
+
+	(3) All settings must now be set *BEFORE* loading XEmacs.rules,
+	not after.  For the cases that depend on BUILD_WITHOUT_MULE
+	(traditionally not available until after XEmacs.rules was loaded),
+	the prescribed method now is to include the new file
+	`Local.rules.inc' near the beginning of the Makefile, to get at the
+	settings in Local.rules. (XEmacs.rules and Local.rules.inc collude
+	so that they don't load the same things twice.) XEmacs.rules should
+	almost always be included at the end of the Makefile, with nothing
+	after except possibly rules.
+
+	(4) Additional dependencies should be added to EXTRA_DEPENDENCIES
+	(renamed from EXTRA_OBJS), not specified directly on the compile::
+	line.
+	
+	(5) The result of this is that the vast majority of Makefiles
+	should contain no rules at all, and almost none should have
+	any compile:: lines. (Only ones does now -- x-symbol. #### The
+	stuff in the subdir Makefile should be moved up to the main
+	Makefile and the subdir Makefile deleted.)
+
+	Also:
+
+	Document all of the settings that a Makefile can set.
+
+	Include Local.rules.inc.
+
+	Add .ps, .pdf to suffixes.
+
+	extraclean removes backup files, etc., not distclean.
+
+	Add comment about semi-uselessness of elcclean.
+
+	Add support for building custom-defines.el.
+
+	Support PACKAGE_SUPPRESS.
+	
+	Use PACKAGE to determine whether to install lisp files, not ELCS,
+	since all packages have at least an _pkg.el file.  This avoids
+	the need to play games with putting auto-autoloads.el into
+	ELCS when there are no .el files in the package.
+
+	Eliminate the different binkit targets -- a relic of an older
+	setup.
+
+	* meta-iterate.rules:
+	Add `extraclean' target.
+	Reformat the .PHONY target.
+
+	* iterate.rules:
+	Add `extraclean' target.
+	Add `foo_NEED_PDEPENDS = t' statements for many targets.
+	When those targets are specified on the command line,
+	pdepends.mk files will be included and regenerated.
+	(Previously, they were always loaded, which got in the way
+	when doing `make clean'. etc.).
+
+	* meta-iterate.rules:
+	* iterate.rules:
+	* XEmacs.rules:
+	The standard is for `install' to just install, not build also.
+	Kill `just-install' and make `install' do what it did.
+	Likewise for `bindist', and kill `bindist-real'.
+
+	* INSTALL:
+	Document changes to `install'/`bindist' semantics.
+
 2003-03-14  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: mail-lib jde ecb.

@@ -1,3 +1,8 @@
+2002-07-14  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages  released:  mail-lib xemacs-devel  xslt-process ibuffer
+	prog-modes liece apel xemacs-base.
+
 2002-06-30  Ville Skyttä  <ville.skytta@xemacs.org>
 
 	* XEmacs.rules (distclean): Add .*~ and .\#* .

@@ -15,10 +15,6 @@ XEMACS = xemacs
 #
 BUILD_WITHOUT_MULE =
 
-# Should we build the unsupported packages?  Set to 't' if yes.
-#
-BUILD_UNSUPPORTED =
-
 # Following test, which would be performed by every makefile
 # including XEmacs.rules, slows down the make process terribly
 # according to
@@ -90,12 +86,6 @@ NONMULE_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/xemacs-packa
 #
 MULE_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/mule-packages
 
-#
-# Where to install the unsupported packages, or where the symlink tree will
-# go.  You probably don't want to change this.
-#
-UNSUPPORTED_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/site-packages
-
 # Non-Mule packages or groups of packages to build/install.  'make bindist'
 # doesn't look at this, it's used by 'make install'.  You probably don't
 # want to change this.
@@ -113,23 +103,7 @@ NONMULE_PACKAGES = xemacs-packages
 # e.g. mule-packages/mule-base mule-packages/skk
 MULE_PACKAGES = mule-packages
 
-# Unsupported packages or groups of packages to build/install.  'make
-# bindist' doesn't look at this, it's used by 'make install'.  You probably
-# don't want to change this.
-#
-# NOTE: This only controls which unsupported packages to build/install, not
-# whether unsupported packages will be built or installed at all, which is
-# controlled by BUILD_UNSUPPORTED above (off by default!).
-#
-# The format for this is: unsupported/$developer-name/pkg1 unsupported/$developer-name/pkg2...
-# e.g. unsupported/simon/asn1 unsupported/scop/docbookide
-UNSUPPORTED_PACKAGES = unsupported
-
-ifeq ('$(CATEGORY)','unsupported')
-PACKAGE_INDEX = package-index-unsupported
-else
 PACKAGE_INDEX = package-index
-endif
 
 # Path to BSD install.
 # INSTALL = ginstall -c

@@ -1,3 +1,22 @@
+2003-02-04  Steve Youngs  <youngs@xemacs.org>
+
+	* Local.rules.template: Remove all the 'unsupported' stuff.  The
+	unsupported packages weren't meant to be built from the toplevel
+	directory. 
+
+	* package-net-packages.el
+	(package-net-packages-convert-index-to-ini): Ditto. 
+
+	* package-compile.el (package-directory-map): Ditto. 
+
+	* meta-iterate.rules: Ditto.
+
+	* hack-package-index.el (batch-hack-package-index): Ditto. 
+
+	* XEmacs.rules: Ditto.
+
+	* Makefile: Ditto.
+
 2003-02-04  Ville Skyttä  <scop@xemacs.org>
 
 	* MAINTAINERS (auctex): Change to Uwe Brauer.

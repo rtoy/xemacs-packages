@@ -30,9 +30,6 @@ include Local.rules.mk
 ifeq ($(BUILD_WITHOUT_MULE),)
 SUBDIRS += mule-packages
 endif
-ifeq ($(BUILD_UNSUPPORTED),t)
-SUBDIRS += unsupported
-endif
 
 include meta-iterate.rules
 

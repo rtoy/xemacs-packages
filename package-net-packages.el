@@ -105,9 +105,7 @@ DESTDIR defaults to the value of `data-directory'."
 ;  (package-get-require-base remote)
 
   (setq destdir (file-name-as-directory (or destdir data-directory)))
-  (let* ((fname (if (equal category "unsupported")
-		    "setup-unsupported-packages.ini"
-		  "setup-packages.ini"))
+  (let* ((fname "setup-packages.ini")
 	 (buf (get-buffer-create (format "*%s*" fname))))
     (unwind-protect
         (save-excursion

@@ -208,14 +208,6 @@
     ("mule-base" . "mule-packages")
     ("mule-ucs" . "mule-packages")
     ("skk" . "mule-packages")
-    ;; unsupported
-    ("antlr-mode" . "scop")
-    ("asn1" . "simon")
-    ("cogre" . "scop")
-    ("ecb" . "scop")
-    ("ede" . "scop")
-    ("epop3" . "simon")
-    ("flim" . "simon")
     ))
 
 (defvar package-source-root nil)

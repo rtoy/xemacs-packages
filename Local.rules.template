@@ -6,10 +6,10 @@
 
 ###################### Begin settings that commonly need to be changed
 
-# `t' or `nil' - When `t', a symlink tree will be built for running a
-# live CVS checkout.  Requires GNU `cp', and that you configure your
-# XEmacs to use ${STAGING} in the package-path.  Create the tree with
-# `make install'.
+# When `t', a symlink tree will be built for running a live CVS
+# checkout.  Requires GNU `cp', and that you configure your XEmacs
+# to use ${STAGING} in the package-path.  Create the tree with `make
+# install'.
 #
 symlink = 
 
@@ -65,16 +65,16 @@ MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../mule-packages
 # XEmacs packages or groups of packages to install. 'make bindist'
 # doesn't look at this, it's used by 'make install'.
 #
-# The format for this is: dir/pkg1 dir/pkg2...
-# e.g. libs/xemacs-base comm/bbdb
-XEMACS_PACKAGES = comm games libs oa os prog wp
+# The format for this is: xemacs-packages/pkg1 xemacs-packages/pkg2...
+# e.g. xemacs-packages/xemacs-base xemacs-packages/bbdb
+XEMACS_PACKAGES = 
 
 # Mule packages or groups of packages to install.  'make bindist'
 # doesn't look at this, it's used by 'make install'.
 #
-# The format for this is: dir/pkg1 dir/pkg2...
-# e.g. mule/mule-base mule/skk
-MULE_PACKAGES = mule
+# The format for this is: mule-packages/pkg1 mule-packages/pkg2...
+# e.g. mule-packages/mule-base mule-packages/skk
+MULE_PACKAGES = 
 
 ###################### End settings that commonly need to be changed
 
@@ -115,7 +115,7 @@ INSTALL = install -c
 ifneq ('$(symlink)','t')
 BUILD_TARS = t
 else
-BUILD_TARS = nil
+BUILD_TARS =
 endif
 
 # Path to GNU tar.

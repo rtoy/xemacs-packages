@@ -1,5 +1,7 @@
 2004-06-16  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: haskell-mode.
+
 	* MAINTAINERS: haskell-mode has a new maintainer, Jerry James.
 
 2004-06-14  Norbert Koch  <viteno@xemacs.org>

@@ -1,3 +1,10 @@
+2002-08-07  Ville Skyttä  <ville.skytta@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES): Add docbookide, ecrypto,
+	ocaml, sasl and sml-mode.
+
+	* package-compile.el (package-directory-map): Ditto.
+
 2002-08-05  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Packages released: psgml xemacs-base ps-print mh-e text-modes.

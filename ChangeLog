@@ -1,3 +1,8 @@
+2002-05-09  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released: xslide jde haskell-mode xslt-process w3 vm
+	psgml ilisp cc-mode calc auctex. 
+
 2002-05-07  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages released: ibuffer os-utils pcl-cvs xemacs-base

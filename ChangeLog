@@ -1,3 +1,9 @@
+2002-04-24  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released: calc dictionary dired ediff edit-utils efs
+	footnote ibuffer liece mail-lib prog-modes ps-print sh-script
+	text-modes tramp viper xemacs-base latin-unity leim.
+
 2002-04-23  Ville Skyttä  <ville.skytta@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add haskell-mode.

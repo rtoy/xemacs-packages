@@ -1,3 +1,8 @@
+2003-07-23  Norbert Koch  <viteno@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES):
+	* package-compile.el (package-directory-map): Add oo-browser package.
+
 2003-07-22  Norbert Koch  <viteno@xemacs.org>
 
 	* package-compile.el (package-directory-map): Add hyperbole package.

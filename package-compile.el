@@ -148,6 +148,7 @@
     ("mmm-mode" . "xemacs-packages")
     ("net-utils" . "xemacs-packages")
     ("ocaml" . "xemacs-packages")
+    ("oo-browser" . "xemacs-packages")
     ("os-utils" . "xemacs-packages")
     ("pc" . "xemacs-packages")
     ("pcl-cvs" . "xemacs-packages")

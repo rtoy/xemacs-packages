@@ -1,5 +1,8 @@
 2002-10-29  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
+	* Packages released:  ediff edit-utils xemacs-base  pgg text-modes
+	latin-unity sml-mode.
+
 	*    Packages released:  igrep    ediff edit-utils xemacs-base pgg
 	text-modes latin-unity sml-mode.
 

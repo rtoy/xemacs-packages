@@ -55,7 +55,7 @@ PACKAGES := xemacs-base fsf-compat mail-lib \
 	sieve slider sml-mode sounds-au sounds-wav speedbar strokes \
 	supercite textools time tm tooltalk tpu tramp \
 	vc vc-cc vhdl view-process viper vm w3 x-symbol \
-	xslide xslt-process xwem zenirc
+	xetla xslide xslt-process xwem zenirc
 else
 PACKAGES := $(NONMULE_PACKAGES)
 endif

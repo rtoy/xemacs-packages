@@ -198,6 +198,7 @@
     ("x-symbol" . "xemacs-packages")
     ("xemacs-base" . "xemacs-packages")
     ("xemacs-devel" . "xemacs-packages")
+    ("xetla" . "xemacs-packages")
     ("xlib" . "xemacs-packages")
     ("xslide" . "xemacs-packages")
     ("xslt-process" . "xemacs-packages")

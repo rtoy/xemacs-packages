@@ -1,3 +1,7 @@
+2002-06-30  Ville Skyttä  <ville.skytta@xemacs.org>
+
+	* XEmacs.rules (distclean): Add .*~ and .\#* .
+
 2002-06-27  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages  released: xslt-process xemacs-devel  xemacs-base w3 tm

@@ -131,7 +131,7 @@ extraclean: clean
 # can get rebuilt should be killed.  everything.  
 
 distclean:: extraclean
-	rm -f core *~ $(AUTOLOAD_PATH)/auto-autoloads.el \
+	rm -f core *~ .*~ .\#* $(AUTOLOAD_PATH)/auto-autoloads.el \
 		$(AUTOLOAD_PATH)/custom-load.el package-info \
 		$(AUTOLOAD_PATH)/_pkg.el
 

@@ -1,3 +1,7 @@
+2002-06-08  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released: liece prog-modes vm gnus.
+
 2002-06-04  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages released: sieve edit-utils pcl-cvs pc text-modes vc-cc vc ess ilisp net-utils.

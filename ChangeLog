@@ -1,3 +1,11 @@
+2002-03-25  Steve Youngs  <youngs@xemacs.org>
+
+	* These packages rolled: apel auctex bbdb calc cookie dictionary
+	ediff edit-utils efs eshell fsf-compat gnats gnus hm--html-menus
+	ibuffer idlwave jde latin-unity liece lookup mail-lib mew mule-ucs
+	pcl-cvs prog-modes reftex semantic sieve speedbar text-modes tm
+	tramp viper vm w3 xslide 
+
 2002-03-22  Daiki Ueno  <daiki@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add liece.

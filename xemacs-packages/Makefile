@@ -41,7 +41,7 @@ PACKAGES := xemacs-base fsf-compat mail-lib dired efs apel \
 	strokes tramp clearcase dictionary sieve ibuffer mmm-mode xslide \
 	liece haskell-mode ess docbookide ecrypto ocaml sasl sml-mode \
 	python-modes fortran-modes ruby-modes perl-modes pgg ecb x-symbol \
-	hyperbole oo-browser riece erc
+	hyperbole oo-browser riece erc xlib xwem
 else
 PACKAGES := $(NONMULE_PACKAGES)
 endif

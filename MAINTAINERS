@@ -50,7 +50,7 @@ ibuffer               John Paul Wallington <jpw@shootybangbang.com>
 idlwave               Carsten Dominik <dominik@astro.uva.nl>
 igrep                 XEmacs Development Team <xemacs-beta@xemacs.org>
 ilisp                 ilisp Maintainers <ilisp@cons.org>
-ispell                XEmacs Development Team <xemacs-beta@xemacs.org>
+ispell                Kenny Stevens <stevens@kdstevens.com>
 jde                   Andy Piper <andy@xemacs.org>
 liece                 Daiki Ueno <ueno@unixuser.org>
 mailcrypt             XEmacs Development Team <xemacs-beta@xemacs.org>
@@ -116,8 +116,10 @@ w3                    XEmacs Development Team <xemacs-beta@xemacs.org>
 x-symbol              Uwe Brauer <oub@xemacs.org>
 xemacs-base           XEmacs Development Team <xemacs-beta@xemacs.org>
 xemacs-devel          XEmacs Development Team <xemacs-beta@xemacs.org>
+xlib                  Zajcev Evgeny <zevlg@yandex.ru>
 xslide                XEmacs Development Team <xemacs-beta@xemacs.org>
 xslt-process          Ovidiu Predescu <ovidiu@xemacs.org>
+xwem                  Zajcev Evgeny <zevlg@yandex.ru>
 zenirc                XEmacs Development Team <xemacs-beta@xemacs.org>
 
 ------------------------------------------------------------------------

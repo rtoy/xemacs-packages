@@ -73,6 +73,7 @@
     ("calc" . "xemacs-packages")
     ("calendar" . "xemacs-packages")
     ("cc-mode" . "xemacs-packages")
+    ("clearcase" . "xemacs-packages")
     ("cookie" . "xemacs-packages")
     ("crisp" . "xemacs-packages")
     ("debug" . "xemacs-packages")

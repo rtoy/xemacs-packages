@@ -205,6 +205,7 @@
     ;; mule-packages
     ("edict" . "mule-packages")
     ("egg-its" . "mule-packages")
+    ("latin-euro-standards" . "mule-packages")
     ("latin-unity" . "mule-packages")
     ("leim" . "mule-packages")
     ("locale" . "mule-packages")

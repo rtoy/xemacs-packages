@@ -1,3 +1,7 @@
+2005-02-15  Aidan Kehoe  <kehoea@parhasard.net>
+
+	* package-compile.el: Package added; latin-euro-standards.
+
 2005-02-14  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: text-modes vhdl.

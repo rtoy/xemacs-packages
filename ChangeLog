@@ -1,3 +1,9 @@
+2001-05-06  Steve Youngs  <youngs@xemacs.org>
+
+	* package-compile.el (package-directory-map): Add Adrian's 'build' package.
+
+	* libs/Makefile (PACKAGES): Ditto.
+
 2001-04-26  Adrian Aichner  <adrian@xemacs.org>
 
 	* XEmacs.rules: Make package building work for Windows native

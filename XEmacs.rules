@@ -55,10 +55,24 @@ MANIFEST = pkginfo/MANIFEST.$(PACKAGE)
 PWD      := $(shell pwd)
 
 .SUFFIXES:
-.SUFFIXES: .info .texi .dvi .elc .el
+.SUFFIXES: .html .info .txi .texi .texinfo .dvi .elc .el
 
 %.info: %.texi
 	$(MAKEINFO) $(MAKEINFO_FLAGS) -o $@ $<
+
+html: $(HTML_DEP)
+ifneq ($(HTML_FILES),)
+	@-mkdir -p $(STAGING)/html
+endif
+ifneq ($(HTML_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(HTML_FILES)) $(STAGING)/html
+endif
+%.html: %.txi
+	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
+%.html: %.texi
+	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
+%.html: %.texinfo
+	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
 
 FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../../xemacs-packages/texinfo" "../../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
 
@@ -92,8 +106,9 @@ all:: $(AUTOLOAD_PATH)/_pkg.el
 dist:: srckit binkit package-info
 
 clean::
-	rm -f $(ELCS) $(INFO_FILES) $(AUTOLOAD_PATH)/auto-autoloads.elc \
-		$(AUTOLOAD_PATH)/custom-load.elc $(EXTRA_OBJS)
+	rm -f $(ELCS) $(HTML_FILES) $(INFO_FILES) \
+	$(AUTOLOAD_PATH)/auto-autoloads.elc $(AUTOLOAD_PATH)/custom-load.elc \
+	$(EXTRA_OBJS)
 
 mostlyclean: clean
 

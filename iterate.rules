@@ -26,9 +26,10 @@ BINDIST_TARGETS= $(PACKAGES:=/bindist.target)
 CLEAN_TARGETS= $(PACKAGES:=/clean.target)
 DISTCLEAN_TARGETS= $(PACKAGES:=/distclean.target)
 ELCCLEAN_TARGETS= $(PACKAGES:=/elcclean.target)
+HTML_TARGETS= $(PACKAGES:=/html.target)
 INSTALL_TARGETS= $(PACKAGES:=/install.target)
 
-.PHONY: all autoloads bytecompile bindist clean distclean elcclean install
+.PHONY: all autoloads bytecompile bindist clean distclean elcclean html install
 
 # At some point we might have dependencies here..
 
@@ -48,6 +49,8 @@ clean: $(CLEAN_TARGETS)
 distclean: $(DISTCLEAN_TARGETS)
 
 elcclean: $(ELCCLEAN_TARGETS)
+
+html: $(HTML_TARGETS)
 
 install: $(INSTALL_TARGETS)
 

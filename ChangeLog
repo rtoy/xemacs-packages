@@ -1,3 +1,16 @@
+2002-01-06  Adrian Aichner  <adrian@xemacs.org>
+
+	* Makefile (.PHONY): Add html.
+	* Makefile (HTML_TARGETS): New.
+	* Makefile (html): New.
+	* XEmacs.rules (.SUFFIXES): Add .html .txi .texi .texinfo.
+	* XEmacs.rules (html): New.
+	* XEmacs.rules (clean): Add $(HTML_FILES).
+	* XEmacs.rules (binkit-common): Add comment.
+	* iterate.rules (HTML_TARGETS): New.
+	* iterate.rules (.PHONY): Add html.
+	* iterate.rules (html): New.
+
 2002-01-10  Steve Youngs  <youngs@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add new package, sieve.

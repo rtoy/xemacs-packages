@@ -30,7 +30,7 @@ ifeq ($(BUILD_WITHOUT_MULE),)
 SUBDIRS += mule-packages
 endif
 
-.PHONY: all all-bytecompile autoloads bytecompile bindist-real bindist clean distclean elcclean World install just-install
+.PHONY: all all-bytecompile autoloads bytecompile bindist-real bindist clean distclean elcclean html World install just-install
 
 # The toplevel has slightly different rules so we do not use iterate.rules
 # directly
@@ -42,6 +42,7 @@ BINDIST_TARGETS= $(SUBDIRS:=/bindist.target)
 CLEAN_TARGETS= $(SUBDIRS:=/clean.target)
 DISTCLEAN_TARGETS= $(SUBDIRS:=/distclean.target)
 ELCCLEAN_TARGETS= $(SUBDIRS:=/elcclean.target)
+HTML_TARGETS= $(SUBDIRS:=/html.target)
 JUST_INSTALL_TARGETS = $(XEMACS_PACKAGES:=/XEMACS.install)
 ifeq ($(BUILD_WITHOUT_MULE),)
 JUST_INSTALL_TARGETS += $(MULE_PACKAGES:=/MULE.install)
@@ -71,6 +72,8 @@ distclean: $(DISTCLEAN_TARGETS)
 
 elcclean:
 	$(XEMACS) $(VANILLA) -batch -l package-clean.el
+
+html: $(HTML_TARGETS)
 
 World: distclean install
 

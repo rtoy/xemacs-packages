@@ -58,6 +58,7 @@ XEMACS = xemacs
 #
 # Therefore this has become a make variable instead:
 #
+# Set XEMACS_NATIVE_NT to 't' if you are building on Microsoft Windows.
 XEMACS_NATIVE_NT =
 
 # See: Makefile and XEmacs.rules to see how $(XEMACS_STAGING),

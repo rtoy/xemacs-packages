@@ -1,3 +1,9 @@
+2000-10-21  Adrian Aichner  <adrian@xemacs.org>
+
+	* Local.rules.template (PACKAGE_INDEX): New variable to configure
+	name of package-index.
+	* XEmacs.rules (PACKAGE_INFO): Use PACKAGE_INDEX.
+
 2000-10-20  Adrian Aichner  <adrian@xemacs.org>
 
 	* Local.rules.template (XEMACS_NATIVE_NT): Configuration variable
@@ -6,12 +12,12 @@
 
 2000-08-22  Steve Youngs  <youngs@xemacs.org>
 
-	* XEmacs.rules (clean): Use $INFO_FILES instead of $PACKAGE.info*, use
-	new var $EXTRA_OBJS.
+	* XEmacs.rules (clean): Use $INFO_FILES instead of $PACKAGE.info*,
+	use new var $EXTRA_OBJS.
 
-	* package-compile.el (package-directory-map): Remove obsolete entries.
-	(package-name-to-directory): Remove obsolete entries, put w3, bbdb, jde &
-	lookup into a single 'or' statement.
+	* package-compile.el (package-directory-map): Remove obsolete
+	entries.  (package-name-to-directory): Remove obsolete entries,
+	put w3, bbdb, jde & lookup into a single 'or' statement.
 
 2000-08-16  Andreas Jaeger  <aj@suse.de>
 

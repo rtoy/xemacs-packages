@@ -1,3 +1,8 @@
+2001-01-11  Steve Youngs  <youngs@xemacs.org>
+
+	* Makefile: Proper GNU Makefile quoting. eg change ($(foo),'') to 
+	('$(foo)','')
+
 2001-01-10  Steve Youngs  <youngs@xemacs.org>
 
 	* package-compile.el (package-directory-map): Added eshell & pcomplete.

@@ -49,12 +49,12 @@ autoloads:
 World: distclean install
 
 install: all
-ifneq ($(MULE_PACKAGES),'')
+ifneq ('$(MULE_PACKAGES)','')
 	for dir in $(MULE_PACKAGES); do \
 		$(MAKE) STAGING=$(MULE_STAGING) $(MFLAGS) -C $${dir} install; \
 	done
 endif
-ifneq ($(XEMACS_PACKAGES),'')
+ifneq ('$(XEMACS_PACKAGES)','')
 	for dir in $(XEMACS_PACKAGES); do \
 		$(MAKE) STAGING=$(XEMACS_STAGING) $(MFLAGS) -C $${dir} install; \
 	done

@@ -7,14 +7,17 @@
 # `t' or `nil' - When `t', a symlink tree will be built for running a
 # live CVS checkout.  Requires GNU `cp', and that you configure your
 # XEmacs to use ${STAGING} in the package-path.  Create the tree with
-# `make bindist'.
+# `make install'.
 #
 symlink = 
 
 # Stuff to install.
 
-# XEmacs packages to install.
+# XEmacs packages to install. 'make bindist' doesn't look at this, it's
+# used by 'make install'.
 #
+# The format for this is: dir/pkg1 dir/pkg2...
+# e.g. libs/xemacs-base comm/bbdb
 XEMACS_PACKAGES =
 #
 # Where to stage or install the packages, or where the symlink tree will go.
@@ -24,12 +27,15 @@ XEMACS_STAGING = ${XEMACS_PACKAGES_BASE}/../Packages
 # APA: Name of package index file
 #
 PACKAGE_INDEX = package-index
-# Should we build the mule package?
+# Should we build the mule package?  Set to 't' if you do not have/want Mule.
 #
 BUILD_WITHOUT_MULE =
 
-# Mule packages to install
+# Mule packages to install.  'make bindist' doesn't look at this, it's
+# used by 'make install'.
 #
+# The format for this is: dir/pkg1 dir/pkg2...
+# e.g. mule/mule-base mule/skk
 MULE_PACKAGES =
 #
 # Where to install them

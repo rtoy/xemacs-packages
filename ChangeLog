@@ -1,5 +1,9 @@
 2004-02-16  Norbert Koch  <viteno@xemacs.org>
 
+	* MAINTAINERS: Skip Montanaro now maintains the package.
+
+2004-02-16  Norbert Koch  <viteno@xemacs.org>
+
 	* Packages released: python-modes ecb xemacs-base x-symbol.
 
 2004-02-11  Norbert Koch  <viteno@xemacs.org>

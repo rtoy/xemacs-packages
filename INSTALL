@@ -147,3 +147,11 @@ address.
 
 	MAKEINFO = makeinfo
 		The path to your makeinfo program
+
+* Notes:
+--------
+	(1) There have been a couple of reports that when you do an
+	    initial check-out of the xemacs-packages module from CVS
+	    sometimes the files 'Local.rules.template' & 'Local.rules.mk'
+	    don't get checked out.  If this happens to you, try doing a
+	    'cvs update'.  That should grab those files.

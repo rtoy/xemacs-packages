@@ -1,3 +1,7 @@
+2003-08-06  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: edit-utils xemacs-devel.
+
 2003-08-05  Norbert Koch  <viteno@xemacs.org>
 
 	* MAINTAINERS: Mark Jake Colman as maintainer for align.el and

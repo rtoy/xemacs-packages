@@ -1,3 +1,15 @@
+2004-12-06  Ben Wing  <ben@xemacs.org>
+
+	* XEmacs.rules:
+	* XEmacs.rules (FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS):
+	text-modes is also needed due to dependency of texinfmt
+	on whitespace.
+	
+	* XEmacs.rules ($(AUTOLOAD_PATH)/auto-autoloads.el):
+	Remove auto-autoloads if package-suppress forms have changed.
+	Touch auto-autoloads so it's always up-to-date; otherwise
+	problems ensue when no autoloads exist in a package.
+
 2004-12-01  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: ecb.

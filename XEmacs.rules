@@ -259,7 +259,7 @@ endif
 
 html: $(HTML_DEP)
 
-FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "$(XEMACS_PACKAGES_BASE)/xemacs-packages/texinfo" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
+FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "$(XEMACS_PACKAGES_BASE)/xemacs-packages/texinfo" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/text-modes" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
 
 FORMAT_INFO_USING_XEMACS_ARGS = $(FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS) -f save-buffer
 
@@ -437,11 +437,19 @@ elcclean:
 
 GENERATED_ELC_DEPENDENCIES = $(ELCS:.elc=.el) $(ELCS_1:.elc=.el)
 
+# If Makefile or _pkg.el has changed (Makefile will trigger _pkg.el
+# rebuilding), then our suppress forms may have changed.  Just rebuilding
+# the autoload file normally isn't enough as the old suppress forms will
+# still sit there, so nuke it first.
+$(AUTOLOAD_PATH)/auto-autoloads.el :: $(AUTOLOAD_PATH)/_pkg.el
+	rm -f $(AUTOLOAD_PATH)/auto-autoloads.el
+
 ifeq ($(XEMACS_21_5),t)
-$(AUTOLOAD_PATH)/auto-autoloads.el : $(GENERATED_ELC_DEPENDENCIES) $(AUTOLOAD_PATH)/_pkg.el
+$(AUTOLOAD_PATH)/auto-autoloads.el :: $(GENERATED_ELC_DEPENDENCIES)
 	$(XEMACS) $(BATCH) -no-autoloads \
 		-l autoload -f batch-update-directory-autoloads \
 		$(PACKAGE) $(AUTOLOAD_PATH)
+	# The equivalent of `touch' is done automatically
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 
 $(AUTOLOAD_PATH)/custom-defines.el : $(GENERATED_ELC_DEPENDENCIES)
@@ -455,11 +463,12 @@ AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \"$(PACKAGE)\")
 AUTOLOAD_FILE = (setq generated-autoload-file \
 	\"$(AUTOLOAD_PATH)/auto-autoloads.el\")
 
-$(AUTOLOAD_PATH)/auto-autoloads.el : $(GENERATED_ELC_DEPENDENCIES) $(AUTOLOAD_PATH)/_pkg.el
+$(AUTOLOAD_PATH)/auto-autoloads.el :: $(GENERATED_ELC_DEPENDENCIES)
 	$(XEMACS) $(BATCH) -no-autoloads \
 		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
 		-eval "$(AUTOLOAD_FILE)" \
 		-l autoload -f batch-update-autoloads $^
+	@touch $(AUTOLOAD_PATH)/auto-autoloads.el
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 endif
 

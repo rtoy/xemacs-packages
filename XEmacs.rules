@@ -112,11 +112,10 @@ AUTOLOAD_PATH = .
 endif
 
 # Set this in the package Makefile if necessary (BEFORE including this file)
-EARLY_GENERATED_LISP ?= $(AUTOLOAD_PATH)/auto-autoloads.el $(AUTOLOAD_PATH)/custom-load.el
+EARLY_GENERATED_LISP := $(AUTOLOAD_PATH)/auto-autoloads.el \
+	$(AUTOLOAD_PATH)/custom-load.el $(EARLY_GENERATED_LISP)
 ifeq ($(XEMACS_21_5),t)
-ifeq ($(EARLY_GENERATED_LISP),$(AUTOLOAD_PATH)/auto-autoloads.el $(AUTOLOAD_PATH)/custom-load.el)
 EARLY_GENERATED_LISP += $(AUTOLOAD_PATH)/custom-defines.el
-endif
 endif
 
 EARLY_GENERATED_ELCS = $(EARLY_GENERATED_LISP:.el=.elc)
@@ -454,6 +453,7 @@ endif
 $(AUTOLOAD_PATH)/custom-load.el : $(GENERATED_ELC_DEPENDENCIES)
 	$(XEMACS) $(BATCH) -no-autoloads -l cus-dep \
 		-f Custom-make-dependencies $(AUTOLOAD_PATH)
+	@touch $(AUTOLOAD_PATH)/custom-load.el
 	@rm -f $(AUTOLOAD_PATH)/custom-load.el~
 
 pkg_tar = $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar
@@ -540,6 +540,9 @@ setup-info:
 		-f package-net-packages-batch-convert-index-to-ini $(PACKAGE_STAGING) $(CATEGORY)
 
 install: compile binkit
+
+# A target that _just_ installs and doesn't build _anything_
+just-install: binkit
 
 ## Do not byte-compile as that could require stuff from elsewhere, and you
 ## get dependency circles.

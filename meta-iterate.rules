@@ -31,7 +31,7 @@ all: autoloads bytecompile
 
 .PHONY: all all-bytecompile autoloads bytecompile bindist
 .PHONY: clean distclean extraclean elcclean html macro-list World
-.PHONY: install
+.PHONY: install just-install
 
 # The toplevel has slightly different rules so we do not use iterate.rules
 # directly
@@ -47,6 +47,7 @@ ELCCLEAN_TARGETS= $(SUBDIRS:=/elcclean.target)
 HTML_TARGETS= $(SUBDIRS:=/html.target)
 INSTALL_TARGETS= $(SUBDIRS:=/install.target)
 INSTALL_HTML_TARGETS= $(SUBDIRS:=/install-html.target)
+JUST_INSTALL_TARGETS= $(SUBDIRS:=/just-install.target)
 
 # At some point we might have dependencies here...
 
@@ -81,6 +82,8 @@ World: extraclean all install
 install: $(INSTALL_TARGETS)
 
 install-html: $(INSTALL_HTML_TARGETS)
+
+just-install: $(JUST_INSTALL_TARGETS)
 
 # Local Variables:
 # mode: Makefile

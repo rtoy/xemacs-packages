@@ -1,3 +1,19 @@
+2003-03-30  Steve Youngs  <youngs@xemacs.org>
+
+	* meta-iterate.rules (.PHONY): Add just-install target.
+	(JUST_INSTALL_TARGETS): New.
+	(just-install): New.
+
+	* iterate.rules (JUST_INSTALL_TARGETS): New.
+	(ALL_TARGETS): Add JUST_INSTALL_TARGETS.
+	(just-install): New.
+	(.PHONY): Add just-install target.
+
+	* XEmacs.rules ($(AUTOLOAD_PATH)/custom-load.el): Touch
+	custom-load.el. 
+	(EARLY_GENERATED_LISP): Revert my earlier change.
+	(just-install): A target that does what its name implies.
+
 2003-03-27  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: ecb.

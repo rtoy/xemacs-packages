@@ -15,13 +15,14 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-# 
 SUBDIRS = xemacs-packages
 
-# Use a Local.rules file to specify what you wish to have installed
-XEMACS_PACKAGES_BASE := $(shell pwd)
+XEMACS_PACKAGES_BASE:= $(shell while [ ! -f XEmacs.rules ]; do \
+				cd ..;	\
+				done;	\
+				pwd)
 
-all:: bytecompile
+all: autoloads bytecompile
 
 include Local.rules.mk
 -include Local.rules
@@ -29,56 +30,9 @@ include Local.rules.mk
 ifeq ($(BUILD_WITHOUT_MULE),)
 SUBDIRS += mule-packages
 endif
-
-.PHONY: all all-bytecompile autoloads bytecompile bindist-real bindist clean distclean elcclean html World install just-install
-
-# The toplevel has slightly different rules so we do not use iterate.rules
-# directly
-
-ALL_TARGETS= $(SUBDIRS:=/all.target)
-AUTOLOADS_TARGETS= $(SUBDIRS:=/autoloads.target)
-BYTECOMPILE_TARGETS= $(SUBDIRS:=/bytecompile.target)
-BINDIST_TARGETS= $(SUBDIRS:=/bindist.target)
-CLEAN_TARGETS= $(SUBDIRS:=/clean.target)
-DISTCLEAN_TARGETS= $(SUBDIRS:=/distclean.target)
-ELCCLEAN_TARGETS= $(SUBDIRS:=/elcclean.target)
-HTML_TARGETS= $(SUBDIRS:=/html.target)
-JUST_INSTALL_TARGETS = $(XEMACS_PACKAGES:=/XEMACS.install)
-ifeq ($(BUILD_WITHOUT_MULE),)
-JUST_INSTALL_TARGETS += $(MULE_PACKAGES:=/MULE.install)
+ifeq ($(BUILD_UNSUPPORTED),t)
+SUBDIRS += unsupported
 endif
 
-# At some point we might have dependencies here...
-
-%.target:
-	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) $(*F)
-
-%.install:
-	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) STAGING=$($(*F:=_STAGING)) install
-
-all-bytecompile: autoloads bytecompile html
-
-autoloads: $(AUTOLOADS_TARGETS)
-
-bytecompile: $(BYTECOMPILE_TARGETS)
-
-bindist-real: $(BINDIST_TARGETS)
-
-bindist: bindist-real
-
-clean: $(CLEAN_TARGETS)
-
-distclean: $(DISTCLEAN_TARGETS)
-
-elcclean:
-	$(XEMACS) $(VANILLA) -batch -l package-clean.el
-
-html: $(HTML_TARGETS)
-
-World: distclean install
-
-install: all just-install
-
-just-install: $(JUST_INSTALL_TARGETS)
-
+include meta-iterate.rules
 

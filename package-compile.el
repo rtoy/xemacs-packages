@@ -1,6 +1,7 @@
 ;;; package-compile.el --- Bytecompiler wrapper for building packages from source
 
 ;; Copyright (C) 1998 by Free Software Foundation, Inc.
+;; Copyright (C) 2002 Ben Wing.
 
 ;; Author: SL Baur <steve@xemacs.org>
 ;; Keywords: internal, lisp
@@ -35,6 +36,28 @@
 ;;; Code:
 
 (setq stack-trace-on-error t)
+;; #### We ought to set load-ignore-elc-files here.  However, that causes
+;; a crash when loading auto-autoload files, for obscure reasons that I
+;; haven't yet tracked down.  So we set it down below, after all the
+;; auto-autoloads have been loaded.
+;;
+;; Using load-ignore-elc-files is the ONLY way to ensure that compilation
+;; of the package tree proceeds properly regardless of the state of .elc
+;; files wrt .el files. (Of course, another solution would be to simply
+;; erase all .elc files; but this is less drastic.) Using
+;; load-ignore-out-of-date-elc-files is a start, but not enough -- it's
+;; possible, for example, for a .elc file that gets loaded to be out of
+;; date even if its date is later than its .el file.  This happens, for
+;; example, with a file containing top-level calls to macros located in
+;; another file -- if the macros are changed in the other file, the .elc
+;; file will be out of date because it will contain the old macros.
+;; Loading the .el file (ala `load-ignore-elc-files') works, since the new
+;; macros will be retrieved on-the-fly when the macro is first called.
+(setq load-ignore-out-of-date-elc-files t)
+(setq load-always-display-messages t)
+;; Don't enable this by default, as it clutters up the output so much.
+;; Turn it on if you're doubtful that the right files are being loaded.
+;; (setq load-show-full-path-in-messages t)
 
 (when (interactive-p)
   (error "package-compile may only be used with -batch"))
@@ -57,8 +80,14 @@
 
 (load (expand-file-name "auto-autoloads" (car load-path)))
 
+
 ;;; Step 2, collect the dependencies into load-path and load the autoloads.
-(require 'bytecomp)
+(let ((load-ignore-elc-files nil)
+      (load-ignore-out-of-date-elc-files t))
+  ;; Make sure we get the compiled version of the byte compiler, otherwise
+  ;; compilation will be UNGODLY slow.
+  (require 'bytecomp)
+  (require 'byte-optimize))
 
 (defconst package-directory-map
   '(
@@ -168,7 +197,7 @@
     ("xslide" . "xemacs-packages")
     ("xslt-process" . "xemacs-packages")
     ("zenirc" . "xemacs-packages")
-    ;; mule/*
+    ;; mule-packages
     ("edict" . "mule-packages")
     ("egg-its" . "mule-packages")
     ("latin-unity" . "mule-packages")
@@ -177,8 +206,22 @@
     ("lookup" . "mule-packages")
     ("mule-base" . "mule-packages")
     ("mule-ucs" . "mule-packages")
-    ("skk" . "mule-packages")))
+    ("skk" . "mule-packages")
+    ;; unsupported
+    ("antlr-mode" . "scop")
+    ("asn1" . "simon")
+    ("cogre" . "scop")
+    ("ecb" . "scop")
+    ("ede" . "scop")
+    ("epop3" . "simon")
+    ("flim" . "simon")
+    ))
 
+(defvar package-source-root nil)
+(let ((defdir default-directory))
+  (while (not (file-exists-p (expand-file-name "XEmacs.rules" defdir)))
+    (setq defdir (expand-file-name (concat defdir "/.."))))
+  (setq package-source-root defdir))
 
 (defun package-name-to-directory (package)
   "Map `package' to a source directory."
@@ -186,7 +229,7 @@
 	      package
 	      (expand-file-name (cdr (assoc package
 					    package-directory-map))
-				"../.."))))
+				package-source-root))))
     (cond ((equal package "gnus")
 	   (expand-file-name "gnus/lisp" (file-name-as-directory dir)))
 	  ((or (equal package "w3") 
@@ -246,6 +289,10 @@
 
 ;; Let the caller specify command
 ;(batch-byte-compile)
+
+;; See comment at top of file.
+;; #### Let's see whether we actually need this.
+;;(setq load-ignore-elc-files t)
 
 (provide 'package-compile)
 

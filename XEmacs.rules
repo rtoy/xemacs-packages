@@ -1,5 +1,6 @@
 # Common Makefile material for package Makefiles
 # Copyright (C) 1997 Free Software Foundation Inc.
+# Copyright (C) 2002 Ben Wing.
 
 # This file is part of XEmacs.
 
@@ -27,8 +28,9 @@ XEMACS_PACKAGES_BASE := $(shell while [ ! -f XEmacs.rules ]; do \
 
 DEPENDS_FILE_NAME = pdepends.mk
 
-# Make this the first target
-bytecompile:: all
+all: autoloads bytecompile
+
+bytecompile:: compile
 
 include ${XEMACS_PACKAGES_BASE}/Local.rules.mk
 -include ${XEMACS_PACKAGES_BASE}/Local.rules
@@ -59,10 +61,41 @@ PWD      := $(shell pwd)
 .SUFFIXES:
 .SUFFIXES: .html .info .txi .texi .texinfo .dvi .elc .el
 
+# STAGING is the top of the directory tree where a particular package's
+# files are installed, or where tarballs are installed using `make bindist'.
+
+# 'make bindist' needs STAGING to be set to NONMULE_INSTALLED_PACKAGES_ROOT
+# if we are building a Mule package so we don't end up with 2 package-index
+# files. (Unsupported packages have a separate package-index-unsupported,
+# so this doesn't apply to them.)
+
+ifeq ('$(CATEGORY)','unsupported')
+STAGING:= $(UNSUPPORTED_INSTALLED_PACKAGES_ROOT)
+else
+ ifeq ('$(MAKECMDGOALS)','bindist')
+STAGING:= $(NONMULE_INSTALLED_PACKAGES_ROOT)
+ else
+  ifeq ('$(CATEGORY)','mule')
+STAGING:= $(MULE_INSTALLED_PACKAGES_ROOT)
+  else
+STAGING:= $(NONMULE_INSTALLED_PACKAGES_ROOT)
+  endif
+ endif
+endif
+
+# If something goes wrong and $(STAGING) is blank, the commands below will
+# attempt to install files into absolute paths /lisp/* and /etc/* -- not
+# a good idea at all.
+
+check-staging:
+ifeq ($(STAGING),)
+	$(error STAGING is not set; potential major filesystem trashing!  Fix this)
+endif
+
 FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../../xemacs-packages/texinfo" "../../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
 
 %-ja.info: %-ja.texi
-	$(XEMACS) -batch -q -no-site-file -insert $< \
+	$(XEMACS) $(BATCH) -insert $< \
 		-eval '(unless (featurep (quote mule)) (kill-emacs 0))' \
 		$(FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS) \
 		-eval '(setq file-coding-system (quote iso-2022-7))' \
@@ -71,7 +104,7 @@ FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (
 %.info: %.texi
 	$(MAKEINFO) $(MAKEINFO_FLAGS) -o $@ $<
 
-html: $(HTML_DEP)
+html: check-staging $(HTML_DEP)
 ifneq ($(HTML_FILES),)
 	@-mkdir -p $(STAGING)/html
 endif
@@ -79,11 +112,15 @@ ifneq ($(HTML_FILES),)
 	$(RCOPY) $(addprefix $(PWD)/, $(HTML_FILES)) $(STAGING)/html
 endif
 %.html: %.txi
-	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
+#	V 1.56k (with Cygwin) does not allow -p flag.  Works fine without it.
+#	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
+	$(TEXI2HTML) $(TEXI2HTML_FLAGS) $<
 %.html: %.texi
-	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
+#	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
+	$(TEXI2HTML) $(TEXI2HTML_FLAGS) $<
 %.html: %.texinfo
-	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
+#	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
+	$(TEXI2HTML) $(TEXI2HTML_FLAGS) $<
 
 FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../xemacs-packages/texinfo" "../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
 
@@ -108,12 +145,12 @@ PACKAGE_STAGING = $(STAGING)
 endif
 
 # Behaves like an XEmacs with the required packages setup
-BOOT_XEMACS= $(XEMACS) -no-autoloads -batch -l $(PACKAGE_COMPILE) -- $(REQUIRES) -- $(PRELOADS)
+BOOT_XEMACS= $(XEMACS) -no-autoloads $(BATCH) -l $(PACKAGE_COMPILE) -- $(REQUIRES) -- $(PRELOADS)
 
 %.elc: %.el
 	$(BOOT_XEMACS) -f batch-byte-compile $<
 
-all:: $(AUTOLOAD_PATH)/_pkg.el
+compile:: $(AUTOLOAD_PATH)/_pkg.el
 
 dist:: binkit package-info
 
@@ -147,7 +184,7 @@ distclean:: extraclean
 # correctly.
 
 elcclean:
-	$(XEMACS) $(VANILLA) -batch -l $(PACKAGE_CLEAN)
+	$(XEMACS) $(BATCH) -l $(PACKAGE_CLEAN)
 
 # XEmacs native MS Windows needs this quoting of command-line
 # arguments due to basic differences in the handling of command-line
@@ -164,14 +201,14 @@ AUTOLOAD_FILE = (setq generated-autoload-file \
 endif
 
 $(AUTOLOAD_PATH)/auto-autoloads.el : $(ELCS:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
-	$(XEMACS) $(VANILLA) -batch -no-autoloads \
+	$(XEMACS) $(BATCH) -no-autoloads \
 		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
 		-eval "$(AUTOLOAD_FILE)" \
 		-l autoload -f batch-update-autoloads $^
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 
 $(AUTOLOAD_PATH)/custom-load.el : $(ELCS:.elc=.el)
-	$(XEMACS) $(VANILLA) -batch -l cus-dep \
+	$(XEMACS) $(BATCH) -l cus-dep \
 		-f Custom-make-dependencies $(AUTOLOAD_PATH)
 
 pkg_tar = $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar
@@ -189,14 +226,14 @@ endif
 # Make the $(pkg_tar).gz first, then the $(pkg_tar).bz2
 package-info : package-info.in Makefile $(AUTOLOAD_PATH)/_pkg.el \
 		$(pkg_tar).gz $(pkg_tar).bz2
-	$(XEMACS) $(VANILLA) -batch \
+	$(XEMACS) $(BATCH) \
 		-l package-info.elc -f batch-update-package-info \
 		'$(VERSION)' $(PKG_TAR_GZ) \
 		'$(REQUIRES)' \
 		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
-	$(XEMACS) $(VANILLA) -batch \
+	$(XEMACS) $(BATCH) \
 		-l ../../hack-package-index.el -f batch-hack-package-index \
-			$(PACKAGE) package-info $(PACKAGE_INFO)
+			$(PACKAGE) package-info $(PACKAGE_INFO) $(CATEGORY)
 
 ifeq ($(BUILD_TARS),t)
 $(pkg_tar): $(STAGING)/$(MANIFEST)
@@ -244,19 +281,20 @@ $(AUTOLOAD_PATH)/_pkg.el: Makefile
 .PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo binkit-with-html
 .PHONY: bindist install autoloads
 
-bindist: binkit package-info setup-info
+bindist: all binkit package-info setup-info
 
 setup-info:
-	$(XEMACS) $(VANILLA) -batch -l $(PACKAGE_NET_PACKAGES) \
+	$(XEMACS) $(BATCH) -l $(PACKAGE_NET_PACKAGES) \
 		-l $(PACKAGE_INFO) \
-		-f package-net-packages-batch-convert-index-to-ini $(PACKAGE_STAGING)
+		-f package-net-packages-batch-convert-index-to-ini $(PACKAGE_STAGING) $(CATEGORY)
 
-install: binkit
+install: all binkit
+
+just-install: binkit
 
 autoloads: $(AUTOLOAD_PATH)/auto-autoloads.el
 
-
-binkit-common: all
+binkit-common: check-staging
 	(if test -d $(STAGING); then		\
 		cd $(STAGING);			\
 		if test -f $(MANIFEST); then	\

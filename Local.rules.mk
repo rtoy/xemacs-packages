@@ -1,5 +1,3 @@
-# This block must be duplicated in XEmacs.rules and the toplevel Makefile.
-
 ifeq (${XEMACS_PACKAGES_BASE},)
 ___ := $(error XEMACS_PACKAGES_BASE not defined??)
 endif

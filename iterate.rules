@@ -1,5 +1,7 @@
 # This file is part of XEmacs.
 
+# Copyright (C) 2002 Ben Wing.
+
 # XEmacs is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
 # Free Software Foundation; either version 2, or (at your option) any
@@ -16,8 +18,14 @@
 # Boston, MA 02111-1307, USA.
 
 #
-# Used by all the subdirectory makefiles..
+# This is used by subdirectories that directly contain packages.  Higher-level
+# subdirectories should use meta-iterate.rules instead.
 #
+
+XEMACS_PACKAGES_BASE:= $(shell while [ ! -f XEmacs.rules ]; do \
+				cd ..;	\
+				done;	\
+				pwd)
 
 AUTOLOADS_TARGETS= $(PACKAGES:=/autoloads.target)
 BYTECOMPILE_TARGETS= $(PACKAGES:=/bytecompile.target)
@@ -27,14 +35,18 @@ DISTCLEAN_TARGETS= $(PACKAGES:=/distclean.target)
 ELCCLEAN_TARGETS= $(PACKAGES:=/elcclean.target)
 HTML_TARGETS= $(PACKAGES:=/html.target)
 INSTALL_TARGETS= $(PACKAGES:=/install.target)
+JUST_INSTALL_TARGETS = $(PACKAGES:=/just-install.target)
+
+# Make this the first target
+all: autoloads bytecompile
 
 ALL_TARGETS = \
 	$(AUTOLOADS_TARGETS)  $(BYTECOMPILE_TARGETS) $(BINDIST_TARGETS) \
 	$(CLEAN_TARGETS) $(DISTCLEAN_TARGETS) $(ELCCLEAN_TARGETS) \
-	$(HTML_TARGETS) $(INSTALL_TARGETS)
+	$(HTML_TARGETS) $(INSTALL_TARGETS) $(JUST_INSTALL_TARGETS)
 
 .PHONY: $(ALL_TARGETS) autoloads bytecompile bindist clean \
-	distclean elcclean html install
+	distclean elcclean html install just-install
 
 # Master rule to pass down actual building 
 # Use a static pattern because of the extra dependencies
@@ -43,7 +55,7 @@ $(ALL_TARGETS) : %.target:
 
 # Standard dependencies
 
-$(BYTECOMPILE_TARGETS): %bytecompile.target: %autoloads.target
+# $(BYTECOMPILE_TARGETS): %bytecompile.target: %autoloads.target
 
 $(BINDIST_TARGETS)= %bindist.target: %bytecompile.target %html.target
 
@@ -67,6 +79,8 @@ html: $(HTML_TARGETS)
 
 install: $(INSTALL_TARGETS)
 
+just-install: $(JUST_INSTALL_TARGETS)
+
 # Optionally put in fake rules for packages that we cannot
 # recursively build (yet)
 ifneq ($(strip (ASSUMED_PRESENT)),)
@@ -84,7 +98,7 @@ DEPENDS_FILE_NAME = pdepends.mk
 
 DEPENDS_FILES = $(PACKAGES:=/$(DEPENDS_FILE_NAME))
 
-$(DEPENDS_FILES): %$(DEPENDS_FILE_NAME): %Makefile ../XEmacs.rules
+$(DEPENDS_FILES): %$(DEPENDS_FILE_NAME): %Makefile $(XEMACS_PACKAGES_BASE)/XEmacs.rules
 	$(MAKE) $(MFLAGS) -C $(*D) TARGET_BASE=$(dir $(*D)) \
 		$(DEPENDS_FILE_NAME)
 

@@ -6,21 +6,18 @@
 
 ##################### Begin settings that commonly need to be changed
 
-# When `t', a symlink tree will be built for running a live CVS
-# checkout.  Requires GNU `cp', and that you configure your XEmacs
-# to use ${STAGING} in the package-path.  Create the tree with `make
-# install'.
-#
-symlink = 
-
 # Path to XEmacs to use for byte compilation.
 #
 # (Double-quote path under native MS Windows if there are embedded spaces.)
 XEMACS = xemacs
 
-# Should we build the mule package?  Set to 't' if you do not have/want Mule.
+# Should we build the Mule packages?  Set to 't' if you do not have/want Mule.
 #
 BUILD_WITHOUT_MULE =
+
+# Should we build the unsupported packages?  Set to 't' if yes.
+#
+BUILD_UNSUPPORTED =
 
 # Following test, which would be performed by every makefile
 # including XEmacs.rules, slows down the make process terribly
@@ -32,7 +29,7 @@ BUILD_WITHOUT_MULE =
 # Date: 14 Oct 2000 12:28:44 +0100
 #
 # XEMACS_NATIVE_NT = \
-# $(shell $(XEMACS) $(VANILLA) -batch \
+# $(shell $(XEMACS) $(BATCH) \
 # -eval "(princ (eq system-type 'windows-nt))")
 #
 # Therefore this has become a make variable instead:
@@ -43,66 +40,95 @@ BUILD_WITHOUT_MULE =
 # This only concerns how XEmacs itself was built.
 XEMACS_NATIVE_NT =
 
-# XEmacs native MS Windows needs this quoting of command-line
-# arguments due to basic differences in the handling of command-line
-# arguments in Unix and MS Windows.
-#### not any more, as of Cygwin 1.1.8-2 (Feb 2001) -- ben
-# set this to 't' if you get errors under MS Windows without it.
-XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING =
+#
+# The directory tree under which the installed packages go.  Under this
+# directory will be directories xemacs-packages/ (non-Mule packages),
+# mule-packages/ (Mule packages, if you built XEmacs with Mule,
+# i.e. international, support), and maybe site-packages/ (packages you
+# created yourself).  If you are installing XEmacs normally, this should be
+# <xemacs-root>/lib/xemacs, where <xemacs-root> is the topmost-level
+# directory under which everything is installed -- normally /usr/local, and
+# set using the `--prefix' parameter to `configure'.  See the INSTALL file.
+
+XEMACS_INSTALLED_PACKAGES_ROOT = /usr/local/lib/xemacs
+
+# If you are developing XEmacs, you probably don't want to install the
+# packages under /usr/local, which is where the stable, released version of
+# XEmacs goes.  Instead, we suggest a layout as described in the base
+# README file of recent versions of XEmacs.  In a nutshell, we suggest you
+# put your source under /src/xemacs, and under this put the package sources
+# in package-src/, and the installed packages in xemacs-packages/ and
+# mule-packages/.  If you do everything this way, you might want to set things as follows:
+#
+#XEMACS_INSTALLED_PACKAGES_ROOT = ${XEMACS_PACKAGES_BASE}/..
+#
+# which puts the xemacs-packages/ and mule-packages/ directories as sisters
+# of the package-src/ directory, and you have to tell configure the
+# location of the installed packages using `--package-path', something like
+#
+#	configure --package-path=/src/xemacs/xemacs-packages;/src/xemacs/mule-packages ...
+#
+
+# When `t', a symlink tree will be built for running a live CVS
+# checkout.  Requires GNU `cp', and that you configure your XEmacs
+# to use ${STAGING} in the package-path.  Create the tree with `make
+# install'.
+#
+symlink = 
+
+##################### End settings that commonly need to be changed
 
 #
-# Where to stage or install the non-Mule packages, or where the
-# symlink tree will go.
+# Where to install the non-Mule packages, or where the symlink tree will
+# go.  You probably don't want to change this.
 #
-XEMACS_STAGING = ${XEMACS_PACKAGES_BASE}/../xemacs-packages
+NONMULE_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/xemacs-packages
 
 #
-# Where to stage or install the Mule packages, or where the
-# symlink tree will go.
+# Where to install the Mule packages, odr where the symlink tree will go.
+# You probably don't want to change this.
 #
-MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../mule-packages
+MULE_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/mule-packages
 
-# XEmacs packages or groups of packages to install. 'make bindist'
-# doesn't look at this, it's used by 'make install'.
+#
+# Where to install the unsupported packages, or where the symlink tree will
+# go.  You probably don't want to change this.
+#
+UNSUPPORTED_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/site-packages
+
+# Non-Mule packages or groups of packages to build/install.  'make bindist'
+# doesn't look at this, it's used by 'make install'.  You probably don't
+# want to change this.
 #
 # The format for this is: xemacs-packages/pkg1 xemacs-packages/pkg2...
 # e.g. xemacs-packages/xemacs-base xemacs-packages/bbdb
-XEMACS_PACKAGES = xemacs-packages
+NONMULE_PACKAGES = xemacs-packages
 
-# Mule packages or groups of packages to install.  'make bindist'
-# doesn't look at this, it's used by 'make install'.
+# Mule packages or groups of packages to build/install.  'make bindist'
+# doesn't look at this, it's used by 'make install'.  You probably don't
+# want to change this.  If you don't want any Mule packages, don't change
+# this, instead set BUILD_WITHOUT_MULE above.
 #
 # The format for this is: mule-packages/pkg1 mule-packages/pkg2...
 # e.g. mule-packages/mule-base mule-packages/skk
 MULE_PACKAGES = mule-packages
 
-##################### End settings that commonly need to be changed
-
-PACKAGE_INDEX = package-index
-
-# See: Makefile and XEmacs.rules to see how $(XEMACS_STAGING),
-# $(MULE_STAGING), and $(STAGING) are used.
+# Unsupported packages or groups of packages to build/install.  'make
+# bindist' doesn't look at this, it's used by 'make install'.  You probably
+# don't want to change this.
 #
+# NOTE: This only controls which unsupported packages to build/install, not
+# whether unsupported packages will be built or installed at all, which is
+# controlled by BUILD_UNSUPPORTED above (off by default!).
+#
+# The format for this is: unsupported/$developer-name/pkg1 unsupported/$developer-name/pkg2...
+# e.g. unsupported/simon/asn1 unsupported/scop/docbookide
+UNSUPPORTED_PACKAGES = unsupported
 
-# We need to set STAGING so that `make' run from a lower-level directory
-# works right.
-
-# the first endif is really not necessary, because STAGING is set from
-# the command line, and variable settings should not override command-line
-# ones.
-ifeq ('$(STAGING)','')
-ifeq ('$(CATEGORY)','mule')
-STAGING := $(MULE_STAGING)
+ifeq ('$(CATEGORY)','unsupported')
+PACKAGE_INDEX = package-index-unsupported
 else
-STAGING := $(XEMACS_STAGING)
-endif
-endif
-
-# 'make bindist' needs STAGING to be set to XEMACS_STAGING regardless of
-# whether a Mule package or not so we don't end up with 2 package-index 
-# files.
-ifeq ('$(MAKECMDGOALS)','bindist')
-STAGING := $(XEMACS_STAGING)
+PACKAGE_INDEX = package-index
 endif
 
 # Path to BSD install.
@@ -144,14 +170,40 @@ EXCLUDES =					\
 
 VANILLA = -vanilla
 
+# Flags to run XEmacs from Makefiles.
+#
+BATCH = $(VANILLA) -batch -eval '(setq stack-trace-on-error t load-ignore-out-of-date-elc-files t load-show-full-path-in-messages t)'
+
 # path to makeinfo
 #
 MAKEINFO = makeinfo
 
-# path to texi2info
+# path to texi2html
 #
 TEXI2HTML = texi2html
+# texi2html 1.56k on Cygwin has "-split_chapter", whereas newer versions
+# (eg. 1.64) has "-split chapter", this should work either way.  1.56k doesn't
+# have "-help" and 1.64 doesn't have "-usage", but doing "-help" with 1.56k
+# outputs the usage anyway :P
+ifneq ('$(shell sh -c "texi2html -help 2>&1 | grep -l split_chapter")','')
+TEXI2HTML_FLAGS = -split_chapter
+else
 TEXI2HTML_FLAGS = -split chapter
+endif
+
+
+# path to texi2dvi, dvips, texi2pdf; If not defined, no conversion will happen
+#
+ifeq ($(XEMACS_NATIVE_NT),t)
+# Cygwin versions currently broken.
+TEXI2DVI =
+DVIPS =
+TEXI2PDF =
+else
+TEXI2DVI = texi2dvi
+DVIPS = dvips
+TEXI2PDF = texi2pdf
+endif
 
 ifneq ('$(symlink)','t')
  # path to GNU cp, use the latter if no GNU cp is available.
@@ -162,7 +214,9 @@ ifneq ('$(symlink)','t')
 else
  # This next one is for running in-place from a CVS checkout.
  # NOTE: cp on FreeBSD does not have a --symbolic-link option
- # so this may not work.
+ # so this will not work.  You could try something like
+ # `pax -rw -l -p p', but this will create hard links rather than
+ # symbolic links.
  #
  RCOPY = cp --force --recursive --symbolic-link
 endif

@@ -99,13 +99,16 @@
 ;;
 ;; 2. Generating setup.ini should be more automatic.
 
-(defun package-net-packages-convert-index-to-ini (&optional destdir remote)
+(defun package-net-packages-convert-index-to-ini (&optional destdir remote category)
   "Convert the package index to ini file format in DESTDIR.
 DESTDIR defaults to the value of `data-directory'."
 ;  (package-get-require-base remote)
 
   (setq destdir (file-name-as-directory (or destdir data-directory)))
-  (let ((buf (get-buffer-create "*setup-packages.ini*")))
+  (let* ((fname (if (equal category "unsupported")
+		    "setup-unsupported-packages.ini"
+		  "setup-packages.ini"))
+	 (buf (get-buffer-create (format "*%s*" fname))))
     (unwind-protect
         (save-excursion
           (set-buffer buf)
@@ -136,8 +139,8 @@ DESTDIR defaults to the value of `data-directory'."
 	      ;; (insert (format "source: %s\n" (plist-get plist 'source)))
 		(insert "\n"))
 	      (setq entries (cdr entries))))
-	  (insert "# setup-packages.ini file ends here\n")
-	  (write-region (point-min) (point-max) (concat destdir "setup-packages.ini")))
+	  (insert (format "# %s file ends here\n" fname))
+	  (write-region (point-min) (point-max) (concat destdir fname)))
       (kill-buffer buf))))
 
 (defun package-net-packages-batch-convert-index-to-ini ()
@@ -145,7 +148,8 @@ DESTDIR defaults to the value of `data-directory'."
   (unless noninteractive
     (error "`package-net-packages-batch-convert-index-to-ini' is to be used only with -batch"))
   (let ((dir (car command-line-args-left))
+	(category (cadr command-line-args-left))
 	(package-get-require-signed-base-updates nil))
-    (package-net-packages-convert-index-to-ini dir nil)))
+    (package-net-packages-convert-index-to-ini dir nil category)))
 
 ;; package-net-packages.el ends here

@@ -1,4 +1,137 @@
+2002-12-08  Ville Skyttä  <scop@xemacs.org>
+
+	* Local.rules.template (TEXI2HTML_FLAGS): Wiggle around
+	different args for different texi2html versions.
+	* package-net-packages.el
+	(package-net-packages-batch-convert-index-to-ini): Typo fix.
+
 2002-11-29  Ben Wing  <ben@xemacs.org>
+
+	* INSTALL (IMPORTANT):
+	Rewrite in accordance with changes in Local.rules.template, and
+	generally clarify the proper way to build packages.
+	
+	* Local.rules.mk:
+	Remove bogus comment.
+	
+	* Local.rules.template:
+	* Local.rules.template (XEMACS):
+	* Local.rules.template (symlink): Removed.
+	* Local.rules.template (BUILD_WITHOUT_MULE):
+	* Local.rules.template (BUILD_UNSUPPORTED): New.
+	* Local.rules.template (XEMACS_NATIVE_NT):
+	* Local.rules.template (XEMACS_INSTALLED_PACKAGES_ROOT): New.
+	* Local.rules.template (XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING): Removed.
+	* Local.rules.template (NONMULE_INSTALLED_PACKAGES_ROOT): New.
+	* Local.rules.template (XEMACS_STAGING): Removed.
+	* Local.rules.template (MULE_INSTALLED_PACKAGES_ROOT): New.
+	* Local.rules.template (MULE_STAGING): Removed.
+	* Local.rules.template (UNSUPPORTED_INSTALLED_PACKAGES_ROOT): New.
+	* Local.rules.template (MULE_PACKAGES):
+	* Local.rules.template (XEMACS_PACKAGES): Removed.
+	* Local.rules.template (NONMULE_PACKAGES): New.
+	* Local.rules.template (PACKAGE_INDEX):
+	* Local.rules.template (UNSUPPORTED_PACKAGES): New.
+	* Local.rules.template (STAGING): Removed.
+	* Local.rules.template (VANILLA):
+	* Local.rules.template (BATCH): New.
+	* Local.rules.template (MAKEINFO):
+	* Local.rules.template (TEXI2HTML_FLAGS):
+	* Local.rules.template (TEXI2DVI): New.
+	* Local.rules.template (DVIPS): New.
+	* Local.rules.template (TEXI2PDF): New.
+	Add BUILD_UNSUPPORTED for building unsupported/*.  Rearrange so
+	that the stuff people actually need to change is all at the top.
+	Replace confusing *_STAGING names with names indicating that these
+	are the roots of installed packages.  Support broken TEXI2DVI and
+	TEXI2PDF, e.g. current Cygwin.	Add $(BATCH), for use when running
+	XEmacs in batch mode -- automatically sets stack-trace-on-error
+	and various load-* flags.  Add comment about using `pax' under
+	FreeBSD to generate links.
+
+	* meta-iterate.rules: New file.  Generalize the stuff in
+	`Makefile', for use also in unsupported/Makefile.
+	
+	* Makefile (SUBDIRS):
+	* Makefile (XEMACS_PACKAGES_BASE):
+	* Makefile (all):
+	* Makefile (.PHONY): Removed.
+	* Makefile (ALL_TARGETS): Removed.
+	* Makefile (AUTOLOADS_TARGETS): Removed.
+	* Makefile (BYTECOMPILE_TARGETS): Removed.
+	* Makefile (BINDIST_TARGETS): Removed.
+	* Makefile (CLEAN_TARGETS): Removed.
+	* Makefile (DISTCLEAN_TARGETS): Removed.
+	* Makefile (ELCCLEAN_TARGETS): Removed.
+	* Makefile (HTML_TARGETS): Removed.
+	* Makefile (JUST_INSTALL_TARGETS): Removed.
+	* Makefile (all-bytecompile): Removed.
+	* Makefile (autoloads): Removed.
+	* Makefile (bytecompile): Removed.
+	* Makefile (bindist-real): Removed.
+	* Makefile (bindist): Removed.
+	* Makefile (clean): Removed.
+	* Makefile (distclean): Removed.
+	* Makefile (elcclean): Removed.
+	* Makefile (html): Removed.
+	* Makefile (World): Removed.
+	* Makefile (install): Removed.
+	* Makefile (just-install): Removed.
+	Delete this file and include meta-iterate.rules instead.
+
+	* XEmacs.rules:
+	* XEmacs.rules (bytecompile):
+	* XEmacs.rules (all): New.
+	* XEmacs.rules (.SUFFIXES):
+	* XEmacs.rules (STAGING): New.
+	* XEmacs.rules (check-staging): New.
+	* XEmacs.rules (FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS):
+	* XEmacs.rules (html):
+	* XEmacs.rules (BOOT_XEMACS):
+	* XEmacs.rules (compile): New.
+	* XEmacs.rules (elcclean):
+	* XEmacs.rules (AUTOLOAD_FILE):
+	* XEmacs.rules (package-info):
+	* XEmacs.rules (bindist):
+	* XEmacs.rules (setup-info):
+	* XEmacs.rules (install):
+	* XEmacs.rules (autoloads):
+	* XEmacs.rules (binkit-common):
+	* XEmacs.rules (just-install): New.
+	Make sure that we get consistent results when running `make'
+	from this directory -- rebuild all autoloads below, then bytecompile.
+	Handle unsupported/ directory.
+	Check that STAGING is set so we don't have file system trashage.
+	Use $(BATCH).
+	Correct usage of texi2html consistent with latest versions.
+
+	* hack-package-index.el (batch-hack-package-index):
+	Handle unsupported/ directory.
+
+	* iterate.rules:
+	* iterate.rules (XEMACS_PACKAGES_BASE): New.
+	* iterate.rules (JUST_INSTALL_TARGETS): New.
+	* iterate.rules (all): New.
+	* iterate.rules (.PHONY):
+	* iterate.rules (just-install): New.
+	* iterate.rules (DEPENDS_FILES):
+	Make sure that we get consistent results when running `make'
+	from this directory -- rebuild all autoloads below, then bytecompile.
+	Allow for this file to be included anywhere in the directory tree.
+	Support target `just-install'.
+	
+	* package-compile.el:
+	* package-compile.el (package-directory-map):
+	* package-compile.el (package-source-root): New.
+	* package-compile.el (package-name-to-directory):
+	Handle unsupported/ directory.
+	Set various new load-* flags for better debugging results.
+	Set load-ignore-out-of-date-elc-files for better compilation results.
+
+	* package-net-packages.el:
+	* package-net-packages.el (package-net-packages-convert-index-to-ini):
+	* package-net-packages.el (package-net-packages-batch-convert-index-to-ini):
+	Handle unsupported/ directory.
 
 	* xemacs-packages/Makefile: Fix comment.
 

@@ -1,3 +1,9 @@
+2003-08-31  Mats Lidell <matsl@xemacs.org>
+
+	* mule-packages/Makefile (compile): New.
+	* xemacs-packages/Makefile (compile): New.
+	This fixes the build process.
+
 2003-08-29  Steve Youngs  <youngs@xemacs.org>
 
 	* xemacs-packages/Makefile: Fix syntax of ifeg.

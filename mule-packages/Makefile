@@ -27,4 +27,6 @@ endif
 
 ASSUMED_PRESENT = xemacs-base fsf-compat viper apel cookie elib dired
 
+compile::
+
 include ../iterate.rules

@@ -46,4 +46,6 @@ else
 PACKAGES := $(NONMULE_PACKAGES)
 endif
 
+compile::
+
 include ../iterate.rules

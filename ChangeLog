@@ -1,3 +1,7 @@
+2002-07-20  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released: build.
+
 2002-07-14  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages  released:  mail-lib xemacs-devel  xslt-process ibuffer

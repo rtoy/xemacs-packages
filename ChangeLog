@@ -1,3 +1,12 @@
+1998-08-31  SL Baur  <steve@altair.xemacs.org>
+
+	* package-compile.el: Add support for unsupported Pterodactyl Gnus.
+
+1998-08-15  SL Baur  <steve@altair.xemacs.org>
+
+	* package-compile.el (package-directory-map): Add zenirc.
+	(package-name-to-directory): Ditto.
+
 1998-07-23  SL Baur  <steve@altair.xemacs.org>
 
 	* Makefile (SPECIAL): Build edit-utils early.

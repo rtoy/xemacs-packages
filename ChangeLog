@@ -1,3 +1,8 @@
+1999-02-02  Jan Vroonhof  <vroonhof@math.ethz.ch>
+
+	* XEmacs.rules (binkit-common): Create lisp dir with
+	auto-autoloads, _pkg.el etc even if there are no other elcs.
+
 1999-02-15  SL Baur  <steve@xemacs.org>
 
 	* Makefile (bindist): Force autoloads building first.

@@ -162,9 +162,9 @@ binkit-common: all
 			rm -rf `cat $(MANIFEST)`; \
 		fi; \
 	fi;)
-ifneq '$(ELCS)' ''
+#ifneq '$(ELCS)' ''
 	@-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-endif
+#endif
 ifneq '$(ELCS_1)' ''
 	@-mkdir -p $(STAGING)/lisp/$(ELCS_1_DEST)
 endif
@@ -194,9 +194,9 @@ ifneq '$(LIBSRC_FILES)' ''
 	@-mkdir -p $(STAGING)/lib-src
 endif
 	@-mkdir -p $(STAGING)/pkginfo
-ifneq '$(ELCS)' ''
+#ifneq '$(ELCS)' ''
 	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
-endif
+#endif
 ifneq '$(ELCS_1)' ''
 	$(RCOPY) $(ELCS_1_FILES) $(STAGING)/lisp/$(ELCS_1_DEST)
 endif
@@ -227,13 +227,13 @@ ifneq '$(LIBSRC_FILES)' ''
 endif
 	(cd $(STAGING); \
 	ls -1 $(MANIFEST) > $(MANIFEST))
-ifneq '$(ELCS)' ''
+#ifneq '$(ELCS)' ''
 	@(cd $(STAGING); \
 	ls -1 lisp/$(PACKAGE)/ChangeLog \
 		$(patsubst %, lisp/$(PACKAGE)/%, $(notdir $(SOURCE_FILES_TO_COPY))) \
 		$(patsubst %, lisp/$(PACKAGE)/%, $(notdir $(EXTRA_SOURCES))) \
 		>> $(MANIFEST))
-endif
+#endif
 ifneq '$(ELCS_1)' ''
 	@(cd $(STAGING); \
 	ls -1 $(patsubst %, lisp/$(ELCS_1_DEST)/%, $(notdir $(ELCS_1_FILES))) \

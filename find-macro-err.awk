@@ -20,6 +20,9 @@
 # Written by Jerry James
 # December 18, 2002
 #
+# Updated January 14, 2004 to also report the type of definition miscompiled
+# (defmacro, defsubst, etc.).
+#
 # Find undefined function messages in the smoketest log and try to match them
 # against the macro list.  Invoke this script in a directory containing
 # macro.list, the output of gen-macro-list.awk.
@@ -29,8 +32,10 @@
 BEGIN {
   OrigRS = RS
   OrigFS = FS
-  while ((getline < "macro.list") > 0)
+  while ((getline < "macro.list") > 0) {
     macro[$1] = $2
+    macrotype[$1] = $3
+  }
   close("macro.list")
 }
 # Track the current package/file name from the log
@@ -42,7 +47,8 @@ BEGIN {
 # Find single undefined functions
 /is not known to be defined/ {
   if ($4 in macro)
-    printf("%s\n  Definition: %s\n  Miscompile: %s\n", $4, macro[$4], fil)
+    printf("%s (%s)\n  Definition: %s\n  Miscompile: %s\n",
+	   $4, macrotype[$4], macro[$4], fil)
 }
 # Find multiple undefined functions
 /are not known to be defined/ {
@@ -51,7 +57,8 @@ BEGIN {
   getline
   for (i = 1; i <= NF; i++)
     if ($i !~ "^[ \t\n\f]*$" && $i in macro)
-      printf("%s\n  Definition: %s\n  Miscompile: %s\n", $i, macro[$i], fil)
+      printf("%s (%s)\n  Definition: %s\n  Miscompile: %s\n",
+	     $i, macrotype[$i], macro[$i], fil)
   RS = OrigRS
   FS = OrigFS
 }

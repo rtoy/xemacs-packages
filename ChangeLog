@@ -1,3 +1,10 @@
+2004-01-14  Jerry James  <james@xemacs.org>
+
+	* find-macro-err.awk: Output the type of definition (defmacro,
+	defsubst, etc.).
+	* gen-macro-list.awk: Ditto.  Skip definitions in comments and
+	strings.  Strip trailing parentheses from macro names.
+
 2004-01-14  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: ispell.

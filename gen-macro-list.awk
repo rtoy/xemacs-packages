@@ -20,21 +20,32 @@
 # Written by Jerry James
 # December 18, 2002
 #
+# Updated January 14, 2004 to record the type of definition (defmacro,
+# defun, etc.) and to avoid finding definitions in comments and strings.
+#
 # Produce a list of macros and the packages/files in which they are defined.
 # Usage: find $package_root -type f -name \*.el | \
 #        xargs awk -f gen-macro-list.awk > macro.list
 #
-# Find all defmacro and defsubst instances (including defmacro*, etc.)
-/\(def(macro|subst)/ {
-  for (i = 1; i <= NF; i++)
+# Find all instances of defmacro and defsubst (including defmacro*, etc.)
+# not in comments or strings
+/^[^;\"]*\(def(macro|subst)/ {
+  for (i = 1; i <= NF; i++) {
     if ($i ~ "\\(def(macro|subst)") {
-      mac = i + 1
-      # If the macro name contains a comma, we don't know how to deal with it
-      if ($mac !~ ",")
-	# This is not correct for pathnames with multiple xemacs-packages
-	# elements, but fixing it is too painful
-	printf("%s\t%s\n", $mac,
-	       substr(FILENAME, match(FILENAME, "(xemacs|mule)-packages")))
-      break
+      mac = i + 1;
+      ## If the macro name contains a comma, we don't know how to process it
+      if ($mac !~ ",") {
+	## Get rid of any trailing parentheses (due to not leaving a space
+	## between the macro name and parameter list.
+	paren = index($mac, "(");
+	## This is not correct for pathnames with multiple xemacs-packages
+	## elements, but fixing it is too painful
+	printf("%s\t%s\t%s\n",
+	       (paren == 0) ? $mac : substr($mac, 1, $paren - 1),
+	       substr(FILENAME, match(FILENAME, "(xemacs|mule)-packages")),
+	       substr($i, index($i, "(") + 1));
+      }
+      break;
     }
+  }
 }

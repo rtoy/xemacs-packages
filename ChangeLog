@@ -1,3 +1,8 @@
+2004-12-24  Norbert Koch  <viteno@xemacs.org>
+
+	* XEmacs.rules (GENERATED_ELC_DEPENDENCIES): Add _pkg.el.  We need
+	its autoload cookie to register packages.
+
 2004-12-22  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: pcl-cvs.
@@ -9,9 +14,6 @@
 	* Packages released: edit-utils general-docs.
 
 	* Packages released: vc xemacs-base.
-
-	* XEmacs.rules (GENERATED_ELC_DEPENDENCIES): Add _pkg.el.  We need
-	its autoload cookie to register packages.
 
 2004-12-14  Norbert Koch  <viteno@xemacs.org>
 

@@ -435,7 +435,8 @@ extraclean: distclean
 elcclean:
 	$(XEMACS) $(BATCH) -l $(PACKAGE_CLEAN)
 
-GENERATED_ELC_DEPENDENCIES = $(ELCS:.elc=.el) $(ELCS_1:.elc=.el)
+GENERATED_ELC_DEPENDENCIES = $(ELCS:.elc=.el) $(ELCS_1:.elc=.el) \
+	$(AUTOLOAD_PATH)/_pkg.el
 
 # If Makefile or _pkg.el has changed (Makefile will trigger _pkg.el
 # rebuilding), then our suppress forms may have changed.  Just rebuilding

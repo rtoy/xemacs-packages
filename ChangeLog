@@ -1,6 +1,7 @@
 2003-02-04  Ville Skyttä  <scop@xemacs.org>
 
 	* MAINTAINERS (auctex): Change to Uwe Brauer.
+	* INSTALL (Building): Remove misleading references to $STAGING.
 
 2003-02-01  Steve Youngs  <youngs@xemacs.org>
 

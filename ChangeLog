@@ -1,9 +1,18 @@
+2000-08-22  Steve Youngs  <youngs@xemacs.org>
+
+	* XEmacs.rules (clean): Use $INFO_FILES instead of $PACKAGE.info*, use
+	new var $EXTRA_OBJS.
+
+	* package-compile.el (package-directory-map): Remove obsolete entries.
+	(package-name-to-directory): Remove obsolete entries, put w3, bbdb, jde &
+	lookup into a single 'or' statement.
+
 2000-08-16  Andreas Jaeger  <aj@suse.de>
 
 	* package-compile.el (package-directory-map): Add semantic.
 	(package-name-to-directory): Handle jde special.
 
-2000-08-16  Steve Youngs  <youngs_s@ozlinx.com.au>
+2000-08-16  Steve Youngs  <youngs@xemacs.org>
 
 	* CVSROOT/modules: added module for eicq
 

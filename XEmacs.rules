@@ -85,8 +85,8 @@ all:: $(AUTOLOAD_PATH)/_pkg.el
 dist:: srckit binkit package-info
 
 clean::
-	rm -f $(ELCS) $(PACKAGE).info* $(AUTOLOAD_PATH)/auto-autoloads.elc \
-		$(AUTOLOAD_PATH)/custom-load.elc
+	rm -f $(ELCS) $(INFO_FILES) $(AUTOLOAD_PATH)/auto-autoloads.elc \
+		$(AUTOLOAD_PATH)/custom-load.elc $(EXTRA_OBJS)
 
 mostlyclean: clean
 

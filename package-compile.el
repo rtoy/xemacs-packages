@@ -95,6 +95,7 @@
     ("eudc" . "xemacs-packages")
     ("footnote" . "xemacs-packages")
     ("forms" . "xemacs-packages")
+    ("fortran-modes" . "xemacs-packages")
     ("frame-icon" . "xemacs-packages")
     ("fsf-compat" . "xemacs-packages")
     ("games" . "xemacs-packages")

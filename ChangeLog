@@ -1,3 +1,9 @@
+2002-03-25  Adrian Aichner  <adrian@xemacs.org>
+
+	* XEmacs.rules (FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS):
+	Moved before rule for %-ja.info.
+	* XEmacs.rules (%-ja.info): New, from TM package texi Makefile.
+	
 2002-03-25  Steve Youngs  <youngs@xemacs.org>
 
 	* These packages rolled: apel auctex bbdb calc cookie dictionary

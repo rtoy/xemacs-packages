@@ -59,6 +59,15 @@ PWD      := $(shell pwd)
 .SUFFIXES:
 .SUFFIXES: .html .info .txi .texi .texinfo .dvi .elc .el
 
+FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../../xemacs-packages/texinfo" "../../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
+
+%-ja.info: %-ja.texi
+	$(XEMACS) -batch -q -no-site-file -insert $< \
+		-eval '(unless (featurep (quote mule)) (kill-emacs 0))' \
+		$(FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS) \
+		-eval '(setq file-coding-system (quote iso-2022-7))' \
+		-eval '(save-buffer 0)'
+
 %.info: %.texi
 	$(MAKEINFO) $(MAKEINFO_FLAGS) -o $@ $<
 
@@ -75,8 +84,6 @@ endif
 	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
 %.html: %.texinfo
 	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
-
-FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../../xemacs-packages/texinfo" "../../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
 
 FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../xemacs-packages/texinfo" "../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
 

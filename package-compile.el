@@ -131,6 +131,7 @@
     ("gnus" . "xemacs-packages")
     ("haskell-mode" . "xemacs-packages")
     ("hm--html-menus" . "xemacs-packages")
+    ("hyperbole" . "xemacs-packages")
     ("ibuffer" . "xemacs-packages")
     ("idlwave" . "xemacs-packages")
     ("igrep" . "xemacs-packages")

@@ -1,3 +1,7 @@
+2003-07-22  Norbert Koch  <viteno@xemacs.org>
+
+	* package-compile.el (package-directory-map): Add hyperbole package.
+
 2003-07-21  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: prog-modes.

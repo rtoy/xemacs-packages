@@ -72,7 +72,7 @@
 
 	* Packages released: mh-e idlwave fortran-modes cc-mode ada.
 
-2002-10-05  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-10-05  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add pgg.
 	* package-compile.el (package-directory-map): Ditto.
@@ -97,22 +97,22 @@
 	* Packages  released:  xemacs-base  ecrypto  mail-lib viper  liece
 	locale ediff debug.
 
-2002-09-20  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-09-20  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add perl-modes.
 	* package-compile.el (package-directory-map): Ditto.
 
-2002-09-18  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-09-18  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add ruby-modes.
 	* package-compile.el (package-directory-map): Ditto.
 
-2002-09-18  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-09-18  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add fortran-modes.
 	* package-compile.el (package-directory-map): Ditto.
 
-2002-09-18  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-09-18  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add python-modes.
 	* package-compile.el (package-directory-map): Ditto.
@@ -127,7 +127,7 @@
 	*  Packages  released:  psgml-dtds net-utils  ps-print  prog-modes
 	reftex.
 
-2002-08-28  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-08-28  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add general-docs.
 
@@ -138,7 +138,7 @@
 	* Packages released: time   tramp view-process ilisp ocaml  reftex
 	prog-modes psgml-dtds psgml.
 
-2002-08-25  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-08-25  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add psgml-dtds.
 
@@ -155,7 +155,7 @@
 	* Packages released: tramp sieve build sml-mode sasl ocaml ecrypto
 	docbookide edit-utils psgml speedbar semantic eieio.
 
-2002-08-07  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-08-07  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add docbookide, ecrypto,
 	ocaml, sasl and sml-mode.
@@ -209,7 +209,7 @@
 	* Packages  released:  mail-lib xemacs-devel  xslt-process ibuffer
 	prog-modes liece apel xemacs-base.
 
-2002-06-30  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-06-30  Ville Skyttä  <scop@xemacs.org>
 
 	* XEmacs.rules (distclean): Add .*~ and .\#* .
 
@@ -293,7 +293,7 @@
 	footnote ibuffer liece mail-lib prog-modes ps-print sh-script
 	text-modes tramp viper xemacs-base latin-unity leim haskell-mode.
 
-2002-04-23  Ville Skyttä  <ville.skytta@xemacs.org>
+2002-04-23  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add haskell-mode.
 

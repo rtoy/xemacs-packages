@@ -16,7 +16,7 @@
 # Boston, MA 02111-1307, USA.
 
 PACKAGES= mule-base \
-	locale leim edict egg-its skk
+	locale leim lookup edict egg-its skk
 
 all:
 	for dir in $(PACKAGES); do \

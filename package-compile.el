@@ -44,7 +44,8 @@
 (let* ((roots (paths-find-emacs-roots invocation-directory
 				      invocation-name))
        (lisp-directory (paths-find-lisp-directory roots)))
-  (setq load-path (paths-find-recursive-load-path (list lisp-directory))))
+  (setq load-path (paths-find-recursive-load-path (list lisp-directory)
+						  paths-load-path-depth)))
 
 (load (expand-file-name "auto-autoloads" (car load-path)))
 

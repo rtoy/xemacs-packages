@@ -1,3 +1,7 @@
+1998-04-17  Michael Sperber [Mr. Preprocessor]  <sperber@informatik.uni-tuebingen.de>
+
+	* package-compile.el: Used paths-load-path-depth variable.
+
 1998-04-07  SL Baur  <steve@altair.xemacs.org>
 
 	* XEmacs.rules (srckit-std): Use $(TAR) not tar.

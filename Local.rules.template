@@ -14,7 +14,10 @@ XEMACS = xemacs
 # Are we running XEmacs 21.5 or greater?  If set, this will generate
 # custom-defines.el files for use with Custom (esp. the Custom menu), and
 # use the new interface in autoload.el for generating auto-autoloads.el files.
-XEMACS_21_5 = t
+#
+# Ben has yet to commit the workspace that enables these new features,
+# so I have defaulted this to 'off' until he does. SY.
+XEMACS_21_5 = 
 
 # Should we build the Mule packages?  Set to 't' if you do not have/want Mule.
 #

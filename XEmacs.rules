@@ -532,14 +532,14 @@ endif
 
 .PHONY: binkit-with-html bindist install autoloads
 
-bindist: binkit package-info setup-info
+bindist: compile binkit package-info setup-info
 
 setup-info:
 	$(XEMACS) $(BATCH) -l $(PACKAGE_NET_PACKAGES) \
 		-l $(PACKAGE_INFO) \
 		-f package-net-packages-batch-convert-index-to-ini $(PACKAGE_STAGING) $(CATEGORY)
 
-install: binkit
+install: compile binkit
 
 ## Do not byte-compile as that could require stuff from elsewhere, and you
 ## get dependency circles.

@@ -106,7 +106,7 @@ srckit-std: distclean
 binkit-sourceonly: all
 	-rm -rf $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-	cp -a ChangeLog *.el* $(STAGING)/lisp/$(PACKAGE)
+	cp -a ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
 	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE); \

@@ -1,3 +1,7 @@
+1999-05-13  SL Baur  <steve@gneiss.etl.go.jp>
+
+	* XEmacs.rules: expand number of DATA destinations
+
 1999-02-02  Jan Vroonhof  <vroonhof@math.ethz.ch>
 
 	* XEmacs.rules (binkit-common): Create lisp dir with

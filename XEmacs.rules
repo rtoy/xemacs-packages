@@ -190,6 +190,15 @@ endif
 ifneq '$(DATA_5_FILES)' ''
 	@-mkdir -p $(STAGING)/etc/$(DATA_5_DEST)
 endif
+ifneq '$(DATA_6_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_6_DEST)
+endif
+ifneq '$(DATA_7_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_7_DEST)
+endif
+ifneq '$(DATA_8_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_8_DEST)
+endif
 ifneq '$(LIBSRC_FILES)' ''
 	@-mkdir -p $(STAGING)/lib-src
 endif
@@ -221,6 +230,15 @@ ifneq '$(DATA_4_FILES)' ''
 endif
 ifneq '$(DATA_5_FILES)' ''
 	$(RCOPY) $(DATA_5_FILES) $(STAGING)/etc/$(DATA_5_DEST)
+endif
+ifneq '$(DATA_6_FILES)' ''
+	$(RCOPY) $(DATA_6_FILES) $(STAGING)/etc/$(DATA_6_DEST)
+endif
+ifneq '$(DATA_7_FILES)' ''
+	$(RCOPY) $(DATA_7_FILES) $(STAGING)/etc/$(DATA_7_DEST)
+endif
+ifneq '$(DATA_8_FILES)' ''
+	$(RCOPY) $(DATA_8_FILES) $(STAGING)/etc/$(DATA_8_DEST)
 endif
 ifneq '$(LIBSRC_FILES)' ''
 	$(RCOPY) $(LIBSRC_FILES) $(STAGING)/lib-src
@@ -272,6 +290,21 @@ endif
 ifneq '$(DATA_5_FILES)' ''
 	@(cd $(STAGING); \
 	ls -1 $(patsubst %, etc/$(DATA_5_DEST)/%, $(notdir $(DATA_5_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(DATA_6_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_6_DEST)/%, $(notdir $(DATA_6_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(DATA_7_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_7_DEST)/%, $(notdir $(DATA_7_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(DATA_8_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_8_DEST)/%, $(notdir $(DATA_8_FILES))) \
 		>> $(MANIFEST))
 endif
 ifneq '$(LIBSRC_FILES)' ''

@@ -29,6 +29,7 @@ efs                   Mike Sperber <sperber@informatik.uni-tuebingen.de>
 eieio                 Eric Ludlam <zappo@gnu.org>
 elib                  XEmacs Development Team <xemacs-beta@xemacs.org>
 emerge                XEmacs Development Team <xemacs-beta@xemacs.org>
+erc                   Adrian Aichner <adrian@xemacs.org>
 eshell                John Wiegley <johnw@gnu.org>
 ess                   A.J. Rossini <rossini@xemacs.org>
 eterm                 XEmacs Development Team <xemacs-beta@xemacs.org>

@@ -1,3 +1,8 @@
+2002-09-06  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+
+	* Packages released: psgml text-modes xemacs-base cc-mode mail-lib
+	edit-utils.
+
 2002-08-29  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	*  Packages  released:  psgml-dtds net-utils  ps-print  prog-modes

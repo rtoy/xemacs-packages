@@ -23,7 +23,7 @@
 # Developer configurable portion
 
 # path to XEmacs-21.0
-XEMACS = /home/xemacs/xemacs-20.0/src/xemacs
+XEMACS = xemacs
 
 # Build Mule?  Comment for no Mule
 BUILD_MULE=t
@@ -32,7 +32,7 @@ BUILD_MULE=t
 INSTALL = ginstall -c
 
 # path to GNU tar
-TAR = /usr/bin/tar
+TAR = tar
 
 # Stuff tar should never archive
 EXCLUDES = --exclude 'CVS' --exclude '*~' --exclude '*.orig' --exclude '*.rej'
@@ -81,6 +81,8 @@ MANIFEST = pkginfo/MANIFEST.$(PACKAGE)
 	$(XEMACS) -no-autoloads -batch $(PRELOADS) -l ../../package-compile.el -- $(REQUIRES) -- $<
 
 all:: $(AUTOLOAD_PATH)/_pkg.el
+
+bytecompile:: all
 
 dist:: srckit binkit package-info
 

@@ -15,11 +15,24 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-PACKAGES= locale leim edict egg-its skk
+PACKAGES= mule-base \
+	locale leim edict egg-its skk
 
 all:
 	for dir in $(PACKAGES); do \
 		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} all; \
+	done
+
+.PHONY: all autoloads bytecompile bindist clean distclean
+
+autoloads:
+	for dir in $(PACKAGES); do \
+		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} autoloads; \
+	done
+
+bytecompile:
+	for dir in $(PACKAGES); do \
+		[ -d $${dir} ] && $(MAKE) $(MFLAGS) -C $${dir} bytecompile; \
 	done
 
 bindist:

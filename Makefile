@@ -16,29 +16,34 @@
 # Boston, MA 02111-1307, USA.
 
 # These packages must be built first and in this order.
-SPECIAL = libs/xemacs-base libs/fsf-compat mule/mule-base libs/mail-lib \
-	comm/vm libs/dired libs/efs libs/apel prog/cc-mode comm/w3 \
-	comm/net-utils oa/edit-utils oa/speedbar
+#SPECIAL = libs/xemacs-base libs/fsf-compat mule/mule-base libs/mail-lib \
+#	comm/vm libs/dired libs/efs libs/apel prog/cc-mode comm/w3 \
+#	comm/net-utils oa/edit-utils oa/speedbar
 
 # The rest require no further special treatment
 SUBDIRS = libs comm games prog wp os oa mule
 
 all:
-	for dir in $(SPECIAL) $(SUBDIRS); do \
-		$(MAKE) $(MFLAGS) -C $${dir} all; \
+	for dir in $(SUBDIRS); do \
+		$(MAKE) $(MFLAGS) -C $${dir} autoloads; \
+	done
+	for dir in $(SUBDIRS); do \
+		$(MAKE) $(MFLAGS) -C $${dir} bytecompile; \
 	done
 
+.PHONY: all bindist clean distclean
+
 bindist:
-	for dir in $(SPECIAL) $(SUBDIRS); do \
+	for dir in $(SUBDIRS); do \
 		$(MAKE) $(MFLAGS) -C $${dir} bindist; \
 	done
 
 clean:
-	for dir in $(SPECIAL) $(SUBDIRS); do \
+	for dir in $(SUBDIRS); do \
 		$(MAKE) $(MFLAGS) -C $${dir} clean; \
 	done
 
 distclean:
-	for dir in $(SPECIAL) $(SUBDIRS); do \
+	for dir in $(SUBDIRS); do \
 		$(MAKE) $(MFLAGS) -C $${dir} distclean; \
 	done

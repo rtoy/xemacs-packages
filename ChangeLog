@@ -1,3 +1,20 @@
+1998-12-06  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules (bytecompile): Add bytecompile target.  Eliminate
+	paths on default `XEMACS' and `TAR' binaries.
+
+	* Makefile: Remove special treatment of packages needed for early
+	bytecompilation.  Add `autoloads', and `bytecompile' targets.
+	Add .PHONY.
+	* os/Makefile (PACKAGES): Ditto.
+	* oa/Makefile (PACKAGES): Ditto.
+	* wp/Makefile (PACKAGES): Ditto.
+	* games/Makefile (PACKAGES): Ditto.
+	* prog/Makefile (PACKAGES): Ditto.
+	* comm/Makefile (PACKAGES): Ditto.
+	* libs/Makefile (PACKAGES): Ditto.
+	* mule/Makefile (PACKAGES): Ditto.
+
 1998-10-15  Greg Klanderman  <greg@alphatech.com>
 
 	* hack-package-index.el (batch-hack-package-index): update for new 

@@ -97,6 +97,7 @@
     ("games" . "xemacs-packages")
     ("gnats" . "xemacs-packages")
     ("gnus" . "xemacs-packages")
+    ("haskell-mode" . "xemacs-packages")
     ("hm--html-menus" . "xemacs-packages")
     ("ibuffer" . "xemacs-packages")
     ("idlwave" . "xemacs-packages")

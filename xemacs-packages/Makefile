@@ -1,6 +1,6 @@
 # This file is part of XEmacs.
 
-# Copyright (C) 2001 Steve Youngs
+# Copyright (C) 2001, 2002 Steve Youngs
 
 # XEmacs is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -30,6 +30,7 @@ PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	xslt-process eterm igrep ilisp os-utils ps-print view-process \
 	eshell pcomplete edit-utils speedbar calc calendar forms frame-icon \
 	hm--html-menus ispell pc psgml sgml slider text-modes time \
-	strokes tramp clearcase dictionary sieve ibuffer mmm-mode xslide liece
+	strokes tramp clearcase dictionary sieve ibuffer mmm-mode xslide \
+	liece haskell-mode
 
 include ../iterate.rules

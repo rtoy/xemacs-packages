@@ -17,9 +17,12 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-# Because of autoload issues, this strange subdirectory order needs to
+# [[ Because of autoload issues, this strange subdirectory order needs to
 # be maintained.  When adding new packages just put them at the end
-# of the list.
+# of the list. ]]
+#
+# This is no longer true.  We build all autoloads first, before any
+# compilation, so they're available to all packages. --ben
 PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	Sun edebug elib tooltalk xemacs-devel sounds-au sounds-wav \
 	eieio build auctex crisp edt reftex texinfo textools tpu viper \

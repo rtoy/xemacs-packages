@@ -1,5 +1,8 @@
 2005-02-03  Norbert Koch  <viteno@xemacs.org>
 
+	* XEmacs.rules (package-info): Fix build, move comment out of the
+	way.
+
 	* Packages released: edit-utils pc prog-modes.
 
 2005-02-03  Ben Wing  <ben@xemacs.org>

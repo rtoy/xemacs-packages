@@ -511,12 +511,14 @@ endif
 # Make the $(pkg_tar).gz first, then the $(pkg_tar).bz2
 package-info : package-info.in Makefile $(AUTOLOAD_PATH)/_pkg.el \
 		$(pkg_tar).gz $(pkg_tar).bz2
-	$(XEMACS_BATCH_DIRTY) \ #  #### See if we can't CLEAN this up
+        #  #### See if we can't CLEAN this up
+	$(XEMACS_BATCH_DIRTY) \
 		-l package-info.elc -f batch-update-package-info \
 		'$(VERSION)' $(PKG_TAR_GZ) \
 		'$(REQUIRES)' \
 		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
-	$(XEMACS_BATCH_DIRTY) \ #  #### See if we can't CLEAN this up
+        #  #### See if we can't CLEAN this up
+	$(XEMACS_BATCH_DIRTY) \
 		-l ../../hack-package-index.el -f batch-hack-package-index \
 			$(PACKAGE) package-info $(PACKAGE_INFO) $(CATEGORY)
 

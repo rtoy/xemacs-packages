@@ -1,3 +1,8 @@
+2003-10-25  Norbert Koch  <viteno@xemacs.org>
+
+	* MAINTAINERS: New package riece, successor to liece.  Daiki Ueno
+	is its maintainer.
+
 2003-10-23  Steve Youngs  <sryoungs@bigpond.net.au>
 
 	* XEmacs.rules: If $AUTHOR_VERSION is null set it to

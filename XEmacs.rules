@@ -115,7 +115,7 @@ BOOT_XEMACS= $(XEMACS) -no-autoloads -batch -l $(PACKAGE_COMPILE) -- $(REQUIRES)
 
 all:: $(AUTOLOAD_PATH)/_pkg.el
 
-dist:: srckit binkit package-info
+dist:: binkit package-info
 
 clean::
 	rm -f $(ELCS) $(HTML_FILES) $(INFO_FILES) \
@@ -241,7 +241,6 @@ $(AUTOLOAD_PATH)/_pkg.el: Makefile
 	@echo "		 :version $(VERSION)" >> $(AUTOLOAD_PATH)/_pkg.el
 	@echo "		 :type '$(PKG_TYPE))" >> $(AUTOLOAD_PATH)/_pkg.el
 
-.PHONY: srckit-std
 .PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo
 .PHONY: bindist install autoloads
 
@@ -255,23 +254,6 @@ setup-info:
 install: binkit
 
 autoloads: $(AUTOLOAD_PATH)/auto-autoloads.el
-
-src_tar = $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar
-
-srckit-std: distclean
-	if [ ! -d $(STAGING) ]; then mkdir -p $(STAGING); fi
-
-	(cd ../..;				\
-	  rm -f $(src_tar)*;			\
-	  $(TAR) $(EXCLUDES) --create --owner=0 --group=0 --file $(src_tar) \
-		$(CATEGORY)/$(PACKAGE))
-
-	gzip -cv9 $(src_tar) > $(src_tar).gz
-
-ifneq ($(BZIP2),)
-	$(BZIP2) -v9 $(src_tar);
-endif 
-	rm -f $(src_tar)
 
 
 binkit-common: all

@@ -1,3 +1,9 @@
+2002-10-14  Ville Skyttä  <scop@xemacs.org>
+
+	* XEmacs.rules (srckit-std): Removed.
+	(src_tar): Ditto.
+	(dist): Don't do srckit.
+
 2002-10-15  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Packages released: liece.

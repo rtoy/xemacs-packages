@@ -1,3 +1,7 @@
+2004-02-09  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: ecb ecrypto.
+
 2004-02-03  Norbert Koch  <viteno@xemacs.org>
 
 	* MAINTAINERS: Uwe Brauer now is the x-symbol package-maintainer.

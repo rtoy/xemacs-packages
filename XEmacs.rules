@@ -45,6 +45,10 @@ PKGDIR = /usr/local/lib/xemacs/packages
 # path to directory for builing kits for distribution
 STAGING = /tmp/staging
 
+# path to GNU cp, use the latter if no GNU cp is available.
+RCOPY = cp -a
+# RCOPY = cp -pR
+
 # Non configurable portion follows
 
 .SUFFIXES:
@@ -68,7 +72,7 @@ mostlyclean: clean
 extraclean: clean
 
 distclean: extraclean
-	rm -f core *~
+	rm -f core *~ auto-autoloads.el custom-load.el package-info _pkg.el
 
 auto-autoloads.el : $(ELCS:.elc=.el) _pkg.el
 	$(XEMACS) $(VANILLA) -batch \
@@ -83,8 +87,9 @@ custom-load.el : $(ELCS:.elc=.el)
 package-info : package-info.in Makefile _pkg.el
 	$(XEMACS) $(VANILLA) -batch \
 		-l package-info.el -f batch-update-package-info \
-		$(VERSION) $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz \
-		'$(REQUIRES)'
+		'$(VERSION)' $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz \
+		'$(REQUIRES)' \
+		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
 
 _pkg.el: Makefile
 	@echo Creating _pkg.el
@@ -109,7 +114,7 @@ srckit-std: distclean
 binkit-sourceonly: all
 	-rm -rf $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-	cp -a ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
 	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE); \
@@ -120,8 +125,8 @@ binkit-sourceinfo: all
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
 	-mkdir -p $(STAGING)/info
 	(cd $(STAGING)/info; rm -rf $(INFO_FILES))
-	cp -a ChangeLog *.el* $(STAGING)/lisp/$(PACKAGE)
-	cp -a $(INFO_FILES) $(STAGING)/info
+	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+	$(RCOPY) $(INFO_FILES) $(STAGING)/info
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
 	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
@@ -133,8 +138,8 @@ binkit-sourcedata: all
 	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
 	-rm -rf $(STAGING)/etc/$(PACKAGE)
 	-mkdir -p $(STAGING)/etc/$(PACKAGE)
-	cp -a ChangeLog *.el* $(STAGING)/lisp/$(PACKAGE)
-	cp -a etc/* $(STAGING)/etc/$(PACKAGE)
+	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+	$(RCOPY) etc/* $(STAGING)/etc/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
 	tar cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
@@ -148,9 +153,9 @@ binkit-sourcedatainfo: all
 	-(cd $(STAGING)/info; rm -rf $(INFO_FILES))
 	-rm -rf $(STAGING)/etc/$(PACKAGE)
 	-mkdir -p $(STAGING)/etc/$(PACKAGE)
-	cp -a ChangeLog *.el* $(STAGING)/lisp/$(PACKAGE)
-	cp -a $(INFO_FILES) $(STAGING)/info
-	cp -a etc/* $(STAGING)/etc/$(PACKAGE)
+	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+	$(RCOPY) $(INFO_FILES) $(STAGING)/info
+	$(RCOPY) etc/* $(STAGING)/etc/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
 	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \

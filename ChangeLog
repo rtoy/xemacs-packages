@@ -1,5 +1,7 @@
 2004-12-24  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: tramp.
+
 	* XEmacs.rules (GENERATED_ELC_DEPENDENCIES): Add _pkg.el.  We need
 	its autoload cookie to register packages.
 

@@ -1,5 +1,5 @@
 # This file is part of XEmacs.
-# Copyright (C) 2002 Ben Wing.
+# Copyright (C) 2002, 2003 Ben Wing.
 
 # XEmacs is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -29,7 +29,9 @@ XEMACS_PACKAGES_BASE := $(shell while [ ! -f XEmacs.rules ]; do \
 
 all: autoloads bytecompile
 
-.PHONY: all all-bytecompile autoloads bytecompile bindist-real bindist clean distclean elcclean html macro-list World install just-install
+.PHONY: all all-bytecompile autoloads bytecompile bindist
+.PHONY: clean distclean extraclean elcclean html macro-list World
+.PHONY: install
 
 # The toplevel has slightly different rules so we do not use iterate.rules
 # directly
@@ -40,20 +42,16 @@ BYTECOMPILE_TARGETS= $(SUBDIRS:=/bytecompile.target)
 BINDIST_TARGETS= $(SUBDIRS:=/bindist.target)
 CLEAN_TARGETS= $(SUBDIRS:=/clean.target)
 DISTCLEAN_TARGETS= $(SUBDIRS:=/distclean.target)
+EXTRACLEAN_TARGETS= $(SUBDIRS:=/extraclean.target)
 ELCCLEAN_TARGETS= $(SUBDIRS:=/elcclean.target)
 HTML_TARGETS= $(SUBDIRS:=/html.target)
-JUST_INSTALL_TARGETS = $(NONMULE_PACKAGES:=/NONMULE.install)
-ifeq ($(BUILD_WITHOUT_MULE),)
-JUST_INSTALL_TARGETS += $(MULE_PACKAGES:=/MULE.install)
-endif
+INSTALL_TARGETS= $(SUBDIRS:=/install.target)
+INSTALL_HTML_TARGETS= $(SUBDIRS:=/install-html.target)
 
 # At some point we might have dependencies here...
 
 %.target:
 	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) $(*F)
-
-%.install:
-	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) just-install
 
 all-bytecompile: autoloads bytecompile html
 
@@ -61,13 +59,13 @@ autoloads: $(AUTOLOADS_TARGETS)
 
 bytecompile: $(BYTECOMPILE_TARGETS)
 
-bindist-real: $(BINDIST_TARGETS)
-
-bindist: bindist-real
+bindist: $(BINDIST_TARGETS)
 
 clean: $(CLEAN_TARGETS)
 
 distclean: $(DISTCLEAN_TARGETS)
+
+extraclean: $(EXTRACLEAN_TARGETS)
 
 elcclean:
 	$(XEMACS) $(BATCH) -l package-clean.el
@@ -78,11 +76,11 @@ macro-list:
 	-rm -f macro.list
 	find . -type f -name \*.el | xargs awk -f gen-macro-list.awk > macro.list
 
-World: distclean install
+World: extraclean all install
 
-install: all just-install
+install: $(INSTALL_TARGETS)
 
-just-install: $(JUST_INSTALL_TARGETS)
+install-html: $(INSTALL_HTML_TARGETS)
 
 # Local Variables:
 # mode: Makefile

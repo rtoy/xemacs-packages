@@ -22,24 +22,22 @@ Notes for FreeBSD users:
 
 	(1) Create a 'Local.rules' file in the toplevel directory and
 	    edit it to suit your needs.  There is a
-	    'Local.rules.template' in the toplevel directory which you
+	    'Local.rules.template' in the top-level directory which you
 	    can copy and modify.
 
-	(2) Regardless of the type of build you decide upon, it's
-	    probably a good idea to run 'make autoloads' from the
-	    toplevel directory.
+	(2) Run `make' (from the top-level directory) to build the
+	    packages.
 
 	(3) Run either 'make install' or 'make bindist' (not both).
 
-	    'make install' builds the packages and installs them into
-	    the $NONMULE_INSTALLED_PACKAGES_ROOT directory
+	    'make install' installs them into the
+	    $NONMULE_INSTALLED_PACKAGES_ROOT directory
 	    ($MULE_INSTALLED_PACKAGES_ROOT for mule-packages),
 	    see Local.rules format below.  It doesn't create package
 	    binary tarballs.
 
-	    'make bindist' builds the packages and creates package
-	    binary tarballs and a 'package-index' file in
-	    $NONMULE_INSTALLED_PACKAGES_ROOT
+	    'make bindist' creates package binary tarballs and a
+	    'package-index' file in $NONMULE_INSTALLED_PACKAGES_ROOT
 	    (both for mule and non-mule packages).
 
 ** Building a Single Package:
@@ -48,11 +46,7 @@ Notes for FreeBSD users:
 	directory.  Say, for example, you want to build the bbdb
 	package:
 	  	- cd ./xemacs-packages/bbdb
-		- make install or bindist
-
-	You can build a category of packages just as easily.  For
-	example, if you want to build all the packages in ./libs:
-		- cd ./xemacs-packages
+		- make
 		- make install or bindist
 
 ** Building Sumo Packages:

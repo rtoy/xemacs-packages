@@ -1,6 +1,6 @@
 # This file is part of XEmacs.
 
-# Copyright (C) 2002 Ben Wing.
+# Copyright (C) 2002, 2003 Ben Wing.
 
 # XEmacs is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -32,10 +32,17 @@ BYTECOMPILE_TARGETS= $(PACKAGES:=/bytecompile.target)
 BINDIST_TARGETS= $(PACKAGES:=/bindist.target)
 CLEAN_TARGETS= $(PACKAGES:=/clean.target)
 DISTCLEAN_TARGETS= $(PACKAGES:=/distclean.target)
+EXTRACLEAN_TARGETS= $(PACKAGES:=/extraclean.target)
 ELCCLEAN_TARGETS= $(PACKAGES:=/elcclean.target)
 HTML_TARGETS= $(PACKAGES:=/html.target)
 INSTALL_TARGETS= $(PACKAGES:=/install.target)
-JUST_INSTALL_TARGETS = $(PACKAGES:=/just-install.target)
+INSTALL_HTML_TARGETS= $(PACKAGES:=/install-html.target)
+
+# Indicate which of the above need the pdepends to be built prior to doing
+# the work of the target.
+autoloads_NEED_PDEPENDS = t
+bytecompile_NEED_PDEPENDS = t
+all_NEED_PDEPENDS = t
 
 # Make this the first target
 all: autoloads bytecompile
@@ -43,10 +50,10 @@ all: autoloads bytecompile
 ALL_TARGETS = \
 	$(AUTOLOADS_TARGETS)  $(BYTECOMPILE_TARGETS) $(BINDIST_TARGETS) \
 	$(CLEAN_TARGETS) $(DISTCLEAN_TARGETS) $(ELCCLEAN_TARGETS) \
-	$(HTML_TARGETS) $(INSTALL_TARGETS) $(JUST_INSTALL_TARGETS)
+	$(HTML_TARGETS) $(INSTALL_TARGETS) $(INSTALL_HTML_TARGETS)
 
 .PHONY: $(ALL_TARGETS) autoloads bytecompile bindist clean \
-	distclean elcclean html install just-install
+	distclean elcclean html install install-html
 
 # Master rule to pass down actual building 
 # Use a static pattern because of the extra dependencies
@@ -57,9 +64,8 @@ $(ALL_TARGETS) : %.target:
 
 # $(BYTECOMPILE_TARGETS): %bytecompile.target: %autoloads.target
 
-$(BINDIST_TARGETS)= %bindist.target: %bytecompile.target %html.target
-
-$(INSTALL_TARGETS)= %install.target: %bytecompile.target %html.target
+# If bindist builds as well as installing
+# $(BINDIST_TARGETS)= %bindist.target: %bytecompile.target %html.target
 
 # Main driver rules
 
@@ -73,13 +79,15 @@ clean: $(CLEAN_TARGETS)
 
 distclean: $(DISTCLEAN_TARGETS)
 
+extraclean: $(EXTRACLEAN_TARGETS)
+
 elcclean: $(ELCCLEAN_TARGETS)
 
 html: $(HTML_TARGETS)
 
 install: $(INSTALL_TARGETS)
 
-just-install: $(JUST_INSTALL_TARGETS)
+install-html: $(INSTALL_HTML_TARGETS)
 
 # Optionally put in fake rules for packages that we cannot
 # recursively build (yet)
@@ -102,7 +110,15 @@ $(DEPENDS_FILES): %$(DEPENDS_FILE_NAME): %Makefile $(XEMACS_PACKAGES_BASE)/XEmac
 	$(MAKE) $(MFLAGS) -C $(*D) TARGET_BASE=$(dir $(*D)) \
 		$(DEPENDS_FILE_NAME)
 
+# Compute, based on the target given on the command line, whether we need
+# to load and recompute the pdepends.mk files (this happens automatically
+# for any Makefile loaded or executed, if the name of the file appears
+# as a target)
+# 
+
+ifeq ($($(MAKECMDGOALS)_NEED_PDEPENDS),t)
 include $(DEPENDS_FILES)
+endif
 
 # Local Variables:
 # mode: Makefile

@@ -1,6 +1,6 @@
 # Common Makefile material for package Makefiles
 # Copyright (C) 1997 Free Software Foundation Inc.
-# Copyright (C) 2002 Ben Wing.
+# Copyright (C) 2002, 2003 Ben Wing.
 
 # This file is part of XEmacs.
 
@@ -21,19 +21,87 @@
 
 # Requires XEmacs 21.0-beta19 or greater and GNU Make 3.78 or greater.
 
+# Settings that a Makefile can specify (all settings need to be done
+# BEFORE including XEmacs.rules; if you need something from Local.rules
+# in order to determine the settings properly -- e.g. BUILD_WITHOUT_MULE --
+# include Local.rules.inc at the top of your Makefile):
+#
+# At the top of every Makefile:
+# -----------------------------
+#
+# VERSION = 1.10
+# MAINTAINER = Joe Shmoe <joe@shmoe.org>, or
+# MAINTAINER = XEmacs Development Team <xemacs-beta@xemacs.org>
+# PACKAGE = my-package
+# PKG_TYPE = regular or single-file (each file is a separate package)
+# REQUIRES = list of packages that must be available to compile the .elcs
+# CATEGORY = standard, mule, or unsupported
+#
+# Optionally:
+# -----------
+#
+# AUTHOR_VERSION = 1.4.9
+# PACKAGE_SUPPRESS = calls to `package-suppress' to indicate packages that
+#  should be available only in particular versions of XEmacs, e.g.:
+#
+# PACKAGE_SUPPRESS = \
+#  (package-suppress 'xemacs-base \"regexp-opt\" '(emacs-version>= 21 5 11)) \
+#  (package-suppress 'xemacs-base \"easy-mmode\" '(emacs-version>= 21 5 11))
+#
+#
+# Lisp files:
+# -----------
+#
+# ELCS = .elc files to compile
+# ELCS_1 = more .elc files to compile, to be installed in a subdirectory of
+#   lisp/
+# ELCS_1_DEST = name of subdirectory to install them into; include
+#   $(PACKAGE) in the name
+# EARLY_GENERATED_LISP = additional .el files that will be generated before
+#   any byte-compilation (use this for autoloads-type files); rules must be
+#   given to build them
+# GENERATED_LISP = additional .el files that will be generated at
+#   byte-compilation time; rules must be given to build them
+# PRELOADS = additional command-line arguments needed when compiling .elcs
+# AUTOLOAD_PATH = subdirectory in source tree where .elcs are located (this
+#   is where auto-autoloads.el, etc. will be placed)
+#
+# Doc files (see below):
+# ----------------------
+#
+# (1) The preferred way:
+#
+# EXPLICIT_DOCS, STANDARD_DOCS, EXTRA_TEXI_FILES, EXTRA_HTML_FILES,
+#   DOCS_TEXINFO_EXTENSION, DOCS_TXI_EXTENSION
+#
+# (2) The hard way:
+#
+# TEXI_FILES, INFO_FILES, INFO_DEP, HTML_FILES, HTML_DEP
+#
+# Also: EXTRA_DOC_FILES
+#
+# Other files to build:
+# ---------------------
+#
+# EXTRA_DEPENDENCIES = additional files to build; rules must be given to
+#   build them
+#
+# Files to install, besides the .elcs, docs, ChangeLog and _pkg.el:
+# -----------------------------------------------------------------
+#
+# EXTRA_SOURCES = files installed under lisp/$(PACKAGE)
+# LIBSRC_FILES = files installed under lib-src/
+# DATA_FILES, DATA_DEST = files installed under a subdirectory of etc/; include
+#   $(PACKAGE) in the name
+# DATA_1_FILES, DATA_1_DEST ... DATA_35_FILES, DATA_35_DEST = files to be
+#   installed in other subdirectories of etc/
+
 XEMACS_PACKAGES_BASE := $(shell while [ ! -f XEmacs.rules ]; do \
                                     cd ..;	\
                                 done;		\
                                 pwd)
 
-DEPENDS_FILE_NAME = pdepends.mk
-
-all: autoloads bytecompile
-
-bytecompile:: compile
-
-include ${XEMACS_PACKAGES_BASE}/Local.rules.mk
--include ${XEMACS_PACKAGES_BASE}/Local.rules
+include ${XEMACS_PACKAGES_BASE}/Local.rules.inc
 
 # Ensure vanilla locale when building
 override LANG := C
@@ -43,13 +111,20 @@ ifeq ($(AUTOLOAD_PATH),)
 AUTOLOAD_PATH = .
 endif
 
-# Override or add to this in the package Makefile if necessary
-GENERATED = $(AUTOLOAD_PATH)/auto-autoloads.elc
+# Set this in the package Makefile if necessary (BEFORE including this file)
+EARLY_GENERATED_LISP += $(AUTOLOAD_PATH)/auto-autoloads.el $(AUTOLOAD_PATH)/custom-load.el
+ifeq ($(XEMACS_21_5),t)
+EARLY_GENERATED_LISP += $(AUTOLOAD_PATH)/custom-defines.el
+endif
+
+EARLY_GENERATED_ELCS = $(EARLY_GENERATED_LISP:.el=.elc)
+GENERATED_ELCS = $(GENERATED_LISP:.el=.elc)
 
 # SOURCE_FILES_TO_COPY = *.el*
 SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) \
 	$(MULE_ELCS) $(MULE_ELCS:.elc=.el) \
-	$(GENERATED) $(GENERATED:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
+	$(EARLY_GENERATED_ELCS) $(EARLY_GENERATED_LISP) \
+	$(GENERATED_ELCS) $(GENERATED_LISP) $(AUTOLOAD_PATH)/_pkg.el
 
 # Non configurable portion follows
 
@@ -59,7 +134,7 @@ MANIFEST = pkginfo/MANIFEST.$(PACKAGE)
 PWD      := $(shell pwd)
 
 .SUFFIXES:
-.SUFFIXES: .html .info .txi .texi .texinfo .dvi .elc .el
+.SUFFIXES: .html .info .txi .texi .texinfo .dvi .ps .pdf .elc .el
 
 # STAGING is the top of the directory tree where a particular package's
 # files are installed, or where tarballs are installed using `make bindist'.
@@ -78,6 +153,10 @@ STAGING:= $(NONMULE_INSTALLED_PACKAGES_ROOT)
  endif
 endif
 
+#####################################
+#            Handle docs            #
+#####################################
+
 # If something goes wrong and $(STAGING) is blank, the commands below will
 # attempt to install files into absolute paths /lisp/* and /etc/* -- not
 # a good idea at all.
@@ -87,39 +166,173 @@ ifeq ($(STAGING),)
 	$(error STAGING is not set; potential major filesystem trashing!  Fix this)
 endif
 
-FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../../xemacs-packages/texinfo" "../../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
+check-mule:
+ifeq ($(CATEGORY),mule)
+ifneq ($(BUILD_WITHOUT_MULE),)
+	$(error This package needs Mule support in order to be compiled)
+endif
+endif
 
-%-ja.info: %-ja.texi
+# Possibilities for building the docs:
+#
+# (1) EXPLICIT_DOCS = <texi files>
+#     Build the specified .texi files.  Info and HTML files automatically
+#     computed from the .texi files.
+# (2) STANDARD_DOCS = t
+#     Same as EXPLICIT_DOCS = $(PACKAGE).texi
+# (3) Manual: Specify TEXI_FILES, INFO_FILES, INFO_DEP, HTML_FILES, and
+#     HTML_DEP by yourself.  Do not explicitly add any doc targets to
+#     compile::.
+#
+# When EXPLICIT_DOCS or STANDARD_DOCS is given:
+#
+# (1) you can specify other .texi files included in the files specified in
+#     EXPLICIT_DOCS using EXTRA_TEXI_FILES (they will be listed as
+#     dependencies of the info and html files)
+# (2) you can specify extra .html output files using EXTRA_HTML_FILES
+# (3) you can use `DOCS_TEXINFO_EXTENSION = t' to indicate that the
+#     explicitly specified docs have .texinfo as the extension instead of
+#    .texi.  Similarly for `DOCS_TXI_EXTENSION = t'.
+#
+# You can also specify EXTRA_DOC_FILES in all cases to indicate extra files
+# to be copied into the man/ directory at installation time.
+
+ifeq ($(STANDARD_DOCS),t)
+EXPLICIT_DOCS = $(PACKAGE).texi
+endif
+
+ifneq ($(EXPLICIT_DOCS),)
+ifeq ($(DOCS_TEXINFO_EXTENSION),t)
+EXPLICIT_DOCS_AS_TEXI=$(EXPLICIT_DOCS:%.texinfo=%.texi)
+else
+ifeq ($(DOCS_TXI_EXTENSION),t)
+EXPLICIT_DOCS_AS_TEXI=$(EXPLICIT_DOCS:%.txi=%.texi)
+else
+EXPLICIT_DOCS_AS_TEXI=$(EXPLICIT_DOCS)
+endif
+endif
+TEXI_FILES = $(EXPLICIT_DOCS) $(EXTRA_TEXI_FILES)
+INFO_FILES = $(EXPLICIT_DOCS_AS_TEXI:%.texi=%.info*)
+INFO_DEP = $(EXPLICIT_DOCS_AS_TEXI:%.texi=%.info)
+
+$(INFO_DEP): $(EXTRA_TEXI_FILES)
+
+mostlyclean::
+	rm -f $(EXPLICIT_DOCS_AS_TEXI:%.texi=%.toc) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.aux) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.oaux) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.log) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.cp) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.cps) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.fn) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.fns) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.tp) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.tps) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.vr) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.vrs) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.pg) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.pgs) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.ky) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.kys)
+
+clean::
+	rm -f $(EXPLICIT_DOCS_AS_TEXI:%.texi=%.dvi) \
+	$(EXPLICIT_DOCS_AS_TEXI:%.texi=%.ps)
+
+HTML_FILES = $(EXPLICIT_DOCS_AS_TEXI:%.texi=%*.html) $(EXTRA_HTML_FILES)
+HTML_DEP = $(EXPLICIT_DOCS_AS_TEXI:%.texi=%_toc.html)
+
+$(HTML_DEP): $(EXTRA_TEXI_FILES)
+
+endif
+
+html: $(HTML_DEP)
+
+FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "$(XEMACS_PACKAGES_BASE)/xemacs-packages/texinfo" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
+
+FORMAT_INFO_USING_XEMACS_ARGS = $(FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS) -f save-buffer
+
+FORMAT_INFO_USING_XEMACS = \
+	$(XEMACS) $(BATCH) -insert $< $(FORMAT_INFO_USING_XEMACS_ARGS)
+
+FORMAT_MULE_INFO_USING_XEMACS = \
 	$(XEMACS) $(BATCH) -insert $< \
 		-eval '(unless (featurep (quote mule)) (kill-emacs 0))' \
-		$(FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS) \
+		-eval '(cd "$(<D)")' \
+		$(FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS) \
 		-eval '(setq file-coding-system (quote iso-2022-7))' \
 		-eval '(save-buffer 0)'
 
+# makeinfo doesn't seem able to handle Mule-formatted files correctly, so
+# we need to use the texinfo package. #### Switch to UTF-8 and this should
+# go away.
+ifeq ($(COMPILE_INFO_AS_MULE),t)
+FORMAT_INFO = $(FORMAT_MULE_INFO_USING_XEMACS)
+else
+FORMAT_INFO = cd $(@D) && $(MAKEINFO) $(MAKEINFO_FLAGS) -o $(@F) $(<F)
+endif
+
+%-ja.info: %-ja.texi
+	$(FORMAT_MULE_INFO_USING_XEMACS)
+
+%.info: %.txi
+	$(FORMAT_INFO)
 %.info: %.texi
-	$(MAKEINFO) $(MAKEINFO_FLAGS) -o $@ $<
+	$(FORMAT_INFO)
+%.info: %.texinfo
+	$(FORMAT_INFO)
 
-html: check-staging $(HTML_DEP)
-ifneq ($(HTML_FILES),)
-	@-mkdir -p $(STAGING)/html
-endif
-ifneq ($(HTML_FILES),)
-	$(RCOPY) $(addprefix $(PWD)/, $(HTML_FILES)) $(STAGING)/html
-endif
-%.html: %.txi
+## Make sure to cd into the directory before running texi2html because it
+## puts its results in the current directory, not the directory of the
+## source file.
+
 #	V 1.56k (with Cygwin) does not allow -p flag.  Works fine without it.
-#	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
-	$(TEXI2HTML) $(TEXI2HTML_FLAGS) $<
-%.html: %.texi
-#	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
-	$(TEXI2HTML) $(TEXI2HTML_FLAGS) $<
-%.html: %.texinfo
-#	$(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $* $<
-	$(TEXI2HTML) $(TEXI2HTML_FLAGS) $<
+#RUN_TEXI2HTML = cd $(@D) && $(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $(<F)
+RUN_TEXI2HTML = cd $(@D) && $(TEXI2HTML) $(TEXI2HTML_FLAGS) $(<F)
 
-FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../xemacs-packages/texinfo" "../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
+%_toc.html: %.txi
+	$(RUN_TEXI2HTML)
+%_toc.html: %.texi
+	$(RUN_TEXI2HTML)
+%_toc.html: %.texinfo
+	$(RUN_TEXI2HTML)
 
-FORMAT_INFO_USING_XEMACS_ARGS = $(FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS) -f save-buffer
+# #### I'm not sure if this is correct.  xslt-process seems to think it
+# needs to be run twice.
+ifneq ($(TEXI2DVI),)
+RUN_TEXI2DVI = cd $(@D) && $(TEXI2DVI) $(<F) && $(TEXI2DVI) $(<F)
+else
+RUN_TEXI2DVI = -
+endif
+
+%.dvi: %.txi
+	$(RUN_TEXI2DVI)
+%.dvi: %.texi
+	$(RUN_TEXI2DVI)
+%.dvi: %.texinfo
+	$(RUN_TEXI2DVI)
+
+ifneq ($(TEXI2PDF),)
+RUN_TEXI2PDF = cd $(@D) && $(TEXI2PDF) $(<F)
+else
+RUN_TEXI2PDF = -
+endif
+
+%.pdf: %.txi
+	$(RUN_TEXI2PDF)
+%.pdf: %.texi
+	$(RUN_TEXI2PDF)
+%.pdf: %.texinfo
+	$(RUN_TEXI2PDF)
+
+ifneq ($(DVIPS),)
+RUN_DVIPS = cd $(@D) && $(DVIPS) -o $(@F) $(<F)
+else
+RUN_DVIPS = -
+endif
+
+%.ps: %.dvi
+	$(RUN_DVIPS)
 
 ifeq ($(XEMACS_NATIVE_NT),t)
 # Convert UNIX-path (containing output of `pwd') to windows-path, so
@@ -139,35 +352,60 @@ PACKAGE_NET_PACKAGES = $(XEMACS_PACKAGES_BASE)/package-net-packages.el
 PACKAGE_STAGING = $(STAGING)
 endif
 
-# Behaves like an XEmacs with the required packages setup
+# Behaves like an XEmacs with the required packages set up
 BOOT_XEMACS= $(XEMACS) -no-autoloads $(BATCH) -l $(PACKAGE_COMPILE) -- $(REQUIRES) -- $(PRELOADS)
 
 %.elc: %.el
 	$(BOOT_XEMACS) -f batch-byte-compile $<
 
+# compile must be :: because some packages (e.g. psgml-dtd?) put separate
+# commands that apply only to those particular dependencies.
+compile:: check-mule
+
+# Build the generated stuff if we're in the top-level of a package directory
+# but not otherwise.
+ifneq ($(PACKAGE),)
 compile:: $(AUTOLOAD_PATH)/_pkg.el
+endif
+
+## first, the byte-compile the files generated earlier (auto-autoloads.el,
+## etc.), now that we have all of them and hence can handle dependencies.
+## then, generate and compile the other generated files.
+compile:: $(EARLY_GENERATED_ELCS) $(GENERATED_ELCS)
+
+## now compile the main Lisp
+compile:: $(ELCS) $(ELCS_1)
+
+## now the docs, info format.
+compile:: $(INFO_DEP)
+
+## now the docs, html format (maybe).
+ifeq ($(INSTALL_HTML),t)
+compile:: html
+endif
+
+## now, any extra dependencies specified by the Makefiles.
+compile:: $(EXTRA_DEPENDENCIES)
 
 dist:: binkit package-info
 
-clean::
-	rm -f $(ELCS) $(HTML_FILES) $(INFO_FILES) \
-	$(AUTOLOAD_PATH)/auto-autoloads.elc $(AUTOLOAD_PATH)/custom-load.elc \
-	$(EXTRA_OBJS) $(DEPENDS_FILE_NAME)
+mostlyclean::
 
-mostlyclean: clean
+clean:: mostlyclean
+	rm -f $(GENERATED_ELCS) $(EARLY_GENERATED_ELCS) $(ELCS) $(ELCS_1) \
+	$(HTML_FILES) $(INFO_FILES) $(DEPENDS_FILE_NAME) $(EXTRA_DEPENDENCIES)
 
-extraclean: clean
+# distclean is what you use when making a distribution.  everything that
+# can get rebuilt should be killed.  everything.
 
-# distclean is what you use when making a distribution.  it should be the
-# absolutely most aggressive clean target out there -- everything that
-# can get rebuilt should be killed.  everything.  
+distclean:: clean
+	rm -f $(GENERATED_LISP) $(EARLY_GENERATED_LISP) package-info $(AUTOLOAD_PATH)/_pkg.el
 
-distclean:: extraclean
-	rm -f core *~ .*~ .\#* $(AUTOLOAD_PATH)/auto-autoloads.el \
-		$(AUTOLOAD_PATH)/custom-load.el package-info \
-		$(AUTOLOAD_PATH)/_pkg.el
+# extraclean means distclean plus removal of backup files, etc.
+extraclean: distclean
+	rm -f core *~ .*~ .\#*
 
-# elcclean is for when you want to rebuild after having made a small
+# [[ elcclean is for when you want to rebuild after having made a small
 # change, e.g. you cvs updated and got new versions of some files.
 # The problem is that if you just `make', you may have the situation
 # where a file that needs to be compiled depends on some other
@@ -176,35 +414,45 @@ distclean:: extraclean
 # w.r.t the .el file, and you'd get the .elc file (missing the
 # necessary features), and error.  So we remove the minimum number of
 # .elc required to ensure that the build will always succeed
-# correctly.
+# correctly. ]]
+
+# This is less of an issue now that we ignore out-of-date .elc files. --ben
 
 elcclean:
 	$(XEMACS) $(BATCH) -l $(PACKAGE_CLEAN)
 
-# XEmacs native MS Windows needs this quoting of command-line
-# arguments due to basic differences in the handling of command-line
-# arguments in Unix and MS Windows.
-#### not any more, as of Cygwin 1.1.8-2 (Feb 2001) -- ben
-ifeq ($(XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING),t)
-AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \\\"$(PACKAGE)\\\")
-AUTOLOAD_FILE = (setq generated-autoload-file \
-	\\\"$(AUTOLOAD_PATH)/auto-autoloads.el\\\")
+GENERATED_ELC_DEPENDENCIES = $(ELCS:.elc=.el) $(ELCS_1:.elc=.el)
+
+ifeq ($(XEMACS_21_5),t)
+$(AUTOLOAD_PATH)/auto-autoloads.el : $(GENERATED_ELC_DEPENDENCIES) $(AUTOLOAD_PATH)/_pkg.el
+	$(XEMACS) $(BATCH) -no-autoloads \
+		-l autoload -f batch-update-directory-autoloads \
+		$(PACKAGE) $(AUTOLOAD_PATH)
+	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
+
+$(AUTOLOAD_PATH)/custom-defines.el : $(GENERATED_ELC_DEPENDENCIES)
+	$(XEMACS) $(BATCH) -no-autoloads \
+		-l autoload -f batch-update-directory-custom-defines \
+		$(PACKAGE) $(AUTOLOAD_PATH)
+	@rm -f $(AUTOLOAD_PATH)/custom-defines.el~
+
 else
 AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \"$(PACKAGE)\")
 AUTOLOAD_FILE = (setq generated-autoload-file \
 	\"$(AUTOLOAD_PATH)/auto-autoloads.el\")
-endif
 
-$(AUTOLOAD_PATH)/auto-autoloads.el : $(ELCS:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
+$(AUTOLOAD_PATH)/auto-autoloads.el : $(GENERATED_ELC_DEPENDENCIES) $(AUTOLOAD_PATH)/_pkg.el
 	$(XEMACS) $(BATCH) -no-autoloads \
 		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
 		-eval "$(AUTOLOAD_FILE)" \
 		-l autoload -f batch-update-autoloads $^
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
+endif
 
-$(AUTOLOAD_PATH)/custom-load.el : $(ELCS:.elc=.el)
-	$(XEMACS) $(BATCH) -l cus-dep \
+$(AUTOLOAD_PATH)/custom-load.el : $(GENERATED_ELC_DEPENDENCIES)
+	$(XEMACS) $(BATCH) -no-autoloads -l cus-dep \
 		-f Custom-make-dependencies $(AUTOLOAD_PATH)
+	@rm -f $(AUTOLOAD_PATH)/custom-load.el~
 
 pkg_tar = $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar
 
@@ -272,33 +520,39 @@ $(AUTOLOAD_PATH)/_pkg.el: Makefile
 	@echo "(package-provide '$(PACKAGE)" >> $(AUTOLOAD_PATH)/_pkg.el
 	@echo "		 :version $(VERSION)" >> $(AUTOLOAD_PATH)/_pkg.el
 	@echo "		 :type '$(PKG_TYPE))" >> $(AUTOLOAD_PATH)/_pkg.el
+ifneq ($(PACKAGE_SUPPRESS),)
+	@echo "" >> $(AUTOLOAD_PATH)/_pkg.el
+	@echo ";;;###autoload" >> $(AUTOLOAD_PATH)/_pkg.el
+	@echo "(when (fboundp 'package-suppress)" >> $(AUTOLOAD_PATH)/_pkg.el
+	@echo "      $(PACKAGE_SUPPRESS)" >> $(AUTOLOAD_PATH)/_pkg.el
+	@echo ")" >> $(AUTOLOAD_PATH)/_pkg.el
+endif
 
-.PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo binkit-with-html
-.PHONY: bindist install autoloads
+.PHONY: binkit-with-html bindist install autoloads
 
-bindist: all binkit package-info setup-info
+bindist: binkit package-info setup-info
 
 setup-info:
 	$(XEMACS) $(BATCH) -l $(PACKAGE_NET_PACKAGES) \
 		-l $(PACKAGE_INFO) \
 		-f package-net-packages-batch-convert-index-to-ini $(PACKAGE_STAGING) $(CATEGORY)
 
-install: all binkit
+install: binkit
 
-just-install: binkit
+## Do not byte-compile as that could require stuff from elsewhere, and you
+## get dependency circles.
+autoloads: $(EARLY_GENERATED_LISP)
 
-autoloads: $(AUTOLOAD_PATH)/auto-autoloads.el
-
-binkit-common: check-staging
+binkit-1: check-staging
 	(if test -d $(STAGING); then		\
 		cd $(STAGING);			\
 		if test -f $(MANIFEST); then	\
 			rm -rf `cat $(MANIFEST)`; \
 		fi;				\
 	fi;)
-#ifneq ($(ELCS),)
+ifneq ($(PACKAGE),)
 	@-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-#endif
+endif
 ifneq ($(ELCS_1),)
 	@-mkdir -p $(STAGING)/lisp/$(ELCS_1_DEST)
 endif
@@ -418,7 +672,7 @@ ifneq ($(LIBSRC_FILES),)
 	@-mkdir -p $(STAGING)/lib-src
 endif
 	@-mkdir -p $(STAGING)/pkginfo
-ifneq ($(ELCS),)
+ifneq ($(PACKAGE),)
 	$(RCOPY) $(addprefix $(PWD)/, ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES)) \
 	  $(STAGING)/lisp/$(PACKAGE)
 endif
@@ -428,6 +682,9 @@ endif
 ifneq ($(INFO_FILES),)
 	$(RCOPY) $(addprefix $(PWD)/, $(INFO_FILES)) $(STAGING)/info
 	$(RCOPY) $(addprefix $(PWD)/, $(TEXI_FILES)) $(STAGING)/man/$(PACKAGE)
+ifneq ($(EXTRA_DOC_FILES),)
+	$(RCOPY) $(addprefix $(PWD)/, $(EXTRA_DOC_FILES)) $(STAGING)/man/$(PACKAGE)
+endif
 endif
 ifneq ($(DATA_FILES),)
 	$(RCOPY) $(addprefix $(PWD)/, $(DATA_FILES)) $(STAGING)/etc/$(DATA_DEST)
@@ -542,7 +799,7 @@ ifneq ($(LIBSRC_FILES),)
 endif
 	(cd $(STAGING); \
 	ls -1 $(MANIFEST) > $(MANIFEST))
-ifneq ($(ELCS),)
+ifneq ($(PACKAGE),)
 	@(cd $(STAGING); \
 	ls -1 lisp/$(PACKAGE)/ChangeLog \
 		$(patsubst %, lisp/$(PACKAGE)/%, $(notdir $(SOURCE_FILES_TO_COPY))) \
@@ -744,22 +1001,21 @@ ifneq ($(LIBSRC_FILES),)
 	ls -1 $(patsubst %,lib-src/%, $(notdir $(LIBSRC_FILES))) >> $(MANIFEST))
 endif
 
-
-binkit-sourceonly: binkit-common
-
-binkit-sourceinfo: binkit-common
-
-binkit-sourcedata: binkit-common
-
-binkit-sourcedatainfo: binkit-common
-
-binkit-with-html: binkit-common
+install-html: check-staging
 ifneq ($(HTML_FILES),)
 	@-mkdir -p $(STAGING)/html
 	$(RCOPY) $(addprefix $(PWD)/, $(HTML_FILES)) $(STAGING)/html
 	@(cd $(STAGING); \
 	ls -1 $(patsubst %,html/%, $(notdir $(HTML_FILES))) >> $(MANIFEST))
 endif
+
+binkit: binkit-1
+
+ifeq ($(INSTALL_HTML),t)
+binkit: install-html
+endif
+
+binkit-with-html: html binkit-1 install-html
 
 # Export dependencies for outer make file usage
 

@@ -11,6 +11,11 @@
 # (Double-quote path under native MS Windows if there are embedded spaces.)
 XEMACS = xemacs
 
+# Are we running XEmacs 21.5 or greater?  If set, this will generate
+# custom-defines.el files for use with Custom (esp. the Custom menu), and
+# use the new interface in autoload.el for generating auto-autoloads.el files.
+XEMACS_21_5 = t
+
 # Should we build the Mule packages?  Set to 't' if you do not have/want Mule.
 #
 BUILD_WITHOUT_MULE =
@@ -146,11 +151,18 @@ VANILLA = -vanilla
 
 # Flags to run XEmacs from Makefiles.
 #
-BATCH = $(VANILLA) -batch -eval '(setq stack-trace-on-error t load-ignore-out-of-date-elc-files t load-show-full-path-in-messages t)'
+BATCH = $(VANILLA) -batch -eval '(setq stack-trace-on-error t load-always-display-messages t load-ignore-out-of-date-elc-files t load-show-full-path-in-messages t)'
 
 # path to makeinfo
 #
 MAKEINFO = makeinfo
+
+# If `t', the build process will build and install .html versions of the
+# doc files.  NOTE: texi2html 1.56k (#### perhaps 1.64 is better?) issues
+# complaints about a large number of files that pass `makeinfo' just fine.
+# This doesn't prevent it from building the .html files, though.
+#
+INSTALL_HTML =
 
 # path to texi2html
 #
@@ -161,6 +173,7 @@ TEXI2HTML = texi2html
 # outputs the usage anyway :P
 ifneq ('$(shell sh -c "texi2html -help 2>&1 | grep -l split_chapter")','')
 TEXI2HTML_FLAGS = -split_chapter
+TEXI2HTML_1_56K = t
 else
 TEXI2HTML_FLAGS = -split chapter
 endif
@@ -177,6 +190,19 @@ else
 TEXI2DVI = texi2dvi
 DVIPS = dvips
 TEXI2PDF = texi2pdf
+endif
+
+# path to tex
+#
+TEX = tex
+
+# path to msgfmt
+#
+ifeq ($(XEMACS_NATIVE_NT),t)
+# No Cygwin version.
+MSGFMT = 
+else
+MSGFMT = msgfmt
 endif
 
 ifneq ('$(symlink)','t')

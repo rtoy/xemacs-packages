@@ -167,7 +167,7 @@ $(AUTOLOAD_PATH)/auto-autoloads.el : $(ELCS:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
 	$(XEMACS) $(VANILLA) -batch -no-autoloads \
 		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
 		-eval "$(AUTOLOAD_FILE)" \
-		-l autoload -f batch-update-autoloads $(ELCS:.elc=.el)
+		-l autoload -f batch-update-autoloads $^
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 
 $(AUTOLOAD_PATH)/custom-load.el : $(ELCS:.elc=.el)

@@ -1,3 +1,9 @@
+2002-04-02  Steve Youngs  <youngs@xemacs.org>
+
+	* XEmacs.rules ($(AUTOLOAD_PATH)/auto-autoloads.el): Use '$^' so
+	'_pkg.el' gets included as well.
+	From Mats Lidell <matsl@contactor.se>.
+
 2002-03-31  Steve Youngs  <youngs@xemacs.org>
 
 	* XEmacs.rules (pkg_tar): Force owner/group to root/root when

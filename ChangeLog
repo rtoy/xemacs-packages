@@ -1,13 +1,3 @@
-2002-12-06  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
-
-	* Packages released: edit-utils prog-modes ecb pgg mail-lib eshell
-	ediff misc-games texinfo build xemacs-base eieio semantic speedbar
-	xemacs-devel w3.
-
-	* Packages released: edit-utils prog-modes ecb pgg mail-lib eshell
-	ediff misc-games texinfo build xemacs-base eieio semantic speedbar
-	xemacs-devel w3.
-
 2002-11-18  Ville Skyttä  <scop@xemacs.org>
 
 	* XEmacs.rules (binkit-with-html): New, thanks to Klaus Berndl

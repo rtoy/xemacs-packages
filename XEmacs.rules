@@ -1,0 +1,155 @@
+# Configuration constants for building XEmacs packages
+# Copyright (C) 1997 Free Software Foundation Inc.
+
+# This file is part of XEmacs.
+
+# XEmacs is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2, or (at your option) any
+# later version.
+
+# XEmacs is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with XEmacs; see the file COPYING.  If not, write to
+# the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
+
+# Requires XEmacs 20.5-beta19 or greater
+
+# Developer configurable portion
+
+# path to XEmacs-20.5
+XEMACS = /home/xemacs/xemacs-20.0/src/xemacs
+
+# path to BSD install
+INSTALL = ginstall -c
+
+# path to GNU tar
+TAR = /usr/bin/tar
+
+# Stuff tar should never archive
+EXCLUDES = --exclude 'CVS' --exclude '*~'
+
+VANILLA = -vanilla
+
+# path to makeinfo
+MAKEINFO = makeinfo
+
+# path to directory to install packages in
+PKGDIR = /usr/local/lib/xemacs/packages
+
+# path to directory for builing kits for distribution
+STAGING = /tmp/staging
+
+# Non configurable portion follows
+
+.SUFFIXES:
+.SUFFIXES: .info .texi .dvi .elc .el
+
+%.info: %.texi
+	$(MAKEINFO) $(MAKEINFO_FLAGS) -o $@ $<
+
+%.elc: %.el
+	$(XEMACS) -no-autoloads -batch $(PRELOADS) -l ../../package-compile.el -- $(REQUIRES) -- $<
+
+all:: _pkg.el
+
+dist:: srckit binkit package-info
+
+clean::
+	rm -f $(ELCS) $(PACKAGE).info* auto-autoloads.elc custom-load.elc
+
+mostlyclean: clean
+
+extraclean: clean
+
+distclean: extraclean
+	rm -f core *~
+
+auto-autoloads.el : $(ELCS:.elc=.el) _pkg.el
+	$(XEMACS) $(VANILLA) -batch \
+		-eval "(setq autoload-package-name \"$(PACKAGE)\")" \
+		-l autoload -f batch-update-directory .
+	@rm -f auto-autoloads.el~
+
+custom-load.el : $(ELCS:.elc=.el)
+	$(XEMACS) $(VANILLA) -batch -l cus-dep \
+		-f Custom-make-dependencies .
+
+package-info : package-info.in Makefile _pkg.el
+	$(XEMACS) $(VANILLA) -batch \
+		-l package-info.el -f batch-update-package-info \
+		$(VERSION) $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz \
+		'$(REQUIRES)'
+
+_pkg.el: Makefile
+	@echo Creating _pkg.el
+	@echo ";;;###autoload" > _pkg.el
+	@echo "(package-provide '$(PACKAGE)" >> _pkg.el
+	@echo "		 :version $(VERSION)" >> _pkg.el
+	@echo "		 :type '$(PKG_TYPE))" >> _pkg.el
+
+.PHONY: srckit-std
+.PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo
+
+srckit-std: distclean
+	if [ ! -d $(STAGING) ]; then mkdir -p $(STAGING); fi
+	(cd ../..; \
+	rm -f $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar*; \
+	tar $(EXCLUDES) -cf $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar $(CATEGORY)/$(PACKAGE))
+	gzip -v9 $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar
+
+binkit-sourceonly: all
+	-rm -rf $(STAGING)/lisp/$(PACKAGE)
+	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+	cp -a ChangeLog *.el* $(STAGING)/lisp/$(PACKAGE)
+	(cd $(STAGING); \
+	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE); \
+	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
+
+binkit-sourceinfo: all
+	-rm -rf $(STAGING)/lisp/$(PACKAGE)
+	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+	-mkdir -p $(STAGING)/info
+	(cd $(STAGING)/info; rm -rf $(INFO_FILES))
+	cp -a ChangeLog *.el* $(STAGING)/lisp/$(PACKAGE)
+	cp -a $(INFO_FILES) $(STAGING)/info
+	(cd $(STAGING); \
+	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+		$(INFO_FILES:%=info/%); \
+	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
+
+binkit-sourcedata: all
+	-rm -rf $(STAGING)/lisp/$(PACKAGE)
+	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+	-rm -rf $(STAGING)/etc/$(PACKAGE)
+	-mkdir -p $(STAGING)/etc/$(PACKAGE)
+	cp -a ChangeLog *.el* $(STAGING)/lisp/$(PACKAGE)
+	cp -a etc/* $(STAGING)/etc/$(PACKAGE)
+	(cd $(STAGING); \
+	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+	tar cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+		etc/$(PACKAGE); \
+	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
+
+binkit-sourcedatainfo: all
+	-rm -rf $(STAGING)/lisp/$(PACKAGE)
+	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+	-mkdir -p $(STAGING)/info
+	-(cd $(STAGING)/info; rm -rf $(INFO_FILES))
+	-rm -rf $(STAGING)/etc/$(PACKAGE)
+	-mkdir -p $(STAGING)/etc/$(PACKAGE)
+	cp -a ChangeLog *.el* $(STAGING)/lisp/$(PACKAGE)
+	cp -a $(INFO_FILES) $(STAGING)/info
+	cp -a etc/* $(STAGING)/etc/$(PACKAGE)
+	(cd $(STAGING); \
+	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+		$(INFO_FILES:%=info/%) etc/$(PACKAGE); \
+	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)

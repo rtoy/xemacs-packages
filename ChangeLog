@@ -1,0 +1,10 @@
+1998-01-11  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules: Explicitly load autoloads from dependent 
+	packages.
+	Move srckit/binkit dependencies here.
+	Add REQUIRES variable.
+	Move the *clean: dependencies here.
+
+	* package-compile.el: New file.
+

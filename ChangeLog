@@ -1,3 +1,8 @@
+2002-06-09  Adrian Aichner  <adrian@xemacs.org>
+
+	* XEmacs.rules (distclean): Convert to double-colon, allowing
+	package Makefiles to add individual rules.
+
 2002-06-08  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages released: liece prog-modes vm gnus.

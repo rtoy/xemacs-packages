@@ -98,6 +98,7 @@
     ("frame-icon" . "xemacs-packages")
     ("fsf-compat" . "xemacs-packages")
     ("games" . "xemacs-packages")
+    ("general-docs" . "xemacs-packages")
     ("gnats" . "xemacs-packages")
     ("gnus" . "xemacs-packages")
     ("haskell-mode" . "xemacs-packages")

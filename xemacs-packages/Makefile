@@ -24,7 +24,7 @@ PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	Sun edebug elib tooltalk xemacs-devel sounds-au sounds-wav \
 	eieio build auctex crisp edt reftex texinfo textools tpu viper \
 	vm w3 net-utils eudc footnote gnats mh-e supercite mailcrypt \
-	rmail gnus tm mew zenirc bbdb cookie games mine \
+	rmail gnus tm mew zenirc bbdb cookie games general-docs mine \
 	misc-games semantic cc-mode pcl-cvs ada c-support debug ediff \
 	emerge idlwave jde prog-modes scheme sh-script vc-cc vc vhdl \
 	xslt-process eterm igrep ilisp os-utils ps-print view-process \

@@ -1,3 +1,9 @@
+2002-08-28  Ville Skyttä  <ville.skytta@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES): Add general-docs.
+
+	* package-compile.el (package-directory-map): Ditto.
+
 2002-08-26  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Packages released: time   tramp view-process ilisp ocaml  reftex

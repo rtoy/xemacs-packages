@@ -1,3 +1,7 @@
+2003-03-27  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: vm liece jde gnus eshell.
+
 2003-03-27  Steve Youngs  <youngs@xemacs.org>
 
 	* package-compile.el: Gnus' lisp files are now in lisp/, not

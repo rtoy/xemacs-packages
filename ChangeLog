@@ -1,3 +1,7 @@
+1999-02-15  SL Baur  <steve@xemacs.org>
+
+	* XEmacs.rules (LANG): Ensure vanilla locale for building.
+
 1998-12-08  SL Baur  <steve@altair.xemacs.org>
 
 	* package-compile.el (package-directory-map): Update to match

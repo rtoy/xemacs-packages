@@ -28,6 +28,9 @@ XEMACS = xemacs
 # Build Mule?  Comment for no Mule
 BUILD_MULE=t
 
+# Ensure vanilla locale when building
+LANG=C
+
 # path to BSD install
 INSTALL = ginstall -c
 

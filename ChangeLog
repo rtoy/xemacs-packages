@@ -1,3 +1,7 @@
+2000-08-16  Andreas Jaeger  <aj@suse.de>
+
+	* package-compile.el (package-directory-map): Add semantic.
+
 2000-08-16  Steve Youngs  <youngs_s@ozlinx.com.au>
 
 	* CVSROOT/modules: added module for eicq

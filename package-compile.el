@@ -89,6 +89,7 @@
     ("pcl-cvs" . "prog")
     ("prog-modes" . "prog")
     ("scheme" . "prog")
+    ("semantic" . "prog")
     ("sh-script" . "prog")
     ("vc" . "prog")
     ("vc-cc" . "prog")

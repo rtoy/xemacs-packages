@@ -1,5 +1,7 @@
 2004-03-23  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: erc xwem.
+
 	* package-compile.el (package-name-to-directory): xwem has most of
 	its relevant files in its lisp sub directory.  Suggested by Steve
 	Youngs  <sryoungs@bigpond.net.au>.

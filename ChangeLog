@@ -1,5 +1,8 @@
 2002-09-25  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
+	*  Packages  released:  jde  prog-modes   fortran-modes ruby-modes
+	python-modes perl-modes.
+
 	* Packages released: w3 gnus idlwave.
 
 	* Packages  released:  xemacs-base  ecrypto  mail-lib viper  liece

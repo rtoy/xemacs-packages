@@ -1,3 +1,9 @@
+2002-11-18  Ville Skyttä  <scop@xemacs.org>
+
+	* XEmacs.rules (binkit-with-html): New, thanks to Klaus Berndl
+	for the	initial patch.
+	(.PHONY): Add binkit-with-html.
+
 2002-11-08  Ville Skyttä  <scop@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add ecb.

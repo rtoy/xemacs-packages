@@ -241,7 +241,7 @@ $(AUTOLOAD_PATH)/_pkg.el: Makefile
 	@echo "		 :version $(VERSION)" >> $(AUTOLOAD_PATH)/_pkg.el
 	@echo "		 :type '$(PKG_TYPE))" >> $(AUTOLOAD_PATH)/_pkg.el
 
-.PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo
+.PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo binkit-with-html
 .PHONY: bindist install autoloads
 
 bindist: binkit package-info setup-info
@@ -719,6 +719,14 @@ binkit-sourceinfo: binkit-common
 binkit-sourcedata: binkit-common
 
 binkit-sourcedatainfo: binkit-common
+
+binkit-with-html: binkit-common
+ifneq ($(HTML_FILES),)
+	@-mkdir -p $(STAGING)/html
+	$(RCOPY) $(addprefix $(PWD)/, $(HTML_FILES)) $(STAGING)/html
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %,html/%, $(notdir $(HTML_FILES))) >> $(MANIFEST))
+endif
 
 # Export dependencies for outer make file usage
 

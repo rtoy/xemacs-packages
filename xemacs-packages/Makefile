@@ -1,6 +1,7 @@
 # This file is part of XEmacs.
 
 # Copyright (C) 2001, 2002 Steve Youngs
+# Copyright (C) 2004 Ben Wing.
 
 # XEmacs is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -17,31 +18,44 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-# [[ Because of autoload issues, this strange subdirectory order needs to
-# be maintained.  When adding new packages just put them at the end
-# of the list. ]]
-#
-# This is no longer true.  We build all autoloads first, before any
-# compilation, so they're available to all packages. --ben
-
 # So we can get at $NONMULE_PACKAGES
 include ../Local.rules.inc
 
+# At one point, we needed the list of packages to be in a very particular
+# order because of autoload issues.  This is no longer true -- we build all
+# autoloads first, before any compilation, so they're available to all
+# packages, and we arrange things so that out-of-date .elc files are
+# ignored.  However, it's useful to order the more basic stuff first,
+# to speed up compilation.  We use four groups:
+#
+# (a) The most basic stuff, listed in dependency order.
+# (b) Basic libraries used by lots of other code, with few or no dependencies
+#     other than in (a); listed alphabetically.
+# (c) Some other things with more dependencies but used by lots of packages;
+#     listed alphabetically.
+# (d) Everything else, listed alphabetically.
+
 ifeq ('$(NONMULE_PACKAGES)','xemacs-packages')
-PACKAGES := xemacs-base fsf-compat mail-lib dired efs apel \
-	Sun edebug elib tooltalk xemacs-devel sounds-au sounds-wav \
-	eieio build auctex crisp edt reftex texinfo textools tpu viper \
-	vm w3 net-utils eudc footnote gnats mh-e supercite mailcrypt \
-	rmail gnus tm mew zenirc bbdb cookie games general-docs mine \
-	misc-games semantic cc-mode pcl-cvs ada c-support debug ediff \
-	emerge idlwave jde prog-modes scheme sh-script vc-cc vc vhdl \
-	xslt-process eterm igrep ilisp os-utils ps-print view-process \
-	eshell pcomplete edit-utils speedbar calc calendar forms frame-icon \
-	hm--html-menus ispell pc psgml psgml-dtds sgml slider text-modes time \
-	strokes tramp clearcase dictionary sieve ibuffer mmm-mode xslide \
-	liece haskell-mode ess docbookide ecrypto ocaml sasl sml-mode \
-	python-modes fortran-modes ruby-modes perl-modes pgg ecb x-symbol \
-	hyperbole oo-browser riece erc xlib xwem escreen
+PACKAGES := xemacs-base fsf-compat mail-lib \
+	\
+	apel cc-mode debug dired ecrypto edit-utils elib eterm ispell \
+	os-utils sh-script texinfo text-modes xlib \
+	\
+	edebug efs eieio net-utils xemacs-devel \
+	\
+	Sun ada auctex bbdb build c-support calc calendar clearcase \
+	cookie crisp dictionary docbookide ecb ediff edt emerge \
+	erc escreen eshell ess eudc footnote forms fortran-modes \
+	frame-icon games general-docs gnats gnus haskell-mode \
+	hm--html-menus hyperbole ibuffer idlwave igrep ilisp \
+	jde liece mailcrypt mew mh-e mine misc-games mmm-mode \
+	ocaml oo-browser pc pcl-cvs pcomplete perl-modes pgg \
+	prog-modes ps-print psgml psgml-dtds python-modes reftex \
+	riece rmail ruby-modes sasl scheme semantic sgml sieve \
+	slider sml-mode sounds-au sounds-wav speedbar strokes \
+	supercite textools time tm tooltalk tpu tramp \
+	vc vc-cc vhdl view-process viper vm w3 x-symbol \
+	xslide xslt-process xwem zenirc
 else
 PACKAGES := $(NONMULE_PACKAGES)
 endif

@@ -1,3 +1,8 @@
+2004-12-07  Ben Wing  <ben@xemacs.org>
+
+	* xemacs-packages/Makefile:
+	Rationalize the order of package compilation.
+
 2004-12-07  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: locale.

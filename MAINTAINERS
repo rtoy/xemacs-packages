@@ -3,7 +3,7 @@ xemacs-packages       Maintainer
 ------------------------------------------------------------------------
 ada                   XEmacs Development Team <xemacs-beta@xemacs.org>
 apel                  XEmacs Development Team <xemacs-beta@xemacs.org>
-auctex                XEmacs Development Team <xemacs-beta@xemacs.org>
+auctex                Uwe Brauer <oub@xemacs.org>
 bbdb                  Ronan Waide <waider@waider.ie>
 build                 Adrian Aichner <adrian@xemacs.org>
 calc                  XEmacs Development Team <xemacs-beta@xemacs.org>

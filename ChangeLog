@@ -1,3 +1,27 @@
+2005-02-03  Ben Wing  <ben@xemacs.org>
+
+	* XEmacs.rules:
+	* XEmacs.rules (XEMACS_BATCH_PREPARE_FOR_TEXINFO):
+	* XEmacs.rules (FORMAT_INFO_USING_XEMACS_ARGS):
+	* XEmacs.rules (FORMAT_INFO_USING_XEMACS):
+	* XEmacs.rules (FORMAT_MULE_INFO_USING_XEMACS):
+	* XEmacs.rules (BOOT_XEMACS):
+	* XEmacs.rules (elcclean):
+	* XEmacs.rules ($(AUTOLOAD_PATH)/auto-autoloads.el):
+	* XEmacs.rules ($(AUTOLOAD_PATH)/custom-defines.el):
+	* XEmacs.rules ($(AUTOLOAD_PATH)/custom-load.el):
+	* XEmacs.rules (package-info):
+	* XEmacs.rules (setup-info):
+	Rearrange things so that we forcibly disable all interactions with
+	any external package references compiled into XEmacs, and turn off
+	all autoloads at startup, then manually set up a clean load-path
+	pointing to what we need, and load the autoloads.  This ensures that
+	we *really* have no dependency on any external packages and that we
+	always have a known environment in which we work. #### A few places
+	still seem to depend on having external packages.  It should be easy
+	to remove them but I don't understand the code in question (for
+	building package-info, setup-info).
+
 2005-01-31  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: edit-utils.

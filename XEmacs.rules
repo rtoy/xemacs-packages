@@ -1,6 +1,6 @@
 # Common Makefile material for package Makefiles
 # Copyright (C) 1997 Free Software Foundation Inc.
-# Copyright (C) 2002, 2003 Ben Wing.
+# Copyright (C) 2002, 2003, 2005 Ben Wing.
 
 # This file is part of XEmacs.
 
@@ -154,6 +154,22 @@ STAGING:= $(NONMULE_INSTALLED_PACKAGES_ROOT)
  endif
 endif
 
+# We should strive to use XEMACS_BATCH_CLEAN as much as possible, so we have
+# no possible contamination from outside packages.  We should rewrite the
+# others to load the appropriate autoloads from our own built package tree.
+
+ifeq ($(BUILD_WITHOUT_MULE),t)
+LISP_DIRECTORIES= (list lisp-directory)
+else
+LISP_DIRECTORIES= (list (expand-file-name "mule" lisp-directory) lisp-directory)
+endif
+XEMACS_BATCH_CLEAN = $(XEMACS) -no-autoloads $(BATCH) -eval '(setq load-path $(LISP_DIRECTORIES))'
+# The following works more or less the same and with less fuss, but only in
+# 21.5 and above
+# XEMACS_BATCH_CLEAN = $(XEMACS) -no-autoloads $(BATCH) -no-packages
+XEMACS_BATCH_DIRTY = $(XEMACS) $(BATCH)
+LOAD_AUTOLOADS= -eval '(packages-load-package-auto-autoloads load-path)'
+
 #####################################
 #            Handle docs            #
 #####################################
@@ -259,18 +275,19 @@ endif
 
 html: $(HTML_DEP)
 
-FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "$(XEMACS_PACKAGES_BASE)/xemacs-packages/texinfo" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/text-modes" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
+XEMACS_BATCH_PREPARE_FOR_TEXINFO = $(XEMACS_BATCH_CLEAN) -eval '(setq load-path (append (list "$(XEMACS_PACKAGES_BASE)/xemacs-packages/texinfo" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/text-modes" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/xemacs-base") load-path))' $(LOAD_AUTOLOADS)
 
-FORMAT_INFO_USING_XEMACS_ARGS = $(FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS) -f save-buffer
+FORMAT_INFO_USING_XEMACS_ARGS = -l informat -l texinfmt -f texinfo-format-buffer
 
 FORMAT_INFO_USING_XEMACS = \
-	$(XEMACS) $(BATCH) -insert $< $(FORMAT_INFO_USING_XEMACS_ARGS)
+	$(XEMACS_BATCH_PREPARE_FOR_TEXINFO) -insert $< \
+	$(FORMAT_INFO_USING_XEMACS_ARGS) -f save-buffer
 
 FORMAT_MULE_INFO_USING_XEMACS = \
-	$(XEMACS) $(BATCH) -insert $< \
+	$(XEMACS_BATCH_PREPARE_FOR_TEXINFO) -insert $< \
 		-eval '(unless (featurep (quote mule)) (kill-emacs 0))' \
 		-eval '(cd "$(<D)")' \
-		$(FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS) \
+		$(FORMAT_INFO_USING_XEMACS_ARGS) \
 		-eval '(setq file-coding-system (quote iso-2022-7))' \
 		-eval '(save-buffer 0)'
 
@@ -364,7 +381,7 @@ PACKAGE_STAGING = $(STAGING)
 endif
 
 # Behaves like an XEmacs with the required packages set up
-BOOT_XEMACS= $(XEMACS) -no-autoloads $(BATCH) -l $(PACKAGE_COMPILE) -- $(REQUIRES) -- $(PRELOADS)
+BOOT_XEMACS= $(XEMACS_BATCH_CLEAN) -l $(PACKAGE_COMPILE) -- $(REQUIRES) -- $(PRELOADS)
 
 %.elc: %.el
 	$(BOOT_XEMACS) -f batch-byte-compile $<
@@ -433,7 +450,7 @@ extraclean: distclean
 # This is less of an issue now that we ignore out-of-date .elc files. --ben
 
 elcclean:
-	$(XEMACS) $(BATCH) -l $(PACKAGE_CLEAN)
+	$(XEMACS_BATCH_CLEAN) -l $(PACKAGE_CLEAN)
 
 GENERATED_ELC_DEPENDENCIES = $(ELCS:.elc=.el) $(ELCS_1:.elc=.el) \
 	$(AUTOLOAD_PATH)/_pkg.el
@@ -447,14 +464,14 @@ $(AUTOLOAD_PATH)/auto-autoloads.el :: $(AUTOLOAD_PATH)/_pkg.el
 
 ifeq ($(XEMACS_21_5),t)
 $(AUTOLOAD_PATH)/auto-autoloads.el :: $(GENERATED_ELC_DEPENDENCIES)
-	$(XEMACS) $(BATCH) -no-autoloads \
+	$(XEMACS_BATCH_CLEAN) $(LOAD_AUTOLOADS) \
 		-l autoload -f batch-update-directory-autoloads \
 		$(PACKAGE) $(AUTOLOAD_PATH)
 	# The equivalent of `touch' is done automatically
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 
 $(AUTOLOAD_PATH)/custom-defines.el : $(GENERATED_ELC_DEPENDENCIES)
-	$(XEMACS) $(BATCH) -no-autoloads \
+	$(XEMACS_BATCH_CLEAN) $(LOAD_AUTOLOADS) \
 		-l autoload -f batch-update-directory-custom-defines \
 		$(PACKAGE) $(AUTOLOAD_PATH)
 	@rm -f $(AUTOLOAD_PATH)/custom-defines.el~
@@ -465,7 +482,7 @@ AUTOLOAD_FILE = (setq generated-autoload-file \
 	\"$(AUTOLOAD_PATH)/auto-autoloads.el\")
 
 $(AUTOLOAD_PATH)/auto-autoloads.el :: $(GENERATED_ELC_DEPENDENCIES)
-	$(XEMACS) $(BATCH) -no-autoloads \
+	$(XEMACS_BATCH_CLEAN) $(LOAD_AUTOLOADS) \
 		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
 		-eval "$(AUTOLOAD_FILE)" \
 		-l autoload -f batch-update-autoloads $^
@@ -474,7 +491,7 @@ $(AUTOLOAD_PATH)/auto-autoloads.el :: $(GENERATED_ELC_DEPENDENCIES)
 endif
 
 $(AUTOLOAD_PATH)/custom-load.el : $(GENERATED_ELC_DEPENDENCIES)
-	$(XEMACS) $(BATCH) -no-autoloads -l cus-dep \
+	$(XEMACS_BATCH_CLEAN) $(LOAD_AUTOLOADS) -l cus-dep \
 		-f Custom-make-dependencies $(AUTOLOAD_PATH)
 	@touch $(AUTOLOAD_PATH)/custom-load.el
 	@rm -f $(AUTOLOAD_PATH)/custom-load.el~
@@ -494,12 +511,12 @@ endif
 # Make the $(pkg_tar).gz first, then the $(pkg_tar).bz2
 package-info : package-info.in Makefile $(AUTOLOAD_PATH)/_pkg.el \
 		$(pkg_tar).gz $(pkg_tar).bz2
-	$(XEMACS) $(BATCH) \
+	$(XEMACS_BATCH_DIRTY) \ #  #### See if we can't CLEAN this up
 		-l package-info.elc -f batch-update-package-info \
 		'$(VERSION)' $(PKG_TAR_GZ) \
 		'$(REQUIRES)' \
 		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
-	$(XEMACS) $(BATCH) \
+	$(XEMACS_BATCH_DIRTY) \ #  #### See if we can't CLEAN this up
 		-l ../../hack-package-index.el -f batch-hack-package-index \
 			$(PACKAGE) package-info $(PACKAGE_INFO) $(CATEGORY)
 
@@ -557,8 +574,8 @@ ifneq ($(PACKAGE_SUPPRESS),)
 	@echo ")" >> $(AUTOLOAD_PATH)/_pkg.el
 endif
 
-setup-info:
-	$(XEMACS) $(BATCH) -l $(PACKAGE_NET_PACKAGES) \
+setup-info: #  #### See if we can't CLEAN this up
+	$(XEMACS_BATCH_DIRTY) -l $(PACKAGE_NET_PACKAGES) \
 		-l $(PACKAGE_INFO) \
 		-f package-net-packages-batch-convert-index-to-ini $(PACKAGE_STAGING) $(CATEGORY)
 

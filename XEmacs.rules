@@ -1006,9 +1006,10 @@ ifneq ($(LIBSRC_FILES),)
 	ls -1 $(patsubst %,lib-src/%, $(notdir $(LIBSRC_FILES))) >> $(MANIFEST))
 endif
 
-install-html: check-staging
+install-html: html check-staging
 ifneq ($(HTML_FILES),)
 	@-mkdir -p $(STAGING)/html
+	@-mkdir -p $(STAGING)/pkginfo
 	$(RCOPY) $(addprefix $(PWD)/, $(HTML_FILES)) $(STAGING)/html
 	@(cd $(STAGING); \
 	ls -1 $(patsubst %,html/%, $(notdir $(HTML_FILES))) >> $(MANIFEST))
@@ -1020,7 +1021,7 @@ ifeq ($(INSTALL_HTML),t)
 binkit: install-html
 endif
 
-binkit-with-html: html binkit-1 install-html
+binkit-with-html: binkit-1 install-html
 
 # Export dependencies for outer make file usage
 

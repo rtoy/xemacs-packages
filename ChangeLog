@@ -1,3 +1,10 @@
+2003-07-25  Adrian Aichner  <adrian@xemacs.org>
+
+	* XEmacs.rules (install-html): install-html to work independent of
+	bindist and to depend on html target.
+	* XEmacs.rules (binkit-with-html): Remove html dependency which is
+	moved to install-html.
+
 2003-07-23  Ville Skyttä  <scop@xemacs.org>
 
 	* package-compile.el (package-name-to-directory):

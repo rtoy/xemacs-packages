@@ -1,0 +1,70 @@
+# This file is part of XEmacs.
+
+# Copyright (C) 2002, 2003, 2004 Ben Wing.
+
+# XEmacs is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2, or (at your option) any
+# later version.
+
+# XEmacs is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with XEmacs; see the file COPYING.  If not, write to
+# the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
+
+# Avoid duplication between iterate.rules and meta-iterate.rules.
+
+AUTOLOADS_TARGETS= $(ITERATE:=/autoloads.target)
+BYTECOMPILE_TARGETS= $(ITERATE:=/bytecompile.target)
+CLEAN_TARGETS= $(ITERATE:=/clean.target)
+DISTCLEAN_TARGETS= $(ITERATE:=/distclean.target)
+EXTRACLEAN_TARGETS= $(ITERATE:=/extraclean.target)
+ELCCLEAN_TARGETS= $(ITERATE:=/elcclean.target)
+GENCLEAN_TARGETS= $(ITERATE:=/genclean.target)
+HTML_TARGETS= $(ITERATE:=/html.target)
+INSTALL_FOR_BINDIST_TARGETS= $(ITERATE:=/install-for-bindist.target)
+INSTALL_HTML_TARGETS= $(ITERATE:=/install-html.target)
+INSTALL_ONLY_TARGETS= $(ITERATE:=/install-only.target)
+
+ALL_TARGETS = \
+	$(AUTOLOADS_TARGETS)  $(BYTECOMPILE_TARGETS) \
+	$(CLEAN_TARGETS) $(DISTCLEAN_TARGETS) $(ELCCLEAN_TARGETS) \
+	$(EXTRACLEAN_TARGETS) $(GENCLEAN_TARGETS) \
+	$(HTML_TARGETS)  $(INSTALL_FOR_BINDIST_TARGETS) \
+	$(INSTALL_HTML_TARGETS) $(INSTALL_ONLY_TARGETS)
+
+.PHONY: autoloads bytecompile clean distclean elcclean extraclean \
+	genclean html install-for-bindist install-html install-only
+
+# Main driver rules
+
+bytecompile:: $(BYTECOMPILE_TARGETS)
+
+autoloads: $(AUTOLOADS_TARGETS)
+
+clean: $(CLEAN_TARGETS)
+
+distclean: $(DISTCLEAN_TARGETS)
+
+extraclean: $(EXTRACLEAN_TARGETS)
+
+elcclean: $(ELCCLEAN_TARGETS)
+
+genclean: $(GENCLEAN_TARGETS)
+
+html: $(HTML_TARGETS)
+
+install-for-bindist: $(INSTALL_FOR_BINDIST_TARGETS)
+
+install-html: $(INSTALL_HTML_TARGETS)
+
+install-only: $(INSTALL_ONLY_TARGETS)
+
+# Local Variables:
+# mode: Makefile
+# end:

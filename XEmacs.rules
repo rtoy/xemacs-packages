@@ -402,6 +402,10 @@ dist:: binkit package-info
 
 mostlyclean::
 
+# Remove the generated files.
+genclean:
+	rm -f $(GENERATED_LISP) $(EARLY_GENERATED_LISP) $(GENERATED_ELCS) $(EARLY_GENERATED_ELCS) package-info $(AUTOLOAD_PATH)/_pkg.el
+
 clean:: mostlyclean
 	rm -f $(GENERATED_ELCS) $(EARLY_GENERATED_ELCS) $(ELCS) $(ELCS_1) \
 	$(HTML_FILES) $(INFO_FILES) $(DEPENDS_FILE_NAME) $(EXTRA_DEPENDENCIES)
@@ -409,8 +413,7 @@ clean:: mostlyclean
 # distclean is what you use when making a distribution.  everything that
 # can get rebuilt should be killed.  everything.
 
-distclean:: clean
-	rm -f $(GENERATED_LISP) $(EARLY_GENERATED_LISP) package-info $(AUTOLOAD_PATH)/_pkg.el
+distclean:: clean genclean
 
 # extraclean means distclean plus removal of backup files, etc.
 extraclean: distclean
@@ -544,19 +547,25 @@ ifneq ($(PACKAGE_SUPPRESS),)
 	@echo ")" >> $(AUTOLOAD_PATH)/_pkg.el
 endif
 
-.PHONY: binkit-with-html bindist install autoloads
-
-bindist: compile binkit package-info setup-info
-
 setup-info:
 	$(XEMACS) $(BATCH) -l $(PACKAGE_NET_PACKAGES) \
 		-l $(PACKAGE_INFO) \
 		-f package-net-packages-batch-convert-index-to-ini $(PACKAGE_STAGING) $(CATEGORY)
 
-install: compile binkit
+.PHONY: binkit-with-html install-for-bindist autoloads
 
 # A target that _only_ installs and doesn't build _anything_
 install-only: binkit
+
+binkit: binkit-1
+
+ifeq ($(INSTALL_HTML),t)
+binkit:: install-html
+endif
+
+binkit-with-html: binkit-1 install-html
+
+install-for-bindist: binkit package-info setup-info
 
 ## Do not byte-compile as that could require stuff from elsewhere, and you
 ## get dependency circles.
@@ -1028,14 +1037,6 @@ ifneq ($(HTML_FILES),)
 	@(cd $(STAGING); \
 	ls -1 $(patsubst %,html/%, $(notdir $(HTML_FILES))) >> $(MANIFEST))
 endif
-
-binkit: binkit-1
-
-ifeq ($(INSTALL_HTML),t)
-binkit: install-html
-endif
-
-binkit-with-html: binkit-1 install-html
 
 # Export dependencies for outer make file usage
 

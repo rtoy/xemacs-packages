@@ -9,7 +9,7 @@
 # Path to XEmacs to use for byte compilation.
 #
 # (Double-quote path under native MS Windows if there are embedded spaces.)
-XEMACS = xemacs
+XEMACS_BINARY = xemacs
 
 # Are we running XEmacs 21.5 or greater?  If set, this will generate
 # custom-defines.el files for use with Custom (esp. the Custom menu), and
@@ -80,7 +80,35 @@ XEMACS_INSTALLED_PACKAGES_ROOT = /usr/local/lib/xemacs
 #
 symlink = 
 
+# If `t', the build process will build and install .html versions of the
+# doc files.  NOTE: texi2html 1.56k (#### perhaps 1.64 is better?) issues
+# complaints about a large number of files that pass `makeinfo' just fine.
+# This doesn't prevent it from building the .html files, though.
+#
+INSTALL_HTML =
+
 ##################### End settings that commonly need to be changed
+
+# How to actually run XEmacs.
+
+# Under MS Windows, when you run a non-console-mode program, stdin and
+# stdout don't normally point anywhere, even when you run the program from
+# a console (e.g. a DOS window)!  Hence the console-mode helper program
+# lib-src/i.exe was written.  Formerly, this was not needed when running
+# XEmacs from a Cygwin program, but at some point around 2003-2004 the
+# behavior of Cygwin was broken^H^H^H^H^H^Hchanged to match normal Windows
+# in this respect.
+
+ifeq ($(XEMACS_NATIVE_NT),t)
+XEMACS = $(dir $(XEMACS_BINARY))../lib-src/i $(XEMACS_BINARY)
+else
+XEMACS = $(XEMACS_BINARY)
+endif
+
+# Flags to run XEmacs from Makefiles.
+#
+VANILLA = -vanilla
+BATCH = $(VANILLA) -batch -eval '(setq stack-trace-on-error t load-always-display-messages t load-ignore-out-of-date-elc-files t load-show-full-path-in-messages t)'
 
 #
 # Where to install the non-Mule packages, or where the symlink tree will
@@ -115,6 +143,8 @@ NONMULE_PACKAGES = xemacs-packages
 MULE_PACKAGES = mule-packages
 
 PACKAGE_INDEX = package-index
+
+#### Path to various programs
 
 # Path to BSD install.
 # INSTALL = ginstall -c
@@ -153,22 +183,9 @@ EXCLUDES =					\
 	--exclude '*.rej'			\
 	--exclude '.\#*'
 
-VANILLA = -vanilla
-
-# Flags to run XEmacs from Makefiles.
-#
-BATCH = $(VANILLA) -batch -eval '(setq stack-trace-on-error t load-always-display-messages t load-ignore-out-of-date-elc-files t load-show-full-path-in-messages t)'
-
 # path to makeinfo
 #
 MAKEINFO = makeinfo
-
-# If `t', the build process will build and install .html versions of the
-# doc files.  NOTE: texi2html 1.56k (#### perhaps 1.64 is better?) issues
-# complaints about a large number of files that pass `makeinfo' just fine.
-# This doesn't prevent it from building the .html files, though.
-#
-INSTALL_HTML =
 
 # path to texi2html
 #
@@ -185,31 +202,33 @@ TEXI2HTML_FLAGS = -split chapter
 endif
 
 
-# path to texi2dvi, dvips, texi2pdf; If not defined, no conversion will happen
+# path to texi2dvi, dvips, texi2pdf; If not defined, no conversion will
+# happen
 #
-ifeq ($(XEMACS_NATIVE_NT),t)
-# Cygwin versions currently broken.
-TEXI2DVI =
-DVIPS =
-TEXI2PDF =
-else
 TEXI2DVI = texi2dvi
 DVIPS = dvips
 TEXI2PDF = texi2pdf
-endif
 
 # path to tex
 #
+# If you are getting errors like this:
+#   cd texi && tex math-ref
+#   This is TeX, Version 3.14159 (Web2C 7.4.5)
+#   kpathsea: Running mktexfmt tex.fmt
+#   fmtutil: config file `fmtutil.cnf' not found.
+#   I can't find the format file `tex.fmt'!
+# Then somehow you installed tex without installing all the library files.
+# Go back to Cygwin setup, look under `publishing' and select all the
+# TeX components.
+# 
 TEX = tex
 
 # path to msgfmt
 #
-ifeq ($(XEMACS_NATIVE_NT),t)
-# No Cygwin version.
-MSGFMT = 
-else
+# Under Cygwin, you need to install the gettext-devel package under the
+# `Devel' component to get this.
+#
 MSGFMT = msgfmt
-endif
 
 ifneq ('$(symlink)','t')
  # path to GNU cp, use the latter if no GNU cp is available.

@@ -1,3 +1,43 @@
+2004-11-07  Ben Wing  <ben@xemacs.org>
+
+	* Local.rules.template:
+	* Local.rules.template (XEMACS_BINARY):
+	Group settings together.  Put XEmacs binary in XEMACS_BINARY
+	not XEMACS (XEMACS may be a wrapper).  Track ever-changing
+	Cygwin semantics.  tex etc. is not broken on Cygwin, you just
+	need to install the right packages -- document this.
+
+	* XEmacs.rules:
+	* XEmacs.rules (distclean):
+	* XEmacs.rules (setup-info):
+	* XEmacs.rules (.PHONY):
+	* XEmacs.rules (binkit):
+	* iterate.rules:
+	* iterate.rules (ITERATE):
+	* iterate.rules (.PHONY):
+	* meta-iterate.rules:
+	* meta-iterate.rules (ITERATE):
+	* meta-iterate.rules (macro-list):
+	* meta-iterate.rules (World):
+	* Local.rules.inc:
+	* Version.rules:
+	* Version.rules (bindist):
+	* Version.rules (binkit):
+	* Version.rules (bytecompile):
+	* Version.rules (compile):
+	* Version.rules (extraclean):
+	* Version.rules (genclean):
+	* Version.rules (install-for-bindist):
+	* Version.rules (install-only):
+	* Version.rules (pdepends.mk):
+	* iterate-1.rules: New.
+	* meta-template.rules: New.
+	Factor out repetitive code into meta-template.rules and
+	iterate-1.rules.  Add some missing targets.  New genclean
+	target for removing just generated files.  Make sure that
+	`make install' actually does everything that `make' does
+	before installing; same for `make bindist'.
+
 2004-10-31  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: semantic.

@@ -18,8 +18,8 @@
 # Boston, MA 02111-1307, USA.
 
 #
-# This is used by subdirectories that directly contain packages.  Higher-level
-# subdirectories should use meta-iterate.rules instead.
+# This is used by subdirectories that directly contain packages.
+# Higher-level subdirectories should use meta-iterate.rules instead.
 #
 
 XEMACS_PACKAGES_BASE:= $(shell while [ ! -f XEmacs.rules ]; do \
@@ -27,71 +27,22 @@ XEMACS_PACKAGES_BASE:= $(shell while [ ! -f XEmacs.rules ]; do \
 				done;	\
 				pwd)
 
-AUTOLOADS_TARGETS= $(PACKAGES:=/autoloads.target)
-BYTECOMPILE_TARGETS= $(PACKAGES:=/bytecompile.target)
-BINDIST_TARGETS= $(PACKAGES:=/bindist.target)
-CLEAN_TARGETS= $(PACKAGES:=/clean.target)
-DISTCLEAN_TARGETS= $(PACKAGES:=/distclean.target)
-EXTRACLEAN_TARGETS= $(PACKAGES:=/extraclean.target)
-ELCCLEAN_TARGETS= $(PACKAGES:=/elcclean.target)
-HTML_TARGETS= $(PACKAGES:=/html.target)
-INSTALL_TARGETS= $(PACKAGES:=/install.target)
-INSTALL_HTML_TARGETS= $(PACKAGES:=/install-html.target)
-INSTALL_ONLY_TARGETS= $(PACKAGES:=/install-only.target)
+include ${XEMACS_PACKAGES_BASE}/meta-targets.rules
 
-# Indicate which of the above need the pdepends to be built prior to doing
-# the work of the target.
-autoloads_NEED_PDEPENDS = t
-bytecompile_NEED_PDEPENDS = t
-all_NEED_PDEPENDS = t
+ITERATE:= $(PACKAGES)
 
-# Make this the first target
-all: autoloads bytecompile
-
-ALL_TARGETS = \
-	$(AUTOLOADS_TARGETS)  $(BYTECOMPILE_TARGETS) $(BINDIST_TARGETS) \
-	$(CLEAN_TARGETS) $(DISTCLEAN_TARGETS) $(ELCCLEAN_TARGETS) \
-	$(HTML_TARGETS) $(INSTALL_TARGETS) $(INSTALL_HTML_TARGETS) \
-	$(INSTALL_ONLY_TARGETS)
-
-.PHONY: $(ALL_TARGETS) autoloads bytecompile bindist clean \
-	distclean elcclean html install install-html install-only
+include ${XEMACS_PACKAGES_BASE}/iterate-1.rules
 
 # Master rule to pass down actual building 
 # Use a static pattern because of the extra dependencies
 $(ALL_TARGETS) : %.target:
 	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) $(*F)
 
+.PHONY: $(ALL_TARGETS) 
+
 # Standard dependencies
 
 # $(BYTECOMPILE_TARGETS): %bytecompile.target: %autoloads.target
-
-# If bindist builds as well as installing
-# $(BINDIST_TARGETS)= %bindist.target: %bytecompile.target %html.target
-
-# Main driver rules
-
-bytecompile:: $(BYTECOMPILE_TARGETS)
-
-autoloads: $(AUTOLOADS_TARGETS)
-
-bindist: $(BINDIST_TARGETS)
-
-clean: $(CLEAN_TARGETS)
-
-distclean: $(DISTCLEAN_TARGETS)
-
-extraclean: $(EXTRACLEAN_TARGETS)
-
-elcclean: $(ELCCLEAN_TARGETS)
-
-html: $(HTML_TARGETS)
-
-install: $(INSTALL_TARGETS)
-
-install-html: $(INSTALL_HTML_TARGETS)
-
-install-only: $(INSTALL_ONLY_TARGETS)
 
 # Optionally put in fake rules for packages that we cannot
 # recursively build (yet)

@@ -46,40 +46,44 @@
 
 # From here on it is just a list of targets that all point to the
 # 'bad-version' target.
+
 all: bad-version
 
 autoloads: all
 
-pdepends.mk: all
-
 bindist: all
+
+binkit: all
 
 bytecompile: all
 
-compile: all
-
 clean: all
 
-mostlyclean: all
-
-extraclean: all
+compile: all
 
 distclean: all
 
-install: all
+extraclean: all
 
-install-only: all
+genclean: all
 
 html: all
 
+install-for-bindist: all
+
 install-html: all
 
-binkit: all
+install-only: all
+
+install: all
+
+mostlyclean: all
+
+pdepends.mk: all
 
 world: all
 
 World: all
-
 
 
 # Local Variables:

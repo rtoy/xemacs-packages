@@ -1,8 +1,5 @@
-# Common Makefile material for package Makefiles
-# Copyright (C) 1997 Free Software Foundation Inc.
-# Copyright (C) 2002, 2003 Ben Wing.
-
 # This file is part of XEmacs.
+# Copyright (C) 2002, 2003, 2004 Ben Wing.
 
 # XEmacs is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -19,25 +16,31 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-# Requires XEmacs 21.0-beta19 or greater and GNU Make 3.78 or greater.
+#
+# All targets that compile as part of their operation do compilation need
+# to build all of the autoloads first before anything else.  To avoid the
+# need to duplicate these declarations in three places, we use a separate
+# file.
+#
 
-ifeq ($(XEMACS_RULES_INCLUDED),)
-XEMACS_RULES_INCLUDED := t
+# Make this the first target
+all: autoloads bytecompile
 
-XEMACS_PACKAGES_BASE := $(shell while [ ! -f XEmacs.rules ]; do \
-                                    cd ..;	\
-                                done;		\
-                                pwd)
+all-with-html: all html
 
-DEPENDS_FILE_NAME = pdepends.mk
+install: all install-only
 
-include ${XEMACS_PACKAGES_BASE}/meta-targets.rules
+bindist: all install-for-bindist
 
-bytecompile:: compile
+.PHONY: all all-with-html install bindist
 
-include ${XEMACS_PACKAGES_BASE}/Local.rules.mk
--include ${XEMACS_PACKAGES_BASE}/Local.rules
-endif
+# Indicate which targets need the pdepends to be built prior to doing
+# the work of the target.
+autoloads_NEED_PDEPENDS = t
+bytecompile_NEED_PDEPENDS = t
+all-with-html_NEED_PDEPENDS = t
+install_NEED_PDEPENDS = t
+bindist_NEED_PDEPENDS = t
 
 # Local Variables:
 # mode: makefile

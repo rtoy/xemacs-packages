@@ -27,63 +27,24 @@ XEMACS_PACKAGES_BASE := $(shell while [ ! -f XEmacs.rules ]; do \
                                 done;		\
                                 pwd)
 
-all: autoloads bytecompile
+include ${XEMACS_PACKAGES_BASE}/meta-targets.rules
 
-.PHONY: all all-bytecompile autoloads bytecompile bindist
-.PHONY: clean distclean extraclean elcclean html macro-list World
-.PHONY: install install-only
+ITERATE:= $(SUBDIRS)
 
-# The toplevel has slightly different rules so we do not use iterate.rules
-# directly
+include ${XEMACS_PACKAGES_BASE}/iterate-1.rules
 
-ALL_TARGETS= $(SUBDIRS:=/all.target)
-AUTOLOADS_TARGETS= $(SUBDIRS:=/autoloads.target)
-BYTECOMPILE_TARGETS= $(SUBDIRS:=/bytecompile.target)
-BINDIST_TARGETS= $(SUBDIRS:=/bindist.target)
-CLEAN_TARGETS= $(SUBDIRS:=/clean.target)
-DISTCLEAN_TARGETS= $(SUBDIRS:=/distclean.target)
-EXTRACLEAN_TARGETS= $(SUBDIRS:=/extraclean.target)
-ELCCLEAN_TARGETS= $(SUBDIRS:=/elcclean.target)
-HTML_TARGETS= $(SUBDIRS:=/html.target)
-INSTALL_TARGETS= $(SUBDIRS:=/install.target)
-INSTALL_HTML_TARGETS= $(SUBDIRS:=/install-html.target)
-INSTALL_ONLY_TARGETS= $(SUBDIRS:=/install-only.target)
+.PHONY: macro-list World
 
 # At some point we might have dependencies here...
 
 %.target:
 	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) $(*F)
 
-all-bytecompile: autoloads bytecompile html
-
-autoloads: $(AUTOLOADS_TARGETS)
-
-bytecompile: $(BYTECOMPILE_TARGETS)
-
-bindist: $(BINDIST_TARGETS)
-
-clean: $(CLEAN_TARGETS)
-
-distclean: $(DISTCLEAN_TARGETS)
-
-extraclean: $(EXTRACLEAN_TARGETS)
-
-elcclean:
-	$(XEMACS) $(BATCH) -l package-clean.el
-
-html: $(HTML_TARGETS)
-
 macro-list:
 	-rm -f macro.list
 	find . -type f -name \*.el | xargs awk -f gen-macro-list.awk > macro.list
 
-World: extraclean all install
-
-install: $(INSTALL_TARGETS)
-
-install-html: $(INSTALL_HTML_TARGETS)
-
-install-only: $(INSTALL_ONLY_TARGETS)
+World: extraclean install
 
 # Local Variables:
 # mode: Makefile

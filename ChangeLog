@@ -1,3 +1,9 @@
+2002-08-25  Ville Skyttä  <ville.skytta@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES): Add psgml-dtds.
+
+	* package-compile.el (package-directory-map): Ditto.
+
 2002-08-13  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Packages released: psgml edit-utils igrep.

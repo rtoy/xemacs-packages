@@ -29,7 +29,7 @@ PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	emerge idlwave jde prog-modes scheme sh-script vc-cc vc vhdl \
 	xslt-process eterm igrep ilisp os-utils ps-print view-process \
 	eshell pcomplete edit-utils speedbar calc calendar forms frame-icon \
-	hm--html-menus ispell pc psgml sgml slider text-modes time \
+	hm--html-menus ispell pc psgml psgml-dtds sgml slider text-modes time \
 	strokes tramp clearcase dictionary sieve ibuffer mmm-mode xslide \
 	liece haskell-mode ess docbookide ecrypto ocaml sasl sml-mode
 

@@ -1,3 +1,7 @@
+2001-12-22  Steve Youngs  <youngs@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES): Add dictionary.
+
 2001-12-17  Steve Youngs  <youngs@xemacs.org>
 
 	* package-compile.el (package-name-to-directory): Add mule-ucs.

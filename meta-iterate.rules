@@ -29,7 +29,7 @@ XEMACS_PACKAGES_BASE := $(shell while [ ! -f XEmacs.rules ]; do \
 
 all: autoloads bytecompile
 
-.PHONY: all all-bytecompile autoloads bytecompile bindist-real bindist clean distclean elcclean html World install just-install
+.PHONY: all all-bytecompile autoloads bytecompile bindist-real bindist clean distclean elcclean html macro-list World install just-install
 
 # The toplevel has slightly different rules so we do not use iterate.rules
 # directly
@@ -76,6 +76,10 @@ elcclean:
 	$(XEMACS) $(BATCH) -l package-clean.el
 
 html: $(HTML_TARGETS)
+
+macro-list:
+	-rm -f macro.list
+	find . -type f -name \*.el | xargs awk -f gen-macro-list.awk > macro.list
 
 World: distclean install
 

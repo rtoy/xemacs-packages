@@ -39,10 +39,12 @@
 (when (interactive-p)
   (error "package-compile may only be used with -batch"))
 
-;;; Step 1, purify the load-path and load the core autoloads.
+;;; Step 1, set the load-path and load the core autoloads.
 
-(when (> (length load-path) 2)
-  (setq load-path (last load-path 2)))
+(let* ((roots (paths-find-emacs-roots invocation-directory
+				      invocation-name))
+       (lisp-directory (paths-find-lisp-directory roots)))
+  (setq load-path (paths-find-recursive-load-path (list lisp-directory))))
 
 (load (expand-file-name "auto-autoloads" (car load-path)))
 

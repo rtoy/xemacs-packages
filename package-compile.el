@@ -161,6 +161,7 @@
     ("psgml-dtds" . "xemacs-packages")
     ("python-modes" . "xemacs-packages")
     ("reftex" . "xemacs-packages")
+    ("riece" . "xemacs-packages")
     ("rmail" . "xemacs-packages")
     ("ruby-modes" . "xemacs-packages")
     ("sasl" . "xemacs-packages")

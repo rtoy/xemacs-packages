@@ -1,5 +1,7 @@
 2003-10-25  Norbert Koch  <viteno@xemacs.org>
 
+	* package-compile.el (package-directory-map): Add new package riece.
+
 	* Packages released: riece.
 
 	* xemacs-packages/Makefile (PACKAGES): Hook up riece to the build.

@@ -155,14 +155,19 @@ elcclean:
 #### not any more, as of Cygwin 1.1.8-2 (Feb 2001) -- ben
 ifeq ($(XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING),t)
 AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \\\"$(PACKAGE)\\\")
+AUTOLOAD_FILE = (setq generated-autoload-file \
+	\\\"$(AUTOLOAD_PATH)/auto-autoloads.el\\\")
 else
 AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \"$(PACKAGE)\")
+AUTOLOAD_FILE = (setq generated-autoload-file \
+	\"$(AUTOLOAD_PATH)/auto-autoloads.el\")
 endif
 
 $(AUTOLOAD_PATH)/auto-autoloads.el : $(ELCS:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
-	$(XEMACS) $(VANILLA) -batch \
+	$(XEMACS) $(VANILLA) -batch -no-autoloads \
 		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
-		-l autoload -f batch-update-directory $(AUTOLOAD_PATH)
+		-eval "$(AUTOLOAD_FILE)" \
+		-l autoload -f batch-update-autoloads $(ELCS:.elc=.el)
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 
 $(AUTOLOAD_PATH)/custom-load.el : $(ELCS:.elc=.el)
@@ -199,7 +204,7 @@ $(pkg_tar): $(STAGING)/$(MANIFEST)
 	   rm -f $(pkg_tar)*)
 
 	(cd $(STAGING);				\
-	  $(TAR) $(EXCLUDES) -cf $(pkg_tar)	\
+	  $(TAR) $(EXCLUDES) --create --owner=0 --group=0 --file $(pkg_tar) \
 		`cat $(MANIFEST)`)
 
 
@@ -258,7 +263,8 @@ srckit-std: distclean
 
 	(cd ../..;				\
 	  rm -f $(src_tar)*;			\
-	  $(TAR) $(EXCLUDES) -cf $(src_tar) $(CATEGORY)/$(PACKAGE))
+	  $(TAR) $(EXCLUDES) --create --owner=0 --group=0 --file $(src_tar) \
+		$(CATEGORY)/$(PACKAGE))
 
 	gzip -cv9 $(src_tar) > $(src_tar).gz
 

@@ -1,3 +1,13 @@
+2002-03-31  Steve Youngs  <youngs@xemacs.org>
+
+	* XEmacs.rules (pkg_tar): Force owner/group to root/root when
+	building tarballs.
+	(srckit-std): Ditto.
+	($(AUTOLOAD_PATH)/auto-autoloads.el): Use 'batch-update-autoloads'
+	so Mule files don't get scanned for autoloads when building
+	packages with a non-Mule XEmacs.
+	(AUTOLOAD_FILE): New.
+
 2002-03-27  Steve Youngs  <youngs@xemacs.org>
 
 	* These packages rolled: tm xemacs-base.

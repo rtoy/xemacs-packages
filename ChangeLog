@@ -1,3 +1,8 @@
+2002-07-31  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+
+	* Packages  released: sieve  mail-lib text-modes xslide edit-utils
+	leim prog-modes ps-print reftex.
+
 2002-07-30  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Packages released: ps-print pcl-cvs.

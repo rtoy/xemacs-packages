@@ -1,3 +1,7 @@
+1999-06-24  SL Baur  <steve@xemacs.org>
+
+	* package-compile.el: add lookup.
+
 1999-05-13  SL Baur  <steve@gneiss.etl.go.jp>
 
 	* XEmacs.rules: expand number of DATA destinations

@@ -73,6 +73,7 @@
     ("egg-its" . "mule")
     ("leim" . "mule")
     ("locale" . "mule")
+    ("lookup" . "mule")
     ("mule-base" . "mule")
     ("skk" . "mule")
     ;; prog/*
@@ -162,6 +163,8 @@
 	   (expand-file-name "mew" (file-name-as-directory dir)))
 	  ((equal package "zenirc")
 	   (expand-file-name "src" (file-name-as-directory dir)))
+	  ((equal package "lookup")
+	   (expand-file-name "lisp" (file-name-as-directory dir)))
 	  (t dir))))
 
 (defvar depends nil)

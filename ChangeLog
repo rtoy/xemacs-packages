@@ -1,3 +1,8 @@
+1998-02-27  Karl M. Hegbloom  <karlheg@bittersweet.inetarena.com>
+
+	* package-compile.el (depends): Provide a more meaningful
+	  error mess when a require isn't in the package map.
+
 1998-01-24  SL Baur  <steve@altair.xemacs.org>
 
 	* Makefile: Created.

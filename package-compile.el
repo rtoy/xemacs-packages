@@ -156,6 +156,9 @@
 ;; Setup load-path and load necessary auto-autoloads
 (while depends
   (let ((dir (package-name-to-directory (car depends))))
+    (when (null dir)
+      (error "%s is not in `package-directory-map'.  See: package-compile.el"
+	     dir))
     (push dir load-path)
     (load (expand-file-name "auto-autoloads" dir))
     (pop depends)))

@@ -16,7 +16,7 @@
 # Boston, MA 02111-1307, USA.
 
 PACKAGES= mule-base \
-	locale leim lookup edict egg-its skk mule-ucs
+	locale leim lookup edict egg-its skk mule-ucs latin-unity
 
 ASSUMED_PRESENT = xemacs-base fsf-compat viper apel cookie elib
 

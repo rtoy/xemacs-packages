@@ -1,5 +1,7 @@
 2002-08-12  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
+	* Packages released: sasl semantic.
+
 	* Packages released: tramp sieve build sml-mode sasl ocaml ecrypto
 	docbookide edit-utils psgml speedbar semantic eieio.
 

@@ -1,3 +1,8 @@
+2003-06-01  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages     released: x-symbol  edit-utils    edebug prog-modes
+	os-utils.
+
 2003-05-31  Adrian Aichner  <adrian@xemacs.org>
 
 	* Local.rules.template: Typo fix.

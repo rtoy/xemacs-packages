@@ -1,3 +1,16 @@
+1998-07-23  SL Baur  <steve@altair.xemacs.org>
+
+	* Makefile (SPECIAL): Build edit-utils early.
+	Ditto with speedbar.
+
+	* XEmacs.rules (BUILD_MULE): Add variable.  Comment to avoid building
+	Mule.
+
+1998-06-21  SL Baur  <steve@altair.xemacs.org>
+
+	* package-compile.el (package-directory-map): Add comm/mew.
+	(package-name-to-directory): Handle mew lisp as subdirectory.
+
 1998-04-17  Michael Sperber [Mr. Preprocessor]  <sperber@informatik.uni-tuebingen.de>
 
 	* package-compile.el: Used paths-load-path-depth variable.

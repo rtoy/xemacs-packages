@@ -25,6 +25,9 @@
 # path to XEmacs-20.5
 XEMACS = /home/xemacs/xemacs-20.0/src/xemacs
 
+# Build Mule?  Comment for no Mule
+BUILD_MULE=t
+
 # path to BSD install
 INSTALL = ginstall -c
 

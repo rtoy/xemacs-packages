@@ -18,7 +18,7 @@
 # These packages must be built first and in this order.
 SPECIAL = libs/xemacs-base libs/fsf-compat mule/mule-base libs/mail-lib \
 	comm/vm libs/dired libs/efs libs/apel prog/cc-mode comm/w3 \
-	comm/net-utils
+	comm/net-utils oa/edit-utils oa/speedbar
 
 # The rest require no further special treatment
 SUBDIRS = libs comm games prog wp os oa mule

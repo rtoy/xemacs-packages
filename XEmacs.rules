@@ -735,7 +735,7 @@ BDEPENDS=$(strip $(filter-out $(PACKAGE),$(REQUIRES)))
 
 $(DEPENDS_FILE_NAME): Makefile $(XEMACS_PACKAGES_BASE)/XEmacs.rules
 ifneq ($(TARGET_BASE),)
-	-rm $(DEPENDS_FILE_NAME)
+	-rm -f $(DEPENDS_FILE_NAME)
 	@echo Creating $(DEPENDS_FILE_NAME)
 	@echo > $(DEPENDS_FILE_NAME)
 ifneq ($(BDEPENDS),)

@@ -1,3 +1,7 @@
+2002-01-23  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs.rules ($(DEPENDS_FILE_NAME)): Force rm of pdepends.mk.
+
 2002-01-23  Steve Youngs  <youngs@xemacs.org>
 
 	* package-compile.el (package-directory-map): Remove eicq

@@ -84,7 +84,7 @@ custom-load.el : $(ELCS:.elc=.el)
 	$(XEMACS) $(VANILLA) -batch -l cus-dep \
 		-f Custom-make-dependencies .
 
-package-info : package-info.in Makefile _pkg.el
+package-info : package-info.in Makefile _pkg.el $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz
 	$(XEMACS) $(VANILLA) -batch \
 		-l package-info.el -f batch-update-package-info \
 		'$(VERSION)' $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz \

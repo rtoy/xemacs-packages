@@ -43,9 +43,17 @@
 
 (let* ((roots (paths-find-emacs-roots invocation-directory
 				      invocation-name))
-       (lisp-directory (paths-find-lisp-directory roots)))
+       (lisp-directory (paths-find-lisp-directory roots))
+       (depth (cond
+	       ;; #### All hail Mr. Preprocessor!
+	       ;; OK, OK, his code is under development; FIXME when it's done.
+	       ((boundp 'paths-load-path-depth) ; XEmacs 21.1
+		paths-load-path-depth)
+	       ((boundp 'paths-core-load-path-depth) ; XEmacs > 21.2.41
+		paths-core-load-path-depth)
+	       (t (error "Somebody has been messing with paths-find-*!")))))
   (setq load-path (paths-find-recursive-load-path (list lisp-directory)
-						  paths-load-path-depth)))
+						  depth)))
 
 (load (expand-file-name "auto-autoloads" (car load-path)))
 

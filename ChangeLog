@@ -1,3 +1,29 @@
+2001-01-17  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* package-compile.el (Step 1): Use paths-load-path-depth when
+	defined, otherwise paths-core-load-path-depth.
+
+2001-01-19  Steve Youngs  <youngs@xemacs.org>
+
+	* iterate.rules: Add a Local Variables to set mode to Makefile.
+
+	* INSTALL: New file.
+
+	* Local.rules.template: Use 'cp -af' and 'cp --force --recursive --symlink'.
+
+2000-12-06  Jan Vroonhof  <jan@xemacs.org>
+
+	* Makefile: Use makefile targets for looping instead of shell loops.
+	Makes build more robust.
+	comm/Makefile: ditto.
+	games/Makefile: ditto
+	libs/Makefile: ditto
+	mule/Makefile: ditto
+	oa/Makefile: ditto
+	os/Mafefile: ditto
+	prog/Makefile: ditto
+	wp/Makefile: ditto
+
 2001-01-11  Steve Youngs  <youngs@xemacs.org>
 
 	* Makefile: Proper GNU Makefile quoting. eg change ($(foo),'') to 

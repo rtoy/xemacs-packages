@@ -111,12 +111,12 @@ MAKEINFO = makeinfo
 ifneq ('$(symlink)','t')
  # path to GNU cp, use the latter if no GNU cp is available.
  #
- RCOPY = cp -a
+ RCOPY = cp -af
  # RCOPY = cp -pR
 else
  # This next one is for running in-place from a CVS checkout.
  #
- RCOPY = cp --recursive --symbolic-link
+ RCOPY = cp --force --recursive --symbolic-link
 endif
 #
 # Local Variables:

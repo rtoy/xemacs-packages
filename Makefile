@@ -15,11 +15,11 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+# 
 SUBDIRS = libs comm games prog wp os oa
 
 # Use a Local.rules file to specify what you wish to have installed
 XEMACS_PACKAGES_BASE := $(shell pwd)
-
 
 all:: all-bytecompile
 
@@ -30,50 +30,42 @@ ifeq ($(BUILD_WITHOUT_MULE),)
 SUBDIRS += mule
 endif
 
-all-bytecompile:
-	for dir in $(SUBDIRS); do \
-		$(MAKE) $(MFLAGS) -C $${dir} autoloads; \
-	done
-	for dir in $(SUBDIRS); do \
-		$(MAKE) $(MFLAGS) -C $${dir} bytecompile; \
-	done
-
-
 .PHONY: all all-bytecompile bindist clean distclean install autoloads
 
-autoloads:
-	for dir in $(SUBDIRS); do \
-		$(MAKE) $(MFLAGS) -C $${dir} autoloads; \
-	done
+# The toplevel has slightly different rules so we do not use iterate.rules
+# directly
+ 
+ALL_TARGETS= $(SUBDIRS:=/all.target)
+AUTOLOADS_TARGETS= $(SUBDIRS:=/autoloads.target)
+BYTECOMPILE_TARGETS= $(SUBDIRS:=/bytecompile.target)
+BINDIST_TARGETS= $(SUBDIRS:=/bindist.target)
+CLEAN_TARGETS= $(SUBDIRS:=/clean.target)
+DISTCLEAN_TARGETS= $(SUBDIRS:=/distclean.target)
+INSTALL_TARGETS = $(XEMACS_PACKAGES:=/XEMACS.install) $(MULE_PACKAGES:=/MULE.install) 
+
+# At some point we might have dependencies here...
+
+%.target:
+	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) $(*F)
+
+%.install:
+	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) STAGING=$($(*F:=_STAGING)) install
+
+all-bytecompile: autoloads bytecompile
+
+autoloads: $(AUTOLOADS_TARGETS)
+
+bytecompile: $(BYTECOMPILE_TARGETS)
+
+bindist-real: $(BINDIST_TARGETS)
+
+bindist: autoloads bindist-real
+
+clean: $(CLEAN_TARGETS)
+
+distclean: $(DISTCLEAN_TARGETS)
 
 World: distclean install
 
-install: all
-ifneq ('$(MULE_PACKAGES)','')
-	for dir in $(MULE_PACKAGES); do \
-		$(MAKE) STAGING=$(MULE_STAGING) $(MFLAGS) -C $${dir} install; \
-	done
-endif
-ifneq ('$(XEMACS_PACKAGES)','')
-	for dir in $(XEMACS_PACKAGES); do \
-		$(MAKE) STAGING=$(XEMACS_STAGING) $(MFLAGS) -C $${dir} install; \
-	done
-endif
+install: all $(INSTALL_TARGETS)
 
-bindist:
-	for dir in $(SUBDIRS); do \
-		$(MAKE) $(MFLAGS) -C $${dir} autoloads; \
-	done
-	for dir in $(SUBDIRS); do \
-		$(MAKE) $(MFLAGS) -C $${dir} bindist; \
-	done
-
-clean:
-	for dir in $(SUBDIRS); do \
-		$(MAKE) $(MFLAGS) -C $${dir} clean; \
-	done
-
-distclean:
-	for dir in $(SUBDIRS); do \
-		$(MAKE) $(MFLAGS) -C $${dir} distclean; \
-	done

@@ -45,3 +45,6 @@ clean: $(CLEAN_TARGETS)
 
 distclean: $(DISTCLEAN_TARGETS)
 
+# Local Variables:
+# mode: Makefile
+# end:

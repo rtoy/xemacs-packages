@@ -1,3 +1,8 @@
+2001-02-06  Vin Shelton  <acs@xemacs.org>
+
+	* XEmacs.rules (package-info): Load 'package-info' instead of
+	'package-info.el'.
+
 2001-01-22  Steve Youngs  <youngs@xemacs.org>
 
 	* Local.rules.template: Update comments.

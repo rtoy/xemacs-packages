@@ -1,3 +1,7 @@
+1999-04-17  Karl M. Hegbloom  <psu25682@odin.cc.pdx.edu>
+
+	* Makefile (SUBDIRS): Don't put "mule" in SUBDIRS unless BUILD_MULE=t
+
 1999-06-24  SL Baur  <steve@xemacs.org>
 
 	* package-compile.el: add lookup.

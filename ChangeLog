@@ -1,5 +1,7 @@
 1999-02-15  SL Baur  <steve@xemacs.org>
 
+	* Makefile (bindist): Force autoloads building first.
+
 	* XEmacs.rules (LANG): Ensure vanilla locale for building.
 
 1998-12-08  SL Baur  <steve@altair.xemacs.org>

@@ -1,3 +1,14 @@
+2001-06-18  Ben Wing  <ben@xemacs.org>
+
+	* Local.rules.template (XEMACS_PACKAGES):
+	* Local.rules.template (MULE_PACKAGES):
+	Give default values for these variables that will generally work.
+	
+	* XEmacs.rules (extraclean):
+	* XEmacs.rules (distclean):
+	* XEmacs.rules (elcclean):
+	Document what these mean.
+
 2001-05-15  Steve Youngs  <youngs@xemacs.org>
 
 	* INSTALL: Update to reflect the 'flat' package tree.

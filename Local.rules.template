@@ -67,14 +67,14 @@ MULE_STAGING = ${XEMACS_PACKAGES_BASE}/../mule-packages
 #
 # The format for this is: xemacs-packages/pkg1 xemacs-packages/pkg2...
 # e.g. xemacs-packages/xemacs-base xemacs-packages/bbdb
-XEMACS_PACKAGES = 
+XEMACS_PACKAGES = xemacs-packages
 
 # Mule packages or groups of packages to install.  'make bindist'
 # doesn't look at this, it's used by 'make install'.
 #
 # The format for this is: mule-packages/pkg1 mule-packages/pkg2...
 # e.g. mule-packages/mule-base mule-packages/skk
-MULE_PACKAGES = 
+MULE_PACKAGES = mule-packages
 
 ###################### End settings that commonly need to be changed
 

@@ -99,10 +99,25 @@ mostlyclean: clean
 
 extraclean: clean
 
+# distclean is what you use when making a distribution.  it should be the
+# absolutely most aggressive clean target out there -- everything that
+# can get rebuilt should be killed.  everything.  
+
 distclean: extraclean
 	rm -f core *~ $(AUTOLOAD_PATH)/auto-autoloads.el \
 		$(AUTOLOAD_PATH)/custom-load.el package-info \
 		$(AUTOLOAD_PATH)/_pkg.el
+
+# elcclean is for when you want to rebuild after having made a small
+# change, e.g. you cvs updated and got new versions of some files.
+# The problem is that if you just `make', you may have the situation
+# where a file that needs to be compiled depends on some other
+# just-updated .el file, and in particular on the features that were
+# added in the update.  In such a case, the .elc file is out-of-date
+# w.r.t the .el file, and you'd get the .elc file (missing the
+# necessary features), and error.  So we remove the minimum number of
+# .elc required to ensure that the build will always succeed
+# correctly.
 
 elcclean:
 	$(XEMACS) $(VANILLA) -batch -l $(PACKAGE_CLEAN)

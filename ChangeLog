@@ -1,3 +1,13 @@
+2001-04-19  Andy Piper  <andy@xemacs.org>
+
+	* package-net-packages.el: New.
+
+	* XEmacs.rules (package-info): use '-l package-info.elc'.  Without
+	the .elc Windows was loading the package-info snippet from 
+	package-index.
+
+	* XEmacs.rules (setup-info): New.
+
 2001-02-24  Ben Wing  <ben@xemacs.org>
 
 	* package-clean.el:

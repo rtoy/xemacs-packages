@@ -131,7 +131,7 @@ endif
 package-info : package-info.in Makefile $(AUTOLOAD_PATH)/_pkg.el \
 		$(pkg_tar).gz $(pkg_tar).bz2
 	$(XEMACS) $(VANILLA) -batch \
-		-l package-info -f batch-update-package-info \
+		-l package-info.elc -f batch-update-package-info \
 		'$(VERSION)' $(PKG_TAR_GZ) \
 		'$(REQUIRES)' \
 		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
@@ -186,7 +186,12 @@ $(AUTOLOAD_PATH)/_pkg.el: Makefile
 .PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo
 .PHONY: bindist install autoloads
 
-bindist: binkit package-info
+bindist: binkit package-info setup-info
+
+setup-info:
+	$(XEMACS) $(VANILLA) -batch -l $(XEMACS_PACKAGES_BASE)/package-net-packages.el \
+		-l $(STAGING)/$(PACKAGE_INDEX) \
+		-f package-net-packages-batch-convert-index-to-ini $(STAGING)
 
 install: binkit
 

@@ -1,3 +1,8 @@
+1998-01-17  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules (bindist): New target.  Rebuilds a binary kit and
+	packge-info without making a source kit.
+
 1998-01-16  SL Baur  <steve@altair.xemacs.org>
 
 	* XEmacs.rules: Add variable EXTRA_SOURCES which get added in

@@ -95,6 +95,9 @@ _pkg.el: Makefile
 
 .PHONY: srckit-std
 .PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo
+.PHONY: bindist
+
+bindist: binkit package-info
 
 srckit-std: distclean
 	if [ ! -d $(STAGING) ]; then mkdir -p $(STAGING); fi

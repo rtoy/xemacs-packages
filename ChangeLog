@@ -1,5 +1,7 @@
 2003-10-25  Norbert Koch  <viteno@xemacs.org>
 
+	* xemacs-packages/Makefile (PACKAGES): Hook up riece to the build.
+
 	* MAINTAINERS: New package riece, successor to liece.  Daiki Ueno
 	is its maintainer.
 

@@ -18,4 +18,6 @@
 PACKAGES= mule-base \
 	locale leim lookup edict egg-its skk mule-ucs
 
+ASSUMED_PRESENT = xemacs-base fsf-compat viper apel cookie elib
+
 include ../iterate.rules

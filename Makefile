@@ -21,7 +21,7 @@ SUBDIRS = xemacs-packages
 # Use a Local.rules file to specify what you wish to have installed
 XEMACS_PACKAGES_BASE := $(shell pwd)
 
-all:: all-bytecompile
+all:: bytecompile
 
 include Local.rules.mk
 -include Local.rules
@@ -56,7 +56,7 @@ endif
 %.install:
 	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) STAGING=$($(*F:=_STAGING)) install
 
-all-bytecompile: elcclean autoloads bytecompile
+all-bytecompile: autoloads bytecompile html
 
 autoloads: $(AUTOLOADS_TARGETS)
 
@@ -64,7 +64,7 @@ bytecompile: $(BYTECOMPILE_TARGETS)
 
 bindist-real: $(BINDIST_TARGETS)
 
-bindist: autoloads bindist-real
+bindist: bindist-real
 
 clean: $(CLEAN_TARGETS)
 

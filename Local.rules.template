@@ -144,6 +144,9 @@ VANILLA = -vanilla
 # path to makeinfo
 #
 MAKEINFO = makeinfo
+#
+# path to texi2html
+TEXI2HTML = texi2html
 
 ifneq ('$(symlink)','t')
  # path to GNU cp, use the latter if no GNU cp is available.

@@ -1,3 +1,45 @@
+2002-01-12  Jan Vroonhof  <jan@xemacs.org>
+
+	* mule-packages/Makefile (ASSUMED_PRESENT):
+		Add packages from xemacs-packages we reference
+
+2002-01-12  Jan Vroonhof  <jan@xemacs.org>
+
+	* Local.rules.template (TEXI2HTML):
+		Add template definition for command
+	
+	* Makefile (all):
+	* Makefile (all-bytecompile):
+	* Makefile (bindist):
+		No longer do global bytecompile and autoload
+	
+	* XEmacs.rules (BOOT_XEMACS):
+		Represents an XEmacs that as the required packages
+		set up, but is otherwise clean.
+		Used for bytecompiling and other package building.
+
+	* XEmacs.rules (DEPENDS_FILE_NAME):
+		Generate a file (default 'pdepends.mk') that
+		contains the cross dependencies to the required packages
+	
+	* XEmacs.rules (clean):
+		Remove pdepends.mk
+
+	* iterate.rules (ALL_TARGETS):
+		Implement dependencies between the various stages
+		of compiling a package. bindist -> bytecompile -> autoload
+	
+	* iterate.rules (ASSUMED_TARGETS):
+		Set of targets to ignore (cross-directory depends)
+	
+	* iterate.rules (DEPENDS_FILES):
+		Rebuild/Load in all the pdepends.mk files
+		These set up correct intra package dependencies
+	
+	* package-compile.el:
+		No longer automatically start a byte-compile
+		Setup data-direcotory-lisy
+
 2002-01-06  Adrian Aichner  <adrian@xemacs.org>
 
 	* Makefile (.PHONY): Add html.

@@ -194,26 +194,38 @@
 (when command-line-args-left
   (pop command-line-args-left))
 
-;; Setup load-path and load necessary auto-autoloads
+;; Setup load-path, data-directory-list and load necessary auto-autoloads
 (while depends
-  (let ((dir (package-name-to-directory (car depends))))
+  (let* ((dir (package-name-to-directory (car depends)))
+	 (etc-dir (expand-file-name "etc" dir)))
     (when (null dir)
       (error "%s is not in `package-directory-map'.  See: package-compile.el"
 	     dir))
     (push dir load-path)
+    ;; This assumes package has layout *-packages/package/etc/package
+    ;; This is the case for the only package it matters at the time or writing
+    ;; which is ps-print
+    (if (file-directory-p (expand-file-name (car depends) etc-dir))
+	(push (file-name-as-directory etc-dir) data-directory-list))
     (load (expand-file-name "auto-autoloads" dir))
     (pop depends)))
 
 ;; Lastly, add the current directory
 (push default-directory load-path)
 
+;; Let it be known we are running under special circomstances
+(defvar bootstrap-in-progress t)
+
 ;;; Step 3, perform the requested bytecompilation
+
+;; (message "datadirs = %s" data-directory-list)
 
 ;; (prin1 "Load path = ")
 ;; (prin1 load-path)
 ;; (terpri)
 
-(batch-byte-compile)
+;; Let the caller specify command
+;(batch-byte-compile)
 
 (provide 'package-compile)
 

@@ -19,7 +19,6 @@
 # Used by all the subdirectory makefiles..
 #
 
-ALL_TARGETS= $(PACKAGES:=/all.target)
 AUTOLOADS_TARGETS= $(PACKAGES:=/autoloads.target)
 BYTECOMPILE_TARGETS= $(PACKAGES:=/bytecompile.target)
 BINDIST_TARGETS= $(PACKAGES:=/bindist.target)
@@ -29,18 +28,32 @@ ELCCLEAN_TARGETS= $(PACKAGES:=/elcclean.target)
 HTML_TARGETS= $(PACKAGES:=/html.target)
 INSTALL_TARGETS= $(PACKAGES:=/install.target)
 
-.PHONY: all autoloads bytecompile bindist clean distclean elcclean html install
+ALL_TARGETS = \
+	$(AUTOLOADS_TARGETS)  $(BYTECOMPILE_TARGETS) $(BINDIST_TARGETS) \
+	$(CLEAN_TARGETS) $(DISTCLEAN_TARGETS) $(ELCCLEAN_TARGETS) \
+	$(HTML_TARGETS) $(INSTALL_TARGETS)
 
-# At some point we might have dependencies here..
+.PHONY: $(ALL_TARGETS) autoloads bytecompile bindist clean \
+	distclean elcclean html install
 
-%.target:
+# Master rule to pass down actual building 
+# Use a static pattern because of the extra dependencies
+$(ALL_TARGETS) : %.target:
 	[ -d $(*D) ] && $(MAKE) $(MFLAGS) -C $(*D) $(*F)
 
-all: $(ALL_TARGETS)
+# Standard dependencies
 
-autoloads: $(AUTOLOADS_TARGETS)
+$(BYTECOMPILE_TARGETS): %bytecompile.target: %autoloads.target
+
+$(BINDIST_TARGETS)= %bindist.target: %bytecompile.target %html.target
+
+$(INSTALL_TARGETS)= %install.target: %bytecompile.target %html.target
+
+# Main driver rules
 
 bytecompile: $(BYTECOMPILE_TARGETS)
+
+autoloads: $(AUTOLOADS_TARGETS)
 
 bindist: $(BINDIST_TARGETS)
 
@@ -53,6 +66,29 @@ elcclean: $(ELCCLEAN_TARGETS)
 html: $(HTML_TARGETS)
 
 install: $(INSTALL_TARGETS)
+
+# Optionally put in fake rules for packages that we cannot
+# recursively build (yet)
+ifneq ($(strip (ASSUMED_PRESENT)),)
+ASSUMED_TARGETS = $(foreach package,$(ASSUMED_PRESENT), \
+			$(package)/autoloads.target \
+			$(package)/compile.target )
+
+$(ASSUMED_TARGETS):
+	-
+endif
+
+# Generate and load inter-package dependencies
+
+DEPENDS_FILE_NAME = pdepends.mk
+
+DEPENDS_FILES = $(PACKAGES:=/$(DEPENDS_FILE_NAME))
+
+$(DEPENDS_FILES): %$(DEPENDS_FILE_NAME): %Makefile ../XEmacs.rules
+	$(MAKE) $(MFLAGS) -C $(*D) TARGET_BASE=$(dir $(*D)) \
+		$(DEPENDS_FILE_NAME)
+
+include $(DEPENDS_FILES)
 
 # Local Variables:
 # mode: Makefile

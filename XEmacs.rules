@@ -25,6 +25,8 @@ XEMACS_PACKAGES_BASE := $(shell while [ ! -f XEmacs.rules ]; do \
                                 done;		\
                                 pwd)
 
+DEPENDS_FILE_NAME = pdepends.mk
+
 # Make this the first target
 bytecompile:: all
 
@@ -98,8 +100,11 @@ PACKAGE_NET_PACKAGES = $(XEMACS_PACKAGES_BASE)/package-net-packages.el
 PACKAGE_STAGING = $(STAGING)
 endif
 
+# Behaves like an XEmacs with the required packages setup
+BOOT_XEMACS= $(XEMACS) -no-autoloads -batch $(PRELOADS) -l $(PACKAGE_COMPILE) -- $(REQUIRES) --
+
 %.elc: %.el
-	$(XEMACS) -no-autoloads -batch $(PRELOADS) -l $(PACKAGE_COMPILE) -- $(REQUIRES) -- $<
+	$(BOOT_XEMACS) -f batch-byte-compile $<
 
 all:: $(AUTOLOAD_PATH)/_pkg.el
 
@@ -108,7 +113,7 @@ dist:: srckit binkit package-info
 clean::
 	rm -f $(ELCS) $(HTML_FILES) $(INFO_FILES) \
 	$(AUTOLOAD_PATH)/auto-autoloads.elc $(AUTOLOAD_PATH)/custom-load.elc \
-	$(EXTRA_OBJS)
+	$(EXTRA_OBJS) $(DEPENDS_FILE_NAME)
 
 mostlyclean: clean
 
@@ -719,6 +724,29 @@ binkit-sourceinfo: binkit-common
 binkit-sourcedata: binkit-common
 
 binkit-sourcedatainfo: binkit-common
+
+# Export dependencies for outer make file usage
+
+# Passed in from outer Make
+TARGET_BASE=
+
+# Build depends is a clean version of Requires
+BDEPENDS=$(strip $(filter-out $(PACKAGE),$(REQUIRES)))
+
+$(DEPENDS_FILE_NAME): Makefile $(XEMACS_PACKAGES_BASE)/XEmacs.rules
+ifneq ($(TARGET_BASE),)
+	-rm $(DEPENDS_FILE_NAME)
+	@echo Creating $(DEPENDS_FILE_NAME)
+	@echo > $(DEPENDS_FILE_NAME)
+ifneq ($(BDEPENDS),)
+	@echo $(TARGET_BASE)$(PACKAGE)/autoloads.target: \
+		$(TARGET_BASE)$(BDEPENDS:=/autoloads.target) \
+		>>$(DEPENDS_FILE_NAME)
+	@echo $(TARGET_BASE)$(PACKAGE)/compile.target: \
+		$(TARGET_BASE)$(BDEPENDS:=/compile.target) \
+		>>$(DEPENDS_FILE_NAME)
+endif
+endif
 
 # Local Variables:
 # mode: makefile

@@ -1,3 +1,22 @@
+1998-10-12  SL Baur  <steve@altair.xemacs.org>
+
+	* hack-package-index.el: New file.  Dynamically update
+	package-get-base.el as tarballs are created.
+
+	* XEmacs.rules: Add install: target.  Add autoloads: target.
+	Add support for multiple lisp directories, multiple data directories.
+
+1998-10-11  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules (AUTOLOAD_PATH): New variable.  Defaults to ".".
+	Change when the source is in a subdirectory.
+
+1998-10-10  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules (binkit-common): New rule.  Obsoletes the
+	individual binkit-* rules.
+	- Add support for installing files in lib-src.
+	
 1998-10-01  SL Baur  <steve@altair.xemacs.org>
 
 	* XEmacs.rules (SOURCE_FILES_TO_COPY): Add _pkg.el.

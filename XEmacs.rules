@@ -43,6 +43,8 @@ VANILLA = -vanilla
 MAKEINFO = makeinfo
 
 # path to directory to install packages in
+# This doesn't work and may never work.  For now use
+# make STAGING=/where/your/runtime/packages/are install
 PKGDIR = /usr/local/lib/xemacs/xemacs-packages
 
 # path to directory for builing kits for distribution
@@ -52,11 +54,18 @@ STAGING = /tmp/staging
 RCOPY = cp -a
 # RCOPY = cp -pR
 
+# Only in rare cases will you need to override this
+ifeq '$(AUTOLOAD_PATH)' ''
+AUTOLOAD_PATH = .
+endif
+
 # Override or add to this in the package Makefile if necessary
-GENERATED = auto-autoloads.elc
+GENERATED = $(AUTOLOAD_PATH)/auto-autoloads.elc
 
 # SOURCE_FILES_TO_COPY = *.el*
-SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) $(MULE_ELCS) $(MULE_ELCS:.elc=.el) $(GENERATED) $(GENERATED:.elc=.el) _pkg.el
+SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) \
+	$(MULE_ELCS) $(MULE_ELCS:.elc=.el) \
+	$(GENERATED) $(GENERATED:.elc=.el) _pkg.el
 
 # Non configurable portion follows
 
@@ -76,24 +85,26 @@ all:: _pkg.el
 dist:: srckit binkit package-info
 
 clean::
-	rm -f $(ELCS) $(PACKAGE).info* auto-autoloads.elc custom-load.elc
+	rm -f $(ELCS) $(PACKAGE).info* $(AUTOLOAD_PATH)/auto-autoloads.elc \
+		$(AUTOLOAD_PATH)/custom-load.elc
 
 mostlyclean: clean
 
 extraclean: clean
 
 distclean: extraclean
-	rm -f core *~ auto-autoloads.el custom-load.el package-info _pkg.el
+	rm -f core *~ $(AUTOLOAD_PATH)/auto-autoloads.el \
+		$(AUTOLOAD_PATH)/custom-load.el package-info _pkg.el
 
-auto-autoloads.el : $(ELCS:.elc=.el) _pkg.el
+$(AUTOLOAD_PATH)/auto-autoloads.el : $(ELCS:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
 	$(XEMACS) $(VANILLA) -batch \
 		-eval "(setq autoload-package-name \"$(PACKAGE)\")" \
-		-l autoload -f batch-update-directory .
-	@rm -f auto-autoloads.el~
+		-l autoload -f batch-update-directory $(AUTOLOAD_PATH)
+	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 
-custom-load.el : $(ELCS:.elc=.el)
+$(AUTOLOAD_PATH)/custom-load.el : $(ELCS:.elc=.el)
 	$(XEMACS) $(VANILLA) -batch -l cus-dep \
-		-f Custom-make-dependencies .
+		-f Custom-make-dependencies $(AUTOLOAD_PATH)
 
 package-info : package-info.in Makefile _pkg.el $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz
 	$(XEMACS) $(VANILLA) -batch \
@@ -101,6 +112,17 @@ package-info : package-info.in Makefile _pkg.el $(STAGING)/$(PACKAGE)-$(VERSION)
 		'$(VERSION)' $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz \
 		'$(REQUIRES)' \
 		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
+	$(XEMACS) $(VANILLA) -batch \
+		-l ../../hack-package-index.el -f batch-hack-package-index \
+			$(PACKAGE) package-info $(STAGING)/package-index
+
+$(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar.gz: $(STAGING)/$(MANIFEST)
+	@(cd $(STAGING); \
+	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*)
+	(cd $(STAGING); \
+	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar \
+		`cat $(MANIFEST)`; \
+	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
 
 _pkg.el: Makefile
 	@echo Creating _pkg.el
@@ -111,9 +133,13 @@ _pkg.el: Makefile
 
 .PHONY: srckit-std
 .PHONY: binkit-sourceonly binkit-sourceinfo binkit-sourcedata binkit-sourcedatainfo
-.PHONY: bindist
+.PHONY: bindist install
 
 bindist: binkit package-info
+
+install: binkit
+
+autoloads: $(AUTOLOAD_PATH)/auto-autoloads.el
 
 srckit-std: distclean
 	if [ ! -d $(STAGING) ]; then mkdir -p $(STAGING); fi
@@ -122,87 +148,215 @@ srckit-std: distclean
 	$(TAR) $(EXCLUDES) -cf $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar $(CATEGORY)/$(PACKAGE))
 	gzip -v9 $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar
 
-binkit-sourceonly: all
-	-rm -rf $(STAGING)/lisp/$(PACKAGE)
-	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-	-rm -f $(STAGING)/$(MANIFEST)
-	-mkdir -p $(STAGING)/pkginfo
-	-touch $(STAGING)/$(MANIFEST)
+binkit-common: all
+	(if test -d $(STAGING); then \
+		cd $(STAGING); \
+		if test -f $(MANIFEST); then \
+			rm -rf `cat $(MANIFEST)`; \
+		fi; \
+	fi;)
+ifneq '$(ELCS)' ''
+	@-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+endif
+ifneq '$(ELCS_1)' ''
+	@-mkdir -p $(STAGING)/lisp/$(ELCS_1_DEST)
+endif
+ifneq '$(INFO_FILES)' ''
+	@-mkdir -p $(STAGING)/info
+	@-mkdir -p $(STAGING)/man/$(PACKAGE)
+endif
+ifneq '$(DATA_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_DEST)
+endif
+ifneq '$(DATA_1_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_1_DEST)
+endif
+ifneq '$(DATA_2_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_2_DEST)
+endif
+ifneq '$(DATA_3_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_3_DEST)
+endif
+ifneq '$(DATA_4_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_4_DEST)
+endif
+ifneq '$(DATA_5_FILES)' ''
+	@-mkdir -p $(STAGING)/etc/$(DATA_5_DEST)
+endif
+ifneq '$(LIBSRC_FILES)' ''
+	@-mkdir -p $(STAGING)/lib-src
+endif
+	@-mkdir -p $(STAGING)/pkginfo
+ifneq '$(ELCS)' ''
 	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
-	(cd $(STAGING); \
-	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	ls -1 $(MANIFEST) lisp/$(PACKAGE)/* > $(MANIFEST); \
-	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar \
-		$(MANIFEST) lisp/$(PACKAGE); \
-	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
-
-binkit-sourceinfo: all
-	-rm -rf $(STAGING)/lisp/$(PACKAGE)
-	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-	-mkdir -p $(STAGING)/info
-	-(cd $(STAGING)/info; rm -rf $(notdir $(INFO_FILES)))
-	-(cd $(STAGING)/man; rm -rf $(PACKAGE))
-	-mkdir -p $(STAGING)/man/$(PACKAGE)
-	-rm -f $(STAGING)/$(MANIFEST)
-	-mkdir -p $(STAGING)/pkginfo
-	-touch $(STAGING)/$(MANIFEST)
-	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+endif
+ifneq '$(ELCS_1)' ''
+	$(RCOPY) $(ELCS_1_FILES) $(STAGING)/lisp/$(ELCS_1_DEST)
+endif
+ifneq '$(INFO_FILES)' ''
 	$(RCOPY) $(INFO_FILES) $(STAGING)/info
 	$(RCOPY) $(TEXI_FILES) $(STAGING)/man/$(PACKAGE)
-	(cd $(STAGING); \
-	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	ls -1 $(MANIFEST) lisp/$(PACKAGE)/* man/$(PACKAGE)/* \
-		$(patsubst %,info/%, $(notdir $(INFO_FILES))) > $(MANIFEST); \
-	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
-		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
-		man/$(PACKAGE) $(MANIFEST); \
-	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
-
-binkit-sourcedata: all
-	-rm -rf $(STAGING)/lisp/$(PACKAGE)
-	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-	-rm -rf $(patsubst %, $(STAGING)/etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES)))
-	-mkdir -p $(STAGING)/etc/$(DATA_DEST)
-	-rm -f $(STAGING)/$(MANIFEST)
-	-mkdir -p $(STAGING)/pkginfo
-	-touch $(STAGING)/$(MANIFEST)
-	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+endif
+ifneq '$(DATA_FILES)' ''
 	$(RCOPY) $(DATA_FILES) $(STAGING)/etc/$(DATA_DEST)
+endif
+ifneq '$(DATA_1_FILES)' ''
+	$(RCOPY) $(DATA_1_FILES) $(STAGING)/etc/$(DATA_1_DEST)
+endif
+ifneq '$(DATA_2_FILES)' ''
+	$(RCOPY) $(DATA_2_FILES) $(STAGING)/etc/$(DATA_2_DEST)
+endif
+ifneq '$(DATA_3_FILES)' ''
+	$(RCOPY) $(DATA_3_FILES) $(STAGING)/etc/$(DATA_3_DEST)
+endif
+ifneq '$(DATA_4_FILES)' ''
+	$(RCOPY) $(DATA_4_FILES) $(STAGING)/etc/$(DATA_4_DEST)
+endif
+ifneq '$(DATA_5_FILES)' ''
+	$(RCOPY) $(DATA_5_FILES) $(STAGING)/etc/$(DATA_5_DEST)
+endif
+ifneq '$(LIBSRC_FILES)' ''
+	$(RCOPY) $(LIBSRC_FILES) $(STAGING)/lib-src
+endif
 	(cd $(STAGING); \
-	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	ls -1 lisp/$(PACKAGE)/* \
-		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
-		$(MANIFEST) > $(MANIFEST); \
-	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
-		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
-		$(MANIFEST); \
-	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
+	ls -1 $(MANIFEST) > $(MANIFEST))
+ifneq '$(ELCS)' ''
+	@(cd $(STAGING); \
+	ls -1 lisp/$(PACKAGE)/ChangeLog \
+		$(patsubst %, lisp/$(PACKAGE)/%, $(notdir $(SOURCE_FILES_TO_COPY))) \
+		$(patsubst %, lisp/$(PACKAGE)/%, $(notdir $(EXTRA_SOURCES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(ELCS_1)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, lisp/$(ELCS_1_DEST)/%, $(notdir $(ELCS_1_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(INFO_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 man/$(PACKAGE)/* \
+		$(patsubst %,info/%, $(notdir $(INFO_FILES))) >> $(MANIFEST))
+endif
+ifneq '$(DATA_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(DATA_1_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_1_DEST)/%, $(notdir $(DATA_1_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(DATA_2_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_2_DEST)/%, $(notdir $(DATA_2_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(DATA_3_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_3_DEST)/%, $(notdir $(DATA_3_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(DATA_4_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_4_DEST)/%, $(notdir $(DATA_4_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(DATA_5_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %, etc/$(DATA_5_DEST)/%, $(notdir $(DATA_5_FILES))) \
+		>> $(MANIFEST))
+endif
+ifneq '$(LIBSRC_FILES)' ''
+	@(cd $(STAGING); \
+	ls -1 $(patsubst %,lib-src/%, $(notdir $(LIBSRC_FILES))) >> $(MANIFEST))
+endif
 
-binkit-sourcedatainfo: all
-	-rm -rf $(STAGING)/lisp/$(PACKAGE)
-	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
-	-mkdir -p $(STAGING)/info
-	-(cd $(STAGING)/info; rm -rf $(notdir $(INFO_FILES)))
-	-(cd $(STAGING)/man; rm -rf $(PACKAGE))
-	-mkdir -p $(STAGING)/man/$(PACKAGE)
-	-rm -rf $(patsubst %, $(STAGING)/etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES)))
-	-mkdir -p $(STAGING)/etc/$(DATA_DEST)
-	-rm -f $(STAGING)/$(MANIFEST)
-	-mkdir -p $(STAGING)/pkginfo
-	-touch $(STAGING)/$(MANIFEST)
-	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
-	$(RCOPY) $(INFO_FILES) $(STAGING)/info
-	$(RCOPY) $(TEXI_FILES) $(STAGING)/man/$(PACKAGE)
-	$(RCOPY) $(DATA_FILES) $(STAGING)/etc/$(DATA_DEST)
-	(cd $(STAGING); \
-	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	ls -1 lisp/$(PACKAGE)/* man/$(PACKAGE)/* \
-		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
-		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
-		$(MANIFEST) > $(MANIFEST); \
-	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
-		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
-		man/$(PACKAGE) \
-		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
-		$(MANIFEST); \
-	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
+binkit-sourceonly: binkit-common
+#binkit-sourceonly: all
+#	-rm -rf $(STAGING)/lisp/$(PACKAGE)
+#	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+#	-rm -f $(STAGING)/$(MANIFEST)
+#	-mkdir -p $(STAGING)/pkginfo
+#	-touch $(STAGING)/$(MANIFEST)
+#	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+#	(cd $(STAGING); \
+#	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+#	ls -1 $(MANIFEST) lisp/$(PACKAGE)/* > $(MANIFEST); \
+#	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar \
+#		$(MANIFEST) lisp/$(PACKAGE); \
+#	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
+
+binkit-sourceinfo: binkit-common
+#binkit-sourceinfo: all
+#	-rm -rf $(STAGING)/lisp/$(PACKAGE)
+#	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+#	-mkdir -p $(STAGING)/info
+#	-(cd $(STAGING)/info; rm -rf $(notdir $(INFO_FILES)))
+#	-(cd $(STAGING)/man; rm -rf $(PACKAGE))
+#	-mkdir -p $(STAGING)/man/$(PACKAGE)
+#	-rm -f $(STAGING)/$(MANIFEST)
+#	-mkdir -p $(STAGING)/pkginfo
+#	-touch $(STAGING)/$(MANIFEST)
+#	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+#	$(RCOPY) $(INFO_FILES) $(STAGING)/info
+#	$(RCOPY) $(TEXI_FILES) $(STAGING)/man/$(PACKAGE)
+#	(cd $(STAGING); \
+#	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+#	ls -1 $(MANIFEST) lisp/$(PACKAGE)/* man/$(PACKAGE)/* \
+#		$(patsubst %,info/%, $(notdir $(INFO_FILES))) > $(MANIFEST); \
+#	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+#		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
+#		man/$(PACKAGE) $(MANIFEST); \
+#	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
+
+binkit-sourcedata: binkit-common
+#binkit-sourcedata: all
+#	-rm -rf $(STAGING)/lisp/$(PACKAGE)
+#	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+#	-rm -rf $(patsubst %, $(STAGING)/etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES)))
+#	-mkdir -p $(STAGING)/etc/$(DATA_DEST)
+#	-rm -f $(STAGING)/$(MANIFEST)
+#	-mkdir -p $(STAGING)/pkginfo
+#	-touch $(STAGING)/$(MANIFEST)
+#	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+#	$(RCOPY) $(DATA_FILES) $(STAGING)/etc/$(DATA_DEST)
+#	(cd $(STAGING); \
+#	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+#	ls -1 lisp/$(PACKAGE)/* \
+#		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+#		$(MANIFEST) > $(MANIFEST); \
+#	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+#		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+#		$(MANIFEST); \
+#	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
+
+binkit-sourcedatainfo: binkit-common
+#binkit-sourcedatainfo: all
+#	-rm -rf $(STAGING)/lisp/$(PACKAGE)
+#	-mkdir -p $(STAGING)/lisp/$(PACKAGE)
+#	-mkdir -p $(STAGING)/info
+#	-(cd $(STAGING)/info; rm -rf $(notdir $(INFO_FILES)))
+#	-(cd $(STAGING)/man; rm -rf $(PACKAGE))
+#	-mkdir -p $(STAGING)/man/$(PACKAGE)
+#	-rm -rf $(patsubst %, $(STAGING)/etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES)))
+#	-mkdir -p $(STAGING)/etc/$(DATA_DEST)
+#	-rm -f $(STAGING)/$(MANIFEST)
+#	-mkdir -p $(STAGING)/pkginfo
+#	-touch $(STAGING)/$(MANIFEST)
+#	$(RCOPY) ChangeLog $(SOURCE_FILES_TO_COPY) $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
+#	$(RCOPY) $(INFO_FILES) $(STAGING)/info
+#	$(RCOPY) $(TEXI_FILES) $(STAGING)/man/$(PACKAGE)
+#	$(RCOPY) $(DATA_FILES) $(STAGING)/etc/$(DATA_DEST)
+#	(cd $(STAGING); \
+#	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
+#	ls -1 lisp/$(PACKAGE)/* man/$(PACKAGE)/* \
+#		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
+#		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+#		$(MANIFEST) > $(MANIFEST); \
+#	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+#		$(patsubst %,info/%, $(notdir $(INFO_FILES))) \
+#		man/$(PACKAGE) \
+#		$(patsubst %, etc/$(DATA_DEST)/%, $(notdir $(DATA_FILES))) \
+#		$(MANIFEST); \
+#	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)

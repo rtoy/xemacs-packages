@@ -50,6 +50,8 @@ all: bad-version
 
 autoloads: all
 
+pdepends.mk: all
+
 bindist: all
 
 bytecompile: all

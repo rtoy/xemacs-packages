@@ -1,3 +1,8 @@
+2002-08-26  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+
+	* Packages released: time   tramp view-process ilisp ocaml  reftex
+	prog-modes psgml-dtds psgml.
+
 2002-08-25  Ville Skyttä  <ville.skytta@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add psgml-dtds.

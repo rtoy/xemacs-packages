@@ -1,5 +1,7 @@
 2004-12-22  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: edit-utils general-docs.
+
 	* Packages released: vc xemacs-base.
 
 	* XEmacs.rules (GENERATED_ELC_DEPENDENCIES): Add _pkg.el.  We need

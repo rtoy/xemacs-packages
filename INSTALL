@@ -7,6 +7,14 @@ IMPORTANT:
 	You MUST create a 'Local.rules' file in the toplevel build
 	directory.  (see below for the format of this file)
 
+Notes for FreeBSD users:
+========================
+	If running FreeBSD there are options for TAR and RCOPY that
+	must be used for package building to work.
+	You must use gmake instead of make for building.
+	gmake can be installed via the devel/gmake port.
+	gtar must be used instead of tar.
+	Install it via archivers/gtar in the ports tree.
 
 * Building:
 -----------

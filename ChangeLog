@@ -1,3 +1,9 @@
+2002-08-04  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+
+	* INSTALL (IMPORTANT): added notes for building on FreeBSD
+
+	* Local.rules.template (EXCLUDES): ditto
+
 2002-08-02  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Packages released: prog-modes.

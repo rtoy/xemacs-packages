@@ -1,6 +1,6 @@
-                                             -*- Outline -*- 
-This file covers building and installing XEmacs Package from CVS
-source.
+                                             -*- Outline -*-
+This file explains how to build and install XEmacs packages from a
+CVS workspace.
 
 IMPORTANT:
 =========
@@ -15,11 +15,11 @@ IMPORTANT:
 	(1) Create a 'Local.rules' file in the toplevel directory and
 	    edit it to suit your needs.  There is a
 	    'Local.rules.template' in the toplevel directory which you
-	    can copy.
+	    can copy and modify.
 
 	(2) Regardless of the type of build you decide upon, it's
 	    probably a good idea to run 'make autoloads' from the
-	    toplevel directory. 
+	    toplevel directory.
 
 	(3) Run either 'make install' or 'make bindist' (not both).
 
@@ -28,18 +28,18 @@ IMPORTANT:
 	    doesn't create package binary tarballs.
 
 	    'make bindist' builds the packages and creates package
-	    binary tarballs and a 'package-index' file in $STAGING
+	    binary tarballs and a 'package-index' file in $STAGING.
 
 ** Building a Single Package:
 
 	All you need to do is run the make from the package's
 	directory.  Say, for example, you want to build the bbdb
-	package: 
+	package:
 	  	- cd ./comm/bbdb
 		- make install or bindist
 
 	You can build a category of packages just as easily.  For
-	example, if you want to build all the packages in ./libs
+	example, if you want to build all the packages in ./libs:
 		- cd ./libs
 		- make install or bindist
 
@@ -68,9 +68,9 @@ IMPORTANT:
 
 ** Installing after a 'make bindist'
 
-	M-x pui-add-install-directory 
+	M-x pui-add-install-directory
 		- enter the value of $XEMACS_STAGING
-	M-x package-get-update-base 
+	M-x package-get-update-base
 		- enter '$XEMACS_STAGING/package-index'
 	M-x pui-list-packages
 		- select the packages you want to install
@@ -98,15 +98,15 @@ IMPORTANT:
 ---------------------
 
 These are the variables in 'Local.rules' that you will need to
-address. 
+address.
 
-	symlink = 
+	symlink =
 		Set this to 't' if you want to do a "run in place".
-		Setting this doesn't work well with 'make bindist'
+		Setting this doesn't work well with 'make bindist'.
 
 	XEMACS_PACKAGES =
-		This is where you set the normal packages that you
-		want to install. eg:
+		This is where you list the the normal (i.e. non-mule)
+		packages that you want to install. eg:
 			XEMACS_PACKAGES = libs/xemacs-base comm/bbdb
 
 	XEMACS_STAGING = ${XEMACS_PACKAGES_BASE}/../Packages
@@ -143,15 +143,20 @@ address.
 		The path to your tar program
 
 	BZIP2 =
-		If you want bzip2 tarballs, set this.
+		If you want tarballs compressed usng bzip2 instead of
+		gzip, set this to the path to bzip2.
 
 	MAKEINFO = makeinfo
 		The path to your makeinfo program
 
 * Notes:
 --------
-	(1) There have been a couple of reports that when you do an
-	    initial check-out of the xemacs-packages module from CVS
-	    sometimes the files 'Local.rules.template' & 'Local.rules.mk'
-	    don't get checked out.  If this happens to you, try doing a
-	    'cvs update'.  That should grab those files.
+	(1) Be sure to include the line
+		update -Pd
+	    in your ~/.cvsrc file.  There seems to be CVS server bug
+	    that results in incomplete checkouts of the
+	    xemacs-packages module from CVS.  In particular, the files
+	    `Local.rules.template' and `Local.rules.mk' might not get
+	    checked out.  The problem is fixed by doing a `cvs update'
+	    with the -Pd flags specified.  See http://cvs.xemacs.org/
+	    for more details on using the CVS repository.

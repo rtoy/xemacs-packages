@@ -4,7 +4,7 @@
 # the full / rooted path to the directory where this "Local.rules"
 # makefile is supposed to be.  Don't override it here.
 
-###################### Begin settings that commonly need to be changed
+##################### Begin settings that commonly need to be changed
 
 # When `t', a symlink tree will be built for running a live CVS
 # checkout.  Requires GNU `cp', and that you configure your XEmacs
@@ -76,7 +76,7 @@ XEMACS_PACKAGES = xemacs-packages
 # e.g. mule-packages/mule-base mule-packages/skk
 MULE_PACKAGES = mule-packages
 
-###################### End settings that commonly need to be changed
+##################### End settings that commonly need to be changed
 
 PACKAGE_INDEX = package-index
 

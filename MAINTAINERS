@@ -1,0 +1,127 @@
+------------------------------------------------------------------------
+xemacs-packages       Maintainer
+------------------------------------------------------------------------
+ada                   XEmacs Development Team <xemacs-beta@xemacs.org>
+apel                  XEmacs Development Team <xemacs-beta@xemacs.org>
+auctex                XEmacs Development Team <xemacs-beta@xemacs.org>
+bbdb                  Ronan Waide <waider@waider.ie>
+build                 Adrian Aichner <adrian@xemacs.org>
+calc                  XEmacs Development Team <xemacs-beta@xemacs.org>
+calendar              XEmacs Development Team <xemacs-beta@xemacs.org>
+cc-mode               Martin Stjernholm <bug-cc-mode@gnu.org>
+clearcase             Michael Diers <mdiers@elego.de>
+cookie                XEmacs Development Team <xemacs-beta@xemacs.org>
+crisp                 XEmacs Development Team <xemacs-beta@xemacs.org>
+c-support             XEmacs Development Team <xemacs-beta@xemacs.org>
+debug                 XEmacs Development Team <xemacs-beta@xemacs.org>
+dictionary            Torsten Hilbrich <dictionary@myrkr.in-berlin.de>
+dired                 Mike Sperber <sperber@informatik.uni-tuebingen.de>
+docbookide            XEmacs Development Team <xemacs-beta@xemacs.org>
+ecb                   Klaus Berndl <klaus.berndl@sdm.de>
+ecrypto               Simon Josefsson <simon@josefsson.org>
+edebug                XEmacs Development Team <xemacs-beta@xemacs.org>
+ediff                 Michael Kifer <kifer@cs.sunysb.edu>
+edit-utils            XEmacs Development Team <xemacs-beta@xemacs.org>
+edt                   XEmacs Development Team <xemacs-beta@xemacs.org>
+efs                   Mike Sperber <sperber@informatik.uni-tuebingen.de>
+eieio                 Eric Ludlam <zappo@gnu.org>
+elib                  XEmacs Development Team <xemacs-beta@xemacs.org>
+emerge                XEmacs Development Team <xemacs-beta@xemacs.org>
+eshell                John Wiegley <johnw@gnu.org>
+ess                   A.J. Rossini <rossini@xemacs.org>
+eterm                 XEmacs Development Team <xemacs-beta@xemacs.org>
+eudc                  Oscar Figueiredo <oscar@xemacs.org>
+footnote              SL Baur <steve@xemacs.org>
+forms                 XEmacs Development Team <xemacs-beta@xemacs.org>
+fortran-modes         XEmacs Development Team <xemacs-beta@xemacs.org>
+frame-icon            XEmacs Development Team <xemacs-beta@xemacs.org>
+fsf-compat            XEmacs Development Team <xemacs-beta@xemacs.org>
+games                 Glynn Clements <glynn@sensei.co.uk>
+general-docs          XEmacs Development Team <xemacs-beta@xemacs.org>
+gnats                 XEmacs Development Team <xemacs-beta@xemacs.org>
+gnus                  XEmacs Development Team <xemacs-beta@xemacs.org>
+haskell-mode          XEmacs Development Team <xemacs-beta@xemacs.org>
+hm--html-menus        XEmacs Development Team <xemacs-beta@xemacs.org>
+ibuffer               John Paul Wallington <jpw@shootybangbang.com>
+idlwave               Carsten Dominik <dominik@astro.uva.nl>
+igrep                 XEmacs Development Team <xemacs-beta@xemacs.org>
+ilisp                 ilisp Maintainers <ilisp@cons.org>
+ispell                XEmacs Development Team <xemacs-beta@xemacs.org>
+jde                   Andy Piper <andy@xemacs.org>
+liece                 Daiki Ueno <ueno@unixuser.org>
+mailcrypt             XEmacs Development Team <xemacs-beta@xemacs.org>
+mail-lib              Simon Josefsson <simon@josefsson.org>
+mew                   XEmacs Development Team <xemacs-beta@xemacs.org>
+mh-e                  XEmacs Development Team <xemacs-beta@xemacs.org>
+mine                  XEmacs Development Team <xemacs-beta@xemacs.org>
+misc-games            XEmacs Development Team <xemacs-beta@xemacs.org>
+mmm-mode              XEmacs Development Team <xemacs-beta@xemacs.org>
+net-utils             XEmacs Development Team <xemacs-beta@xemacs.org>
+ocaml                 XEmacs Development Team <xemacs-beta@xemacs.org>
+os-utils              XEmacs Development Team <xemacs-beta@xemacs.org>
+pcl-cvs               XEmacs Development Team <xemacs-beta@xemacs.org>
+pc                    XEmacs Development Team <xemacs-beta@xemacs.org>
+pcomplete             John Wiegley <johnw@gnu.org>
+perl-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
+pgg                   Simon Josefsson <simon@josefsson.org>
+prog-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
+- eiffel.el           Martin Schwenke <martin@meltin.net>
+- javascript-mode.el  Ville Skyttä <scop@xemacs.org>
+- p4.el               Peter Österlund <petero2@telia.com>
+- rpm-spec-mode.el    Stig Bjørlykke <stigb@tihlde.org>
+psgml-dtds            XEmacs Development Team <xemacs-beta@xemacs.org>
+psgml                 XEmacs Development Team <xemacs-beta@xemacs.org>
+ps-print              XEmacs Development Team <xemacs-beta@xemacs.org>
+python-modes          XEmacs Development Team <xemacs-beta@xemacs.org>
+reftex                Carsten Dominik <dominik@science.uva.nl>
+rmail                 XEmacs Development Team <xemacs-beta@xemacs.org>
+ruby-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
+sasl                  Simon Josefsson <simon@josefsson.org>
+scheme                Karl M. Hegbloom <karlheg@bittersweet.inetarena.com>
+semantic              Eric M. Ludlam <zappo@gnu.org>
+sgml                  XEmacs Development Team <xemacs-beta@xemacs.org>
+sh-script             XEmacs Development Team <xemacs-beta@xemacs.org>
+sieve                 Simon Josefsson <simon@josefsson.org>
+slider                XEmacs Development Team <xemacs-beta@xemacs.org>
+sml-mode              XEmacs Development Team <xemacs-beta@xemacs.org>
+sounds-au             XEmacs Development Team <xemacs-beta@xemacs.org>
+sounds-wav            XEmacs Development Team <xemacs-beta@xemacs.org>
+speedbar              Eric M. Ludlam <zappo@gnu.org>
+strokes               XEmacs Development Team <xemacs-beta@xemacs.org>
+Sun                   XEmacs Development Team <xemacs-beta@xemacs.org>
+supercite             Martin Schwenke <martin@meltin.net>
+texinfo               XEmacs Development Team <xemacs-beta@xemacs.org>
+text-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
+- image-mode.el       Glynn Clements <glynn@sensei.co.uk>
+- rtf-support.el      Alastair Houghton <alastair@xemacs.org>
+textools              XEmacs Development Team <xemacs-beta@xemacs.org>
+time                  XEmacs Development Team <xemacs-beta@xemacs.org>
+tm                    XEmacs Development Team <xemacs-beta@xemacs.org>
+tooltalk              XEmacs Development Team <xemacs-beta@xemacs.org>
+tpu                   Kevin Oberman <oberman@es.net>
+tramp                 Kai Großjohann <kai.grossjohann@uni-duisburg.de>
+vc-cc                 XEmacs Development Team <xemacs-beta@xemacs.org>
+vc                    XEmacs Development Team <xemacs-beta@xemacs.org>
+vhdl                  XEmacs Development Team <xemacs-beta@xemacs.org>
+view-process          XEmacs Development Team <xemacs-beta@xemacs.org>
+viper                 Michael Kifer <kifer@cs.sunysb.edu>
+vm                    Kyle Jones <kyle_jones@wonderworks.com>
+w3                    XEmacs Development Team <xemacs-beta@xemacs.org>
+xemacs-base           XEmacs Development Team <xemacs-beta@xemacs.org>
+xemacs-devel          XEmacs Development Team <xemacs-beta@xemacs.org>
+xslide                XEmacs Development Team <xemacs-beta@xemacs.org>
+xslt-process          Ovidiu Predescu <ovidiu@xemacs.org>
+zenirc                XEmacs Development Team <xemacs-beta@xemacs.org>
+
+------------------------------------------------------------------------
+mule-packages         Maintainer
+------------------------------------------------------------------------
+edict                 Stephen J. Turnbull <stephen@xemacs.org>
+egg-its               XEmacs Development Team <xemacs-beta@xemacs.org>
+latin-unity           Stephen J. Turnbull <stephen@xemacs.org>
+leim                  XEmacs Development Team <xemacs-beta@xemacs.org>
+locale                XEmacs Development Team <xemacs-beta@xemacs.org>
+lookup                XEmacs Development Team <xemacs-beta@xemacs.org>
+mule-base             XEmacs Development Team <xemacs-beta@xemacs.org>
+mule-ucs              Stephen J. Turnbull <stephen@xemacs.org>
+skk                   XEmacs Development Team <xemacs-beta@xemacs.org>

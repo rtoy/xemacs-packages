@@ -124,6 +124,7 @@
     ("semantic" . "xemacs-packages")
     ("sgml" . "xemacs-packages")
     ("sh-script" . "xemacs-packages")
+    ("sieve" . "xemacs-packages")
     ("slider" . "xemacs-packages")
     ("sounds-au" . "xemacs-packages")
     ("sounds-wav" . "xemacs-packages")

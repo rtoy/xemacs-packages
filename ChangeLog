@@ -1,3 +1,8 @@
+2004-11-08  Norbert Koch  <viteno@xemacs.org>
+
+	*   Packages  released:    bbdb  edit-utils   mail-lib  text-modes
+	xemacs-base.
+
 2004-11-07  Ben Wing  <ben@xemacs.org>
 
 	* Local.rules.template:

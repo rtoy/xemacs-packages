@@ -1,5 +1,7 @@
 2002-10-07  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
+	* Packages released: pgg tramp mailcrypt xemacs-base textools.
+
 	* Packages released: text-modes texinfo sieve sh-script scheme.
 
 	*   Packages  released: python-modes  psgml prog-modes  perl-modes

@@ -1,5 +1,10 @@
 2004-03-15  Norbert Koch  <viteno@xemacs.org>
 
+	* MAINTAINERS: 
+	* package-compile.el (package-directory-map): 
+	* xemacs-packages/Makefile (PACKAGES): 
+	New package escreen added.  Jan Rychter'll be its maintainer.
+
 	* Packages released: reftex xlib.
 
 2004-03-12  Norbert Koch  <viteno@xemacs.org>

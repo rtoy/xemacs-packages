@@ -121,6 +121,7 @@
     ("ess" . "xemacs-packages")
     ("eterm" . "xemacs-packages")
     ("eudc" . "xemacs-packages")
+    ("escreen" . "xemacs-packages")
     ("footnote" . "xemacs-packages")
     ("forms" . "xemacs-packages")
     ("fortran-modes" . "xemacs-packages")

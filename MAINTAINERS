@@ -30,6 +30,7 @@ eieio                 Eric Ludlam <zappo@gnu.org>
 elib                  XEmacs Development Team <xemacs-beta@xemacs.org>
 emerge                XEmacs Development Team <xemacs-beta@xemacs.org>
 erc                   Adrian Aichner <adrian@xemacs.org>
+escreen		      Jan Rychter <jan@rychter.com>
 eshell                John Wiegley <johnw@gnu.org>
 ess                   A.J. Rossini <rossini@xemacs.org>
 eterm                 XEmacs Development Team <xemacs-beta@xemacs.org>

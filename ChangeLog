@@ -1,3 +1,7 @@
+2004-10-04  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: dictionary dired efs.
+
 2004-10-01  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: auctex dictionary edit-utils ess gnus tramp.

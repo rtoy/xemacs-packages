@@ -1,3 +1,8 @@
+2005-02-15  Norbert Koch  <viteno@xemacs.org>
+
+	* mule-packages/Makefile: Hook up latin-euro-standards to the
+	build.
+
 2005-02-15  Aidan Kehoe  <kehoea@parhasard.net>
 
 	* package-compile.el: Package added; latin-euro-standards.

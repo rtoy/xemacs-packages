@@ -1,3 +1,7 @@
+2004-02-17  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: ecb.
+
 2004-02-16  Norbert Koch  <viteno@xemacs.org>
 
 	* MAINTAINERS: Skip Montanaro now maintains the package.

@@ -1,5 +1,10 @@
 2003-08-05  Norbert Koch  <viteno@xemacs.org>
 
+	* MAINTAINERS: Mark Jake Colman as maintainer for align.el and
+	autorevert.el
+
+2003-08-05  Norbert Koch  <viteno@xemacs.org>
+
 	* Packages released: edict prog-modes.
 
 2003-08-03  Norbert Koch  <viteno@xemacs.org>

@@ -22,6 +22,8 @@ ecrypto               Simon Josefsson <simon@josefsson.org>
 edebug                XEmacs Development Team <xemacs-beta@xemacs.org>
 ediff                 Michael Kifer <kifer@cs.sunysb.edu>
 edit-utils            XEmacs Development Team <xemacs-beta@xemacs.org>
+- align.el            Jake Colman <jake.colman@xemacs.org>
+- autorevert.el       Jake Colman <jake.colman@xemacs.org>
 edt                   XEmacs Development Team <xemacs-beta@xemacs.org>
 efs                   Mike Sperber <sperber@informatik.uni-tuebingen.de>
 eieio                 Eric Ludlam <zappo@gnu.org>

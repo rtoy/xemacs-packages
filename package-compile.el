@@ -135,6 +135,7 @@
     ("igrep" . "os")
     ("ilisp" . "os")
     ("os-utils" . "os")
+    ("ps-print-nomule" . "os")
     ("view-process" . "os")
     ;; wp/*
     ("auctex" . "wp")

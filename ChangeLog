@@ -1,3 +1,7 @@
+2002-11-29  Ben Wing  <ben@xemacs.org>
+
+	* xemacs-packages/Makefile: Fix comment.
+
 2002-12-06  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Packages released: edit-utils prog-modes ecb pgg mail-lib eshell

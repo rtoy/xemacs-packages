@@ -17,7 +17,7 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-# Because of autoload issues, this strange sub directories needs to
+# Because of autoload issues, this strange subdirectory order needs to
 # be maintained.  When adding new packages just put them at the end
 # of the list.
 PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \

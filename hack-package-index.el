@@ -44,6 +44,13 @@
     (re-search-forward (concat "^" end-of-package-marker "$"))
     (forward-char)))
 
+(defun convert-crlf ()
+  "Convert CRLF to LF."
+  (save-excursion
+    (goto-char (point-min))
+    (while (search-forward "\r\n" nil t)
+      (replace-match "\n" t t))))
+
 (defun batch-hack-package-index ()
   (let ((package-name (pop command-line-args-left))
 	(package-info (pop command-line-args-left))
@@ -60,7 +67,11 @@
     (insert end-of-package-marker "\n")
     (forward-line -2)
     (insert "(package-get-update-base-entry (quote\n")
-    (insert-file-contents-literally package-info)
+    (let ((length
+           (second (insert-file-contents-literally package-info))))
+      (save-restriction
+        (narrow-to-region (point) (+ (point) length))
+        (convert-crlf)))
     (write-file package-get-base)))
 
 (provide 'hack-package-index)

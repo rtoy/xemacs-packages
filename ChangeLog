@@ -1,3 +1,11 @@
+2002-07-18  Adrian Aichner  <adrian@xemacs.org>
+
+	* hack-package-index.el: Integrate contributions from Steve Youngs
+	and Hrvoje Niksic.
+	* hack-package-index.el (convert-crlf): New.
+	* hack-package-index.el (batch-hack-package-index): Handle CRLF in
+	package-index for Windows to fix problem of duplicate entries.
+
 2002-07-31  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
 	* Packages  released: sieve  mail-lib text-modes xslide edit-utils

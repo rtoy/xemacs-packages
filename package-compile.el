@@ -98,6 +98,7 @@
     ("gnats" . "xemacs-packages")
     ("gnus" . "xemacs-packages")
     ("hm--html-menus" . "xemacs-packages")
+    ("ibuffer" . "xemacs-packages")
     ("idlwave" . "xemacs-packages")
     ("igrep" . "xemacs-packages")
     ("ilisp" . "xemacs-packages")

@@ -1,3 +1,7 @@
+1999-07-23  SL Baur  <steve@xemacs.org>
+
+	* Makefile: add toplevel autoloads target
+
 1999-07-16  SL Baur  <steve@xemacs.org>
 
 	* Makefile: revert mule subdirectory change.

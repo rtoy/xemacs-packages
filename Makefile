@@ -45,7 +45,12 @@ all:
 		$(MAKE) $(MFLAGS) -C $${dir} bytecompile; \
 	done
 
-.PHONY: all bindist clean distclean install
+.PHONY: all bindist clean distclean install autoloads
+
+autoloads:
+	for dir in $(SUBDIRS); do \
+		$(MAKE) $(MFLAGS) -C $${dir} autoloads; \
+	done
 
 World: distclean install
 

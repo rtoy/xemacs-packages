@@ -67,9 +67,15 @@ PACKAGE_COMPILE = \
 "$(shell cygpath --windows $(XEMACS_PACKAGES_BASE)/package-compile.el)"
 PACKAGE_CLEAN = \
 "$(shell cygpath --windows $(XEMACS_PACKAGES_BASE)/package-clean.el)"
+PACKAGE_NET_PACKAGES = \
+"$(shell cygpath --windows $(XEMACS_PACKAGES_BASE)/package-net-packages.el)"
+PACKAGE_STAGING = \
+"$(shell cygpath --windows $(STAGING))"
 else
 PACKAGE_COMPILE = $(XEMACS_PACKAGES_BASE)/package-compile.el
 PACKAGE_CLEAN = $(XEMACS_PACKAGES_BASE)/package-clean.el
+PACKAGE_NET_PACKAGES = $(XEMACS_PACKAGES_BASE)/package-net-packages.el
+PACKAGE_STAGING = $(STAGING)
 endif
 
 %.elc: %.el
@@ -189,9 +195,9 @@ $(AUTOLOAD_PATH)/_pkg.el: Makefile
 bindist: binkit package-info setup-info
 
 setup-info:
-	$(XEMACS) $(VANILLA) -batch -l $(XEMACS_PACKAGES_BASE)/package-net-packages.el \
-		-l $(STAGING)/$(PACKAGE_INDEX) \
-		-f package-net-packages-batch-convert-index-to-ini $(STAGING)
+	$(XEMACS) $(VANILLA) -batch -l $(PACKAGE_NET_PACKAGES) \
+		-l $(PACKAGE_INFO) \
+		-f package-net-packages-batch-convert-index-to-ini $(PACKAGE_STAGING)
 
 install: binkit
 

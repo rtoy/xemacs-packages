@@ -1,3 +1,9 @@
+2001-02-18  Steve Youngs  <youngs@xemacs.org>
+
+	* libs/Makefile (PACKAGES): Add eieio.
+
+	* package-compile.el (package-directory-map): Add eieio.
+
 2001-02-06  Vin Shelton  <acs@xemacs.org>
 
 	* XEmacs.rules (package-info): Load 'package-info' instead of

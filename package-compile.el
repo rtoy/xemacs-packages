@@ -68,6 +68,7 @@
     ("dired" . "libs")
     ("edebug" . "libs")
     ("efs" . "libs")
+    ("eieio" . "libs")
     ("elib" . "libs")
     ("fsf-compat" . "libs")
     ("mail-lib" . "libs")

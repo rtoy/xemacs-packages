@@ -1,3 +1,13 @@
+2003-03-02  Norbert Koch  <nk@viteno.net>
+
+	* Packages  released: xslide  xemacs-devel x-symbol  vc text-modes
+	sml-mode sieve psgml mh-e   ilisp hm--html-menus  gnus  edit-utils
+	edebug ecb clearcase auctex.
+
+	* Packages   released: xslide xemacs-devel x-symbol  vc text-modes
+	sml-mode  sieve psgml  mh-e  hm--html-menus  ilisp gnus edit-utils
+	edebug ecb clearcase auctex.
+
 2003-02-07  Ben Wing  <ben@xemacs.org>
 
 	* package-compile.el:

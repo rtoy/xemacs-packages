@@ -112,9 +112,11 @@ AUTOLOAD_PATH = .
 endif
 
 # Set this in the package Makefile if necessary (BEFORE including this file)
-EARLY_GENERATED_LISP += $(AUTOLOAD_PATH)/auto-autoloads.el $(AUTOLOAD_PATH)/custom-load.el
+EARLY_GENERATED_LISP ?= $(AUTOLOAD_PATH)/auto-autoloads.el $(AUTOLOAD_PATH)/custom-load.el
 ifeq ($(XEMACS_21_5),t)
+ifeq ($(EARLY_GENERATED_LISP),$(AUTOLOAD_PATH)/auto-autoloads.el $(AUTOLOAD_PATH)/custom-load.el)
 EARLY_GENERATED_LISP += $(AUTOLOAD_PATH)/custom-defines.el
+endif
 endif
 
 EARLY_GENERATED_ELCS = $(EARLY_GENERATED_LISP:.el=.elc)

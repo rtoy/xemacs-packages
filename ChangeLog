@@ -1,3 +1,9 @@
+2003-03-22  Steve Youngs  <youngs@xemacs.org>
+
+	* XEmacs.rules (EARLY_GENERATED_LISP): Use '?=' so we can override
+	it in a package Makefile.
+	Only create 'custom-defines.el' if we create 'custom-load.el'.
+
 2003-03-09  Ben Wing  <ben@xemacs.org>
 
 	* Local.rules.inc: New file.  Used when it's necessary to get at

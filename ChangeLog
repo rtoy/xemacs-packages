@@ -1,3 +1,8 @@
+2002-10-29  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+
+	*    Packages released:  igrep    ediff edit-utils xemacs-base pgg
+	text-modes latin-unity sml-mode.
+
 2002-10-14  Ville Skyttä  <scop@xemacs.org>
 
 	* XEmacs.rules (srckit-std): Removed.

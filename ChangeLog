@@ -1,3 +1,13 @@
+2004-03-19  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: net-utils.
+
+	* Packages released: erc net-utils.
+
+2004-03-19  Steve Youngs  <sryoungs@bigpond.net.au>
+
+	* package-compile.el (package-name-to-directory): Add xwem.
+
 2004-03-18  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: vhdl.

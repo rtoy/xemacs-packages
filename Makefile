@@ -21,7 +21,7 @@
 #	comm/net-utils oa/edit-utils oa/speedbar
 
 # The rest require no further special treatment
-SUBDIRS = libs comm games prog wp os oa mule
+SUBDIRS = libs comm games prog wp os oa
 
 # Stuff to install, by default nothing.  Please set these variables
 # in Local.rules
@@ -33,9 +33,15 @@ XEMACS_STAGING =
 MULE_PACKAGES =
 # Where to install them
 MULE_STAGING =
+# Should we build the mule package?
+BUILD_WITHOUT_MULE =
 
 # Use a Local.rules file to specify what you wish to have installed
 sinclude Local.rules
+
+ifeq ('$(BUILD_WITHOUT_MULE)','')
+SUBDIRS += mule
+endif
 
 all:
 	for dir in $(SUBDIRS); do \

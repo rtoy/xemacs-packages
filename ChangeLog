@@ -1,3 +1,8 @@
+1999-12-14  Andreas Jaeger  <aj@suse.de>
+
+	* Makefile (SUBDIRS): Build for mule unless BUILD_WITHOUT_MULE is
+	set.
+
 1999-07-23  SL Baur  <steve@xemacs.org>
 
 	* Makefile: add toplevel autoloads target

@@ -1,5 +1,7 @@
 2003-07-02  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: hyperbole prog-modes leim edict.
+
 	* xemacs-packages/Makefile (PACKAGES): Hook up hyperbole package
 	to the build.
 

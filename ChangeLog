@@ -1,3 +1,7 @@
+2003-12-04  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: xemacs-base net-utils gnus.
+
 2003-12-03  Norbert Koch  <viteno@xemacs.org>
 
 	* MAINTAINERS: Change maintainership of net-utils package.

@@ -1,3 +1,11 @@
+1998-04-07  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules (srckit-std): Use $(TAR) not tar.
+	(binkit-sourceonly): Ditto.
+	(binkit-sourceinfo): Ditto.
+	(binkit-sourcedata): Ditto.
+	(binkit-sourcedatainfo): Ditto.
+
 1998-04-04  SL Baur  <steve@altair.xemacs.org>
 
 	* package-compile.el (package-directory-map): Add fsf-compat.

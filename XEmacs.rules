@@ -108,7 +108,7 @@ srckit-std: distclean
 	if [ ! -d $(STAGING) ]; then mkdir -p $(STAGING); fi
 	(cd ../..; \
 	rm -f $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar*; \
-	tar $(EXCLUDES) -cf $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar $(CATEGORY)/$(PACKAGE))
+	$(TAR) $(EXCLUDES) -cf $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar $(CATEGORY)/$(PACKAGE))
 	gzip -v9 $(STAGING)/$(PACKAGE)-$(VERSION)-src.tar
 
 binkit-sourceonly: all
@@ -117,7 +117,7 @@ binkit-sourceonly: all
 	$(RCOPY) ChangeLog *.el* $(EXTRA_SOURCES) $(STAGING)/lisp/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE); \
+	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE); \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
 
 binkit-sourceinfo: all
@@ -129,7 +129,7 @@ binkit-sourceinfo: all
 	$(RCOPY) $(INFO_FILES) $(STAGING)/info
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
 		$(INFO_FILES:%=info/%); \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
 
@@ -142,7 +142,7 @@ binkit-sourcedata: all
 	$(RCOPY) etc/* $(STAGING)/etc/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	tar cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
 		etc/$(PACKAGE); \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)
 
@@ -158,6 +158,6 @@ binkit-sourcedatainfo: all
 	$(RCOPY) etc/* $(STAGING)/etc/$(PACKAGE)
 	(cd $(STAGING); \
 	rm -f $(PACKAGE)-$(VERSION)-pkg.tar*; \
-	tar $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
+	$(TAR) $(EXCLUDES) -cf $(PACKAGE)-$(VERSION)-pkg.tar lisp/$(PACKAGE) \
 		$(INFO_FILES:%=info/%) etc/$(PACKAGE); \
 	gzip -v9 $(PACKAGE)-$(VERSION)-pkg.tar)

@@ -1,3 +1,7 @@
+1998-10-13  SL Baur  <steve@altair.xemacs.org>
+
+	* package-compile.el: Drop pgnus and irchat entries.
+
 1998-10-12  SL Baur  <steve@altair.xemacs.org>
 
 	* XEmacs.rules: Fix all references to _pkg.el to refer to it via

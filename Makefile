@@ -35,6 +35,9 @@ all:
 
 bindist:
 	for dir in $(SUBDIRS); do \
+		$(MAKE) $(MFLAGS) -C $${dir} autoloads; \
+	done
+	for dir in $(SUBDIRS); do \
 		$(MAKE) $(MFLAGS) -C $${dir} bindist; \
 	done
 

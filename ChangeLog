@@ -1,3 +1,8 @@
+2000-06-22  Andreas Jaeger  <aj@suse.de>
+
+	* XEmacs.rules: Uncomment ELCS test.
+	Patch by Didier Verna <didier@xemacs.org>.
+
 2000-06-04  Andreas Jaeger  <aj@suse.de>
 
 	* Makefile: Move includes to the front and add new target all as

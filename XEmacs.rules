@@ -268,13 +268,13 @@ ifneq ($(LIBSRC_FILES),)
 endif
 	(cd $(STAGING); \
 	ls -1 $(MANIFEST) > $(MANIFEST))
-#ifneq ($(ELCS),)
+ifneq ($(ELCS),)
 	@(cd $(STAGING); \
 	ls -1 lisp/$(PACKAGE)/ChangeLog \
 		$(patsubst %, lisp/$(PACKAGE)/%, $(notdir $(SOURCE_FILES_TO_COPY))) \
 		$(patsubst %, lisp/$(PACKAGE)/%, $(notdir $(EXTRA_SOURCES))) \
 		>> $(MANIFEST))
-#endif
+endif
 ifneq ($(ELCS_1),)
 	@(cd $(STAGING); \
 	ls -1 $(patsubst %, lisp/$(ELCS_1_DEST)/%, $(notdir $(ELCS_1_FILES))) \

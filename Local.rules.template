@@ -89,7 +89,7 @@ symlink =
 NONMULE_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/xemacs-packages
 
 #
-# Where to install the Mule packages, odr where the symlink tree will go.
+# Where to install the Mule packages, or where the symlink tree will go.
 # You probably don't want to change this.
 #
 MULE_INSTALLED_PACKAGES_ROOT = ${XEMACS_INSTALLED_PACKAGES_ROOT}/mule-packages

@@ -525,6 +525,9 @@ $(pkg_tar) $(pkg_tar).gz $(pkg_tar).bz2 :
 	touch $@
 endif # BUILD_TARS ?
 
+ifeq ($(AUTHOR_VERSION),)
+AUTHOR_VERSION = No-Upstream-Ver
+endif
 
 $(AUTOLOAD_PATH)/_pkg.el: Makefile
 	@echo Creating $(AUTOLOAD_PATH)/_pkg.el

@@ -1,5 +1,7 @@
 2003-06-01  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: prog-modes.
+
 	* Packages     released: x-symbol  edit-utils    edebug prog-modes
 	os-utils.
 

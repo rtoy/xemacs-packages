@@ -1,3 +1,7 @@
+2003-05-14  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: mail-lib tm bbdb mh-e xemacs-devel pgg gnus.
+
 2003-05-11  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: mule-base time.

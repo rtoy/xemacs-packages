@@ -1,3 +1,8 @@
+2002-11-01  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+
+	*   Packages   released: locale   latin-unity   mail-lib  sml-mode
+	edit-utils text-modes.
+
 2002-10-30  Ville Skyttä  <scop@xemacs.org>
 
 	* mule-packages/Makefile (ASSUMED_PRESENT):

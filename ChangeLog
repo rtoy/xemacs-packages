@@ -1,3 +1,8 @@
+1998-10-15  Greg Klanderman  <greg@alphatech.com>
+
+	* hack-package-index.el (batch-hack-package-index): update for new 
+	package index file format.
+
 1998-10-13  SL Baur  <steve@altair.xemacs.org>
 
 	* package-compile.el: Drop pgnus and irchat entries.

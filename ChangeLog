@@ -1,3 +1,7 @@
+2002-05-04  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs.rules (BOOT_XEMACS): Do PRELOADS in correct order.
+
 2002-04-24  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages released: calc dictionary dired ediff edit-utils efs

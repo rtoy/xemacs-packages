@@ -108,7 +108,7 @@ PACKAGE_STAGING = $(STAGING)
 endif
 
 # Behaves like an XEmacs with the required packages setup
-BOOT_XEMACS= $(XEMACS) -no-autoloads -batch $(PRELOADS) -l $(PACKAGE_COMPILE) -- $(REQUIRES) --
+BOOT_XEMACS= $(XEMACS) -no-autoloads -batch -l $(PACKAGE_COMPILE) -- $(REQUIRES) -- $(PRELOADS)
 
 %.elc: %.el
 	$(BOOT_XEMACS) -f batch-byte-compile $<

@@ -31,6 +31,7 @@ PACKAGES= xemacs-base fsf-compat mail-lib dired efs apel \
 	eshell pcomplete edit-utils speedbar calc calendar forms frame-icon \
 	hm--html-menus ispell pc psgml psgml-dtds sgml slider text-modes time \
 	strokes tramp clearcase dictionary sieve ibuffer mmm-mode xslide \
-	liece haskell-mode ess docbookide ecrypto ocaml sasl sml-mode
+	liece haskell-mode ess docbookide ecrypto ocaml sasl sml-mode \
+	python-modes
 
 include ../iterate.rules

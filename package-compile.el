@@ -127,6 +127,7 @@
     ("ps-print" . "xemacs-packages")
     ("psgml" . "xemacs-packages")
     ("psgml-dtds" . "xemacs-packages")
+    ("python-modes" . "xemacs-packages")
     ("reftex" . "xemacs-packages")
     ("rmail" . "xemacs-packages")
     ("sasl" . "xemacs-packages")

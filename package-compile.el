@@ -156,6 +156,7 @@
     ("locale" . "mule-packages")
     ("lookup" . "mule-packages")
     ("mule-base" . "mule-packages")
+    ("mule-ucs" . "mule-packages")
     ("skk" . "mule-packages")))
 
 
@@ -172,7 +173,8 @@
 	       (equal package "bbdb") 
 	       (equal package "jde")
 	       (equal package "tramp")
-	       (equal package "lookup"))
+	       (equal package "lookup")
+	       (equal package "mule-ucs"))
 	   (expand-file-name "lisp" (file-name-as-directory dir)))
 	  ((equal package "mew")
 	   (expand-file-name "mew" (file-name-as-directory dir)))

@@ -16,6 +16,6 @@
 # Boston, MA 02111-1307, USA.
 
 PACKAGES= mule-base \
-	locale leim lookup edict egg-its skk
+	locale leim lookup edict egg-its skk mule-ucs
 
 include ../iterate.rules

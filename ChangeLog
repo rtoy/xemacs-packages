@@ -1,37 +1,9 @@
-2003-01-26  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+2003-02-01  Steve Youngs  <youngs@xemacs.org>
 
-	* Packages released: jde ediff text-modes.
-
-2003-01-24  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
-
-	* Packages released: prog-modes net-utils.
-
-2003-01-20  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
-
-	* Packages released: prog-modes jde.
-
-2003-01-19  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
-
-	* Packages released: jde psgml.
-
-2003-01-18  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
-
-	* Packages  released: perl-modes  text-modes xemacs-base net-utils
-	sml-mode vc.
-
-2003-01-13  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
-
-	*  Packages released:  build  xslide xemacs-base  textools texinfo
-	sml-mode  sieve  scheme  python-modes psgml  prog-modes perl-modes
-	os-utils ocaml idlwave fortran-modes docbookide cc-mode ada jde w3
-	ruby-modes haskell-mode   fsf-compat edit-utils semantic  mail-lib
-	sh-script text-modes mh-e.
-
-2003-01-03  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
-
-	*  Packages released:  xemacs-base dired apel  edebug xemacs-devel
-	build  auctex  net-utils  eudc  gnus tm  semantic  ada   jde
-	prog-modes vc vhdl ilisp edit-utils speedbar psgml tramp ess leim.
+	* package-compile.el (package-directory-map): Add x-symbol.
+	(package-name-to-directory): Ditto.
+	* MAINTAINERS: Ditto.
+	* xemacs-packages/Makefile: Ditto.
 
 2002-12-31  Steve Youngs  <youngs@xemacs.org>
 

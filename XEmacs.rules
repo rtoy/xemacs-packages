@@ -60,6 +60,12 @@ PWD      := $(shell pwd)
 %.info: %.texi
 	$(MAKEINFO) $(MAKEINFO_FLAGS) -o $@ $<
 
+FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../../xemacs-packages/texinfo" "../../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
+
+FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS = -eval '(setq load-path (append (list "../../xemacs-packages/texinfo" "../../xemacs-packages/xemacs-base") load-path))' -l informat -l texinfmt -f texinfo-format-buffer
+
+FORMAT_INFO_USING_XEMACS_ARGS = $(FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS) -f save-buffer
+
 ifeq ($(XEMACS_NATIVE_NT),t)
 # Convert UNIX-path (containing output of `pwd') to windows-path, so
 # that XEmacs native NT can handle it.

@@ -1,3 +1,9 @@
+2002-03-22  Daiki Ueno  <daiki@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES): Add liece.
+
+	* package-compile.el (package-directory-map): Add liece.
+
 2002-03-15  Steve Youngs  <youngs@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add xslide.

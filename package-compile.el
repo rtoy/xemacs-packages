@@ -104,6 +104,7 @@
     ("ilisp" . "xemacs-packages")
     ("ispell" . "xemacs-packages")
     ("jde" . "xemacs-packages")
+    ("liece" . "xemacs-packages")
     ("mail-lib" . "xemacs-packages")
     ("mailcrypt" . "xemacs-packages")
     ("mew" . "xemacs-packages")

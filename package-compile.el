@@ -60,6 +60,7 @@
     ("dired" . "libs")
     ("edebug" . "libs")
     ("efs" . "libs")
+    ("elib" . "libs")
     ("fsf-compat" . "libs")
     ("mail-lib" . "libs")
     ("tooltalk" . "libs")

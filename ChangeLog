@@ -1,3 +1,7 @@
+1998-10-01  SL Baur  <steve@altair.xemacs.org>
+
+	* XEmacs.rules (SOURCE_FILES_TO_COPY): Add _pkg.el.
+
 1998-09-19  SL Baur  <steve@altair.xemacs.org>
 
 	* XEmacs.rules (EXCLUDES): Add *.orig and *.rej.

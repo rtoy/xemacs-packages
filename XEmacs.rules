@@ -56,7 +56,7 @@ RCOPY = cp -a
 GENERATED = auto-autoloads.elc
 
 # SOURCE_FILES_TO_COPY = *.el*
-SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) $(MULE_ELCS) $(MULE_ELCS:.elc=.el) $(GENERATED) $(GENERATED:.elc=.el)
+SOURCE_FILES_TO_COPY = $(ELCS) $(ELCS:.elc=.el) $(MULE_ELCS) $(MULE_ELCS:.elc=.el) $(GENERATED) $(GENERATED:.elc=.el) _pkg.el
 
 # Non configurable portion follows
 

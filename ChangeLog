@@ -1,3 +1,19 @@
+2000-06-23  Adrian Aichner  <aichner@ecf.teradyne.com>
+
+	* XEmacs.rules: Temporarily work around shortcomings of XEmacs
+	native NT with command-line-argument- and file-path syntax
+	parsing.
+	(XEMACS_NATIVE_NT): Determine whether packages are
+	being built by Native-NT XEmacs.
+	(PACKAGE_COMPILE): Conditionalize for XEmacs native NT build.
+	(AUTOLOAD_PACKAGE_NAME): Ditto.
+	(PKG_TAR_GZ): Ditto.
+	(PACKAGE_INFO): Ditto.
+	(%.elc): Use generalized PACKAGE_COMPILE.
+	($(AUTOLOAD_PATH)/auto-autoloads.el): Use generalized
+	AUTOLOAD_PACKAGE_NAME.
+	(package-info): Use generalized PKG_TAR_GZ and PACKAGE_INFO.
+
 2000-06-22  Andreas Jaeger  <aj@suse.de>
 
 	* XEmacs.rules: Uncomment ELCS test.

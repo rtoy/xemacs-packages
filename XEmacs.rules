@@ -34,6 +34,12 @@ include ${XEMACS_PACKAGES_BASE}/Local.rules.mk
 # Ensure vanilla locale when building
 override LANG := C
 
+# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
+# need to temporarily work around.
+XEMACS_NATIVE_NT = \
+$(shell $(XEMACS) $(VANILLA) -batch \
+-eval "(princ (eq system-type 'windows-nt))")
+
 # Only in rare cases will you need to override this
 ifeq ($(AUTOLOAD_PATH),)
 AUTOLOAD_PATH = .
@@ -60,9 +66,19 @@ PWD      := $(shell pwd)
 %.info: %.texi
 	$(MAKEINFO) $(MAKEINFO_FLAGS) -o $@ $<
 
-%.elc: %.el
-	$(XEMACS) -no-autoloads -batch $(PRELOADS) -l $(XEMACS_PACKAGES_BASE)/package-compile.el -- $(REQUIRES) -- $<
+# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
+# need to temporarily work around.
+ifeq ($(XEMACS_NATIVE_NT),t)
+# APA: Convert UNIX-path (containing output of `pwd') to windows-path,
+# so that XEmacs native NT can handle it.
+PACKAGE_COMPILE = \
+"$(shell cygpath --windows $(XEMACS_PACKAGES_BASE)/package-compile.el)"
+else
+PACKAGE_COMPILE = $(XEMACS_PACKAGES_BASE)/package-compile.el
+endif
 
+%.elc: %.el
+	$(XEMACS) -no-autoloads -batch $(PRELOADS) -l $(PACKAGE_COMPILE) -- $(REQUIRES) -- $<
 
 all:: $(AUTOLOAD_PATH)/_pkg.el
 
@@ -81,9 +97,19 @@ distclean: extraclean
 		$(AUTOLOAD_PATH)/custom-load.el package-info \
 		$(AUTOLOAD_PATH)/_pkg.el
 
+# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
+# need to temporarily work around.
+ifeq ($(XEMACS_NATIVE_NT),t)
+# APA: XEmacs native NT currently needs this quoting of
+# command-line-rguments.
+AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \\\"$(PACKAGE)\\\")
+else
+AUTOLOAD_PACKAGE_NAME = (setq autoload-package-name \"$(PACKAGE)\")
+endif
+
 $(AUTOLOAD_PATH)/auto-autoloads.el : $(ELCS:.elc=.el) $(AUTOLOAD_PATH)/_pkg.el
 	$(XEMACS) $(VANILLA) -batch \
-		-eval "(setq autoload-package-name \"$(PACKAGE)\")" \
+		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
 		-l autoload -f batch-update-directory $(AUTOLOAD_PATH)
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 
@@ -93,19 +119,29 @@ $(AUTOLOAD_PATH)/custom-load.el : $(ELCS:.elc=.el)
 
 pkg_tar = $(STAGING)/$(PACKAGE)-$(VERSION)-pkg.tar
 
+# APA: XEmacs native NT currently (2000-06-23) has shortcomings we
+# need to temporarily work around.
+ifeq ($(XEMACS_NATIVE_NT),t)
+# APA: Convert UNIX-path (containing output of `pwd') to windows-path,
+# so that XEmacs native NT can handle it.
+PKG_TAR_GZ = "$(shell cygpath --windows $(pkg_tar)).gz"
+PACKAGE_INFO = "$(shell cygpath --windows $(STAGING)/package-index)"
+else
+PKG_TAR_GZ = $(pkg_tar).gz
+PACKAGE_INFO = $(STAGING)/package-index
+endif
+
 # Make the $(pkg_tar).gz first, then the $(pkg_tar).bz2
 package-info : package-info.in Makefile $(AUTOLOAD_PATH)/_pkg.el \
 		$(pkg_tar).gz $(pkg_tar).bz2
-
 	$(XEMACS) $(VANILLA) -batch \
 		-l package-info.el -f batch-update-package-info \
-		'$(VERSION)' $(pkg_tar).gz \
+		'$(VERSION)' $(PKG_TAR_GZ) \
 		'$(REQUIRES)' \
 		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
-
 	$(XEMACS) $(VANILLA) -batch \
 		-l ../../hack-package-index.el -f batch-hack-package-index \
-			$(PACKAGE) package-info $(STAGING)/package-index
+			$(PACKAGE) package-info $(PACKAGE_INFO)
 
 ifeq ($(BUILD_TARS),t)
 $(pkg_tar): $(STAGING)/$(MANIFEST)

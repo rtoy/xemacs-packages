@@ -15,7 +15,7 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-PACKAGES= locale leim egg-its skk
+PACKAGES= locale leim edict egg-its skk
 
 all:
 	for dir in $(PACKAGES); do \

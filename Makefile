@@ -23,6 +23,20 @@
 # The rest require no further special treatment
 SUBDIRS = libs comm games prog wp os oa mule
 
+# Stuff to install, by default nothing.  Please set these variables
+# in Local.rules
+# XEmacs packages to install
+XEMACS_PACKAGES =
+# Where to install them
+XEMACS_STAGING =
+# Mule packages to install
+MULE_PACKAGES =
+# Where to install them
+MULE_STAGING =
+
+# Use a Local.rules file to specify what you wish to have installed
+sinclude Local.rules
+
 all:
 	for dir in $(SUBDIRS); do \
 		$(MAKE) $(MFLAGS) -C $${dir} autoloads; \
@@ -31,7 +45,21 @@ all:
 		$(MAKE) $(MFLAGS) -C $${dir} bytecompile; \
 	done
 
-.PHONY: all bindist clean distclean
+.PHONY: all bindist clean distclean install
+
+World: distclean install
+
+install: all
+ifneq ($(MULE_PACKAGES),'')
+	for dir in $(MULE_PACKAGES); do \
+		$(MAKE) STAGING=$(MULE_STAGING) $(MFLAGS) -C $${dir} install; \
+	done
+endif
+ifneq ($(XEMACS_PACKAGES),'')
+	for dir in $(XEMACS_PACKAGES); do \
+		$(MAKE) STAGING=$(XEMACS_STAGING) $(MFLAGS) -C $${dir} install; \
+	done
+endif
 
 bindist:
 	for dir in $(SUBDIRS); do \

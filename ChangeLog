@@ -1,10 +1,15 @@
+1999-07-16  SL Baur  <steve@xemacs.org>
+
+	* Makefile: revert mule subdirectory change.
+	Add support for install, World targets.
+
+	* package-compile.el: add ucs-conv.
+
+	* .cvsignore: new file
+
 1999-07-14  SL Baur  <steve@xemacs.org>
 
 	* package-compile.el: add ps-print-nomule
-
-1999-07-16  SL Baur  <steve@xemacs.org>
-
-	* Makefile: revert mule subdirectory change
 
 1999-07-13  SL Baur  <steve@xemacs.org>
 

@@ -84,7 +84,6 @@
     ("edit-utils" . "xemacs-packages")
     ("edt" . "xemacs-packages")
     ("efs" . "xemacs-packages")
-    ("eicq" . "xemacs-packages")
     ("eieio" . "xemacs-packages")
     ("elib" . "xemacs-packages")
     ("emerge" . "xemacs-packages")

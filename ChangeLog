@@ -1,3 +1,9 @@
+2002-01-23  Steve Youngs  <youngs@xemacs.org>
+
+	* package-compile.el (package-directory-map): Remove eicq
+
+	* xemacs-packages/Makefile (PACKAGES): Remove eicq
+
 2002-01-13  Adrian Aichner  <adrian@xemacs.org>
 
 	* Local.rules.template (TEXI2HTML_FLAGS): New.  Splitting on

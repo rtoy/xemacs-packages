@@ -1,5 +1,7 @@
 2002-09-25  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
 
+	* Packages released: w3 gnus idlwave.
+
 	* Packages  released:  xemacs-base  ecrypto  mail-lib viper  liece
 	locale ediff debug.
 

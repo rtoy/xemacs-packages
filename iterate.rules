@@ -37,7 +37,7 @@ ELCCLEAN_TARGETS= $(PACKAGES:=/elcclean.target)
 HTML_TARGETS= $(PACKAGES:=/html.target)
 INSTALL_TARGETS= $(PACKAGES:=/install.target)
 INSTALL_HTML_TARGETS= $(PACKAGES:=/install-html.target)
-JUST_INSTALL_TARGETS= $(PACKAGES:=/just-install.target)
+INSTALL_ONLY_TARGETS= $(PACKAGES:=/install-only.target)
 
 # Indicate which of the above need the pdepends to be built prior to doing
 # the work of the target.
@@ -52,10 +52,10 @@ ALL_TARGETS = \
 	$(AUTOLOADS_TARGETS)  $(BYTECOMPILE_TARGETS) $(BINDIST_TARGETS) \
 	$(CLEAN_TARGETS) $(DISTCLEAN_TARGETS) $(ELCCLEAN_TARGETS) \
 	$(HTML_TARGETS) $(INSTALL_TARGETS) $(INSTALL_HTML_TARGETS) \
-	$(JUST_INSTALL_TARGETS)
+	$(INSTALL_ONLY_TARGETS)
 
 .PHONY: $(ALL_TARGETS) autoloads bytecompile bindist clean \
-	distclean elcclean html install install-html just-install
+	distclean elcclean html install install-html install-only
 
 # Master rule to pass down actual building 
 # Use a static pattern because of the extra dependencies
@@ -91,7 +91,7 @@ install: $(INSTALL_TARGETS)
 
 install-html: $(INSTALL_HTML_TARGETS)
 
-just-install: $(JUST_INSTALL_TARGETS)
+install-only: $(INSTALL_ONLY_TARGETS)
 
 # Optionally put in fake rules for packages that we cannot
 # recursively build (yet)

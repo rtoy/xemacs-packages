@@ -541,8 +541,8 @@ setup-info:
 
 install: compile binkit
 
-# A target that _just_ installs and doesn't build _anything_
-just-install: binkit
+# A target that _only_ installs and doesn't build _anything_
+install-only: binkit
 
 ## Do not byte-compile as that could require stuff from elsewhere, and you
 ## get dependency circles.

@@ -1,3 +1,21 @@
+2003-03-31  Steve Youngs  <youngs@xemacs.org>
+
+	* XEmacs.rules (install):
+	* XEmacs.rules (just-install): Removed.
+	* XEmacs.rules (install-only): New.
+	* iterate.rules (JUST_INSTALL_TARGETS): Removed.
+	* iterate.rules (INSTALL_ONLY_TARGETS): New.
+	* iterate.rules (ALL_TARGETS):
+	* iterate.rules (.PHONY):
+	* iterate.rules (just-install): Removed.
+	* iterate.rules (install-only): New.
+	* meta-iterate.rules (.PHONY):
+	* meta-iterate.rules (JUST_INSTALL_TARGETS): Removed.
+	* meta-iterate.rules (INSTALL_ONLY_TARGETS): New.
+	* meta-iterate.rules (just-install): Removed.
+	* meta-iterate.rules (install-only): New.
+	Rename 'just-install' to 'install-only'.
+
 2003-03-30  Steve Youngs  <youngs@xemacs.org>
 
 	* meta-iterate.rules (.PHONY): Add just-install target.

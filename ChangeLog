@@ -1,3 +1,7 @@
+1998-04-04  SL Baur  <steve@altair.xemacs.org>
+
+	* package-compile.el (package-directory-map): Add fsf-compat.
+
 1998-02-27  Karl M. Hegbloom  <karlheg@bittersweet.inetarena.com>
 
 	* package-compile.el (depends): Provide a more meaningful

@@ -59,6 +59,7 @@
     ("dired" . "libs")
     ("edebug" . "libs")
     ("efs" . "libs")
+    ("fsf-compat" . "libs")
     ("mail-lib" . "libs")
     ("tooltalk" . "libs")
     ("xemacs-base" . "libs")

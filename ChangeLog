@@ -1,3 +1,7 @@
+2002-05-31  Steve Youngs  <youngs@xemacs.org>
+
+	* Packages released: sieve edit-utils pc text-modes vc-cc vc ess ilisp.
+
 2002-05-25  Steve Youngs  <youngs@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add ess.

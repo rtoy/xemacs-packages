@@ -76,6 +76,7 @@
     ("cookie" . "xemacs-packages")
     ("crisp" . "xemacs-packages")
     ("debug" . "xemacs-packages")
+    ("dictionary" . "xemacs-packages")
     ("dired" . "xemacs-packages")
     ("edebug" . "xemacs-packages")
     ("ediff" . "xemacs-packages")

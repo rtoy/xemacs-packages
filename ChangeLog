@@ -1,6 +1,7 @@
-2001-07-30  Edward M. Lee  <tailbert@yahoo.com>
+2001-09-08  Steve Youngs  <youngs@xemacs.org>
 
-	* XEmacs.rules: Define DATA_{27-35}_FILES for jde Makefile.
+	* package-compile.el (package-directory-map): Add dictionary
+	package. 
 
 2001-06-18  Ben Wing  <ben@xemacs.org>
 

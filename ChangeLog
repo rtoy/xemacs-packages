@@ -1,3 +1,7 @@
+1999-07-14  SL Baur  <steve@xemacs.org>
+
+	* package-compile.el: add ps-print-nomule
+
 1999-07-16  SL Baur  <steve@xemacs.org>
 
 	* Makefile: revert mule subdirectory change

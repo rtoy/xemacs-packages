@@ -1,7 +1,5 @@
 2000-05-23  Karl M. Hegbloom  <karlheg@debian.org>
 
-	* Local.rules: Remove from CVS.
-
 	* Local.rules.template, Local.rules.mk: New files.
 
 	* Makefile, XEmacs.rules: Include Local.rules.mk, define

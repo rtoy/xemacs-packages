@@ -1,3 +1,7 @@
+2002-10-07  Rendhalver [Peter Brown]  <rendhalver@xemacs.org>
+
+	* Packages released: mh-e idlwave fortran-modes cc-mode ada.
+
 2002-10-05  Ville Skyttä  <ville.skytta@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Add pgg.

@@ -1,3 +1,7 @@
+2003-10-26  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: x-symbol.
+
 2003-10-25  Norbert Koch  <viteno@xemacs.org>
 
 	* package-compile.el (package-directory-map): Add new package riece.

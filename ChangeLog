@@ -1,3 +1,7 @@
+2001-01-10  Steve Youngs  <youngs@xemacs.org>
+
+	* package-compile.el (package-directory-map): Added eshell & pcomplete.
+
 2000-10-21  Adrian Aichner  <adrian@xemacs.org>
 
 	* Local.rules.template (PACKAGE_INDEX): New variable to configure

@@ -133,9 +133,11 @@
     ("time" . "oa")
     ;; os/*
     ("eterm" . "os")
+    ("eshell" . "os")
     ("igrep" . "os")
     ("ilisp" . "os")
     ("os-utils" . "os")
+    ("pcomplete" . "os")
     ("ps-print-nomule" . "os")
     ("view-process" . "os")
     ;; wp/*

@@ -1,3 +1,16 @@
+2001-05-11  Steve Youngs  <youngs@xemacs.org>
+
+	* ./xemacs-packages/Makefile: New.
+
+	* ./xemacs-packages/*/Makefile (CATEGORY): Change to "standard".
+
+	* package-compile.el (package-directory-map): Re-organise.  There are
+	now only 2 categories, "xemacs-packages" & "mule-packages".  Also, put
+	them into alphabetical order.
+
+	* Makefile (SUBDIRS): The sub directories are now 'xemacs-packages' &
+	'mule-packages'.
+
 2001-05-10  Steve Youngs  <youngs@xemacs.org>
 
 	* Local.rules.template: If 'make bindist' STAGING should be set to

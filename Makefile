@@ -16,7 +16,7 @@
 # Boston, MA 02111-1307, USA.
 
 # 
-SUBDIRS = libs comm games prog wp os oa
+SUBDIRS = xemacs-packages
 
 # Use a Local.rules file to specify what you wish to have installed
 XEMACS_PACKAGES_BASE := $(shell pwd)
@@ -27,7 +27,7 @@ include Local.rules.mk
 -include Local.rules
 
 ifeq ($(BUILD_WITHOUT_MULE),)
-SUBDIRS += mule
+SUBDIRS += mule-packages
 endif
 
 .PHONY: all all-bytecompile autoloads bytecompile bindist-real bindist clean distclean elcclean World install just-install

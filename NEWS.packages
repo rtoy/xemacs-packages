@@ -1,0 +1,28 @@
+-*- mode:outline -*-
+
+* Introduction
+==============
+
+This file presents some general information about the various packages
+affiliated with XEmacs.  This file is primarily about the changes in
+recent package versions and their release history.
+
+Use `C-c C-f' to move to the next equal level of outline, and
+`C-c C-b' to move to previous equal level.  `C-h m' will give more
+info about the Outline mode.  Many commands are also available through 
+the menubar.
+
+* Changes in mic-paren
+======================
+
+** In mic-paren versions >= 3.3 the prefix "mic-" has been removed from the
+command-names 'mic-paren-forward-sexp' and 'mic-paren-backward-sexp'.
+Now all user-functions and -options begin with the prefix "paren-"
+because this package should be a replacement of the other
+paren-packages like paren.el and stig-paren.el!
+
+** In mic-paren versions >= 3.2 the prefix "mic-" has been removed from the
+command-names 'mic-paren-toggle-matching-quoted-paren' and
+'mic-paren-toggle-matching-paired-delimiter'.  In versions >= 3.1
+mic-paren is NOT auto. activated after loading.  In versions >= 3.0
+the variable 'paren-face' has been renamed to `paren-match-face'.

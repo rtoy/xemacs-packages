@@ -1,3 +1,9 @@
+2002-01-13  Adrian Aichner  <adrian@xemacs.org>
+
+	* Local.rules.template (TEXI2HTML_FLAGS): New.  Splitting on
+	chapters is a good default to decrease bandwidth demands when
+	accessing large docs like calc.
+
 2002-01-12  Jan Vroonhof  <jan@xemacs.org>
 
 	* mule-packages/Makefile (ASSUMED_PRESENT):

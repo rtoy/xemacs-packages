@@ -144,9 +144,11 @@ VANILLA = -vanilla
 # path to makeinfo
 #
 MAKEINFO = makeinfo
+
+# path to texi2info
 #
-# path to texi2html
 TEXI2HTML = texi2html
+TEXI2HTML_FLAGS = -split chapter
 
 ifneq ('$(symlink)','t')
  # path to GNU cp, use the latter if no GNU cp is available.

@@ -44,7 +44,7 @@ fsf-compat            XEmacs Development Team <xemacs-beta@xemacs.org>
 games                 Glynn Clements <glynn.clements@virgin.net>
 general-docs          XEmacs Development Team <xemacs-beta@xemacs.org>
 gnats                 XEmacs Development Team <xemacs-beta@xemacs.org>
-gnus                  Steve Youngs <sryoungs@bigpond.net.au>
+gnus                  Steve Youngs <steve@sxemacs.org>
 haskell-mode          Jerry James <james@xemacs.org>
 hm--html-menus        XEmacs Development Team <xemacs-beta@xemacs.org>
 hyperbole             Mats Lidell <matsl@xemacs.org>
@@ -62,7 +62,7 @@ mh-e                  Steve Youngs <mh-e-devel@lists.sf.net>
 mine                  XEmacs Development Team <xemacs-beta@xemacs.org>
 misc-games            XEmacs Development Team <xemacs-beta@xemacs.org>
 mmm-mode              XEmacs Development Team <xemacs-beta@xemacs.org>
-net-utils             Steve Youngs <sryoungs@bigpond.net.au>
+net-utils             Steve Youngs <steve@sxemacs.org>
 ocaml                 XEmacs Development Team <xemacs-beta@xemacs.org>
 oo-browser            Jake Colman <jake.colman@xemacs.org>
 os-utils              XEmacs Development Team <xemacs-beta@xemacs.org>
@@ -102,6 +102,7 @@ texinfo               XEmacs Development Team <xemacs-beta@xemacs.org>
 text-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
 - image-mode.el       Glynn Clements <glynn@sensei.co.uk>
 - rtf-support.el      Alastair Houghton <alastair@xemacs.org>
+- tpum                Zajcev Evgeny <zevlg@yandex.ru>
 textools              XEmacs Development Team <xemacs-beta@xemacs.org>
 time                  XEmacs Development Team <xemacs-beta@xemacs.org>
 tm                    XEmacs Development Team <xemacs-beta@xemacs.org>
@@ -118,6 +119,7 @@ w3                    XEmacs Development Team <xemacs-beta@xemacs.org>
 x-symbol              Uwe Brauer <oub@xemacs.org>
 xemacs-base           XEmacs Development Team <xemacs-beta@xemacs.org>
 xemacs-devel          XEmacs Development Team <xemacs-beta@xemacs.org>
+xetla                 Steve Youngs <steve@sxemacs.org>
 xlib                  Zajcev Evgeny <zevlg@yandex.ru>
 xslide                XEmacs Development Team <xemacs-beta@xemacs.org>
 xslt-process          Ovidiu Predescu <ovidiu@xemacs.org>

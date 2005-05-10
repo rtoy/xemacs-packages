@@ -1,3 +1,8 @@
+2005-05-10  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: bbdb dictionary erc  ess jde liece lookup mew
+	mule-base mule-ucs w3 zenirc.
+
 2005-05-09  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: nil.

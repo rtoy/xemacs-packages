@@ -1,5 +1,7 @@
 2005-05-10  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: cc-mode text-modes vm.
+
 	* Packages released: bbdb dictionary erc  ess jde liece lookup mew
 	mule-base mule-ucs w3 zenirc.
 

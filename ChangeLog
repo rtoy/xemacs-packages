@@ -1,5 +1,7 @@
 2005-09-26  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: ecrypto mail-lib.
+
 	* Packages released: pgg.
 
 	* Packages released: sasl sieve texinfo.

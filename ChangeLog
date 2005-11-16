@@ -1,5 +1,8 @@
 2005-11-16  Norbert Koch  <viteno@xemacs.org>
 
+	* package-compile.el:
+	* xemacs-packages/Makefile (PACKAGES):  Remove ess and liece.
+
 	* Packages released: ediff viper.
 
 2005-11-15  Norbert Koch  <viteno@xemacs.org>

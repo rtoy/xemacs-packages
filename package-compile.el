@@ -118,7 +118,6 @@
     ("emerge" . "xemacs-packages")
     ("erc" . "xemacs-packages")
     ("eshell" . "xemacs-packages")
-    ("ess" . "xemacs-packages")
     ("eterm" . "xemacs-packages")
     ("eudc" . "xemacs-packages")
     ("escreen" . "xemacs-packages")
@@ -140,7 +139,6 @@
     ("ilisp" . "xemacs-packages")
     ("ispell" . "xemacs-packages")
     ("jde" . "xemacs-packages")
-    ("liece" . "xemacs-packages")
     ("mail-lib" . "xemacs-packages")
     ("mailcrypt" . "xemacs-packages")
     ("mew" . "xemacs-packages")
@@ -232,7 +230,6 @@
 	 (dir (expand-file-name
 	      package (expand-file-name area package-source-root))))
     (cond ((or (equal package "bbdb") 
-	       (equal package "ess")
 	       (equal package "gnus")
 	       (equal package "jde")
 	       (equal package "lookup")

@@ -1,3 +1,12 @@
+2006-05-01  Adrian Aichner  <adrian@xemacs.org>
+
+	* XEmacs.rules (FORMAT_INFO): Drop use of -o argument.
+	* XEmacs.rules (HACK_PACKAGE_INDEX): New variable supporting
+	"unsupported" packages, which are on different relative
+	subdirectory level from official packages.
+	* XEmacs.rules (package-info): Use $(HACK_PACKAGE_INDEX).
+	* XEmacs.rules (binkit): Convert to single-colon rule.
+
 2006-05-01  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: perl-modes.

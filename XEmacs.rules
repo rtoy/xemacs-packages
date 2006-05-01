@@ -297,7 +297,7 @@ FORMAT_MULE_INFO_USING_XEMACS = \
 ifeq ($(COMPILE_INFO_AS_MULE),t)
 FORMAT_INFO = $(FORMAT_MULE_INFO_USING_XEMACS)
 else
-FORMAT_INFO = cd $(@D) && $(MAKEINFO) $(MAKEINFO_FLAGS) -o $(@F) $(<F)
+FORMAT_INFO = cd $(@D) && $(MAKEINFO) $(MAKEINFO_FLAGS) $(<F)
 endif
 
 %-ja.info: %-ja.texi
@@ -373,11 +373,14 @@ PACKAGE_NET_PACKAGES = \
 "$(shell cygpath --windows $(XEMACS_PACKAGES_BASE)/package-net-packages.el)"
 PACKAGE_STAGING = \
 "$(shell cygpath --windows $(STAGING))"
+HACK_PACKAGE_INDEX = \
+"$(shell cygpath --windows $(XEMACS_PACKAGES_BASE)/hack-package-index.el)"
 else
 PACKAGE_COMPILE = $(XEMACS_PACKAGES_BASE)/package-compile.el
 PACKAGE_CLEAN = $(XEMACS_PACKAGES_BASE)/package-clean.el
 PACKAGE_NET_PACKAGES = $(XEMACS_PACKAGES_BASE)/package-net-packages.el
 PACKAGE_STAGING = $(STAGING)
+HACK_PACKAGE_INDEX = $(XEMACS_PACKAGES_BASE)/hack-package-index.el
 endif
 
 # Behaves like an XEmacs with the required packages set up
@@ -519,7 +522,7 @@ package-info : package-info.in Makefile $(AUTOLOAD_PATH)/_pkg.el \
 		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
         #  #### See if we can't CLEAN this up
 	$(XEMACS_BATCH_DIRTY) \
-		-l ../../hack-package-index.el -f batch-hack-package-index \
+		-l $(HACK_PACKAGE_INDEX) -f batch-hack-package-index \
 			$(PACKAGE) package-info $(PACKAGE_INFO) $(CATEGORY)
 
 ifeq ($(BUILD_TARS),t)
@@ -589,7 +592,7 @@ install-only: binkit
 binkit: binkit-1
 
 ifeq ($(INSTALL_HTML),t)
-binkit:: install-html
+binkit: install-html
 endif
 
 binkit-with-html: binkit-1 install-html

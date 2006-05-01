@@ -1,5 +1,9 @@
 2006-05-01  Adrian Aichner  <adrian@xemacs.org>
 
+	* XEmacs.rules (FORMAT_INFO): Revert -o removal.
+
+2006-05-01  Adrian Aichner  <adrian@xemacs.org>
+
 	* XEmacs.rules (FORMAT_INFO): Drop use of -o argument.
 	* XEmacs.rules (HACK_PACKAGE_INDEX): New variable supporting
 	"unsupported" packages, which are on different relative

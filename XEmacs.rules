@@ -297,7 +297,7 @@ FORMAT_MULE_INFO_USING_XEMACS = \
 ifeq ($(COMPILE_INFO_AS_MULE),t)
 FORMAT_INFO = $(FORMAT_MULE_INFO_USING_XEMACS)
 else
-FORMAT_INFO = cd $(@D) && $(MAKEINFO) $(MAKEINFO_FLAGS) $(<F)
+FORMAT_INFO = cd $(@D) && $(MAKEINFO) $(MAKEINFO_FLAGS) -o $(@F) $(<F)
 endif
 
 %-ja.info: %-ja.texi

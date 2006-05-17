@@ -1,3 +1,8 @@
+2006-05-17  Norbert Koch  <viteno@xemacs.org>
+
+	*  Packages  released: debug   haskell-mode ilisp  ocaml  os-utils
+	prog-modes w3.
+
 2006-05-10  Norbert Koch  <viteno@xemacs.org>
 
 	* Sumo packages released.

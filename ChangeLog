@@ -1,3 +1,7 @@
+2006-05-25  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: haskell-mode python-modes xemacs-base.
+
 2006-05-17  Norbert Koch  <viteno@xemacs.org>
 
 	*  Packages  released: debug   haskell-mode ilisp  ocaml  os-utils

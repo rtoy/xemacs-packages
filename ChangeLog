@@ -1,3 +1,7 @@
+2006-08-03  Ville Skyttä  <scop@xemacs.org>
+
+	* MAINTAINERS: Jeff Miller takes care of the calendar package.
+
 2006-07-27  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: calendar edit-utils pcl-cvs.

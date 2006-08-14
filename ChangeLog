@@ -1,3 +1,8 @@
+2006-08-14  Norbert Koch  <viteno@xemacs.org>
+
+	*   Packages   released:   latin-unity  leim    vhdl   xemacs-base
+	xemacs-devel.
+
 2006-08-03  Ville Skyttä  <scop@xemacs.org>
 
 	* MAINTAINERS: Jeff Miller takes care of the calendar package.

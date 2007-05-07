@@ -1,5 +1,7 @@
 2007-05-07  Norbert Koch  <viteno@xemacs.org>
 
+	* Packages released: guided-tour.
+
 	* package-compile.el (package-directory-map): 
 	* xemacs-packages/Makefile (PACKAGES): Add guided-tour.
 

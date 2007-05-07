@@ -46,7 +46,7 @@ PACKAGES := xemacs-base fsf-compat mail-lib \
 	Sun ada auctex bbdb build c-support calc calendar clearcase \
 	cookie crisp dictionary docbookide ecb ediff edt emerge \
 	erc escreen eshell eudc footnote forms fortran-modes \
-	frame-icon games general-docs gnats gnus haskell-mode \
+	frame-icon games general-docs gnats gnus guided-tour haskell-mode \
 	hm--html-menus hyperbole ibuffer idlwave igrep ilisp \
 	jde mailcrypt mew mh-e mine misc-games mmm-mode \
 	ocaml oo-browser pc pcl-cvs pcomplete perl-modes pgg \

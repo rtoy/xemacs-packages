@@ -130,6 +130,7 @@
     ("general-docs" . "xemacs-packages")
     ("gnats" . "xemacs-packages")
     ("gnus" . "xemacs-packages")
+    ("guided-tour" . "xemacs-packages")
     ("haskell-mode" . "xemacs-packages")
     ("hm--html-menus" . "xemacs-packages")
     ("hyperbole" . "xemacs-packages")

@@ -1,3 +1,23 @@
+2007-05-22  Jerry James  <james@xemacs.org>
+
+	* .cvsignore: Ignore macro.suppress as well as macro.list.
+	* find-macro-err.awk: Don't report names found in macro.suppress.
+	Also, update the FSF's address.
+
+	* Local.rules.inc:
+	* Makefile:
+	* Version.rules:
+	* XEmacs.rules:
+	* gen-macro-list.awk:
+	* hack-package-index.el:
+	* iterate-1.rules:
+	* iterate.rules:
+	* meta-iterate.rules:
+	* meta-targets.rules:
+	* package-clean.el:
+	* package-compile.el:
+	* package-net-packages.el: Update the FSF's address.
+
 2007-05-22  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: auctex.

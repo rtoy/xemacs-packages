@@ -14,8 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with XEmacs; see the file COPYING.  If not, write to
-# the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-# Boston, MA 02111-1307, USA.
+# the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+# Boston, MA 02110-1301, USA.
 #
 # Written by Jerry James
 # December 18, 2002
@@ -23,11 +23,14 @@
 # Updated January 14, 2004 to also report the type of definition miscompiled
 # (defmacro, defsubst, etc.).
 #
+# Updated May 22, 2007 to take macro names to be suppressed from the file
+# macro.suppress.
+#
 # Find undefined function messages in the smoketest log and try to match them
 # against the macro list.  Invoke this script in a directory containing
 # macro.list, the output of gen-macro-list.awk.
 # Usage: awk -f find-macro-err.awk < $package_build_log
-#
+
 # Read macro.list into an array and save RS and FS
 BEGIN {
   OrigRS = RS
@@ -37,6 +40,11 @@ BEGIN {
     macrotype[$1] = $3
   }
   close("macro.list")
+  while ((getline < "macro.suppress") > 0) {
+    delete macro[$1]
+    delete macrotype[$1]
+  }
+  close("macro.suppress")
 }
 # Track the current package/file name from the log
 /Compiling .*\.\.\./ {

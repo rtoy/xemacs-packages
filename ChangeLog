@@ -1,3 +1,7 @@
+2007-06-11  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: perl-modes prog-modes psgml tramp.
+
 2007-05-22  Jerry James  <james@xemacs.org>
 
 	* .cvsignore: Ignore macro.suppress as well as macro.list.

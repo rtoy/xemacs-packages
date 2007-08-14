@@ -72,8 +72,12 @@
 	      ((boundp 'paths-core-load-path-depth) ; XEmacs > 21.2.41
 	       paths-core-load-path-depth)
 	      (t (error "Somebody has been messing with paths-find-*!")))))
-  (setq load-path (paths-find-recursive-load-path (list lisp-directory)
-						  depth)))
+  (setq load-path (paths-find-recursive-load-path
+                   (cons lisp-directory
+                         ;; Only pay attention to mule-lisp-directory if
+                         ;; it's non-nil.
+                         (and mule-lisp-directory (list mule-lisp-directory)))
+                   depth)))
 
 (load (expand-file-name "auto-autoloads" (car load-path)))
 

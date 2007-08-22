@@ -50,11 +50,14 @@ XEMACS_NATIVE_NT =
 # mule-packages/ (Mule packages, if you built XEmacs with Mule,
 # i.e. international, support), and maybe site-packages/ (packages you
 # created yourself).  If you are installing XEmacs normally, this should be
-# <xemacs-root>/lib/xemacs, where <xemacs-root> is the topmost-level
-# directory under which everything is installed -- normally /usr/local, and
-# set using the `--prefix' parameter to `configure'.  See the INSTALL file.
+# <xemacs-root>/share/xemacs for XEmacs from 21.5 on and
+# <xemacs-root>/lib/xemacs for XEmacsen before 21.5, where
+# <xemacs-root> is the topmost-level directory under which everything
+ # is installed -- normally /usr/local, and set using the `--prefix'
+# parameter to `configure'.  See the INSTALL file.
 
-XEMACS_INSTALLED_PACKAGES_ROOT = /usr/local/lib/xemacs
+XEMACS_INSTALLED_PACKAGES_ROOT = /usr/local/share/xemacs
+# XEMACS_INSTALLED_PACKAGES_ROOT = /usr/local/lib/xemacs
 
 # If you are developing XEmacs, you probably don't want to install the
 # packages under /usr/local, which is where the stable, released version of

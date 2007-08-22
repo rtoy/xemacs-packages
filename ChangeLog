@@ -1,3 +1,8 @@
+2007-08-20  Mike Sperber  <mike@xemacs.org>
+
+	* Local.rules.template (XEMACS_INSTALLED_PACKAGES_ROOT): Move from
+	/usr/local/lib to /usr/local/share.
+
 2007-08-19  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: ediff viper.

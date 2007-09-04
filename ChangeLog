@@ -1,3 +1,8 @@
+2007-09-04  Didier Verna  <didier@xemacs.org>
+
+	* MAINTAINERS: Explicitely state that I maintain Patcher in
+	xemacs-devel.
+
 2007-09-04  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: eshell hm--html-menus liece vm w3.
@@ -135,7 +140,7 @@
 
 	* Packages released: guided-tour.
 
-	* package-compile.el (package-directory-map): 
+	* package-compile.el (package-directory-map):
 	* xemacs-packages/Makefile (PACKAGES): Add guided-tour.
 
 2007-05-02  Norbert Koch  <viteno@xemacs.org>
@@ -776,7 +781,7 @@
 
 2005-03-09  Norbert Koch  <viteno@xemacs.org>
 
-	* package-compile.el: 
+	* package-compile.el:
 	* xemacs-packages/Makefile (PACKAGES): New package re-builder.
 
 2005-03-07  Norbert Koch  <viteno@xemacs.org>
@@ -947,7 +952,7 @@
 	* XEmacs.rules (FORMAT_INFO_USING_XEMACS_NO_SAVE_ARGS):
 	text-modes is also needed due to dependency of texinfmt
 	on whitespace.
-	
+
 	* XEmacs.rules ($(AUTOLOAD_PATH)/auto-autoloads.el):
 	Remove auto-autoloads if package-suppress forms have changed.
 	Touch auto-autoloads so it's always up-to-date; otherwise
@@ -1321,9 +1326,9 @@
 
 	* Packages released: xwem escreen.
 
-	* MAINTAINERS: 
-	* package-compile.el (package-directory-map): 
-	* xemacs-packages/Makefile (PACKAGES): 
+	* MAINTAINERS:
+	* package-compile.el (package-directory-map):
+	* xemacs-packages/Makefile (PACKAGES):
 	New package escreen added.  Jan Rychter'll be its maintainer.
 
 	* Packages released: reftex xlib.
@@ -1663,7 +1668,7 @@
 2003-09-23  Steve Youngs  <youngs@xemacs.org>
 
 	* XEmacs.rules (TEXI_FILES): Make sure it gets set to the correct
-	value. 
+	value.
 
 2003-09-21  Norbert Koch  <viteno@xemacs.org>
 
@@ -2007,7 +2012,7 @@
 	(.PHONY): Add just-install target.
 
 	* XEmacs.rules ($(AUTOLOAD_PATH)/custom-load.el): Touch
-	custom-load.el. 
+	custom-load.el.
 	(EARLY_GENERATED_LISP): Revert my earlier change.
 	(just-install): A target that does what its name implies.
 
@@ -2026,7 +2031,7 @@
 2003-03-27  Steve Youngs  <youngs@xemacs.org>
 
 	* package-compile.el: Gnus' lisp files are now in lisp/, not
-	gnus/lisp/. 
+	gnus/lisp/.
 
 	* Local.rules.template (XEMACS_21_5): Default to 'off' until Ben
 	commits the workspace that enables the new features.
@@ -2046,7 +2051,7 @@
 	* Local.rules.inc: New file.  Used when it's necessary to get at
 	some settings (in particular, usually BUILD_WITHOUT_MULE) before
 	including XEmacs.rules.
-	
+
 	* Local.rules.template (XEMACS):
 	* Local.rules.template (XEMACS_21_5): New.
 	* Local.rules.template (BATCH):
@@ -2059,7 +2064,7 @@
 	yet).
 
 	Add load-always-display-messages=t to $(BATCH) flags.
-	
+
 	* XEmacs.rules:
 	* XEmacs.rules (XEMACS_PACKAGES_BASE):
 	* XEmacs.rules (DEPENDS_FILE_NAME): Removed.
@@ -2127,7 +2132,7 @@
 	actions.  This way, XEmacs.rules can change the implementation
 	(e.g. add another generated file) without impacting the package
 	Makefiles.
-	
+
 	(1) XEmacs.rules now takes care of ELCS dependencies and
 	auto-autoloads/custom-load/etc.  Additional generated .el files
 	should be added to GENERATED_LISP or EARLY_GENERATED_LISP
@@ -2164,7 +2169,7 @@
 	(4) Additional dependencies should be added to EXTRA_DEPENDENCIES
 	(renamed from EXTRA_OBJS), not specified directly on the compile::
 	line.
-	
+
 	(5) The result of this is that the vast majority of Makefiles
 	should contain no rules at all, and almost none should have
 	any compile:: lines. (Only ones does now -- x-symbol. #### The
@@ -2186,7 +2191,7 @@
 	Add support for building custom-defines.el.
 
 	Support PACKAGE_SUPPRESS.
-	
+
 	Use PACKAGE to determine whether to install lisp files, not ELCS,
 	since all packages have at least an _pkg.el file.  This avoids
 	the need to play games with putting auto-autoloads.el into
@@ -2249,16 +2254,16 @@
 
 	* Local.rules.template: Remove all the 'unsupported' stuff.  The
 	unsupported packages weren't meant to be built from the toplevel
-	directory. 
+	directory.
 
 	* package-net-packages.el
-	(package-net-packages-convert-index-to-ini): Ditto. 
+	(package-net-packages-convert-index-to-ini): Ditto.
 
-	* package-compile.el (package-directory-map): Ditto. 
+	* package-compile.el (package-directory-map): Ditto.
 
 	* meta-iterate.rules: Ditto.
 
-	* hack-package-index.el (batch-hack-package-index): Ditto. 
+	* hack-package-index.el (batch-hack-package-index): Ditto.
 
 	* XEmacs.rules: Ditto.
 
@@ -2309,10 +2314,10 @@
 	* INSTALL (IMPORTANT):
 	Rewrite in accordance with changes in Local.rules.template, and
 	generally clarify the proper way to build packages.
-	
+
 	* Local.rules.mk:
 	Remove bogus comment.
-	
+
 	* Local.rules.template:
 	* Local.rules.template (XEMACS):
 	* Local.rules.template (symlink): Removed.
@@ -2350,7 +2355,7 @@
 
 	* meta-iterate.rules: New file.  Generalize the stuff in
 	`Makefile', for use also in unsupported/Makefile.
-	
+
 	* Makefile (SUBDIRS):
 	* Makefile (XEMACS_PACKAGES_BASE):
 	* Makefile (all):
@@ -2418,7 +2423,7 @@
 	from this directory -- rebuild all autoloads below, then bytecompile.
 	Allow for this file to be included anywhere in the directory tree.
 	Support target `just-install'.
-	
+
 	* package-compile.el:
 	* package-compile.el (package-directory-map):
 	* package-compile.el (package-source-root): New.
@@ -2712,12 +2717,12 @@
 2002-05-09  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages released: xslide jde haskell-mode xslt-process w3 vm
-	psgml ilisp cc-mode calc auctex. 
+	psgml ilisp cc-mode calc auctex.
 
 2002-05-07  Steve Youngs  <youngs@xemacs.org>
 
 	* Packages released: ibuffer os-utils pcl-cvs xemacs-base
-	prog-modes latin-unity haskell-mode mule-base. 
+	prog-modes latin-unity haskell-mode mule-base.
 
 2002-05-04  Stephen J. Turnbull  <stephen@xemacs.org>
 
@@ -2760,14 +2765,14 @@
 	* XEmacs.rules (FORMAT_INFO_LEVEL_3_USING_XEMACS_NO_SAVE_ARGS):
 	Moved before rule for %-ja.info.
 	* XEmacs.rules (%-ja.info): New, from TM package texi Makefile.
-	
+
 2002-03-25  Steve Youngs  <youngs@xemacs.org>
 
 	* These packages rolled: apel auctex bbdb calc cookie dictionary
 	ediff edit-utils efs eshell fsf-compat gnats gnus hm--html-menus
 	ibuffer idlwave jde latin-unity liece lookup mail-lib mew mule-ucs
 	pcl-cvs prog-modes reftex semantic sieve speedbar text-modes tm
-	tramp viper vm w3 xslide 
+	tramp viper vm w3 xslide
 
 2002-03-22  Daiki Ueno  <daiki@xemacs.org>
 
@@ -2824,12 +2829,12 @@
 
 	* Local.rules.template (TEXI2HTML):
 		Add template definition for command
-	
+
 	* Makefile (all):
 	* Makefile (all-bytecompile):
 	* Makefile (bindist):
 		No longer do global bytecompile and autoload
-	
+
 	* XEmacs.rules (BOOT_XEMACS):
 		Represents an XEmacs that as the required packages
 		set up, but is otherwise clean.
@@ -2838,21 +2843,21 @@
 	* XEmacs.rules (DEPENDS_FILE_NAME):
 		Generate a file (default 'pdepends.mk') that
 		contains the cross dependencies to the required packages
-	
+
 	* XEmacs.rules (clean):
 		Remove pdepends.mk
 
 	* iterate.rules (ALL_TARGETS):
 		Implement dependencies between the various stages
 		of compiling a package. bindist -> bytecompile -> autoload
-	
+
 	* iterate.rules (ASSUMED_TARGETS):
 		Set of targets to ignore (cross-directory depends)
-	
+
 	* iterate.rules (DEPENDS_FILES):
 		Rebuild/Load in all the pdepends.mk files
 		These set up correct intra package dependencies
-	
+
 	* package-compile.el:
 		No longer automatically start a byte-compile
 		Setup data-direcotory-lisy
@@ -2906,14 +2911,14 @@
 2001-09-08  Steve Youngs  <youngs@xemacs.org>
 
 	* package-compile.el (package-directory-map): Add dictionary
-	package. 
+	package.
 
 2001-06-18  Ben Wing  <ben@xemacs.org>
 
 	* Local.rules.template (XEMACS_PACKAGES):
 	* Local.rules.template (MULE_PACKAGES):
 	Give default values for these variables that will generally work.
-	
+
 	* XEmacs.rules (extraclean):
 	* XEmacs.rules (distclean):
 	* XEmacs.rules (elcclean):
@@ -2969,7 +2974,7 @@
 	* package-net-packages.el: New.
 
 	* XEmacs.rules (package-info): use '-l package-info.elc'.  Without
-	the .elc Windows was loading the package-info snippet from 
+	the .elc Windows was loading the package-info snippet from
 	package-index.
 
 	* XEmacs.rules (setup-info): New.
@@ -2978,7 +2983,7 @@
 
 	* package-clean.el:
 	New file, based on update-elc-2.el.
-	
+
 	* Local.rules.template:
 	* Local.rules.template (symlink):
 	* Local.rules.template (XEMACS):
@@ -2996,7 +3001,7 @@
 	that everything will by default be installed.  Add
 	XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING to conditionalize out no
 	longer needed MS Windows quoting changes.
-	
+
 	* Makefile (all):
 	* Makefile (all-bytecompile):
 	* Makefile (elcclean):
@@ -3009,7 +3014,7 @@
 	compile errors when upgrading, and use it in all:.  Rename
 	INSTALL_TARGETS to JUST_INSTALL_TARGETS and conditionalize
 	appropriately on BUILD_WITHOUT_MULE.
-	
+
 	* XEmacs.rules:
 	* XEmacs.rules (PWD):
 	* XEmacs.rules (elcclean):
@@ -3018,13 +3023,13 @@
 	Windows comments.  Conditionalize extra MS Windows quoting on
 	XEMACS_NATIVE_NT_NEEDS_EXTRA_QUOTING, since it breaks things under
 	newer Cygwins.
-	
+
 	* iterate.rules (ELCCLEAN_TARGETS):
 	* iterate.rules (INSTALL_TARGETS):
 	* iterate.rules (distclean):
 	* iterate.rules (elcclean):
 	Add targets for elcclean and install to work recursively.
-	
+
 	* package-compile.el (stack-trace-on-error):
 	Turn on by default for better error tracking.
 
@@ -3080,7 +3085,7 @@
 
 2001-01-11  Steve Youngs  <youngs@xemacs.org>
 
-	* Makefile: Proper GNU Makefile quoting. eg change ($(foo),'') to 
+	* Makefile: Proper GNU Makefile quoting. eg change ($(foo),'') to
 	('$(foo)','')
 
 2001-01-10  Steve Youngs  <youngs@xemacs.org>

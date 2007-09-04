@@ -119,6 +119,7 @@ w3                    XEmacs Development Team <xemacs-beta@xemacs.org>
 x-symbol              Uwe Brauer <oub@xemacs.org>
 xemacs-base           XEmacs Development Team <xemacs-beta@xemacs.org>
 xemacs-devel          XEmacs Development Team <xemacs-beta@xemacs.org>
+- patcher.el	      Didier Verna <didier@xemacs.org>
 xetla                 Steve Youngs <steve@sxemacs.org>
 xlib                  Zajcev Evgeny <zevlg@yandex.ru>
 xslide                XEmacs Development Team <xemacs-beta@xemacs.org>

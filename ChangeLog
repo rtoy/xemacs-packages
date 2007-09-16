@@ -1,3 +1,7 @@
+2007-09-16  Vin Shelton  <acs@xemacs.org>
+
+	* xemacs-packages/Makefile (PACKAGES): Added easypg.
+
 2007-09-04  Didier Verna  <didier@xemacs.org>
 
 	* MAINTAINERS: Explicitely state that I maintain Patcher in

@@ -44,7 +44,7 @@ PACKAGES := xemacs-base fsf-compat mail-lib \
 	edebug efs eieio net-utils xemacs-devel \
 	\
 	Sun ada auctex bbdb build c-support calc calendar clearcase \
-	cookie crisp dictionary docbookide ecb ediff edt emerge \
+	cookie crisp dictionary docbookide easypg ecb ediff edt emerge \
 	erc escreen eshell eudc footnote forms fortran-modes \
 	frame-icon games general-docs gnats gnus guided-tour haskell-mode \
 	hm--html-menus hyperbole ibuffer idlwave igrep ilisp \

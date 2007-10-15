@@ -1,3 +1,7 @@
+2007-10-15  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: mh-e.
+
 2007-09-16  Vin Shelton  <acs@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Added easypg.

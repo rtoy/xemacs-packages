@@ -103,7 +103,9 @@
     ("calc" . "xemacs-packages")
     ("calendar" . "xemacs-packages")
     ("cc-mode" . "xemacs-packages")
+    ("cedet-common" . "xemacs-packages")
     ("clearcase" . "xemacs-packages")
+    ("cogre" . "xemacs-packages")
     ("cookie" . "xemacs-packages")
     ("crisp" . "xemacs-packages")
     ("debug" . "xemacs-packages")
@@ -112,6 +114,7 @@
     ("dired" . "xemacs-packages")
     ("ecb" . "xemacs-packages")
     ("ecrypto" . "xemacs-packages")
+    ("ede" . "xemacs-packages")
     ("edebug" . "xemacs-packages")
     ("ediff" . "xemacs-packages")
     ("edit-utils" . "xemacs-packages")
@@ -226,7 +229,7 @@
     (setq defdir (expand-file-name (concat defdir "/.."))))
   (setq package-source-root defdir))
 
-(defun package-name-to-directory (package)
+(defun package-name-to-directories (package)
   "Map `package' to a source directory."
   (let* ((area (or (cdr (assoc package package-directory-map))
 		   (error (concat "%s is not in `package-directory-map'.  "
@@ -244,12 +247,16 @@
 	       (equal package "x-symbol")
 	       (equal package "xlib")
 	       (equal package "xwem"))
-	   (expand-file-name "lisp" (file-name-as-directory dir)))
+	   (list (expand-file-name "lisp" (file-name-as-directory dir))))
 	  ((equal package "mew")
-	   (expand-file-name "mew" (file-name-as-directory dir)))
+	   (list (expand-file-name "mew" (file-name-as-directory dir))))
 	  ((equal package "zenirc")
-	   (expand-file-name "src" (file-name-as-directory dir)))
-	  (t dir))))
+	   (list (expand-file-name "src" (file-name-as-directory dir))))
+	  ((equal package "semantic")
+	   (list dir
+		 (expand-file-name "bovine" (file-name-as-directory dir))
+		 (expand-file-name "wisent" (file-name-as-directory dir))))
+	  (t (list dir)))))
 
 (defvar depends nil)
 (defvar command-line-args-left)
@@ -264,19 +271,22 @@
 
 ;; Setup load-path, data-directory-list and load necessary auto-autoloads
 (while depends
-  (let* ((dir (package-name-to-directory (car depends)))
-	 (etc-dir (expand-file-name "etc" dir)))
-    (when (null dir)
+  (let ((dirs (package-name-to-directories (car depends))))
+    (when (null dirs)
       (error "%s is not in `package-directory-map'.  See: package-compile.el"
-	     dir))
-    (push dir load-path)
-    ;; This assumes package has layout *-packages/package/etc/package
-    ;; This is the case for the only package it matters at the time or writing
-    ;; which is ps-print
-    (if (file-directory-p (expand-file-name (car depends) etc-dir))
-	(push (file-name-as-directory etc-dir) data-directory-list))
-    (load (expand-file-name "auto-autoloads" dir))
-    (pop depends)))
+	     (car depends)))
+    (let* ((dir (car dirs))
+	   (etc-dir (expand-file-name "etc" dir)))
+      (while dirs
+	(push (car dirs) load-path)
+	(setq dirs (cdr dirs)))
+      ;; This assumes package has layout *-packages/package/etc/package
+      ;; This is the case for the only package it matters at the time or writing
+      ;; which is ps-print
+      (if (file-directory-p (expand-file-name (car depends) etc-dir))
+	  (push (file-name-as-directory etc-dir) data-directory-list))
+      (load (expand-file-name "auto-autoloads" dir))
+      (pop depends))))
 
 ;; Lastly, add the current directory
 (push default-directory load-path)

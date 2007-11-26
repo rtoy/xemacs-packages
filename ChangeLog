@@ -1,3 +1,9 @@
+2007-10-30  Mike Sperber  <mike@xemacs.org>
+
+	* package-compile.el (package-directory-map):
+	* xemacs-packages/Makefile (PACKAGES): Add cedet-common,
+	cogre, ede.
+
 2007-11-11  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: dired.

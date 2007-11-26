@@ -41,7 +41,7 @@ PACKAGES := xemacs-base fsf-compat mail-lib \
 	apel cc-mode debug dired ecrypto edit-utils elib eterm ispell \
 	os-utils sh-script texinfo text-modes xlib \
 	\
-	edebug efs eieio net-utils xemacs-devel \
+	edebug efs cedet-common cogre eieio ede net-utils xemacs-devel \
 	\
 	Sun ada auctex bbdb build c-support calc calendar clearcase \
 	cookie crisp dictionary docbookide easypg ecb ediff edt emerge \

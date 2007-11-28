@@ -41,7 +41,9 @@ PACKAGES := xemacs-base fsf-compat mail-lib \
 	apel cc-mode debug dired ecrypto edit-utils elib eterm ispell \
 	os-utils sh-script texinfo text-modes xlib \
 	\
-	edebug efs cedet-common cogre eieio ede net-utils xemacs-devel \
+	edebug efs net-utils xemacs-devel \
+	\
+	cedet-common speedbar eieio ede semantic cogre \
 	\
 	Sun ada auctex bbdb build c-support calc calendar clearcase \
 	cookie crisp dictionary docbookide easypg ecb ediff edt emerge \
@@ -51,8 +53,8 @@ PACKAGES := xemacs-base fsf-compat mail-lib \
 	jde mailcrypt mew mh-e mine misc-games mmm-mode \
 	ocaml oo-browser pc pcl-cvs pcomplete perl-modes pgg \
 	prog-modes ps-print psgml psgml-dtds python-modes re-builder \
-	reftex riece rmail ruby-modes sasl scheme semantic sgml \
-	sieve slider sml-mode sounds-au sounds-wav speedbar strokes \
+	reftex riece rmail ruby-modes sasl scheme sgml \
+	sieve slider sml-mode sounds-au sounds-wav strokes \
 	supercite textools time tm tooltalk tpu tramp \
 	vc vc-cc vhdl view-process viper vm w3 x-symbol \
 	xetla xslide xslt-process xwem zenirc

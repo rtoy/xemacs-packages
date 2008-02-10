@@ -1,8 +1,76 @@
-2007-10-30  Mike Sperber  <mike@xemacs.org>
+2008-02-10  Norbert Koch  <viteno@xemacs.org>
 
-	* package-compile.el (package-directory-map):
-	* xemacs-packages/Makefile (PACKAGES): Add cedet-common,
-	cogre, ede.
+	* Packages released: sh-script.
+
+2008-02-07  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: easypg.
+
+2008-01-20  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: perl-modes python-modes.
+
+2008-01-15  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: leim.
+
+2008-01-13  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: dired xemacs-base.
+
+2008-01-10  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: ediff viper.
+
+2008-01-09  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: ediff viper.
+
+2008-01-04  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: xemacs-base.
+
+2008-01-03  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: tramp.
+
+2008-01-02  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: gnus.
+
+2008-01-01  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: elib.
+
+2007-12-31  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: xemacs-devel.
+
+2007-12-28  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: scheme.
+
+2007-12-25  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: latin-euro-standards xemacs-base.
+
+2007-12-18  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: xemacs-base.
+
+2007-12-17  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: dired.
+
+	* Packages released: igrep.
+
+2007-12-10  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: elib.
+
+2007-11-29  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: net-utils.
 
 2007-11-11  Norbert Koch  <viteno@xemacs.org>
 
@@ -15,6 +83,12 @@
 2007-10-30  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: pcl-cvs vc.
+
+2007-10-30  Mike Sperber  <mike@xemacs.org>
+
+	* package-compile.el (package-directory-map):
+	* xemacs-packages/Makefile (PACKAGES): Add cedet-common,
+	cogre, ede.
 
 2007-10-15  Norbert Koch  <viteno@xemacs.org>
 

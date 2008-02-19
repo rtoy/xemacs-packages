@@ -1,3 +1,8 @@
+2008-02-19  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages    released:  eieio    fsf-compat   misc-games ps-print
+	speedbar.
+
 2008-02-18  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: cedet-common.

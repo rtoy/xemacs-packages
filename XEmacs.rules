@@ -59,7 +59,8 @@
 #   $(PACKAGE) in the name
 # EARLY_GENERATED_LISP = additional .el files that will be generated before
 #   any byte-compilation (use this for autoloads-type files); rules must be
-#   given to build them
+#   given to build them.  XEmacs.rules will automatically add auto-autoloads,
+#   custom-load, and custom-defines to this list, so don't include them.
 # GENERATED_LISP = additional .el files that will be generated at
 #   byte-compilation time; rules must be given to build them
 # PRELOADS = additional command-line arguments needed when compiling .elcs

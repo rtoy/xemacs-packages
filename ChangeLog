@@ -1,3 +1,8 @@
+2008-02-27  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* XEmacs.rules (EARLY_GENERATED_LISP):
+	Document automatically included files.
+
 2008-02-27  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: xemacs-devel.

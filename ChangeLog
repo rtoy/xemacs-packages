@@ -1,3 +1,9 @@
+2008-02-28  Mike Sperber  <mike@xemacs.org>
+
+	* XEmacs.rules (auto-autoloads.el): Put xemacs-base into the
+	load-path for generating the autoloads, so we pick up
+	autoload-operators.el.
+
 2008-02-27  Stephen J. Turnbull  <stephen@xemacs.org>
 
 	* XEmacs.rules (EARLY_GENERATED_LISP):

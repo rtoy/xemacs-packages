@@ -463,12 +463,17 @@ GENERATED_ELC_DEPENDENCIES = $(ELCS:.elc=.el) $(ELCS_1:.elc=.el) \
 # rebuilding), then our suppress forms may have changed.  Just rebuilding
 # the autoload file normally isn't enough as the old suppress forms will
 # still sit there, so nuke it first.
+
+# We include xemacs-base in the load path so as to get any the operator
+# definitions in autoload-operators.el.
 $(AUTOLOAD_PATH)/auto-autoloads.el :: $(AUTOLOAD_PATH)/_pkg.el
 	rm -f $(AUTOLOAD_PATH)/auto-autoloads.el
 
 ifeq ($(XEMACS_21_5),t)
 $(AUTOLOAD_PATH)/auto-autoloads.el :: $(GENERATED_ELC_DEPENDENCIES)
-	$(XEMACS_BATCH_CLEAN) $(LOAD_AUTOLOADS) \
+	$(XEMACS_BATCH_CLEAN) \
+	-eval '(setq load-path (cons "$(XEMACS_PACKAGES_BASE)/xemacs-packages/xemacs-base" load-path)))' \
+	$(LOAD_AUTOLOADS) \
 		-l autoload -f batch-update-directory-autoloads \
 		$(PACKAGE) $(AUTOLOAD_PATH)
 	# The equivalent of `touch' is done automatically
@@ -486,7 +491,9 @@ AUTOLOAD_FILE = (setq generated-autoload-file \
 	\"$(AUTOLOAD_PATH)/auto-autoloads.el\")
 
 $(AUTOLOAD_PATH)/auto-autoloads.el :: $(GENERATED_ELC_DEPENDENCIES)
-	$(XEMACS_BATCH_CLEAN) $(LOAD_AUTOLOADS) \
+	$(XEMACS_BATCH_CLEAN) \
+	-eval '(setq load-path (cons "$(XEMACS_PACKAGES_BASE)/xemacs-packages/xemacs-base" load-path)))' \
+	$(LOAD_AUTOLOADS) \
 		-eval "$(AUTOLOAD_PACKAGE_NAME)" \
 		-eval "$(AUTOLOAD_FILE)" \
 		-l autoload -f batch-update-autoloads $^

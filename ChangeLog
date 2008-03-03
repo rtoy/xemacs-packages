@@ -1,3 +1,7 @@
+2008-03-03  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: net-utils.
+
 2008-02-28  Mike Sperber  <mike@xemacs.org>
 
 	* XEmacs.rules (auto-autoloads.el): Put xemacs-base into the

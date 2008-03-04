@@ -1,3 +1,7 @@
+2008-03-04  Norbert Koch  <viteno@xemacs.org>
+
+	* MAINTAINERS: Mark Didier as maintainer of whitespace.el.
+
 2008-03-03  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: net-utils.

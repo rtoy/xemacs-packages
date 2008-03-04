@@ -105,6 +105,7 @@ text-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
 - image-mode.el       Glynn Clements <glynn@sensei.co.uk>
 - rtf-support.el      Alastair Houghton <alastair@xemacs.org>
 - tpum                Zajcev Evgeny <zevlg@yandex.ru>
+- whitespace.el       Didier Verna <didier@xemacs.org>
 textools              XEmacs Development Team <xemacs-beta@xemacs.org>
 time                  XEmacs Development Team <xemacs-beta@xemacs.org>
 tm                    XEmacs Development Team <xemacs-beta@xemacs.org>

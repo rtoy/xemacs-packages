@@ -1,3 +1,7 @@
+2008-03-25  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: gnus guided-tour sh-script.
+
 2008-03-04  Norbert Koch  <viteno@xemacs.org>
 
 	* MAINTAINERS: Mark Didier as maintainer of whitespace.el.

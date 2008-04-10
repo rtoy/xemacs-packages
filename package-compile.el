@@ -243,6 +243,7 @@
 	       (equal package "lookup")
 	       (equal package "mule-ucs")
 	       (equal package "tramp")
+               (equal package "vm")
                (equal package "w3")
 	       (equal package "x-symbol")
 	       (equal package "xlib")

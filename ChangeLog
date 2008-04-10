@@ -1,3 +1,10 @@
+2008-04-10  Norbert Koch  <viteno@xemacs.org>
+
+	* package-compile.el (package-name-to-directories): VM sources are
+	located in the lisp directory.
+
+	* MAINTAINERS: Robert Widhopf-Fenk is the new VM maintainer.
+
 2008-04-07  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: calendar ediff net-utils viper.

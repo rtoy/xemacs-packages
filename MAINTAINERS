@@ -35,7 +35,7 @@ elib                  XEmacs Development Team <xemacs-beta@xemacs.org>
 emerge                XEmacs Development Team <xemacs-beta@xemacs.org>
 erc                   Adrian Aichner <adrian@xemacs.org>
 escreen               Jan Rychter <jan@rychter.com>
-eshell                John Wiegley <johnw@gnu.org>
+eshell                XEmacs Dev Team <xemacs-beta@xemacs.org>
 ess                   Rodney Sparapani <rodney.sparapani@xemacs.org>
 eterm                 XEmacs Development Team <xemacs-beta@xemacs.org>
 eudc                  Oscar Figueiredo <oscar@xemacs.org>
@@ -72,7 +72,7 @@ oo-browser            Jake Colman <jake.colman@xemacs.org>
 os-utils              XEmacs Development Team <xemacs-beta@xemacs.org>
 pcl-cvs               XEmacs Development Team <xemacs-beta@xemacs.org>
 pc                    XEmacs Development Team <xemacs-beta@xemacs.org>
-pcomplete             John Wiegley <johnw@gnu.org>
+pcomplete             XEmacs Dev Team <xemacs-beta@xemacs.org>
 perl-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
 pgg                   Simon Josefsson <simon@josefsson.org>
 prog-modes            XEmacs Development Team <xemacs-beta@xemacs.org>

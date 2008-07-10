@@ -1,3 +1,7 @@
+2008-07-10  Norbert Koch  <viteno@xemacs.org>
+
+	* MAINTAINERS: Sync with package Makefile contents.
+
 2008-06-25  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: os-utils.

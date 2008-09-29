@@ -1,3 +1,7 @@
+2008-09-29  Norbert Koch  <viteno@xemacs.org>
+
+	* Local.rules.template: Define LATEX.  It is needed by auctex.
+
 2008-09-08  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: eshell.

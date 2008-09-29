@@ -226,6 +226,19 @@ TEXI2PDF = texi2pdf
 # 
 TEX = tex
 
+# path to latex
+#
+# If you are getting errors like this:
+#   cd preview/latex && \
+#      '\nonstopmode \input preview.drv' && \
+#      '\nonstopmode \input preview.drv' && \
+#      '\nonstopmode \input preview.drv' 
+#   /bin/sh: \nonstopmode \input preview.drv: not found 
+# then check that latex is installed on your system and that you point
+# to the correct location (or have it referenced in your PATH environment)
+#
+LATEX = latex
+
 # path to msgfmt
 #
 # Under Cygwin, you need to install the gettext-devel package under the

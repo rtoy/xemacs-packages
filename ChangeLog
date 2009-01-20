@@ -1,3 +1,7 @@
+2009-01-20  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: python-modes.
+
 2009-01-20  Stephen J. Turnbull  <stephen@xemacs.org>
 
 	* MAINTAINERS: Skip Montanaro retires as python-modes maintainer.

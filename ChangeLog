@@ -1,3 +1,8 @@
+2009-01-20  Stephen J. Turnbull  <stephen@xemacs.org>
+
+	* MAINTAINERS: Skip Montanaro retires as python-modes maintainer.
+	Change to XEmacs Development Team.
+
 2009-01-13  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: misc-games xemacs-base.

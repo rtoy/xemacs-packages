@@ -41,7 +41,7 @@ PACKAGES := xemacs-base fsf-compat mail-lib \
 	apel cc-mode debug dired ecrypto edit-utils elib eterm ispell \
 	os-utils sh-script texinfo text-modes xlib \
 	\
-	ede edebug efs net-utils xemacs-devel \
+	edebug efs net-utils xemacs-devel \
 	\
 	cedet-common speedbar eieio ede semantic cogre \
 	\

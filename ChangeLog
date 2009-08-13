@@ -1,3 +1,7 @@
+2009-08-13  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: ibuffer.
+
 2009-07-31  Norbert Koch  <viteno@xemacs.org>
 
 	* xemacs-packages/Makefile (PACKAGES): Revert last change, ede is

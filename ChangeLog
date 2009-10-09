@@ -1,3 +1,9 @@
+2009-10-09  Aidan Kehoe  <kehoea@parhasard.net>
+
+	* mule-packages/Makefile (PACKAGES): 
+	Move latin-euro-standards, latin-unity before mule-ucs in the
+	build order. Thank you Jerry James!
+
 2009-10-02  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: build.

@@ -20,7 +20,7 @@ include ../Local.rules.inc
 
 ifeq ('$(MULE_PACKAGES)','mule-packages')
 PACKAGES := mule-base locale leim lookup edict egg-its skk \
-	mule-ucs latin-unity latin-euro-standards
+	latin-unity latin-euro-standards mule-ucs
 else
 PACKAGES := $(MULE_PACKAGES)
 endif

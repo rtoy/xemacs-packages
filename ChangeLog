@@ -1,3 +1,7 @@
+2009-11-14  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: pcl-cvs scheme.
+
 2009-10-09  Aidan Kehoe  <kehoea@parhasard.net>
 
 	* mule-packages/Makefile (PACKAGES): 

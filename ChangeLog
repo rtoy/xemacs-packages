@@ -1,3 +1,7 @@
+2010-04-12  Norbert Koch  <viteno@xemacs.org>
+
+	* MAINTAINERS: Update responsibilities for xemacs-packages/games.
+
 2010-03-30  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: xemacs-base eieio.

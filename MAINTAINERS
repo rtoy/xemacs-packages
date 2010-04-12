@@ -44,7 +44,12 @@ forms                 XEmacs Development Team <xemacs-beta@xemacs.org>
 fortran-modes         XEmacs Development Team <xemacs-beta@xemacs.org>
 frame-icon            XEmacs Development Team <xemacs-beta@xemacs.org>
 fsf-compat            XEmacs Development Team <xemacs-beta@xemacs.org>
-games                 Glynn Clements <glynn@gclements.plus.com>
+games                 XEmacs Development Team <xemacs-beta@xemacs.org>
+- gamegrid.el         Glynn Clements <glynn@gclements.plus.com>
+- snake.el            Glynn Clements <glynn@gclements.plus.com>
+- sokoban.el          Glynn Clements <glynn@gclements.plus.com>
+- sudoku.el           Zajcev Evgeny <zevlg@yandex.ru>
+- tetris.el           Glynn Clements <glynn@gclements.plus.com>
 general-docs          XEmacs Development Team <xemacs-beta@xemacs.org>
 gnats                 XEmacs Development Team <xemacs-beta@xemacs.org>
 gnus                  Mike Kupfer <mike.kupfer@xemacs.org>
@@ -105,7 +110,7 @@ Sun                   XEmacs Development Team <xemacs-beta@xemacs.org>
 supercite             XEmacs Development Team <xemacs-beta@xemacs.org>
 texinfo               XEmacs Development Team <xemacs-beta@xemacs.org>
 text-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
-- image-mode.el       Glynn Clements <glynn@sensei.co.uk>
+- image-mode.el       Glynn Clements <glynn@gclements.plus.com>
 - rtf-support.el      Alastair Houghton <alastair@xemacs.org>
 - tpum                Zajcev Evgeny <zevlg@yandex.ru>
 - whitespace.el       Didier Verna <didier@xemacs.org>

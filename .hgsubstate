@@ -77,6 +77,7 @@ c149ad62c87446307c7b1d5d259323a38b0b8d0b xemacs-packages/net-utils
 fd7ad264907107574dbbe5492304ec4a9786d658 xemacs-packages/ocaml
 a0a3bac469f2d74a0af53140dace0cc455060c43 xemacs-packages/oo-browser
 89f88d5db0a8af3b2751c90ca5d43bf9cf27dad8 xemacs-packages/os-utils
+0000000000000000000000000000000000000000 xemacs-packages/patcher
 7a04c241f47185ce3284c2760a9dc426a9657958 xemacs-packages/pc
 edc81e85ee70ea6fe14a3a7e7bb79c0ecdf10b78 xemacs-packages/pcl-cvs
 bb764ada03558fbbb5453138c6437513fdea84bf xemacs-packages/pcomplete

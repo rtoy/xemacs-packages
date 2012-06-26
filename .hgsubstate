@@ -54,7 +54,7 @@ f8371cdd355b3b6288640fb84db3b039237de23a xemacs-packages/frame-icon
 d53a8387757746cc6c55bd754be1a2848e04aa29 xemacs-packages/games
 61ebe6c6b1bf84bf0fe5685ef66fed734bd00679 xemacs-packages/general-docs
 f649d3209420d89482731b7f3d290314f20b1923 xemacs-packages/gnats
-356c7699e548257d82bba037c92b81684de971f0 xemacs-packages/gnus
+db294f70eef13cf94a326b9a1a9be02f9e5e85fe xemacs-packages/gnus
 a72a46dbb57f5454673cdace404d40be6d41d555 xemacs-packages/guided-tour
 475c1c54240ae796e80e8222cf0177c038566dc4 xemacs-packages/haskell-mode
 9cc3f88c82e0c1f98b9c348e9c1c59634c2997d4 xemacs-packages/hm--html-menus

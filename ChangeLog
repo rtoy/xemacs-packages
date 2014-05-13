@@ -1,3 +1,8 @@
+2014-05-13  Jerry James  <james@xemacs.org>
+
+	* .cvsignore: Remove.
+	* .hgignore: New file.
+
 2014-05-13  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: tramp.

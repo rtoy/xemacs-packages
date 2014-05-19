@@ -1,0 +1,7 @@
+^#\..*#$
+^\.#
+~$
+^Local\.rules$
+^typescripts?$
+^id-lisp$
+^macro

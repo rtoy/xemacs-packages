@@ -1,3 +1,8 @@
+2014-05-27  Mats Lidell  <matsl@xemacs.org>
+
+	* MAINTAINERS: Simon Josefsson retires. Move his packages to the
+	XEmacs Development Team.
+
 2014-05-26  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: scheme.

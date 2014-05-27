@@ -21,7 +21,7 @@ dired                 Mike Sperber <sperber@deinprogramm.de>
 docbookide            XEmacs Development Team <xemacs-beta@xemacs.org>
 easypg                Daiki Ueno <ueno@unixuser.org>
 ecb                   Klaus Berndl <klaus.berndl@sdm.de>
-ecrypto               Simon Josefsson <simon@josefsson.org>
+ecrypto               XEmacs Development Team <xemacs-beta@xemacs.org>
 ede                   XEmacs Development Team <xemacs-beta@xemacs.org>
 edebug                XEmacs Development Team <xemacs-beta@xemacs.org>
 ediff                 Michael Kifer <kifer@cs.sunysb.edu>
@@ -65,7 +65,7 @@ ispell                XEmacs Development Team <xemacs-beta@xemacs.org>
 jde                   XEmacs Development Team <xemacs-beta@xemacs.org>
 liece                 Daiki Ueno <ueno@unixuser.org>
 mailcrypt             XEmacs Development Team <xemacs-beta@xemacs.org>
-mail-lib              Simon Josefsson <simon@josefsson.org>
+mail-lib              XEmacs Development Team <xemacs-beta@xemacs.org>
 mew                   XEmacs Development Team <xemacs-beta@xemacs.org>
 mh-e                  Mike Kupfer <mike.kupfer@xemacs.org>
 mine                  XEmacs Development Team <xemacs-beta@xemacs.org>
@@ -79,7 +79,7 @@ pcl-cvs               XEmacs Development Team <xemacs-beta@xemacs.org>
 pc                    XEmacs Development Team <xemacs-beta@xemacs.org>
 pcomplete             XEmacs Dev Team <xemacs-beta@xemacs.org>
 perl-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
-pgg                   Simon Josefsson <simon@josefsson.org>
+pgg                   XEmacs Development Team <xemacs-beta@xemacs.org>
 prog-modes            XEmacs Development Team <xemacs-beta@xemacs.org>
 - eiffel.el           Martin Schwenke <martin@meltin.net>
 - javascript-mode.el  Ville Skyttä <scop@xemacs.org>
@@ -94,12 +94,12 @@ re-builder            Aidan Kehoe <aidan@xemacs.org>
 riece                 Daiki Ueno <ueno@unixuser.org>
 rmail                 XEmacs Development Team <xemacs-beta@xemacs.org>
 ruby-modes            Hans de Graaff <graaff@xemacs.org>
-sasl                  Simon Josefsson <simon@josefsson.org>
+sasl                  XEmacs Development Team <xemacs-beta@xemacs.org>
 scheme                Karl M. Hegbloom <karlheg@bittersweet.inetarena.com>
 semantic              XEmacs Development Team <xemacs-beta@xemacs.org>
 sgml                  XEmacs Development Team <xemacs-beta@xemacs.org>
 sh-script             XEmacs Development Team <xemacs-beta@xemacs.org>
-sieve                 Simon Josefsson <simon@josefsson.org>
+sieve                 XEmacs Development Team <xemacs-beta@xemacs.org>
 slider                XEmacs Development Team <xemacs-beta@xemacs.org>
 sml-mode              XEmacs Development Team <xemacs-beta@xemacs.org>
 sounds-au             XEmacs Development Team <xemacs-beta@xemacs.org>

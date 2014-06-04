@@ -278,6 +278,12 @@ html: $(HTML_DEP)
 
 XEMACS_BATCH_PREPARE_FOR_TEXINFO = $(XEMACS_BATCH_CLEAN) -eval '(setq load-path (append (list "$(XEMACS_PACKAGES_BASE)/xemacs-packages/texinfo" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/text-modes" "$(XEMACS_PACKAGES_BASE)/xemacs-packages/xemacs-base") load-path))' $(LOAD_AUTOLOADS)
 
+ifeq ($(XEMACS_21_5),t)
+INFO_ENCODING = utf-8
+else
+INFO_ENCODING = iso-2022-7
+endif
+
 FORMAT_INFO_USING_XEMACS_ARGS = -l informat -l texinfmt -f texinfo-format-buffer
 
 FORMAT_INFO_USING_XEMACS = \
@@ -289,7 +295,7 @@ FORMAT_MULE_INFO_USING_XEMACS = \
 		-eval '(unless (featurep (quote mule)) (kill-emacs 0))' \
 		-eval '(cd "$(<D)")' \
 		$(FORMAT_INFO_USING_XEMACS_ARGS) \
-		-eval '(setq file-coding-system (quote iso-2022-7))' \
+		-eval '(setq file-coding-system (quote $(INFO_ENCODING)))' \
 		-eval '(save-buffer 0)'
 
 # makeinfo doesn't seem able to handle Mule-formatted files correctly, so
@@ -315,9 +321,24 @@ endif
 ## puts its results in the current directory, not the directory of the
 ## source file.
 
-#	V 1.56k (with Cygwin) does not allow -p flag.  Works fine without it.
-#RUN_TEXI2HTML = cd $(@D) && $(TEXI2HTML) $(TEXI2HTML_FLAGS) -p $(<F)
+ifeq ($(COMPILE_INFO_AS_MULE),t)
+ifeq ($(XEMACS_21_5),t)
+PREPARE_MULE_UCS =
+else
+PREPARE_MULE_UCS = -eval '(setq load-path (append (list "$(XEMACS_PACKAGES_BASE)/mule-packages/mule-base" "$(XEMACS_PACKAGES_BASE)/mule-packages/mule-ucs/lisp" "$(XEMACS_PACKAGES_BASE)/mule-packages/latin-euro-standards") load-path))' $(LOAD_AUTOLOADS) -l tae -l un-define
+endif
+RUN_TEXI2HTML = for fil in $< $(EXTRA_TEXI_FILES); do \
+	$(XEMACS_BATCH_PREPARE_FOR_TEXINFO) $(PREPARE_MULE_UCS) \
+	-eval '(unless (featurep (quote mule)) (kill-emacs 0))' \
+	-eval "(find-file \"$$fil\")" \
+	-eval '(setq file-coding-system (quote utf-8))' \
+	-eval '(progn (goto-char (point-min)) (when (search-forward "@setfilename" nil t) (forward-line) (insert "@documentencoding UTF-8\n")))' \
+	-eval '(save-buffer 16)'; done && \
+	pushd $(@D) && $(TEXI2HTML) $(TEXI2HTML_FLAGS) $(<F) && popd && \
+	for fil in $< $(EXTRA_TEXI_FILES); do mv -f $$fil~ $$fil; done
+else
 RUN_TEXI2HTML = cd $(@D) && $(TEXI2HTML) $(TEXI2HTML_FLAGS) $(<F)
+endif
 
 %_toc.html: %.txi
 	$(RUN_TEXI2HTML)
@@ -522,13 +543,13 @@ endif
 # Make the $(pkg_tar).gz first, then the $(pkg_tar).bz2
 package-info : package-info.in Makefile $(AUTOLOAD_PATH)/_pkg.el \
 		$(pkg_tar).gz $(pkg_tar).bz2
-        #  #### See if we can't CLEAN this up
+	#  #### See if we can't CLEAN this up
 	$(XEMACS_BATCH_DIRTY) \
 		-l package-info.elc -f batch-update-package-info \
 		'$(VERSION)' $(PKG_TAR_GZ) \
 		'$(REQUIRES)' \
 		'$(AUTHOR_VERSION)' '$(MAINTAINER)' '$(CATEGORY)'
-        #  #### See if we can't CLEAN this up
+	#  #### See if we can't CLEAN this up
 	$(XEMACS_BATCH_DIRTY) \
 		-l $(HACK_PACKAGE_INDEX) -f batch-hack-package-index \
 			$(PACKAGE) package-info $(PACKAGE_INFO) $(CATEGORY)

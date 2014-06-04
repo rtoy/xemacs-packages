@@ -84,10 +84,9 @@ XEMACS_INSTALLED_PACKAGES_ROOT = /usr/local/share/xemacs
 symlink = 
 
 # If `t', the build process will build and install .html versions of the
-# doc files.  NOTE: texi2html 1.56k (#### perhaps 1.64 is better?) issues
-# complaints about a large number of files that pass `makeinfo' just fine.
-# This doesn't prevent it from building the .html files, though.
-#
+# doc files.  NOTE: texi2html and texi2any both issue complaints about a
+# large number of files that pass `makeinfo' just fine.  This doesn't
+# prevent it from building the .html files, though.
 INSTALL_HTML =
 
 ##################### End settings that commonly need to be changed
@@ -190,18 +189,13 @@ EXCLUDES =					\
 #
 MAKEINFO = makeinfo
 
-# path to texi2html
+# path to texi2html or texi2any
 #
-TEXI2HTML = texi2html
-# texi2html 1.56k on Cygwin has "-split_chapter", whereas newer versions
-# (eg. 1.64) has "-split chapter", this should work either way.  1.56k doesn't
-# have "-help" and 1.64 doesn't have "-usage", but doing "-help" with 1.56k
-# outputs the usage anyway :P
-ifneq ('$(shell sh -c "texi2html -help 2>&1 | grep -l split_chapter")','')
-TEXI2HTML_FLAGS = -split_chapter
-TEXI2HTML_1_56K = t
-else
+TEXI2HTML = texi2any
+ifeq ($(TEXI2HTML),texi2html)
 TEXI2HTML_FLAGS = -split chapter
+else
+TEXI2HTML_FLAGS = --html --split=chapter
 endif
 
 

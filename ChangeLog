@@ -1,3 +1,9 @@
+2014-06-18  Jerry James  <james@xemacs.org>
+
+	* package-net-packages.el
+	(package-net-packages-batch-convert-index-to-ini): consume command
+	line arguments instead of just peeking at them.
+
 2014-06-02  Jerry James  <james@xemacs.org>
 
 	* Local.rules.template: Support texi2any.  Drop support for

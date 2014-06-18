@@ -145,8 +145,8 @@ DESTDIR defaults to the value of `data-directory'."
   "Convert the package index to ini file format."
   (unless noninteractive
     (error "`package-net-packages-batch-convert-index-to-ini' is to be used only with -batch"))
-  (let ((dir (car command-line-args-left))
-	(category (cadr command-line-args-left))
+  (let ((dir (pop command-line-args-left))
+	(category (pop command-line-args-left))
 	(package-get-require-signed-base-updates nil))
     (package-net-packages-convert-index-to-ini dir nil category)))
 

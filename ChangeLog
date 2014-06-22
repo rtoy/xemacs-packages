@@ -1,3 +1,7 @@
+2014-06-22  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: mule-base, skk, mew, riece, w3, vm, x-symbol, tramp, tm, gnus.
+
 2014-06-18  Jerry James  <james@xemacs.org>
 
 	* package-net-packages.el

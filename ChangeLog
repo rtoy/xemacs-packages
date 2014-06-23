@@ -1,3 +1,7 @@
+2014-06-23  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: tramp.
+
 2014-06-22  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: mule-base, skk, mew, riece, w3, vm, x-symbol, tramp, tm, gnus.

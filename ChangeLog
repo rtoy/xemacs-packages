@@ -1,3 +1,7 @@
+2014-09-08  Norbert Koch  <viteno@xemacs.org>
+
+	* Packages released: xemacs-base, cc-mode, calendar, net-utils, gnus, leim.
+
 2014-07-15  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: fsf-compat, ispell.

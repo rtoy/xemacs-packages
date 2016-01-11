@@ -8,6 +8,9 @@
 
 # Path to XEmacs to use for byte compilation.
 #
+# Using SXEmacs is also possible, though not supported by the XEmacs
+# maintainers.  See 'BUILD_WITH_SXEMACS' below.
+#
 # (Double-quote path under native MS Windows if there are embedded spaces.)
 XEMACS_BINARY = xemacs
 
@@ -18,6 +21,12 @@ XEMACS_BINARY = xemacs
 # Ben has yet to commit the workspace that enables these new features,
 # so I have defaulted this to 'off' until he does. SY.
 XEMACS_21_5 = 
+
+## SXEmacs
+# SXEmacs has _some_ 21.5 features, but not quite enough to build all
+# the packages with XEMACS_21_5 set, so when building with SXEmacs,
+# set BUILD_WITH_SXEMACS to 't' and leave XEMACS_21_5 unset.
+BUILD_WITH_SXEMACS =
 
 # Should we build the Mule packages?  Set to 't' if you do not have/want Mule.
 #

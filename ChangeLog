@@ -34,6 +34,14 @@
 
 	* Packages released: cc-mode.
 
+2015-07-10  Steve Youngs  <steve@sxemacs.org>
+
+	* XEmacs.rules: Use BUILD_WITH_SXEMACS to let SXEmacs build
+	custom-defines and do auto-autoloads the same way as XEmacs 21.5.
+
+	* Local.rules.template (BUILD_WITH_SXEMACS): New, default unset.
+	Allows building packages with SXEmacs.
+
 2015-05-17  Norbert Koch  <viteno@xemacs.org>
 
 	* Packages released: xemacs-base, cc-mode.
